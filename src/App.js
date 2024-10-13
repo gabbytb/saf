@@ -61,6 +61,7 @@ export default function App() {
     //     // ReactGA.set({ page: window.location.pathname });
     // }, []);
     
+    
     return (
         <Routes>
           {/* add routes without layouts */}
@@ -71,6 +72,7 @@ export default function App() {
           <Route path="/user/login" element={<SignIn />} />        
           <Route path="/donations" element={<DonateNow />} />
           <Route path="/blog" element={<BlogPosts />} />  
+          {/* <Route path="/admin/staffs/" element={<BlogPosts />} children=[] /> */}
           <Route path="/blog/page/:id" element={<BlogPosts />} />  
           <Route path="/blog/post" element={<Posts />} />         
           <Route path="/blog/:slug" element={<BlogSinglePost />} />          

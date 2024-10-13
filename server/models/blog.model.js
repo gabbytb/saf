@@ -20,6 +20,7 @@ module.exports = mongoose => {
         excerpt: {
             type: String,
         },
+        comments: [],
         author: {
             img: String,
             name: String,

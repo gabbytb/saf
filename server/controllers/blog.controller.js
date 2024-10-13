@@ -7,7 +7,7 @@ const Blog = db.blogs;
 
 
 
-// Our CREATE ACCOUNT Logic starts here
+// Our CREATE NEW BLOG POST Logic starts here
 exports.createBlogPost = async (req, res) => {
 
     // Gets a unique number based on the current time
@@ -180,82 +180,83 @@ exports.createBlogPost = async (req, res) => {
 };  // THOROUGHLY Tested === Working
 
 
-// Our FIND All USERS Logic starts here
-exports.findAllBlogPosts = async (req, res) => { 
+// Our FIND All BLOG POSTS Logic starts here
+// exports.findAllBlogPosts = async (req, res) => { 
 
-    const { page = 1, limit = 10, status } = req.query; // Destructure query parameters   
-    // published
-    // draft
+//     const { page = 1, limit = 10, status } = req.query; // Destructure query parameters   
+//     // published
+//     // draft
 
-    try {
-        let query = { 
+//     try {
+//         let query = { 
 
-        };
+//         };
 
-        if (status) {
-            query.status = status;
-        };
+//         if (status) {
+//             query.status = status;
+//         };
  
-        const allBlogPosts = await Blog.find(query)
-                                .skip((page - 1) * limit)
-                                .limit(parseInt(limit));
-        console.log("ALL BLOG POSTS: ", allBlogPosts);
+//         const allBlogPosts = await Blog.find(query)
+//                                 .skip((page - 1) * limit)
+//                                 .limit(parseInt(limit));
+//         console.log("ALL BLOG POSTS: ", allBlogPosts);
 
 
-        const totalBlogPosts = await Blog.countDocuments(query); // Total number of users with the given status
-        const totalPages = Math.ceil(totalBlogPosts / limit); // Calculate total pages
-        const pagination = {
-            postsRecord: totalBlogPosts,
-            page,
-            limit,
-            lastPage: totalPages,
-        };
-        console.log("PAGINATION: ", pagination, "\n\n");
+//         const totalBlogPosts = await Blog.countDocuments(query); // Total number of users with the given status
+//         const totalPages = Math.ceil(totalBlogPosts / limit); // Calculate total pages
+//         const pagination = {
+//             postsRecord: totalBlogPosts,
+//             page,
+//             limit,
+//             lastPage: totalPages,
+//         };
+//         console.log("PAGINATION: ", pagination, "\n\n");
 
-        const responseData = {
-            success: true,
-            data: {
-                allBlogPosts,
-                pagination
-            },
-            message: "BLOG: Items retrieved successfully",
-        }
-        res.status(200).json(responseData);
+//         const responseData = {
+//             success: true,
+//             data: {
+//                 allBlogPosts,
+//                 pagination
+//             },
+//             message: "BLOG: Items retrieved successfully",
+//         }
+//         res.status(200).json(responseData);
 
-    } catch (error) {
-        console.error("Internal Server Error:", error);
-        return res.status(500).send(`Internal Server Error: ${error.message}`);
-    };
-};  // THOROUGHLY Tested === Working
+//     } catch (error) {
+//         console.error("Internal Server Error:", error);
+//         return res.status(500).send(`Internal Server Error: ${error.message}`);
+//     };
+// };  // THOROUGHLY Tested === Working
 
 
 // Our FIND All USERS Logic starts here
-exports.findAllBlogPosts = async (req, res) => { 
+exports.findRecentBlogPosts = async (req, res) => { 
 
     const { page = 1, limit = 10, status, sort } = req.query; // Destructure query parameters   
     // published
     // draft
     
     try {
+        // Set for DB Query
         let query = { };
-
         if (status) {
             query.status = status;
         };
  
         // Set the sorting order
-        let sortOrder = {};
+        let sortOrder = { };
         if (sort === 'recent') {
-                    sortOrder.createdAt = -1; // Sort by createdAt in descending order
+            sortOrder.createdAt = -1; // Sort by createdAt in descending order
         } else {
-                    sortOrder.createdAt = 1; // Default sorting (ascending)
+            sortOrder.createdAt = 1; // Default sorting (ascending)
         };
+
 
         const allBlogPosts = await Blog.find(query)
                                 .sort(sortOrder)
                                 .skip((page - 1) * limit)
                                 .limit(parseInt(limit));
-        console.log("ALL BLOG POSTS: ", allBlogPosts);
+        console.log("FIND BLOG POSTS BY MOST RECENT: ", allBlogPosts);
 
 
         const totalBlogPosts = await Blog.countDocuments(query); // Total number of users with the given status

@@ -32,8 +32,9 @@ const BlogPosts = () => {
 
     // { color }
     // console.log('WINDOW LOCATION = ', window.location);
-    console.log('WINDOW LOCATION PATHNAME = ', window.location.pathname);
-    console.log('WINDOW LOCATION SEARCH = ', window.location.search);
+    // console.log('WINDOW LOCATION PATHNAME = ', window.location.pathname);
+    // console.log('WINDOW LOCATION SEARCH = ', window.location.search);
+
 
 
 
@@ -59,15 +60,18 @@ const BlogPosts = () => {
     // console.log("TOTAL BLOG PAGES: ", totalPages);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const limit = 10; // Number of items per page   
+    // const limit = 10; // Number of items per page   
 
 
 
 
-
+   
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
+    const cpg = localStorage.getItem('cpg');  
+    console.log('CPG = ', cpg);
+    console.log('CURRENT PAGE = ', currentPage); 
     useEffect(() => {      
   
         // *************************************************************************************************************
@@ -81,6 +85,12 @@ const BlogPosts = () => {
                 
             const new_URL = window.location.origin + `/blog/page/${currentPage}`;
             window.history.replaceState({}, document.title, new_URL );
+
+            var nextBtn = document.querySelector('.next-pg');
+            if (nextBtn.classList.contains('cursor-not-allowed')) {
+                nextBtn.classList.add('hidden')
+            };
+
         } else {                                                 
             const pageTitle = 'Blog News', 
                   siteTitle = "Samuel Akinola Foundation";
@@ -89,40 +99,130 @@ const BlogPosts = () => {
             const new_URL = window.location.origin + '/blog';                                               
             window.history.replaceState({}, document.title, new_URL );     
         };
+
+        if (cpg === 1 && currentPage === 1) {
+            async function fetchAllPublishedBlogPosts() {
+                const limit = 10; // Number of items per page  
+                var status = 'published';
+                var sort = 'recent';
+                localStorage.setItem('cpg', currentPage);
+
+                await api.get(`/api/v1/admin/blogs/manage?page=${cpg}&limit=${limit}&status=${status}&sort=${sort}`)
+                .then((response) => {
+                        const { success, data, message } = response.data;
+                        const { allBlogPosts, pagination } = data;
         
+                        if (!success && message === "No article found") {
+                            console.log("Success: ", success);
+                            console.log("Message: ", message);
+                        };
+        
+                        setAllBlogPosts(allBlogPosts);
+                                                    
+                        setTotalBlogPosts(pagination?.postsRecord);
+                        setTotalPages(pagination?.lastPage);                                   
 
-        async function fetchAllPublishedBlogPosts() {
-            var status = 'published';
-            var sort = 'recent';
-            
-            await api.get(`/api/v1/admin/blogs/manage?page=${currentPage}&limit=${limit}&status=${status}&sort=${sort}`)
-            .then((response) => {
-                const { success, data, message } = response.data;
-                const { allBlogPosts, pagination } = data;
-  
-                if (!success && message === "No article found") {
-                        console.log("Success: ", success);
-                        console.log("Message: ", message);
-                };
-  
-                setAllBlogPosts(allBlogPosts);
-                                              
-                setTotalBlogPosts(pagination?.postsRecord);
-                setTotalPages(pagination?.lastPage);
-            })
-            .catch((error) => {
+                        // localStorage.setItem('cpg', currentPage);
+
+                        const new_URL = window.location.origin + '/blog';
+                        window.history.replaceState({}, document.title, new_URL ); 
+    
+                })
+                .catch((error) => {
                     console.log("Error fetching data: ", error);
-            })
-            .finally(() => {
+                })
+                .finally(() => {
                     setIsLoading(false);
-            });
-        };
-        var timerID = setTimeout(fetchAllPublishedBlogPosts, 400);   // Delay execution of findAllStaffs by 1800ms
-        return () => {
-            clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
+                });           
+            };
+            var timerID = setTimeout(fetchAllPublishedBlogPosts, 400);   // Delay execution of findAllStaffs by 1800ms
+            return () => {
+                clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
+            }; 
         };
 
-    }, [currentPage]); // Fetch data when currentPage changes and update URL with /page/currentPage value
+        if (cpg !== null && currentPage !== 1) { 
+            async function fetchAllPublishedBlogPosts() {
+                const limit = 10; // Number of items per page  
+                var status = 'published';
+                var sort = 'recent';
+                localStorage.setItem('cpg', currentPage);
+
+                await api.get(`/api/v1/admin/blogs/manage?page=${cpg}&limit=${limit}&status=${status}&sort=${sort}`)
+                .then((response) => {
+                        const { success, data, message } = response.data;
+                        const { allBlogPosts, pagination } = data;
+        
+                        if (!success && message === "No article found") {
+                            console.log("Success: ", success);
+                            console.log("Message: ", message);
+                        };
+        
+                        setAllBlogPosts(allBlogPosts);
+                                                    
+                        setTotalBlogPosts(pagination?.postsRecord);
+                        setTotalPages(pagination?.lastPage);
+                    
+                        const new_URL = window.location.origin + `/blog/page/${currentPage}`;
+                        window.history.replaceState({}, document.title, new_URL ); 
+    
+                })
+                .catch((error) => {
+                    console.log("Error fetching data: ", error);
+                })
+                .finally(() => {
+                    setIsLoading(false);
+                });           
+            };
+            var timerID = setTimeout(fetchAllPublishedBlogPosts, 400);   // Delay execution of findAllStaffs by 1800ms
+            return () => {
+                clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
+            };   
+        } else {
+            async function fetchAllPublishedBlogPosts() {
+                const limit = 10; // Number of items per page  
+                var status = 'published';
+                var sort = 'recent';
+
+                localStorage.setItem('cpg', currentPage);
+
+                await api.get(`/api/v1/admin/blogs/manage?page=${currentPage}&limit=${limit}&status=${status}&sort=${sort}`)
+                .then((response) => {
+                        const { success, data, message } = response.data;
+                        const { allBlogPosts, pagination } = data;
+        
+                        if (!success && message === "No article found") {
+                            console.log("Success: ", success);
+                            console.log("Message: ", message);
+                        };
+        
+                        setAllBlogPosts(allBlogPosts);
+                                                    
+                        setTotalBlogPosts(pagination?.postsRecord);
+                        setTotalPages(pagination?.lastPage);                     
+
+                        const new_URL = window.location.origin + '/blog';                                               
+                        window.history.replaceState({}, document.title, new_URL ); 
+                })
+                .catch((error) => {
+                    console.log("Error fetching data: ", error);
+                })
+                .finally(() => {
+                    setIsLoading(false);
+                });           
+            };
+            var timerID = setTimeout(fetchAllPublishedBlogPosts, 400);   // Delay execution of findAllStaffs by 1800ms
+            return () => {
+                clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
+        };            
+    }                                                
+     
+    }, [currentPage, cpg]); // Fetch data when currentPage changes and update URL with /page/currentPage value
+   
+    
+
+
+
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
@@ -143,12 +243,13 @@ const BlogPosts = () => {
 
 
 
+
     return (
-        <>
+        <div id="blogPostsWrapper">
             <Nav />
 
-            <div className="container mx-auto">
-                <main className="mx-12 lg:mx-16 mt-32 mb-28 grid">                     
+            <main id="blogPostsID" className="container mx-auto">
+                <div className="mx-12 lg:mx-16 mt-36 mb-28 grid">                     
                     <div className="mx-auto flex flex-col items-center pl-16 pr-12">  
 
                         <h1 className="text-4xl font-black mb-32">RECENT POSTS</h1>   
@@ -172,14 +273,14 @@ const BlogPosts = () => {
                                                         alt="post thumbnail" 
                                                     />
                                                 </Link>
-                                                <div className="px-6 py-5">
-                                                    <div className="font-semibold text-lg mb-2">
-                                                        <Link className="text-slate-900 hover:text-slate-700" to={`/blog/${post.uri}`}>
+                                                <div className="px-6 pt-7 pb-12">
+                                                    <div className="font-black text-lg mb-1.5">
+                                                        <Link className="text-slate-900 hover:text-slate-700 text-14xl/tighter" to={`/blog/${post.uri}`}>
                                                             {post.title}
                                                         </Link>
                                                     </div>
-                                                    <p className="text-slate-700 mb-1" title="Published date">{convertDate(post.createdAt)}</p>
-                                                    <p className="text-slate-800">            
+                                                    <p className="text-slate-700 text-xl font-medium mb-5" title="Published date">{convertDate(post.createdAt)}</p>
+                                                    <p className="text-slate-800 text-xl/9 mb-5">            
                                                         {post?.excerpt}                
                                                     </p>
                                                     <br />
@@ -227,7 +328,7 @@ const BlogPosts = () => {
                                     <button
                                     key={index}
                                     onClick={() => handlePageChange(index + 1)}
-                                    className={`-ml-px relative inline-flex items-center px-4 py-2 rounded-full border border-gray-300 bg-white text-xl font-bold text-black hover:bg-gray-50 w-20 justify-center h-20 ${currentPage === index + 1 ? 'bg-gray-200' : ''}`}>
+                                    className={`-ml-px relative inline-flex items-center px-4 py-2 rounded-full border border-gray-300 text-xl font-bold outline-none focus:outline-none hover:bg-gray-50 w-20 justify-center h-20 ${currentPage === index + 1 ? 'bg-gray-100 text-blue-800' : ''}`}>
                                     {index + 1}
                                     </button>
                                 ))}
@@ -236,7 +337,7 @@ const BlogPosts = () => {
                                 {/* Next page button */}
                                 <button
                                     onClick={() => handlePageChange(currentPage + 1)}
-                                    className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-full rounded-r-md border border-gray-300 bg-white text-xl font-medium text-black tracking-extratight hover:bg-gray-50 w-20 justify-center h-20 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                    className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-full rounded-r-md border border-gray-300 bg-white text-xl font-medium text-black tracking-extratight hover:bg-gray-50 w-20 justify-center h-20 next-pg ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
                                     // disabled={currentPage === totalPages}
                                 >next
                                 </button>
@@ -244,11 +345,11 @@ const BlogPosts = () => {
                         </div>
                         {/* Pagination controls */}
                     </div>
-                </main> 
-            </div>
+                </div> 
+            </main>
 
             <HomeFooter />
-        </>
+        </div>
     );
 };
 

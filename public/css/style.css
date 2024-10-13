@@ -852,6 +852,25 @@ tbody tr{
     background-color: #f9f9f9;
   } */
 
+main#blogSinglePost section .rendered-output h2{
+  margin-bottom: 0.5rem;
+  font-size: 2.25rem;
+  font-weight: 900;
+}
+
+main#blogSinglePost section .rendered-output p{
+  margin-bottom: 2.5rem;
+  font-size: 1.5rem;
+  line-height: 2;
+}
+
+#singlePostWrapper #header, 
+  #blogPostsWrapper #header{
+  --tw-shadow: 0 1px 20px 0 var(--admin-staff-details-nav);
+  --tw-shadow-colored: 0 1px 20px 0 var(--tw-shadow-color);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+}
+
 .sales-stats--wrap .sales_direction svg.sales-increase,
   .sales-stats--wrap .sales_direction svg.sales-decrease{
   max-height: 3rem;
@@ -3794,6 +3813,10 @@ progress#file {
   margin-bottom: 0.25rem;
 }
 
+.mb-1\.5{
+  margin-bottom: 0.375rem;
+}
+
 .mb-10{
   margin-bottom: 2.5rem;
 }
@@ -3824,6 +3847,10 @@ progress#file {
 
 .mb-3{
   margin-bottom: 0.75rem;
+}
+
+.mb-3\.5{
+  margin-bottom: 0.875rem;
 }
 
 .mb-32{
@@ -3962,6 +3989,10 @@ progress#file {
   margin-top: 8rem;
 }
 
+.mt-36{
+  margin-top: 9rem;
+}
+
 .mt-4{
   margin-top: 1rem;
 }
@@ -4060,6 +4091,10 @@ progress#file {
 
 .h-60{
   height: 15rem;
+}
+
+.h-72{
+  height: 18rem;
 }
 
 .h-8{
@@ -4212,10 +4247,6 @@ progress#file {
 
 .max-w-full{
   max-width: 100%;
-}
-
-.max-w-lg{
-  max-width: 32rem;
 }
 
 .flex-1{
@@ -4424,6 +4455,10 @@ progress#file {
   gap: 0.5rem;
 }
 
+.gap-24{
+  gap: 6rem;
+}
+
 .gap-3{
   gap: 0.75rem;
 }
@@ -4615,9 +4650,9 @@ progress#file {
   border-color: rgb(209 213 219 / var(--tw-border-opacity));
 }
 
-.border-gray-600{
+.border-gray-500{
   --tw-border-opacity: 1;
-  border-color: rgb(75 85 99 / var(--tw-border-opacity));
+  border-color: rgb(107 114 128 / var(--tw-border-opacity));
 }
 
 .border-transparent{
@@ -4773,6 +4808,11 @@ progress#file {
   background-color: rgb(255 255 255 / var(--tw-bg-opacity));
 }
 
+.bg-gray-100{
+  --tw-bg-opacity: 1;
+  background-color: rgb(243 244 246 / var(--tw-bg-opacity));
+}
+
 .bg-opacity-5{
   --tw-bg-opacity: 0.05;
 }
@@ -4863,6 +4903,11 @@ progress#file {
   padding-right: 0.75rem;
 }
 
+.px-32{
+  padding-left: 8rem;
+  padding-right: 8rem;
+}
+
 .px-4{
   padding-left: 1rem;
   padding-right: 1rem;
@@ -4943,18 +4988,22 @@ progress#file {
   padding-bottom: 1.5rem;
 }
 
+.py-7{
+  padding-top: 1.75rem;
+  padding-bottom: 1.75rem;
+}
+
 .py-8{
   padding-top: 2rem;
   padding-bottom: 2rem;
 }
 
-.px-32{
-  padding-left: 8rem;
-  padding-right: 8rem;
-}
-
 .pb-0{
   padding-bottom: 0px;
+}
+
+.pb-1{
+  padding-bottom: 0.25rem;
 }
 
 .pb-10{
@@ -4999,10 +5048,6 @@ progress#file {
 
 .pl-16{
   padding-left: 4rem;
-}
-
-.pl-28{
-  padding-left: 7rem;
 }
 
 .pl-3{
@@ -5089,16 +5134,12 @@ progress#file {
   padding-top: 2rem;
 }
 
-.pl-32{
-  padding-left: 8rem;
+.pb-9{
+  padding-bottom: 2.25rem;
 }
 
-.pr-0{
-  padding-right: 0px;
-}
-
-.pb-3{
-  padding-bottom: 0.75rem;
+.pt-7{
+  padding-top: 1.75rem;
 }
 
 .text-left{
@@ -5146,8 +5187,18 @@ progress#file {
   line-height: 4.4rem;
 }
 
+.text-14xl\/tighter{
+  font-size: 1.6rem;
+  line-height: 1.35;
+}
+
 .text-15xl{
   font-size: 1.4rem;
+}
+
+.text-15xl\/more-loose{
+  font-size: 1.4rem;
+  line-height: 1.55;
 }
 
 .text-2xl{
@@ -5185,6 +5236,11 @@ progress#file {
   font-size: 2.25rem;
 }
 
+.text-4xl\/tight{
+  font-size: 2.25rem;
+  line-height: 1.25;
+}
+
 .text-5xl{
   font-size: 3rem;
 }
@@ -5217,6 +5273,16 @@ progress#file {
 
 .text-xl{
   font-size: 1.25rem;
+}
+
+.text-xl\/9{
+  font-size: 1.25rem;
+  line-height: 2.25rem;
+}
+
+.text-xl\/normal{
+  font-size: 1.25rem;
+  line-height: 1.5;
 }
 
 .text-xs{
@@ -5410,6 +5476,21 @@ progress#file {
 .text-white{
   --tw-text-opacity: 1;
   color: rgb(255 255 255 / var(--tw-text-opacity));
+}
+
+.text-blue-300{
+  --tw-text-opacity: 1;
+  color: rgb(147 197 253 / var(--tw-text-opacity));
+}
+
+.text-blue-600{
+  --tw-text-opacity: 1;
+  color: rgb(37 99 235 / var(--tw-text-opacity));
+}
+
+.text-blue-800{
+  --tw-text-opacity: 1;
+  color: rgb(30 64 175 / var(--tw-text-opacity));
 }
 
 .text-opacity-50{
@@ -5836,6 +5917,11 @@ progress#file {
   .lg\:mx-16{
     margin-left: 4rem;
     margin-right: 4rem;
+  }
+
+  .lg\:mx-24{
+    margin-left: 6rem;
+    margin-right: 6rem;
   }
 
   .lg\:mx-6{

@@ -354,6 +354,30 @@
     background-color: #f9f9f9;
   } */
 
+  main#blogSinglePost section .rendered-output h2 {
+    @apply 
+      text-4xl
+      font-black
+      mb-2
+    ;
+  }
+
+  main#blogSinglePost section .rendered-output p {
+      @apply
+        text-2xl/loose
+        mb-10
+      ;
+  }
+
+  #singlePostWrapper #header, 
+  #blogPostsWrapper #header {
+    @apply
+      shadow-7xl
+    ;
+  }
+
+  blogPostsWrapper
+
   .sales-stats--wrap .sales_stats {
     @apply
       flex-col 
