@@ -69,9 +69,6 @@ const BlogPosts = () => {
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
-    const cpg = localStorage.getItem('cpg');  
-    console.log('CPG = ', cpg);
-    console.log('CURRENT PAGE = ', currentPage); 
     useEffect(() => {      
   
         // *************************************************************************************************************
@@ -99,93 +96,12 @@ const BlogPosts = () => {
             const new_URL = window.location.origin + '/blog';                                               
             window.history.replaceState({}, document.title, new_URL );     
         };
-
-        if (cpg === 1 && currentPage === 1) {
-            async function fetchAllPublishedBlogPosts() {
+     
+        async function fetchAllPublishedBlogPosts() {
                 const limit = 10; // Number of items per page  
                 var status = 'published';
                 var sort = 'recent';
-                localStorage.setItem('cpg', currentPage);
-
-                await api.get(`/api/v1/admin/blogs/manage?page=${cpg}&limit=${limit}&status=${status}&sort=${sort}`)
-                .then((response) => {
-                        const { success, data, message } = response.data;
-                        const { allBlogPosts, pagination } = data;
-        
-                        if (!success && message === "No article found") {
-                            console.log("Success: ", success);
-                            console.log("Message: ", message);
-                        };
-        
-                        setAllBlogPosts(allBlogPosts);
-                                                    
-                        setTotalBlogPosts(pagination?.postsRecord);
-                        setTotalPages(pagination?.lastPage);                                   
-
-                        // localStorage.setItem('cpg', currentPage);
-
-                        const new_URL = window.location.origin + '/blog';
-                        window.history.replaceState({}, document.title, new_URL ); 
-    
-                })
-                .catch((error) => {
-                    console.log("Error fetching data: ", error);
-                })
-                .finally(() => {
-                    setIsLoading(false);
-                });           
-            };
-            var timerID = setTimeout(fetchAllPublishedBlogPosts, 400);   // Delay execution of findAllStaffs by 1800ms
-            return () => {
-                clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
-            }; 
-        };
-
-        if (cpg !== null && currentPage !== 1) { 
-            async function fetchAllPublishedBlogPosts() {
-                const limit = 10; // Number of items per page  
-                var status = 'published';
-                var sort = 'recent';
-                localStorage.setItem('cpg', currentPage);
-
-                await api.get(`/api/v1/admin/blogs/manage?page=${cpg}&limit=${limit}&status=${status}&sort=${sort}`)
-                .then((response) => {
-                        const { success, data, message } = response.data;
-                        const { allBlogPosts, pagination } = data;
-        
-                        if (!success && message === "No article found") {
-                            console.log("Success: ", success);
-                            console.log("Message: ", message);
-                        };
-        
-                        setAllBlogPosts(allBlogPosts);
-                                                    
-                        setTotalBlogPosts(pagination?.postsRecord);
-                        setTotalPages(pagination?.lastPage);
-                    
-                        const new_URL = window.location.origin + `/blog/page/${currentPage}`;
-                        window.history.replaceState({}, document.title, new_URL ); 
-    
-                })
-                .catch((error) => {
-                    console.log("Error fetching data: ", error);
-                })
-                .finally(() => {
-                    setIsLoading(false);
-                });           
-            };
-            var timerID = setTimeout(fetchAllPublishedBlogPosts, 400);   // Delay execution of findAllStaffs by 1800ms
-            return () => {
-                clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
-            };   
-        } else {
-            async function fetchAllPublishedBlogPosts() {
-                const limit = 10; // Number of items per page  
-                var status = 'published';
-                var sort = 'recent';
-
-                localStorage.setItem('cpg', currentPage);
-
+              
                 await api.get(`/api/v1/admin/blogs/manage?page=${currentPage}&limit=${limit}&status=${status}&sort=${sort}`)
                 .then((response) => {
                         const { success, data, message } = response.data;
@@ -199,10 +115,7 @@ const BlogPosts = () => {
                         setAllBlogPosts(allBlogPosts);
                                                     
                         setTotalBlogPosts(pagination?.postsRecord);
-                        setTotalPages(pagination?.lastPage);                     
-
-                        const new_URL = window.location.origin + '/blog';                                               
-                        window.history.replaceState({}, document.title, new_URL ); 
+                        setTotalPages(pagination?.lastPage);                           
                 })
                 .catch((error) => {
                     console.log("Error fetching data: ", error);
@@ -210,14 +123,13 @@ const BlogPosts = () => {
                 .finally(() => {
                     setIsLoading(false);
                 });           
-            };
-            var timerID = setTimeout(fetchAllPublishedBlogPosts, 400);   // Delay execution of findAllStaffs by 1800ms
-            return () => {
+        };
+        var timerID = setTimeout(fetchAllPublishedBlogPosts, 400);   // Delay execution of findAllStaffs by 1800ms
+        return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
-        };            
-    }                                                
+        };                                               
      
-    }, [currentPage, cpg]); // Fetch data when currentPage changes and update URL with /page/currentPage value
+    }, [currentPage]); // Fetch data when currentPage changes and update URL with /page/currentPage value
    
     
 
@@ -252,48 +164,59 @@ const BlogPosts = () => {
                 <div className="mx-12 lg:mx-16 mt-36 mb-28 grid">                     
                     <div className="mx-auto flex flex-col items-center pl-16 pr-12">  
 
-                        <h1 className="text-4xl font-black mb-32">RECENT POSTS</h1>   
+                        <h1 className="text-4xl font-black mb-32 mt-4">RECENT POSTS</h1>   
            
            
-                        {/* POSTS LISTING */}          
-                        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-20 mx-28 sm:mx-8 lg:mx-16 flex-wrap">                                    
-                            {
-                                allBlogPosts.map((post) => {                
-                                    return (                                        
-                                        <div key={post._id} className="self-stretch p-2 mb-12">
-                                            <div className="rounded shadow-md h-full">
-                                                {/* <Link to={`/blog/${formatUrl(post.url)}`}> */}
-                                                <Link to={`/blog/${post.uri}`}>
-                                                    <img className="w-full m-0 rounded-t lazy" 
-                                                        // src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E"
-                                                        //  data-src="/assets/img/small-business.jpg" 
-                                                        src={post.img}
-                                                        width="960" 
-                                                        height="500" 
-                                                        alt="post thumbnail" 
-                                                    />
-                                                </Link>
-                                                <div className="px-6 pt-7 pb-12">
-                                                    <div className="font-black text-lg mb-1.5">
-                                                        <Link className="text-slate-900 hover:text-slate-700 text-14xl/tighter" to={`/blog/${post.uri}`}>
-                                                            {post.title}
-                                                        </Link>
-                                                    </div>
-                                                    <p className="text-slate-700 text-xl font-medium mb-5" title="Published date">{convertDate(post.createdAt)}</p>
-                                                    <p className="text-slate-800 text-xl/9 mb-5">            
-                                                        {post?.excerpt}                
-                                                    </p>
-                                                    <br />
-                                                    <Link to={`/blog/${post.uri}`} className="bg-green-500 text-white hover:text-gray-300 px-8 py-3 rounded-full">
-                                                        <button type="button">Read More</button>
-                                                    </Link>
-                                                </div>
-                                            </div>
-                                        </div>                                        
-                                    );
-                                })                                
-                            }                          
-                        </div>
+                        {/* POSTS LISTING */}    
+                        {
+                            allBlogPosts.length !== 0 ? 
+                                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-20 mx-28 sm:mx-8 lg:mx-16 flex-wrap">                                    
+                                    {
+                                    
+                                        allBlogPosts.map((post) => {                
+                                            return (                                        
+                                                    <div key={post._id} className="self-stretch p-2 mb-12">
+                                                        <div className="rounded shadow-md h-full">
+                                                            {/* <Link to={`/blog/${formatUrl(post.url)}`}> */}
+                                                            <Link to={`/blog/${post.uri}`}>
+                                                                <img className="w-full m-0 rounded-t lazy" 
+                                                                    // src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E"
+                                                                    //  data-src="/assets/img/small-business.jpg" 
+                                                                    src={post.img}
+                                                                    width="960" 
+                                                                    height="500" 
+                                                                    alt="post thumbnail" 
+                                                                />
+                                                            </Link>
+                                                            <div className="px-6 pt-7 pb-12">
+                                                                <div className="font-black text-lg mb-1.5">
+                                                                    <Link className="text-slate-900 hover:text-slate-700 text-14xl/tighter" to={`/blog/${post.uri}`}>
+                                                                        {post.title}
+                                                                    </Link>
+                                                                </div>
+                                                                <p className="text-slate-700 text-xl font-medium mb-5" title="Published date">{convertDate(post.createdAt)}</p>
+                                                                <p className="text-slate-800 text-xl/9 mb-5">            
+                                                                    {post?.excerpt}                
+                                                                </p>
+                                                                <br />
+                                                                <Link to={`/blog/${post.uri}`} className="bg-green-500 text-white hover:text-gray-300 px-8 py-3 rounded-full">
+                                                                    <button type="button">Read More</button>
+                                                                </Link>
+                                                            </div>
+                                                        </div>
+                                                    </div>                                        
+                                            );
+                                        })                                
+                                            
+                                    }                          
+                                </div>
+                                :
+                                
+                                <div className="flex justify-center mb-32"> 
+                                    <p className="text-2xl font-medium">No Article found</p>
+                                </div>
+
+                        }
                         {/* POSTS LISTING */}    
                                                                 
 
@@ -308,41 +231,48 @@ const BlogPosts = () => {
 
 
                         {/* Pagination controls */}
-                        <div className="flex justify-between items-center py-2 mt-16 mr-6">
-                            {/* <div className="p-4 font-medium text-3xl font-firma tracking-supertight flex flex-row gap-6 items-center">
-                                {limit} 
-                                <div className="text-xl normal-case">Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong></div>
-                            </div> */}
-                            <nav className="relative z-0 inline-flex gap-3">
-                                {/* Previous page button */}
-                                <button
-                                    onClick={() => handlePageChange(currentPage - 1)}
-                                    className={`relative inline-flex items-center px-2 py-2 rounded-full border border-gray-300 bg-white text-xl font-medium text-black tracking-extratight hover:bg-gray-50 w-20 justify-center h-20 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed hidden' : ''}`}
-                                    disabled={currentPage === 1}
-                                >prev
-                                </button>
+                        {
+                            allBlogPosts.length !== 0 ? 
+                                <div className="flex justify-between items-center py-2 mt-16 mr-6">
+                                    {/* <div className="p-4 font-medium text-3xl font-firma tracking-supertight flex flex-row gap-6 items-center">
+                                        {limit} 
+                                        <div className="text-xl normal-case">Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong></div>
+                                    </div> */}
+                                    <nav className="relative z-0 inline-flex gap-3">
+                                        {/* Previous page button */}
+                                        <button
+                                            onClick={() => handlePageChange(currentPage - 1)}
+                                            className={`relative inline-flex items-center px-2 py-2 rounded-full border border-gray-300 bg-white text-xl font-medium text-black tracking-extratight hover:bg-gray-50 w-20 justify-center h-20 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed hidden' : ''}`}
+                                            disabled={currentPage === 1}
+                                        >prev
+                                        </button>
 
 
-                                {/* Page numbers */}
-                                {Array.from({ length: totalPages }, (_, index) => (
-                                    <button
-                                    key={index}
-                                    onClick={() => handlePageChange(index + 1)}
-                                    className={`-ml-px relative inline-flex items-center px-4 py-2 rounded-full border border-gray-300 text-xl font-bold outline-none focus:outline-none hover:bg-gray-50 w-20 justify-center h-20 ${currentPage === index + 1 ? 'bg-gray-100 text-blue-800' : ''}`}>
-                                    {index + 1}
-                                    </button>
-                                ))}
+                                        {/* Page numbers */}
+                                        {Array.from({ length: totalPages }, (_, index) => (
+                                            <button
+                                            key={index}
+                                            onClick={() => handlePageChange(index + 1)}
+                                            className={`-ml-px relative inline-flex items-center px-4 py-2 rounded-full border border-gray-300 text-xl font-bold outline-none focus:outline-none hover:bg-gray-50 w-20 justify-center h-20 ${currentPage === index + 1 ? 'bg-gray-100 text-blue-800' : ''}`}>
+                                            {index + 1}
+                                            </button>
+                                        ))}
 
 
-                                {/* Next page button */}
-                                <button
-                                    onClick={() => handlePageChange(currentPage + 1)}
-                                    className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-full rounded-r-md border border-gray-300 bg-white text-xl font-medium text-black tracking-extratight hover:bg-gray-50 w-20 justify-center h-20 next-pg ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                    // disabled={currentPage === totalPages}
-                                >next
-                                </button>
-                            </nav>
-                        </div>
+                                        {/* Next page button */}
+                                        <button
+                                            onClick={() => handlePageChange(currentPage + 1)}
+                                            className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-full rounded-r-md border border-gray-300 bg-white text-xl font-medium text-black tracking-extratight hover:bg-gray-50 w-20 justify-center h-20 next-pg ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                            // disabled={currentPage === totalPages}
+                                        >next
+                                        </button>
+                                    </nav>
+                                </div>
+                                :
+                                <div className="flex justify-between items-center py-2 mt-16 mr-6">                              
+                                    <nav className="hidden"></nav>
+                                </div>
+                        }
                         {/* Pagination controls */}
                     </div>
                 </div> 

@@ -138,22 +138,13 @@ const BlogSinglePost = () => {
         };
     }, [currentPage]);
 
-
-    async function goBackOneStep() {
-        let redirToPage = localStorage.getItem('cpg');
-        console.log('Redirect to Blog - Page ', redirToPage);
-        window.location = `/blog/page/${redirToPage}`
-    };
-    var redirToPage = localStorage.getItem('cpg');
-
-
     return (
         <div id="singlePostWrapper">
             <Nav />
 
             <main id="blogSinglePost" className="container mx-auto mb-64 px-32">            
                 <div className="w-full flex justify-center">
-                    <h1><Link to={`/blog/page/${redirToPage}`} onClick={goBackOneStep}>Blog Post </Link></h1>
+                    <h1><Link to={'/blog'}>Blog Post </Link></h1>
                 </div>
                 <div class="mx-12 lg:mx-24 mt-32 grid grid-cols-28 gap-24">                       
 
