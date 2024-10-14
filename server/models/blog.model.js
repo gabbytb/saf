@@ -20,7 +20,17 @@ module.exports = mongoose => {
         excerpt: {
             type: String,
         },
-        comments: [],
+        comments: [
+            {
+                contribution: String,
+                firstName: { 
+                    type: String, 
+                    default: 'anonymous',
+                },
+                lastName: String,        
+                email: String,
+            },
+        ],
         author: {
             img: String,
             name: String,
