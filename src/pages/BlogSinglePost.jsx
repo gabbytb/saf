@@ -1,5 +1,5 @@
 import { useEffect, useState, } from "react";
-import { Link, useParams, useNavigate } from "react-router-dom";
+import { Link, useParams, } from "react-router-dom";
 import { HomeFooter, Nav } from "../components";
 import api from "../api";
 
@@ -107,6 +107,7 @@ const BlogSinglePost = () => {
     const [sidebarPosts, setSidebarPosts] = useState([]);
     console.log("Sidebar Post: ", sidebarPosts);
   
+    // eslint-disable-next-line
     const [currentPage, setCurrentPage] = useState(1);
 
     useEffect(() => {
@@ -180,7 +181,7 @@ const BlogSinglePost = () => {
                                                         </div>
 
                                                         <div className="mt-0 pt-0 pb-2 text-14xl italic font-bold grid grid-cols-32 gap-1 items-baseline">Tagged in: 
-                                                            <Link to={`/blog/tags/{}`} className="items-start border-none outline-none hover:outline-none focus:outline-none hover:border-none focus:border-none">{blogSinglePost?.tags}</button>
+                                                            <Link to={`/blog/tags/{}`} className="items-start border-none outline-none hover:outline-none focus:outline-none hover:border-none focus:border-none">{blogSinglePost?.tags}</Link>
                                                         </div >
 
                                                         <label htmlFor="comments" className="mb-0">Leave a comment

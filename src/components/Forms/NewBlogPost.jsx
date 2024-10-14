@@ -118,7 +118,7 @@ const FormNewBlogPost = () => {
 
         await api.post('/api/v1/admin/blogs/manage/create', payload) // Update the URL to your API endpoint
         .then((response) => {
-            const { success, data, message } = response.data;
+            const { success, message } = response.data;
             var errMsg = document.querySelector('#newPostFormID .create_error'); 
             var successMsg = document.querySelector('#newPostFormID .create_success');
         
