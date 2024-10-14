@@ -161,9 +161,10 @@ module.exports = {
         '16': '1fr 1fr', // Used for Section 1: .s1-grids-wrap
         '18': '54% 1fr', // Used for Section 2 after: .h-container-2
         // '20': '1fr',
-        '22': 'repeat(auto-fit,minmax(240px,1fr))', // Used for Footer: .app-reviews
+        '22': 'repeat(auto-fit,minmax(240px,1fr))', // Used for Footer: .app-reviews  
         '26': '28rem 1fr', // Used for Admin Dashboard
         '28': '68% 1fr', // Used for Blog Page
+        '32': '8rem 1fr',
       },
       height: {
         '13': '3.2rem',

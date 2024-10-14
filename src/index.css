@@ -160,9 +160,19 @@
     border-radius: 5px;
     padding: 10px 15px;
     outline: none;
-    font-size: 15px;
+    /* font-size: 15px; */
     letter-spacing: 0.06em;
     appearance: auto;
+  }
+
+  :disabled {
+    font-size: 1.2rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.05em !important;
+    padding: 0 !important;
+    height: 1.6rem !important;
+    line-height: 1.55 !important;
+    align-items: center !important;
   }
 
   tr {
@@ -230,6 +240,21 @@
     border: 0;
   };
   
+
+  /* #blogSinglePost .tox .tox-statusbar__right-container .tox:not([dir=rtl]) .tox-statusbar__branding {
+    @apply
+      hidden
+      !important
+    ;
+  }; */
+
+  /* #blogSinglePost .tox .tox-statusbar__right-container  .tox:not([dir=rtl]) .tox-statusbar__branding a {
+    @apply
+      hidden
+      !important
+    ;
+  }; */
+
   .login__form {
     position: relative;
     background-color: hsla(0, 0%, 100%, .01);

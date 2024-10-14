@@ -630,10 +630,20 @@ input[type="text"], input[type="email"], input[type="password"] {
   border-radius: 5px;
   padding: 10px 15px;
   outline: none;
-  font-size: 15px;
+  /* font-size: 15px; */
   letter-spacing: 0.06em;
   -webkit-appearance: auto;
           appearance: auto;
+}
+
+:disabled {
+  font-size: 1.2rem !important;
+  font-weight: 500 !important;
+  letter-spacing: 0.05em !important;
+  padding: 0 !important;
+  height: 1.6rem !important;
+  line-height: 1.55 !important;
+  align-items: center !important;
 }
 
 tr {
@@ -830,6 +840,20 @@ tbody tr{
   outline: 0;
   border: 0;
 };
+
+/* #blogSinglePost .tox .tox-statusbar__right-container .tox:not([dir=rtl]) .tox-statusbar__branding {
+    @apply
+      hidden
+      !important
+    ;
+  }; */
+
+/* #blogSinglePost .tox .tox-statusbar__right-container  .tox:not([dir=rtl]) .tox-statusbar__branding a {
+    @apply
+      hidden
+      !important
+    ;
+  }; */
 
 .login__register {
   font-size: var(--login-small-font-size);
@@ -4089,6 +4113,10 @@ progress#file {
   height: 11rem;
 }
 
+.h-52{
+  height: 13rem;
+}
+
 .h-60{
   height: 15rem;
 }
@@ -4379,6 +4407,10 @@ progress#file {
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
 
+.grid-cols-32{
+  grid-template-columns: 8rem 1fr;
+}
+
 .grid-cols-subgrid{
   grid-template-columns: subgrid;
 }
@@ -4407,12 +4439,20 @@ progress#file {
   align-content: center;
 }
 
+.items-start{
+  align-items: flex-start;
+}
+
 .items-end{
   align-items: flex-end;
 }
 
 .items-center{
   align-items: center;
+}
+
+.items-baseline{
+  align-items: baseline;
 }
 
 .items-stretch{
@@ -4437,6 +4477,10 @@ progress#file {
 
 .gap-0{
   gap: 0px;
+}
+
+.gap-1{
+  gap: 0.25rem;
 }
 
 .gap-10{
@@ -4465,6 +4509,10 @@ progress#file {
 
 .gap-4{
   gap: 1rem;
+}
+
+.gap-5{
+  gap: 1.25rem;
 }
 
 .gap-6{
@@ -4968,6 +5016,11 @@ progress#file {
   padding-bottom: 0.75rem;
 }
 
+.py-3\.5{
+  padding-top: 0.875rem;
+  padding-bottom: 0.875rem;
+}
+
 .py-4{
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -5204,11 +5257,6 @@ progress#file {
 .text-2xl\/normal{
   font-size: 1.5rem;
   line-height: 1.5;
-}
-
-.text-2xl\/relaxed{
-  font-size: 1.5rem;
-  line-height: 1.625;
 }
 
 .text-3xl{
@@ -5627,6 +5675,10 @@ progress#file {
   cursor: not-allowed;
 }
 
+.hover\:border-none:hover{
+  border-style: none;
+}
+
 .hover\:bg-blue-600:hover{
   --tw-bg-opacity: 1;
   background-color: rgb(37 99 235 / var(--tw-bg-opacity));
@@ -5710,6 +5762,10 @@ progress#file {
 
 .hover\:ease-in-out:hover{
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.focus\:border-none:focus{
+  border-style: none;
 }
 
 .focus\:border-blue-500:focus{

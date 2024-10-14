@@ -49,7 +49,7 @@ const FormNewBlogPost = () => {
     // ********************************* //
     // *** PAYLOAD FOR NEW BLOG POST *** //
     // ********************************* //
-    const [postDesc, setPostDesc] = useState({ description: '<b></b>' });
+    const [postDesc, setPostDesc] = useState({ description: ' ' });
     console.log("*** Blog Description: ", postDesc);
     
 
@@ -59,21 +59,6 @@ const FormNewBlogPost = () => {
     // ******************************************************** //
     // ** MANAGE STATE OF:- Form Message and Form Submitted *** //
     // ******************************************************** //
-    // Effect to set up the onChange listener
-    // useEffect(() => {
-    //     if (quill) {
-    //         const handleChange = () => {
-    //             const description = quill.root.innerHTML; // Get the content of the editor
-    //             setPostDesc({ ...postDesc, description }); // Update the post state
-    //         };
-    //         quill.on('text-change', handleChange); // Listen for changes
-
-    //         return () => {
-    //             quill.off('text-change', handleChange); // Cleanup the listener
-    //         };
-    //     }
-    // }, [quill]); // Run this effect when `quill` is available
-
     const [formMessage, setFormMessage] = useState(null);
     // console.log("Create Attempt: ", formMessage);
     
@@ -98,16 +83,7 @@ const FormNewBlogPost = () => {
     };
 
     // Function to update description
-    // const updateDescription = (e) => {
-    //     const name = e.target.name;
-    //     const value = e.target.value;
-    //     setPostDesc({ 
-    //         ...postDesc, 
-    //         [name]: value 
-    //     }); 
-    // };
-
-    const handleEditorChange = (content) => {   
+    const updateDescription = (content) => {   
         setPostDesc((prevPost) => ({
             ...prevPost,
             description: content,
@@ -324,10 +300,12 @@ const FormNewBlogPost = () => {
                                                 
                                         <Editor
                                             apiKey="b68jaid3qmtd8i45pcq2e32l0m0lxo2lt1kpnp4xv97kgppi" // Get your free API key from TinyMCE website
-                                            initialValue="Start typing here..."
-                                            init={{
-                                                height: 500,
-                                                menubar: false,
+                                            initialValue=""
+                                            name="description"
+                                            init={{                                                                                             
+                                                height: 300,
+                                                menubar: true,
+                                                branding: false,
                                                 plugins: [
                                                   // Core editing features
                                                   'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
@@ -345,7 +323,7 @@ const FormNewBlogPost = () => {
                                                 ],
                                                 ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
                                             }}                                            
-                                            onEditorChange={handleEditorChange}                                                                                                                                                                                                                                  
+                                            onEditorChange={updateDescription}                                                                                                                                                                                                                                                                                                            
                                         />
                                     </label>
                                 </div>
@@ -355,18 +333,18 @@ const FormNewBlogPost = () => {
                             <div className="w-full lg:w-12/12 px-4">
                                 <div className="relative w-full mb-3">
                                     <label
-                                        className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2"
+                                        className="flex flex-col uppercase text-black text-lg font-extrabold tracking-moretight mb-2"
                                         htmlFor="excerpt">
                                         Excerpt
 
                                         <textarea
                                             type="text"
-                                            className="border-0 px-6 py-6 mt-3 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-3xl shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
+                                            className="border-0 px-6 py-6 mt-3 mb-6 placeholder-gray-600 text-black bg-white rounded text-2xl font-normal shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
                                             name="excerpt"                                                             
                                             placeholder="Post excerpt"
                                             // value={post.excerpt}
                                             onChange={(e) => setPost({ ...post, excerpt: e.target.value })}                                              
-                                            rows="3">
+                                            rows="4">
                                         </textarea>
                                     </label>
                                 </div>

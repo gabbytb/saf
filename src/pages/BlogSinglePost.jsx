@@ -157,27 +157,37 @@ const BlogSinglePost = () => {
                                         <div className="self-stretch p-0 mb-0">
                                             <div className="rounded shadow-md h-full">                                              
                                                 <img className="w-full m-0 rounded-t lazy" 
-                                                    // src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E" 
-                                                    // data-src="/assets/img/small-business.jpg" 
-                                                    // width="960" 
-                                                    src={blogSinglePost?.img}   
-                                                    width="100%"
-                                                    height="500" 
-                                                    alt="post thumbnail" 
+                                                    // data-src="/assets/img/small-business.jpg"                                                  
+                                                    src={blogSinglePost?.img}                                     
+                                                    alt="post cover" 
                                                 />                                       
                                                 <div className="px-11 pt-10 pb-20 flex flex-col gap-8">
                                                     <div className="font-semibold text-lg mb-2 border-gray-500 border-b-2 pb-2">
                                                         <p className="text-slate-900 text-4xl/tight font-semibold capitalize">{blogSinglePost?.title}</p>
                                                         <div className="mt-3 pb-1 text-10xl italic font-bold">{convertDate(blogSinglePost?.createdAt)}</div>
                                                     </div>
-                                                    {/* <p class="text-slate-700 mb-1" title="Published date">{blogSinglePost?.author?.name}</p> */}
-                                                    {/* <p class="text-slate-800 text-2xl/relaxed font-medium tracking-tightened mb-2">            
-                                                        {blogSinglePost?.description}               
-                                                    </p> */}
+                                                    {/* <p class="text-slate-700 mb-1" title="Post Author">{blogSinglePost?.author?.name}</p> */}                                             
+                                                   
                                                     <div
                                                         className="rendered-output"
                                                         dangerouslySetInnerHTML={{ __html: blogSinglePost?.description }} // Render HTML content here
-                                                    />                   
+                                                    />   
+
+                                                    <div className="pt-0 pb-6 flex flex-col gap-8">
+                                                        
+                                                        <div className="mt-0 pt-0 pb-6 text-14xl italic font-bold flex flex-col justify-center items-center gap-5">Categorized in
+                                                            <button type="button" className="bg-gray-100 text-slate-700 px-6 py-3.5 rounded-xl border-none outline-none hover:outline-none focus:outline-none hover:border-none focus:border-none">{blogSinglePost?.categories}</button>
+                                                        </div>
+
+                                                        <div className="mt-0 pt-0 pb-2 text-14xl italic font-bold grid grid-cols-32 gap-1 items-baseline">Tagged in: 
+                                                            <Link to={`/blog/tags/{}`} className="items-start border-none outline-none hover:outline-none focus:outline-none hover:border-none focus:border-none">{blogSinglePost?.tags}</button>
+                                                        </div >
+
+                                                        <label htmlFor="comments" className="mb-0">Leave a comment
+                                                            <textarea name="comments" id="comments" className="w-full h-52">{blogSinglePost?.comments}</textarea>    
+                                                        </label>    
+
+                                                    </div>                
                                                 </div>
                                             </div>
                                         </div>
