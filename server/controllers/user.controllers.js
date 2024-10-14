@@ -963,7 +963,7 @@ exports.findSingleUserById = async (req, res) => {
     try {
         const _id = req.params.id;
         const user = await User.findById(_id);
-    
+
         // const decodedExpiresIn = decrypt(user.expirationInMs); // Decode here
         // console.log("Decoded Token Expiration Time: ", decodedExpiresIn);
 

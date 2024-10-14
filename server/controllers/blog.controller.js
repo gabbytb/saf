@@ -330,6 +330,9 @@ exports.findBlogPostById = async (req, res) => {
         const _id = req.params.id;
         const blog = await Blog.findById(_id);
 
+        // const id = req.params.id;
+        // const blog = await Blog.filter(b => b._id === id);
+        
         if (!blog) {
             const responseData = {
                 success: false,

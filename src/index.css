@@ -165,7 +165,7 @@
     appearance: auto;
   }
 
-  :disabled {
+  /* :disabled {
     font-size: 1.2rem !important;
     font-weight: 500 !important;
     letter-spacing: 0.05em !important;
@@ -173,7 +173,7 @@
     height: 1.6rem !important;
     line-height: 1.55 !important;
     align-items: center !important;
-  }
+  } */
 
   tr {
     text-align: justify;
@@ -495,7 +495,8 @@
   #homeTopBarID div {
     @apply 
       h-full 
-      flex 
+      hidden
+      xl:flex 
       items-center
     ;
   }

@@ -26,7 +26,7 @@ const HomeNav = () => {
                 <div className="basis-3/4 justify-center ml-56 pl-64">
                     Welcome to Samuel Akinola Foundation 💙 . New account? <strong className="text-xl">&nbsp; Sign up ↗</strong>
                 </div>
-                <ul className="flex h-full basis-1/4 social--icons">
+                <ul className="flex h-full basis-full xl:basis-1/4 social--icons">
                     <li className="flex fill-white w-full justify-end gap-7 pr-24">
                         {
                             footerLinks.map((item) => {

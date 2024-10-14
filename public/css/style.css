@@ -636,15 +636,15 @@ input[type="text"], input[type="email"], input[type="password"] {
           appearance: auto;
 }
 
-:disabled {
-  font-size: 1.2rem !important;
-  font-weight: 500 !important;
-  letter-spacing: 0.05em !important;
-  padding: 0 !important;
-  height: 1.6rem !important;
-  line-height: 1.55 !important;
-  align-items: center !important;
-}
+/* :disabled {
+    font-size: 1.2rem !important;
+    font-weight: 500 !important;
+    letter-spacing: 0.05em !important;
+    padding: 0 !important;
+    height: 1.6rem !important;
+    line-height: 1.55 !important;
+    align-items: center !important;
+  } */
 
 tr {
   text-align: justify;
@@ -925,9 +925,15 @@ main#blogSinglePost section .rendered-output p{
 }
 
 #homeTopBarID div{
-  display: flex;
+  display: none;
   height: 100%;
   align-items: center;
+}
+
+@media (min-width: 1040px){
+  #homeTopBarID div{
+    display: flex;
+  }
 }
 
 #homeTopBarID .social--icons a{
@@ -4313,6 +4319,10 @@ progress#file {
   flex-basis: 58.333333%;
 }
 
+.basis-full{
+  flex-basis: 100%;
+}
+
 .border-collapse{
   border-collapse: collapse;
 }
@@ -6159,6 +6169,10 @@ progress#file {
 
   .xl\:w-full{
     width: 100%;
+  }
+
+  .xl\:basis-1\/4{
+    flex-basis: 25%;
   }
 
   .xl\:grid-cols-3{
