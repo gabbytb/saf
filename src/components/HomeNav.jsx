@@ -17,7 +17,6 @@ import { FooterSocialCard } from "../components";
 
 
 
-
 const HomeNav = () => {
     
     return (
@@ -197,4 +196,5 @@ const HomeNav = () => {
         </>
     );
 };
+
 export default HomeNav;
