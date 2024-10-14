@@ -4,8 +4,9 @@ import {
 } from "../assets/images";
 import { 
     PersonalFirstIcon, PersonalSecondIcon, PersonalThirdIcon, 
-    BusinessFirstIcon, DeveloperFirstIcon, DeveloperSecondIcon, 
+    DeveloperFirstIcon, DeveloperSecondIcon, 
     LearnFirstIcon, LearnSecondIcon, LearnThirdIcon, 
+    // BusinessFirstIcon
 } from "../assets/icons";
 import { footerLinks } from "../constants";
 import { FooterSocialCard } from "../components";
