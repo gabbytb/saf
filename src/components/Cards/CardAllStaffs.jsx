@@ -143,7 +143,7 @@ export default function CardAllStaffs({ color }) {
 
 
                 <div className={`w-full overflow-x-auto ${activeDisplay === "allStaffs" ? "block" : "hidden"}`}>
-                  {/* Projects table */}
+                  {/* Staffs table */}
                   <table className="items-center w-full bg-transparent border-collapse">
                     <thead>
                       <tr>

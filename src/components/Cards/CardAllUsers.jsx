@@ -5,8 +5,8 @@ import api from "../../api";
 import sketch from '../../assets/img/sketch.jpg';
 
 // components
-import { Preloader, CardAllApprovedUsers, CardAllPendingUsers, CardAllRejectedUsers, TableDropdown } from "..";
-
+import { CardAllApprovedUsers, CardAllPendingUsers, CardAllRejectedUsers, TableDropdown } from "..";
+import { spinner } from "../../assets/images";
 
 
 
@@ -116,14 +116,14 @@ export default function CardAllUsers({ color }) {
                   }
                 >
 
-                  {/* Users Navigation */}
-                  <div id="usersLinkID" className="flex flex-row gap-3 mt-8 mb-10 px-7">
-                    <Link className="allUsers activeUserView py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allUsers")}>All</Link>
-                    <Link className="allApprovedUsers py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allApprovedUsers")}>Approved</Link>
-                    <Link className="allPendingUsers py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allPendingUsers")}>Pending</Link>
-                    <Link className="allRejectedUsers py-4 px-10 rounded-lg border" onClick={() => setActiveDisplay("allRejectedUsers")}>Rejected</Link>
-                  </div>
-                  {/* Users Navigation */}
+                {/* Users Navigation */}
+                <div id="usersLinkID" className="flex flex-row gap-3 mt-8 mb-10 px-7">
+                  <Link className="allUsers activeUserView py-4 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allUsers")}>All </Link>
+                  <Link className="allApprovedUsers py-4 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allApprovedUsers")}>Approved </Link>
+                  <Link className="allPendingUsers py-4 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allPendingUsers")}>Pending </Link>
+                  <Link className="allRejectedUsers py-4 px-10 rounded-lg border text-xl" onClick={() => setActiveDisplay("allRejectedUsers")}>Rejected </Link>
+                </div>
+                {/* Users Navigation */}
 
                   
                   {/* Page Title */}
@@ -201,12 +201,13 @@ export default function CardAllUsers({ color }) {
                             </thead>          
                             <tbody className='w-16 h-16'>
                               <tr>
-                                <td></td>
-                                <td></td>
-                                <td className="max-w-40 h-60 flex justify-center items-center">
-                                  <Preloader />
-                                </td>
-                                <td></td>
+                              <td></td>
+                              <td></td>
+                              <td className="max-w-40 h-60 flex justify-center items-center">                                
+                                {/* <Preloader /> */}
+                                <img src={spinner} alt="Spinning" className="ml-80" />
+                              </td>
+                              <td></td>
                               </tr>                
                             </tbody>
                           </table>
@@ -228,10 +229,10 @@ export default function CardAllUsers({ color }) {
 
           {/* Users Navigation */}
           <div id="usersLinkID" className="flex flex-row gap-3 mt-8 mb-10 px-7">
-            <Link className="allUsers activeUserView py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allUsers")}>All </Link>
-            <Link className="allApprovedUsers py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allApprovedUsers")}>Approved </Link>
-            <Link className="allPendingUsers py-4 px-10 rounded-lg border mr-2" onClick={() => setActiveDisplay("allPendingUsers")}>Pending </Link>
-            <Link className="allRejectedUsers py-4 px-10 rounded-lg border" onClick={() => setActiveDisplay("allRejectedUsers")}>Rejected </Link>
+            <Link className="allUsers activeUserView py-4 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allUsers")}>All </Link>
+            <Link className="allApprovedUsers py-4 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allApprovedUsers")}>Approved </Link>
+            <Link className="allPendingUsers py-4 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allPendingUsers")}>Pending </Link>
+            <Link className="allRejectedUsers py-4 px-10 rounded-lg border text-xl" onClick={() => setActiveDisplay("allRejectedUsers")}>Rejected </Link>
           </div>
           {/* Users Navigation */}
 
@@ -259,66 +260,66 @@ export default function CardAllUsers({ color }) {
             {/* Projects table */}
             <table className="items-center w-full bg-transparent border-collapse">
               <thead>
-                <tr>
-                  <th
-                    className={
-                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                      (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                    }
-                  >
-                    S/N
-                  </th>
-                  <th
-                    className={
-                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                      (color === "light"
-                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                        : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                    }
-                  >
-                    Full Name
-                  </th>
-                  <th
-                    className={
-                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                      (color === "light"
-                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                        : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                    }
-                  >
-                    E-mail address
-                  </th>
-                  <th
-                    className={
-                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                      (color === "light"
-                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                        : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                    }
-                  >
-                    Status
-                  </th> 
-                  <th
-                    className={
-                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                      (color === "light"
-                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                        : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                    }
-                  >
-                    Action
-                  </th>              
-                  <th
-                    className={
-                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                      (color === "light"
-                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                        : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                    }
-                  ></th>
-                </tr>
+                      <tr>
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                          }
+                        >
+                          S/N
+                        </th>
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                          }
+                        >
+                          Full Name
+                        </th>
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                          }
+                        >
+                          E-mail address
+                        </th>
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                          }
+                        >
+                          Status
+                        </th> 
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                          }
+                        >
+                          Action
+                        </th>              
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                          }
+                        ></th>
+                      </tr>
               </thead>
               {
                 allUsers?.length !== 0 ?
@@ -326,98 +327,98 @@ export default function CardAllUsers({ color }) {
                     {
                         allUsers?.map((user, userIndex) => {
                             if (user?.status === "pending") {
-                                return (
-                                    <tr key={userIndex}>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                          #{userIndex+1}
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-                                          <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
-                                          <span
-                                            className={
-                                              "ml-3 font-bold " +
-                                              +(color === "light" ? "text-blueGray-600" : "text-white")
-                                            }
-                                          >
-                                            {user?.firstName} {user?.lastName}
-                                          </span>
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs text-sm tracking-supertight font-bold whitespace-nowrap p-4">
-                                          {user?.email}
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 capitalize">
-                                          <i className="fas fa-circle text-orange-500 mr-2"></i>{user?.status}
-                                        </td> 
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 capitalize">
-                                          <Link to={`/admin/users/${user._id}`}>View details</Link>
-                                        </td>                     
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-                                          <TableDropdown />
-                                        </td>
-                                    </tr>               
-                                  );
+                              return (
+                                <tr key={userIndex}>
+                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4">
+                                      #{userIndex+1}
+                                    </td>
+                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap p-4 text-left flex items-center capitalize">
+                                      <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
+                                      <span
+                                        className={
+                                          "ml-3 font-bold " +
+                                          +(color === "light" ? "text-blueGray-600" : "text-white")
+                                        }
+                                      >
+                                        {user?.firstName} {user?.lastName}
+                                      </span>
+                                    </td>
+                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap p-4">
+                                      {user?.email}
+                                    </td>
+                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap p-4 capitalize">
+                                      <i className="fas fa-circle text-orange-400 mr-2"></i>{user?.status}
+                                    </td>                  
+                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap p-4 capitalize">
+                                        <Link to={`/admin/staffs/${user._id}`}>View details</Link>
+                                    </td>    
+                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4 text-right">
+                                      <TableDropdown />
+                                    </td>
+                                </tr>               
+                              );
                             } else if (user?.status === "rejected") {
                               return (
-                                    <tr key={userIndex}>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                          #{userIndex+1}
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-                                          <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
-                                          <span
-                                            className={
-                                              "ml-3 font-bold" +
-                                              +(color === "light" ? "text-blueGray-600" : "text-white")
-                                            }
-                                          >
-                                            {user?.firstName} {user?.lastName}
-                                          </span>
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs text-sm tracking-supertight font-bold whitespace-nowrap p-4">
-                                          {user?.email}
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 capitalize">
-                                          <i className="fas fa-circle text-red-500 mr-2"></i>{user?.status}
-                                        </td>   
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 capitalize">
-                                          <Link to={`/admin/users/${user._id}`}>View details</Link>
-                                        </td>                               
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-                                          <TableDropdown />
-                                        </td>
-                                    </tr>               
+                                <tr key={userIndex}>
+                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4">
+                                      #{userIndex+1}
+                                    </td>
+                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap p-4 text-left flex items-center">
+                                      <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
+                                      <span
+                                        className={
+                                          "ml-3 font-bold " +
+                                          + (color === "light" ? "text-blueGray-600" : "text-white")
+                                        }
+                                      >
+                                        {user?.firstName} {user?.lastName}
+                                      </span>
+                                    </td>
+                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap p-4">
+                                      {user?.email}
+                                    </td>
+                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap p-4 capitalize">
+                                      <i className="fas fa-circle text-red-500 mr-2"></i>{user?.status}
+                                    </td> 
+                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap p-4 capitalize">
+                                        <Link to={`/admin/staffs/${user._id}`}>View details</Link>
+                                    </td>                   
+                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4 text-right">
+                                      <TableDropdown />
+                                    </td>
+                                </tr>               
                               );
                             } else {
-                                  return (
-                                    <tr key={userIndex}>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4">
-                                          #{userIndex+1}
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-left flex items-center">
-                                          <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
-                                          <span
-                                            className={
-                                              "ml-3 font-bold " +
-                                              +(color === "light" ? "text-blueGray-600" : "text-white")
-                                            }
-                                          >
-                                            {user?.firstName} {user?.lastName}
-                                          </span>
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs text-sm tracking-supertight font-bold whitespace-nowrap p-4">
-                                          {user?.email}
-                                        </td>
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 capitalize">
-                                          <i className="fas fa-circle text-green-500 mr-2"></i>{user?.status}
-                                        </td>  
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 capitalize">
-                                          <Link to={`/admin/users/${user._id}`}>View details</Link>
-                                        </td>                           
-                                        <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xs whitespace-nowrap p-4 text-right">
-                                          <TableDropdown />
-                                        </td>
-                                    </tr>               
-                                  );
+                              return (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                <tr key={userIndex}>
+                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4">
+                                      #{userIndex+1}
+                                    </td>
+                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap p-4 text-left flex items-center">
+                                      <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
+                                      <span
+                                        className={
+                                          "ml-3 font-bold " +
+                                          +(color === "light" ? "text-blueGray-600" : "text-white")
+                                        }
+                                      >
+                                        {user?.firstName} {user?.lastName}
+                                      </span>
+                                    </td>
+                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap p-4">
+                                      {user?.email}
+                                    </td>
+                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap p-4 capitalize">
+                                      <i className="fas fa-circle text-green-500 mr-2"></i>{user?.status}
+                                    </td>  
+                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap p-4 capitalize">
+                                        <Link to={`/admin/staffs/${user._id}`}>View details</Link>
+                                    </td>                  
+                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4 text-right">
+                                      <TableDropdown />
+                                    </td>
+                                </tr>               
+                              );
                             };
                         })
                     }
@@ -455,12 +456,12 @@ export default function CardAllUsers({ color }) {
 
                                         {/* Page numbers */}
                                         {Array.from({ length: totalPages }, (_, index) => (
-                                            <button
-                                            key={index}
-                                            onClick={() => handlePageChange(index + 1)}
-                                            className={`-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-xl font-bold text-gray-700 hover:bg-gray-50 w-16 justify-center h-14 activePage ${currentPage === index + 1 ? 'bg-gray-200' : ''}`}>
-                                            {index + 1}
-                                            </button>
+                                                    <button
+                                                    key={index}
+                                                    onClick={() => handlePageChange(index + 1)}
+                                                    className={`-ml-px relative inline-flex items-center border border-gray-300 text-xl font-black outline-none focus:outline-none hover:bg-gray-50 w-16 justify-center h-14 ${currentPage === index + 1 ? 'bg-gray-100 text-blue-800' : ''}`}>
+                                                    {index + 1}
+                                                    </button>
                                         ))}
 
 

@@ -317,6 +317,7 @@ export default function CardAllPendingStaffs({ color, activeDisplay }) {
                                         {limit} 
                                         <div className="text-xl normal-case">Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong></div>
                 </div>
+                
                 <nav className="relative z-0 inline-flex shadow-sm">
                                         {/* Previous page button */}
                                         <button
