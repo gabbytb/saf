@@ -634,6 +634,7 @@ input[type="text"], input[type="email"], input[type="password"] {
   letter-spacing: 0.06em;
   -webkit-appearance: auto;
           appearance: auto;
+  border: 0.3px solid lightgray;
 }
 
 /* :disabled {
@@ -4489,10 +4490,6 @@ progress#file {
   gap: 0px;
 }
 
-.gap-1{
-  gap: 0.25rem;
-}
-
 .gap-10{
   gap: 2.5rem;
 }
@@ -4713,6 +4710,11 @@ progress#file {
   border-color: rgb(107 114 128 / var(--tw-border-opacity));
 }
 
+.border-slate-200{
+  --tw-border-opacity: 1;
+  border-color: rgb(226 232 240 / var(--tw-border-opacity));
+}
+
 .border-transparent{
   border-color: transparent;
 }
@@ -4783,6 +4785,11 @@ progress#file {
 .bg-gray-900{
   --tw-bg-opacity: 1;
   background-color: rgb(17 24 39 / var(--tw-bg-opacity));
+}
+
+.bg-green-400{
+  --tw-bg-opacity: 1;
+  background-color: rgb(74 222 128 / var(--tw-bg-opacity));
 }
 
 .bg-green-500{
@@ -5194,6 +5201,14 @@ progress#file {
 
 .pt-8{
   padding-top: 2rem;
+}
+
+.pl-8{
+  padding-left: 2rem;
+}
+
+.pt-3{
+  padding-top: 0.75rem;
 }
 
 .text-left{

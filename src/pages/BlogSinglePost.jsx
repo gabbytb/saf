@@ -139,14 +139,22 @@ const BlogSinglePost = () => {
         };
     }, [currentPage]);
 
+
+    async function updateComments() {
+
+    };
+
+
     return (
         <div id="singlePostWrapper">
             <Nav />
 
             <main id="blogSinglePost" className="container mx-auto mb-64 px-32">            
-                <div className="w-full flex justify-center">
+               
+                {/* <div className="w-full flex justify-center">
                     <h1><Link to={'/blog'}>Blog Post </Link></h1>
-                </div>
+                </div> */}
+
                 <div class="mx-12 lg:mx-24 mt-32 grid grid-cols-28 gap-24">                       
 
                     <section className="p-0">   
@@ -180,13 +188,32 @@ const BlogSinglePost = () => {
                                                             <button type="button" className="bg-gray-100 text-slate-700 px-6 py-3.5 rounded-xl border-none outline-none hover:outline-none focus:outline-none hover:border-none focus:border-none">{blogSinglePost?.categories}</button>
                                                         </div>
 
-                                                        <div className="mt-0 pt-0 pb-2 text-14xl italic font-bold grid grid-cols-32 gap-1 items-baseline">Tagged in: 
-                                                            <Link to={`/blog/tags/{}`} className="items-start border-none outline-none hover:outline-none focus:outline-none hover:border-none focus:border-none">{blogSinglePost?.tags}</Link>
+                                                        <div className="mt-0 pt-0 pb-2 text-14xl font-bold grid grid-cols-32 gap-2 items-baseline">Tagged in: 
+                                                            <Link to={`/blog/tags/{}`} className="text-xl items-start border-none outline-none hover:outline-none focus:outline-none hover:border-none focus:border-none">{blogSinglePost?.tags}</Link>
                                                         </div >
 
-                                                        <label htmlFor="comments" className="mb-0">Leave a comment
-                                                            <textarea name="comments" id="comments" className="w-full h-52">{blogSinglePost?.comments}</textarea>    
-                                                        </label>    
+                                                        <form onSubmit={updateComments} className="flex flex-col gap-4">
+                                                            <label htmlFor="comments" className="mb-0 text-xl font-medium">Leave a comment
+                                                                <textarea name="comments" id="comments" placeholder="Your comment" className="mt-3 w-full h-52 border-slate-200 rounded-xl shadow-sm p-4">{blogSinglePost?.comments}</textarea>    
+                                                            </label>  
+
+                                                            <div className="grid grid-cols-2 gap-8">
+                                                                <label htmlFor="firstName" className="mb-0 text-xl font-medium">First Name
+                                                                    <input type="text" name="firstName" id="firstName" className="mt-1 rounded-xl" />
+                                                                </label>
+                                                                <label htmlFor="lastName" className="mb-0 text-xl font-medium">Last Name
+                                                                    <input type="text" name="lastName" id="lastName" className="mt-1 rounded-xl" />
+                                                                </label>
+                                                            </div>
+
+                                                            <label htmlFor="email" className="mb-0 text-xl font-medium">E-mail Address
+                                                                <input type="email" name="email" id="email" className="mt-1 rounded-xl" />
+                                                            </label>
+
+                                                            <div className="flex justify-end">
+                                                                <button type="submit" className="bg-green-400 hover:bg-green-500 focus:bg-green-600 px-8 py-4 text-xl tracking-tightener font-medium text-white rounded-lg">Comment</button>
+                                                            </div>
+                                                        </form>                                                        
 
                                                     </div>                
                                                 </div>

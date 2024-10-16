@@ -163,6 +163,7 @@
     /* font-size: 15px; */
     letter-spacing: 0.06em;
     appearance: auto;
+    border: 0.3px solid lightgray;
   }
 
   /* :disabled {
@@ -240,7 +241,6 @@
     border: 0;
   };
   
-
   /* #blogSinglePost .tox .tox-statusbar__right-container .tox:not([dir=rtl]) .tox-statusbar__branding {
     @apply
       hidden
