@@ -72,7 +72,7 @@ const DashboardStaffs = ({ isLoggedIn }) => {
                 <AdminNavbar />
                 
                 {/* Header */}
-                <div className="relative bg-blue-600 md:pt-32 pb-32 pt-12">
+                <div className="relative bg-blue-900 md:pt-32 pb-32 pt-12">
               
                     {/* Welcome Logged-In User */}
                     <div className="px-4 md:px-10 pb-6 mx-auto w-full">  

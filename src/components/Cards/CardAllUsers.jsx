@@ -88,7 +88,7 @@ export default function CardAllUsers({ color }) {
                 });
             };
      
-            var timerID = setTimeout(fetchAllUsers, 300);   // Delay execution of findAllUsers by 1800ms
+            var timerID = setTimeout(fetchAllUsers, 800);   // Delay execution of findAllUsers by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes         
             };
@@ -116,14 +116,14 @@ export default function CardAllUsers({ color }) {
                   }
                 >
 
-                {/* Users Navigation */}
-                <div id="usersLinkID" className="flex flex-row gap-3 mt-8 mb-10 px-7">
-                  <Link className="allUsers activeUserView py-4 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allUsers")}>All </Link>
-                  <Link className="allApprovedUsers py-4 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allApprovedUsers")}>Approved </Link>
-                  <Link className="allPendingUsers py-4 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allPendingUsers")}>Pending </Link>
-                  <Link className="allRejectedUsers py-4 px-10 rounded-lg border text-xl" onClick={() => setActiveDisplay("allRejectedUsers")}>Rejected </Link>
-                </div>
-                {/* Users Navigation */}
+                  {/* Users Navigation */}
+                  <div id="usersLinkID" className="flex flex-row gap-3 mt-8 mb-10 px-7">
+                    <Link className="allUsers activeUserView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allUsers")}>All </Link>
+                    <Link className="allApprovedUsers pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allApprovedUsers")}>Approved </Link>
+                    <Link className="allPendingUsers pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allPendingUsers")}>Pending </Link>
+                    <Link className="allRejectedUsers pt-3 pb-2 px-10 rounded-lg border text-xl" onClick={() => setActiveDisplay("allRejectedUsers")}>Rejected </Link>
+                  </div>
+                  {/* Users Navigation */}
 
                   
                   {/* Page Title */}
@@ -145,60 +145,70 @@ export default function CardAllUsers({ color }) {
 
 
                   <div className={`w-full overflow-x-auto ${activeDisplay === "allUsers" ? "block" : "hidden"}`}>
-                          {/* Projects table */}
+                          {/* Users table */}
                           <table className="items-center w-full bg-transparent border-collapse">
                             <thead>
                               <tr>
                                 <th
                                   className={
-                                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                    "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
                                     (color === "light"
                                     ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                    : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                                    : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
                                   }
                                 >
                                   S/N
                                 </th>
                                 <th
                                   className={
-                                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                    "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
                                     (color === "light"
                                       ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                      : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                                      : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
                                   }
                                 >
                                   Full Name
                                 </th>
                                 <th
                                   className={
-                                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                    "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
                                     (color === "light"
                                       ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                      : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                                      : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
                                   }
                                 >
                                   E-mail address
                                 </th>
                                 <th
                                   className={
-                                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                    "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
                                     (color === "light"
                                       ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                      : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                                      : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
                                   }
                                 >
                                   Status
+                                </th> 
+                                <th
+                                  className={
+                                    "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                    (color === "light"
+                                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                      : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                  }
+                                >
+                                  Action
                                 </th>              
                                 <th
                                   className={
-                                    "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                    "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
                                     (color === "light"
                                       ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                      : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
+                                      : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
                                   }
                                 ></th>
                               </tr>
-                            </thead>          
+                            </thead>           
                             <tbody className='w-16 h-16'>
                               <tr>
                               <td></td>
@@ -227,12 +237,13 @@ export default function CardAllUsers({ color }) {
           }
         >
 
+
           {/* Users Navigation */}
           <div id="usersLinkID" className="flex flex-row gap-3 mt-8 mb-10 px-7">
-            <Link className="allUsers activeUserView py-4 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allUsers")}>All </Link>
-            <Link className="allApprovedUsers py-4 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allApprovedUsers")}>Approved </Link>
-            <Link className="allPendingUsers py-4 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allPendingUsers")}>Pending </Link>
-            <Link className="allRejectedUsers py-4 px-10 rounded-lg border text-xl" onClick={() => setActiveDisplay("allRejectedUsers")}>Rejected </Link>
+                    <Link className="allUsers activeUserView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allUsers")}>All </Link>
+                    <Link className="allApprovedUsers pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allApprovedUsers")}>Approved </Link>
+                    <Link className="allPendingUsers pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allPendingUsers")}>Pending </Link>
+                    <Link className="allRejectedUsers pt-3 pb-2 px-10 rounded-lg border text-xl" onClick={() => setActiveDisplay("allRejectedUsers")}>Rejected </Link>
           </div>
           {/* Users Navigation */}
 
@@ -329,10 +340,10 @@ export default function CardAllUsers({ color }) {
                             if (user?.status === "pending") {
                               return (
                                 <tr key={userIndex}>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4">
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
                                       #{userIndex+1}
                                     </td>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap p-4 text-left flex items-center capitalize">
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap text-left flex items-center capitalize">
                                       <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
                                       <span
                                         className={
@@ -343,16 +354,16 @@ export default function CardAllUsers({ color }) {
                                         {user?.firstName} {user?.lastName}
                                       </span>
                                     </td>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap p-4">
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
                                       {user?.email}
                                     </td>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap p-4 capitalize">
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">
                                       <i className="fas fa-circle text-orange-400 mr-2"></i>{user?.status}
-                                    </td>                  
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap p-4 capitalize">
+                                    </td>
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
                                         <Link to={`/admin/staffs/${user._id}`}>View details</Link>
                                     </td>    
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4 text-right">
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
                                       <TableDropdown />
                                     </td>
                                 </tr>               
@@ -360,10 +371,10 @@ export default function CardAllUsers({ color }) {
                             } else if (user?.status === "rejected") {
                               return (
                                 <tr key={userIndex}>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4">
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
                                       #{userIndex+1}
                                     </td>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap p-4 text-left flex items-center">
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap text-left flex items-center">
                                       <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
                                       <span
                                         className={
@@ -374,16 +385,16 @@ export default function CardAllUsers({ color }) {
                                         {user?.firstName} {user?.lastName}
                                       </span>
                                     </td>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap p-4">
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
                                       {user?.email}
                                     </td>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap p-4 capitalize">
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">
                                       <i className="fas fa-circle text-red-500 mr-2"></i>{user?.status}
                                     </td> 
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap p-4 capitalize">
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
                                         <Link to={`/admin/staffs/${user._id}`}>View details</Link>
                                     </td>                   
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4 text-right">
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
                                       <TableDropdown />
                                     </td>
                                 </tr>               
@@ -391,10 +402,10 @@ export default function CardAllUsers({ color }) {
                             } else {
                               return (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                                 <tr key={userIndex}>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4">
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
                                       #{userIndex+1}
                                     </td>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap p-4 text-left flex items-center">
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap text-left flex items-center">
                                       <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
                                       <span
                                         className={
@@ -405,16 +416,16 @@ export default function CardAllUsers({ color }) {
                                         {user?.firstName} {user?.lastName}
                                       </span>
                                     </td>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap p-4">
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
                                       {user?.email}
                                     </td>
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap p-4 capitalize">
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">
                                       <i className="fas fa-circle text-green-500 mr-2"></i>{user?.status}
                                     </td>  
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap p-4 capitalize">
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
                                         <Link to={`/admin/staffs/${user._id}`}>View details</Link>
                                     </td>                  
-                                    <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4 text-right">
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
                                       <TableDropdown />
                                     </td>
                                 </tr>               
@@ -444,6 +455,7 @@ export default function CardAllUsers({ color }) {
                                         {limit} 
                                         <div className="text-xl normal-case">Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong></div>
                 </div>
+                
                 <nav className="relative z-0 inline-flex shadow-sm">
                                         {/* Previous page button */}
                                         <button

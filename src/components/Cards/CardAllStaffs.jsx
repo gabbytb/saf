@@ -336,10 +336,10 @@ export default function CardAllStaffs({ color }) {
                                   if (user?.status === "pending") {
                                       return (
                                           <tr key={userIndex}>
-                                              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4">
+                                              <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
                                                 #{userIndex+1}
                                               </td>
-                                              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap p-4 text-left flex items-center capitalize">
+                                              <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap text-left flex items-center capitalize">
                                                 <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
                                                 <span
                                                   className={
@@ -350,16 +350,16 @@ export default function CardAllStaffs({ color }) {
                                                   {user?.firstName} {user?.lastName}
                                                 </span>
                                               </td>
-                                              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap p-4">
+                                              <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
                                                 {user?.email}
                                               </td>
-                                              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap p-4 capitalize">
+                                              <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">
                                                 <i className="fas fa-circle text-orange-400 mr-2"></i>{user?.status}
                                               </td>                  
-                                              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap p-4 capitalize">
+                                              <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
                                                   <Link to={`/admin/staffs/${user._id}`}>View details</Link>
                                               </td>    
-                                              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4 text-right">
+                                              <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
                                                 <TableDropdown />
                                               </td>
                                           </tr>               
@@ -367,10 +367,10 @@ export default function CardAllStaffs({ color }) {
                                   } else if (user?.status === "rejected") {
                                       return (
                                             <tr key={userIndex}>
-                                                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4">
+                                                <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
                                                   #{userIndex+1}
                                                 </td>
-                                                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap p-4 text-left flex items-center">
+                                                <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap text-left flex items-center">
                                                   <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
                                                   <span
                                                     className={
@@ -381,16 +381,16 @@ export default function CardAllStaffs({ color }) {
                                                     {user?.firstName} {user?.lastName}
                                                   </span>
                                                 </td>
-                                                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap p-4">
+                                                <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
                                                   {user?.email}
                                                 </td>
-                                                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap p-4 capitalize">
+                                                <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">
                                                   <i className="fas fa-circle text-red-500 mr-2"></i>{user?.status}
                                                 </td> 
-                                                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap p-4 capitalize">
+                                                <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
                                                     <Link to={`/admin/staffs/${user._id}`}>View details</Link>
                                                 </td>                   
-                                                <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4 text-right">
+                                                <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
                                                   <TableDropdown />
                                                 </td>
                                             </tr>               
@@ -398,10 +398,10 @@ export default function CardAllStaffs({ color }) {
                                   } else {
                                       return (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                                           <tr key={userIndex}>
-                                              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4">
+                                              <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
                                                 #{userIndex+1}
                                               </td>
-                                              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap p-4 text-left flex items-center">
+                                              <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap text-left flex items-center">
                                                 <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
                                                 <span
                                                   className={
@@ -412,16 +412,16 @@ export default function CardAllStaffs({ color }) {
                                                   {user?.firstName} {user?.lastName}
                                                 </span>
                                               </td>
-                                              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap p-4">
+                                              <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
                                                 {user?.email}
                                               </td>
-                                              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap p-4 capitalize">
+                                              <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">
                                                 <i className="fas fa-circle text-green-500 mr-2"></i>{user?.status}
                                               </td>  
-                                              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap p-4 capitalize">
+                                              <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
                                                   <Link to={`/admin/staffs/${user._id}`}>View details</Link>
                                               </td>                  
-                                              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4 text-right">
+                                              <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
                                                 <TableDropdown />
                                               </td>
                                           </tr>               

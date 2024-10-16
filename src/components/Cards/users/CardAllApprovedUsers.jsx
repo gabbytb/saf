@@ -86,7 +86,7 @@ export default function CardAllApprovedUsers({ color, activeDisplay, }) {
                       setIsLoading(false);
                 });
             };
-            var timerID = setTimeout(fetchAllApprovedUsers, 400);   // Delay execution of findAllApprovedUsers by 1800ms
+            var timerID = setTimeout(fetchAllApprovedUsers, 800);   // Delay execution of findAllApprovedUsers by 1800ms
         
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
@@ -112,56 +112,66 @@ export default function CardAllApprovedUsers({ color, activeDisplay, }) {
               {/* Projects table */}
               <table className="items-center w-full bg-transparent border-collapse">
                 <thead>
-                  <tr>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                        (color === "light"
-                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                        : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                      }
-                    >
-                      S/N
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                        (color === "light"
-                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                          : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                      }
-                    >
-                      Full Name
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                        (color === "light"
-                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                          : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                      }
-                    >
-                      E-mail address
-                    </th>
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                        (color === "light"
-                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                          : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                      }
-                    >
-                      Status
-                    </th>              
-                    <th
-                      className={
-                        "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                        (color === "light"
-                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                          : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                      }
-                    ></th>
-                  </tr>
+                    <tr>
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                          }
+                        >
+                          S/N
+                        </th>
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                          }
+                        >
+                          Full Name
+                        </th>
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                          }
+                        >
+                          E-mail address
+                        </th>
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                          }
+                        >
+                          Status
+                        </th> 
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                          }
+                        >
+                          Action
+                        </th>              
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                          }
+                        ></th>
+                    </tr>
                 </thead>          
                 <tbody className='w-16 h-16 '>
                     <tr>
@@ -187,56 +197,66 @@ export default function CardAllApprovedUsers({ color, activeDisplay, }) {
             {/* Projects table */}
             <table className="items-center w-full bg-transparent border-collapse">
               <thead>
-                <tr>
-                  <th
-                    className={
-                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                      (color === "light"
-                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                      : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                    }
-                  >
-                    S/N
-                  </th>
-                  <th
-                    className={
-                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                      (color === "light"
-                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                        : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                    }
-                  >
-                    Full Name
-                  </th>
-                  <th
-                    className={
-                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                      (color === "light"
-                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                        : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                    }
-                  >
-                    E-mail address
-                  </th>
-                  <th
-                    className={
-                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                      (color === "light"
-                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                        : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                    }
-                  >
-                    Status
-                  </th>              
-                  <th
-                    className={
-                      "px-6 align-middle border border-solid py-3 text-xs uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                      (color === "light"
-                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                        : "bg-lightBlue-800 text-lightBlue-300 border-lightBlue-700")
-                    }
-                  ></th>
-                </tr>
+                  <tr>
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                          }
+                        >
+                          S/N
+                        </th>
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                          }
+                        >
+                          Full Name
+                        </th>
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                          }
+                        >
+                          E-mail address
+                        </th>
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                          }
+                        >
+                          Status
+                        </th> 
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                          }
+                        >
+                          Action
+                        </th>              
+                        <th
+                          className={
+                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                            (color === "light"
+                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                          }
+                        ></th>
+                  </tr>
               </thead>
               {
                 allApprovedUsers?.length !== 0 ?
@@ -245,32 +265,32 @@ export default function CardAllApprovedUsers({ color, activeDisplay, }) {
                         allApprovedUsers?.map((user, userIndex) =>  {                       
                             return (
                                 <tr key={userIndex}>
-                              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4">
-                                #{userIndex+1}
-                              </td>
-                              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap p-4 text-left flex items-center">
-                                <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
-                                <span
-                                  className={
-                                    "ml-3 font-bold " +
-                                    +(color === "light" ? "text-blueGray-600" : "text-white")
-                                  }
-                                >
-                                  {user?.firstName} {user?.lastName}
-                                </span>
-                              </td>
-                              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap p-4">
-                                {user?.email}
-                              </td>
-                              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap p-4 capitalize">
-                                <i className="fas fa-circle text-green-500 mr-2"></i>{user?.status}
-                              </td>  
-                              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap p-4 capitalize">
-                                  <Link to={`/admin/staffs/${user._id}`}>View details</Link>
-                              </td>                  
-                              <td className="border-t-0 px-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap p-4 text-right">
-                                <TableDropdown />
-                              </td>
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
+                                      #{userIndex+1}
+                                    </td>
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap text-left flex items-center">
+                                      <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
+                                      <span
+                                        className={
+                                          "ml-3 font-bold " +
+                                          +(color === "light" ? "text-blueGray-600" : "text-white")
+                                        }
+                                      >
+                                        {user?.firstName} {user?.lastName}
+                                      </span>
+                                    </td>
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
+                                      {user?.email}
+                                    </td>
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">
+                                      <i className="fas fa-circle text-green-500 mr-2"></i>{user?.status}
+                                    </td>  
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
+                                        <Link to={`/admin/staffs/${user._id}`}>View details</Link>
+                                    </td>                  
+                                    <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
+                                      <TableDropdown />
+                                    </td>
                                 </tr>              
                             );                                                                     
                         })
@@ -297,6 +317,7 @@ export default function CardAllApprovedUsers({ color, activeDisplay, }) {
                                         {limit} 
                                         <div className="text-xl normal-case">Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong></div>
                                     </div>
+
                                     <nav className="relative z-0 inline-flex shadow-sm">
                                         {/* Previous page button */}
                                         <button
@@ -309,12 +330,12 @@ export default function CardAllApprovedUsers({ color, activeDisplay, }) {
 
                                         {/* Page numbers */}
                                         {Array.from({ length: totalPages }, (_, index) => (
-                                            <button
-                                            key={index}
-                                            onClick={() => handlePageChange(index + 1)}
-                                            className={`-ml-px relative inline-flex items-center px-4 py-2 border border-gray-300 bg-white text-xl font-bold text-gray-700 hover:bg-gray-50 w-16 justify-center h-14 ${currentPage === index + 1 ? 'bg-gray-200' : ''}`}>
-                                            {index + 1}
-                                            </button>
+                                                    <button
+                                                    key={index}
+                                                    onClick={() => handlePageChange(index + 1)}
+                                                    className={`-ml-px relative inline-flex items-center border border-gray-300 text-xl font-black outline-none focus:outline-none hover:bg-gray-50 w-16 justify-center h-14 ${currentPage === index + 1 ? 'bg-gray-100 text-blue-800' : ''}`}>
+                                                    {index + 1}
+                                                    </button>
                                         ))}
 
 

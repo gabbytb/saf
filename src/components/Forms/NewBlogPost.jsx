@@ -178,12 +178,14 @@ const FormNewBlogPost = () => {
                 setTimeout(() => {
                     successMsg.classList.remove('success-message-info');
                     successMsg.classList.add('create_success');            
-                }, 3500);
+                }, 35000);
+                // }, 3500);
                 // Perform These Actions
 
                 setTimeout(() => {
                     window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
-                }, 3900);
+                }, 39000);
+                // }, 3900);
                 // Perform These Actions
 
             };
@@ -339,12 +341,12 @@ const FormNewBlogPost = () => {
 
                                         <textarea
                                             type="text"
-                                            className="border-0 px-6 py-6 mt-3 mb-6 placeholder-gray-600 text-black bg-white rounded text-2xl font-normal shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
+                                            className="border-0 px-6 py-6 mt-3 mb-6 placeholder-gray-600 text-black bg-white rounded text-xl font-medium shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
                                             name="excerpt"                                                             
-                                            placeholder="Post excerpt"
+                                            // placeholder="Post excerpt"
                                             // value={post.excerpt}
                                             onChange={(e) => setPost({ ...post, excerpt: e.target.value })}                                              
-                                            rows="4">
+                                            rows="3">
                                         </textarea>
                                     </label>
                                 </div>
@@ -430,8 +432,10 @@ const FormNewBlogPost = () => {
                         {/* SUBMIT BUTTON */}   
 
                         {/* Success Message */}
-                        <div className="mt-3 mb-3 mx-auto create_success">
-                            {formMessage}
+                        <div className="mx-auto flex justify-center w-2/4">
+                            <div className="create_success">
+                                {formMessage}
+                            </div>                           
                         </div>
                         {/* Success Message */}
                     </form>
