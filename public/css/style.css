@@ -4040,6 +4040,10 @@ progress#file {
   margin-top: 2rem;
 }
 
+.ml-80{
+  margin-left: 20rem;
+}
+
 .block{
   display: block;
 }
@@ -4250,6 +4254,10 @@ progress#file {
 
 .w-screen{
   width: 100vw;
+}
+
+.w-4{
+  width: 1rem;
 }
 
 .min-w-0{

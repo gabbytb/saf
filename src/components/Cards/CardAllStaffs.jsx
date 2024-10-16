@@ -206,14 +206,14 @@ export default function CardAllStaffs({ color }) {
                           }
                         ></th>
                       </tr>
-                    </thead>         
+                    </thead>
                     <tbody className='w-16 h-16'>
                             <tr>
                               <td></td>
                               <td></td>
                               <td className="max-w-40 h-60 flex justify-center items-center">                                
                                 {/* <Preloader /> */}
-                                <img src={spinner} alt="Spinning" className="pl-8" />
+                                <img src={spinner} alt="Spinning" className="ml-80" />
                               </td>
                               <td></td>
                             </tr>                
