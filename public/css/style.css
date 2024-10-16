@@ -3932,6 +3932,10 @@ progress#file {
   margin-left: 14rem;
 }
 
+.ml-80{
+  margin-left: 20rem;
+}
+
 .ml-auto{
   margin-left: auto;
 }
@@ -4038,10 +4042,6 @@ progress#file {
 
 .mt-8{
   margin-top: 2rem;
-}
-
-.ml-80{
-  margin-left: 20rem;
 }
 
 .block{
@@ -4254,10 +4254,6 @@ progress#file {
 
 .w-screen{
   width: 100vw;
-}
-
-.w-4{
-  width: 1rem;
 }
 
 .min-w-0{
@@ -5187,6 +5183,10 @@ progress#file {
   padding-top: 5rem;
 }
 
+.pt-3{
+  padding-top: 0.75rem;
+}
+
 .pt-4{
   padding-top: 1rem;
 }
@@ -5209,14 +5209,6 @@ progress#file {
 
 .pt-8{
   padding-top: 2rem;
-}
-
-.pl-8{
-  padding-left: 2rem;
-}
-
-.pt-3{
-  padding-top: 0.75rem;
 }
 
 .text-left{
