@@ -456,8 +456,8 @@ function SignIn() {
 
                 {/* Alternative Sign-In Methods */}
                 <div className="alt_sso flex justify-center align-middle pb-12 mb-20 gap-10">
-                    <button className="w-96 hover:outline-none focus:outline-none" onClick={() => login()}>
-                        <div className="flex flex-wrap justify-center gap-3 bg-white hover:bg-cyan-500 focus:bg-cyan-500 hover:ease-in-out hover:duration-150 hover:text-white text-black text-15xl tracking-extratight font-medium items-center py-3 px-12 rounded-lg">Sign In with Google <span className="w-8 h-8"><GoogleIcon /></span></div>
+                    <button className="w-123.3 hover:outline-none focus:outline-none" onClick={() => login()}>
+                        <div className="flex flex-wrap justify-center gap-3 bg-white hover:bg-cyan-500 focus:bg-cyan-500 hover:ease-in-out hover:duration-150 hover:text-white text-black text-15xl tracking-extratight font-medium items-center py-3 px-12 rounded-full">Sign In with Google <span className="w-8 h-8"><GoogleIcon /></span></div>
                     </button>
                 </div>
                 {/* Alternative Sign-In Methods */}

@@ -1,6 +1,6 @@
 import React from "react";
 import { googleLogout } from "@react-oauth/google";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { createPopper } from "@popperjs/core";
 import {
   adminDashboardIcon,  
@@ -13,6 +13,10 @@ import {
 
 
 const UserDropdown = ({ isLoggedIn }) => {
+
+
+      const navigate = useNavigate();
+
 
       // dropdown props
       const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
@@ -42,12 +46,12 @@ const UserDropdown = ({ isLoggedIn }) => {
       // ***************************************************************************
       function logOut() {
           // Clear User Details from Local Storage
-          localStorage.clear();
+          localStorage.removeItem('user');
+          // localStorage.clear();
           // log out function to log the user out of google and set the profile array to null
           googleLogout();
           // redirect to Login Page
-          const redirToLOGIN = "/user/login";
-          window.location.replace(redirToLOGIN);
+          navigate("/user/login");
       };
       // ***************************************************************************
       // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
@@ -62,8 +66,7 @@ const UserDropdown = ({ isLoggedIn }) => {
 
     return (
         <>
-            <Link to="#pablo" className="text-blueGray-500 block" 
-                ref={btnDropdownRef}
+            <Link ref={btnDropdownRef} to="#pablo" className="text-blueGray-500 block"                 
                 onClick={(e) => {
                     e.preventDefault();
                     dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover(); 
@@ -83,7 +86,7 @@ const UserDropdown = ({ isLoggedIn }) => {
 
                                     if (name?.role === "ROLE_ADMIN")  {
                                         return (
-                                                <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{adminRole}</span>
+                                            <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{adminRole}</span>
                                         );
                                     } else if (name?.role === "ROLE_EDITOR")  {
                                         return (

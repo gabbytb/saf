@@ -270,6 +270,7 @@ const BlogSinglePost = () => {
                     </aside>
 
                 </div>
+                
             </main>
 
             <HomeFooter />
