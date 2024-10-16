@@ -1,16 +1,13 @@
 import { useState } from 'react';
-// import RichTextEditor from '../TextEditor/RichTextEditor';
 import { Editor } from '@tinymce/tinymce-react';
 import api from "../../api";
-// import { useQuill } from 'react-quilljs';
-// import 'quill/dist/quill.snow.css';
 
 
 
 
 
 
-const FormNewBlogPost = () => {
+const NewBlogPost = () => {
 
 
     console.clear();
@@ -178,14 +175,12 @@ const FormNewBlogPost = () => {
                 setTimeout(() => {
                     successMsg.classList.remove('success-message-info');
                     successMsg.classList.add('create_success');            
-                }, 35000);
-                // }, 3500);
+                }, 3500);
                 // Perform These Actions
 
                 setTimeout(() => {
                     window.scrollTo({ left: 0, top: 0, behavior: 'smooth', });
-                }, 39000);
-                // }, 3900);
+                }, 3900);
                 // Perform These Actions
 
             };
@@ -228,7 +223,7 @@ const FormNewBlogPost = () => {
 
                       
                         <h6 className="text-gray-500 text-2xl mt-12 mb-12 font-black uppercase px-4">
-                        {/* Create New Post */}
+                            {/* Create New Post */}
                         </h6>
                         <div className="flex flex-wrap">                                                            
 
@@ -243,6 +238,7 @@ const FormNewBlogPost = () => {
                                         <input
                                             type="text"
                                             className="border-0 px-3 py-3 mt-3 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                                                         
+                                            id="img"
                                             name="img"                                                                              
                                             placeholder="Enter Image URL"
                                             // value={post.title}
@@ -263,6 +259,7 @@ const FormNewBlogPost = () => {
                                         <input
                                             type="text"
                                             className="border-0 px-3 py-3 mt-3 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                                                         
+                                            id="title"  
                                             name="title"                                                                              
                                             placeholder="Post Title"
                                             // value={post.title}
@@ -284,6 +281,7 @@ const FormNewBlogPost = () => {
                                             type="text"
                                             className="border-0 px-3 py-3 mt-3 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                                                         
                                             placeholder="Article Slug"   
+                                            id="uri"   
                                             name="uri"   
                                             value={post.uri === '' ? formatUrl(post.title.toLowerCase()) : formatUrl(post.uri.toLowerCase())}                                      
                                             onChange={(e) => setPost({ ...post, uri: e.target.value })}                                           
@@ -303,6 +301,7 @@ const FormNewBlogPost = () => {
                                         <Editor
                                             apiKey="b68jaid3qmtd8i45pcq2e32l0m0lxo2lt1kpnp4xv97kgppi" // Get your free API key from TinyMCE website
                                             initialValue=""
+                                            // id="description" 
                                             name="description"
                                             init={{                                                                                             
                                                 height: 300,
@@ -342,6 +341,7 @@ const FormNewBlogPost = () => {
                                         <textarea
                                             type="text"
                                             className="border-0 px-6 py-6 mt-3 mb-6 placeholder-gray-600 text-black bg-white rounded text-xl font-medium shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
+                                            id="excerpt"
                                             name="excerpt"                                                             
                                             // placeholder="Post excerpt"
                                             // value={post.excerpt}
@@ -356,8 +356,8 @@ const FormNewBlogPost = () => {
 
                         <hr className="mt-6 border-b-1 border-blueGray-300" />
 
-                        <h6 className="text-gray-500 text-lg mt-10 mb-8 px-4 font-bold uppercase">
-                        Post Attributes
+                        <h6 className="text-slate-700 text-xl mt-10 mb-8 px-4 font-bold uppercase">
+                            Post Attributes
                         </h6>
                         <div className="flex flex-wrap">
 
@@ -374,6 +374,7 @@ const FormNewBlogPost = () => {
                                         <input
                                             type="text"
                                             className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
+                                            id="tags"
                                             name="tags"
                                             placeholder="Enter Tags (comma separated)"
                                             onChange={(e) => updateTags(e.target.value.split(','))}                                                                           
@@ -391,6 +392,7 @@ const FormNewBlogPost = () => {
                                         <input
                                             type="text"
                                             className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                        
+                                            id="categories"
                                             name="categories"
                                             placeholder="Categories (comma separated)"
                                             onChange={(e) => updateCategories(e.target.value.split(','))}                                                                                  
@@ -412,6 +414,7 @@ const FormNewBlogPost = () => {
                                         <input
                                             type="checkbox"
                                             className="border-0 px-3 py-3 mt-0 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-8 h-8 ease-linear transition-all duration-150"                                        
+                                            id="isPublished"    
                                             name="isPublished"                                                                                  
                                             onChange={(e) => setPost({ ...post, isPublished: e.target.type === 'checkbox' ? !e.target.checked : e.target.value })}                                                                                  
                                         /> Save as Draft
@@ -447,4 +450,4 @@ const FormNewBlogPost = () => {
     );
 };
 
-export default FormNewBlogPost;
+export default NewBlogPost;

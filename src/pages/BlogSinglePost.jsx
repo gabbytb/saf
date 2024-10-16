@@ -110,6 +110,8 @@ const BlogSinglePost = () => {
     // eslint-disable-next-line
     const [currentPage, setCurrentPage] = useState(1);
 
+    let leftArrow = '>';
+
     useEffect(() => {
         async function fetchAllSidebarBlogPosts() {
             const limit = 3; // Number of items per page
@@ -151,14 +153,15 @@ const BlogSinglePost = () => {
 
             <main id="blogSinglePost" className="container mx-auto mb-64 px-32">            
                
-                {/* <div className="w-full flex justify-center">
-                    <h1><Link to={'/blog'}>Blog Post </Link></h1>
-                </div> */}
+                <div className="w-full flex justify-center gap-2 mt-16">
+                    <h1 className="text-2xl font-bold"><Link to={'/blog'}>Blog Post </Link></h1>
+                    <span>{leftArrow}</span>
+                </div>
 
                 <div class="mx-12 lg:mx-24 mt-32 grid grid-cols-28 gap-24">                       
 
                     <section className="p-0">   
-                                <div className="max-w-full mx-auto flex flex-col items-center p-0">  
+                        <div className="max-w-full mx-auto flex flex-col items-center p-0">  
                                 
                                     {/* SINGLE POST PAGE */}           
                                     <div className="block w-full">
@@ -223,7 +226,7 @@ const BlogSinglePost = () => {
                                     </div>
                                     {/* SINGLE POST PAGE */}    
 
-                                </div>
+                        </div>
                     </section>
 
 
