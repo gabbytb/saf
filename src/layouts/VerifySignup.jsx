@@ -180,9 +180,11 @@ const VerifySignUp = () => {
     // ******************************** //
     useEffect(() => {        
         // Assuming the token is passed as a query parameter
-        // console.log("CURRENT URL: ", window.location);
+        // console.log("CURRENT LOCATION OF URL: ", window.location);
 
-        const { search } = window.location;
+        const search = window.location.search;
+        // OR 
+        // const { search } = window.location;
         const queryParams = new URLSearchParams(search);        
         const token = queryParams.get('token'); 
         console.log("Token: ", token);

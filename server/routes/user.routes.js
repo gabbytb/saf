@@ -71,27 +71,44 @@ module.exports = app => {
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage") for the frontend to access.
     
     
+    // Fetch DATA using this API
+    router.get("/api/v1/admin/users/manage/approvedUsers", users.findAllApprovedUsers);
+    // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/published") for the frontend to access.
+    router.get("/api/v1/admin/users/manage/pendingUsers", users.findAllPendingUsers);
+    // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/published") for the frontend to access.
+    router.get("/api/v1/admin/users/manage/rejectedUsers", users.findAllRejectedUsers);        // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/published") for the frontend to access.
+  
+        
     // Fetch all "Users" DATA from using API
     router.get("/api/v1/auth/account/admins", users.findAllAdmins);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage") for the frontend to access.
 
 
-    // Fetch all "isActive Users" DATA using this API
-    router.get("/api/v1/admin/users/manage/active", users.findAllActive);
+    // Fetch DATA using this API
+    router.get("/api/v1/admin/users/manage/approvedAdmins", users.findAllApprovedAdmins);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/published") for the frontend to access.
-
-
+    router.get("/api/v1/admin/users/manage/pendingAdmins", users.findAllPendingAdmins);
+    // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/published") for the frontend to access.
+    router.get("/api/v1/admin/users/manage/rejectedAdmins", users.findAllRejectedAdmins);
+    // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/published") for the frontend to access.
+    
+    
     // Update a "Single User" DATA by it's ID, using this API
     router.put("/api/v1/admin/users/manage/update/:id", users.updateSingleUserById);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/update/:id") for the frontend to access.
 
+
+    // Update a "Single User Status" DATA by it's ID, using this API
+    router.put("/api/v1/admin/users/manage/update/status/:id", users.updateSingleUserStatusById);
+    // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/update/:id") for the frontend to access.
     
+
     // router.post("/image-upload", users.uploadImages);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/image-upload") for the frontend to access.
 
 
     // Delete a "Single User" DATA by it's ID, using this API
-    router.delete("/api/v1/admin/users/manage/delete/:id", requireAUTHORIZATION, users.deleteUser);
+    router.delete("/api/v1/admin/users/manage/delete/:id", requireAUTHORIZATION, users.deleteUserById);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/delete/:id") for the frontend to access.
 
 

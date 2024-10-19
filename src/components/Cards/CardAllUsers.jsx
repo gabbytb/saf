@@ -20,7 +20,10 @@ export default function CardAllUsers({ color }) {
     // ****************************************************************************
     const [allUsers, setAllUsers] = useState([]);
     // console.log("ALL USERS: ", allUsers);
-      
+    const [totalApprovedUsers, setTotalApprovedUsers] = useState();
+    const [totalPendingUsers, setTotalPendingUsers] = useState();
+    const [totalRejectedUsers, setTotalRejectedUsers] = useState();
+
     // eslint-disable-next-line
     const [totalUsers, setTotalUsers] = useState(null);
     // console.log("TOTAL USERS: ", totalUsers);
@@ -86,11 +89,56 @@ export default function CardAllUsers({ color }) {
                 .finally(() => {
                     setIsLoading(false);
                 });
+                
+
+                await api.get(`/api/v1/admin/users/manage/approvedUsers`)
+                .then((response) => {
+                    const { success, data, message } = response.data;              
+                    if (!success && message === "No user found") {
+                        console.log("Success: ", success);
+                        console.log("Message: ", message);
+                    };
+    
+                    setTotalApprovedUsers(data);
+                })
+                .catch((error) => {
+                    console.log("Error fetching data: ", error);
+                });
+
+
+                await api.get(`/api/v1/admin/users/manage/pendingUsers`)
+                .then((response) => {
+                    const { success, data, message } = response.data;              
+                    if (!success && message === "No user found") {
+                        console.log("Success: ", success);
+                        console.log("Message: ", message);
+                    };
+    
+                    setTotalPendingUsers(data);
+                })
+                .catch((error) => {
+                    console.log("Error fetching data: ", error);
+                });
+
+
+                await api.get(`/api/v1/admin/users/manage/rejectedUsers`)
+                .then((response) => {
+                    const { success, data, message } = response.data;              
+                    if (!success && message === "No user found") {
+                        console.log("Success: ", success);
+                        console.log("Message: ", message);
+                    };
+    
+                    setTotalRejectedUsers(data);
+                })
+                .catch((error) => {
+                    console.log("Error fetching data: ", error);
+                });
             };
      
-            var timerID = setTimeout(fetchAllUsers, 800);   // Delay execution of findAllUsers by 1800ms
+            var timer = setTimeout(fetchAllUsers, 800);   // Delay execution of findAllUsers by 1800ms
             return () => {
-                clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes         
+                clearTimeout(timer);                  // Clean up timer if component unmounts or token changes         
             };
         };       
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
@@ -118,10 +166,10 @@ export default function CardAllUsers({ color }) {
 
                   {/* Users Navigation */}
                   <div id="usersLinkID" className="flex flex-row gap-3 mt-8 mb-10 px-7">
-                    <Link className="allUsers activeUserView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allUsers")}>All </Link>
-                    <Link className="allApprovedUsers pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allApprovedUsers")}>Approved </Link>
-                    <Link className="allPendingUsers pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allPendingUsers")}>Pending </Link>
-                    <Link className="allRejectedUsers pt-3 pb-2 px-10 rounded-lg border text-xl" onClick={() => setActiveDisplay("allRejectedUsers")}>Rejected </Link>
+                      <Link className="allUsers activeUserView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allUsers")}>All ({ totalUsers })</Link>
+              <Link className="allApprovedUsers pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allApprovedUsers")}>Approved ({ totalApprovedUsers })</Link>
+              <Link className="allPendingUsers pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allPendingUsers")}>Pending ({ totalPendingUsers })</Link>
+              <Link className="allRejectedUsers pt-3 pb-2 px-10 rounded-lg border text-xl" onClick={() => setActiveDisplay("allRejectedUsers")}>Rejected ({ totalRejectedUsers })</Link>
                   </div>
                   {/* Users Navigation */}
 
@@ -240,10 +288,10 @@ export default function CardAllUsers({ color }) {
 
           {/* Users Navigation */}
           <div id="usersLinkID" className="flex flex-row gap-3 mt-8 mb-10 px-7">
-                    <Link className="allUsers activeUserView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allUsers")}>All </Link>
-                    <Link className="allApprovedUsers pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allApprovedUsers")}>Approved </Link>
-                    <Link className="allPendingUsers pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allPendingUsers")}>Pending </Link>
-                    <Link className="allRejectedUsers pt-3 pb-2 px-10 rounded-lg border text-xl" onClick={() => setActiveDisplay("allRejectedUsers")}>Rejected </Link>
+              <Link className="allUsers activeUserView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allUsers")}>All ({ totalUsers })</Link>
+              <Link className="allApprovedUsers pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allApprovedUsers")}>Approved ({ totalApprovedUsers })</Link>
+              <Link className="allPendingUsers pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allPendingUsers")}>Pending ({ totalPendingUsers })</Link>
+              <Link className="allRejectedUsers pt-3 pb-2 px-10 rounded-lg border text-xl" onClick={() => setActiveDisplay("allRejectedUsers")}>Rejected ({ totalRejectedUsers })</Link>
           </div>
           {/* Users Navigation */}
 

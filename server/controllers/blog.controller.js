@@ -181,56 +181,7 @@ exports.createBlogPost = async (req, res) => {
 
 
 // Our FIND All BLOG POSTS Logic starts here
-// exports.findAllBlogPosts = async (req, res) => { 
-
-//     const { page = 1, limit = 10, status } = req.query; // Destructure query parameters   
-//     // published
-//     // draft
-
-//     try {
-//         let query = { 
-
-//         };
-
-//         if (status) {
-//             query.status = status;
-//         };
- 
-//         const allBlogPosts = await Blog.find(query)
-//                                 .skip((page - 1) * limit)
-//                                 .limit(parseInt(limit));
-//         console.log("ALL BLOG POSTS: ", allBlogPosts);
-
-
-//         const totalBlogPosts = await Blog.countDocuments(query); // Total number of users with the given status
-//         const totalPages = Math.ceil(totalBlogPosts / limit); // Calculate total pages
-//         const pagination = {
-//             postsRecord: totalBlogPosts,
-//             page,
-//             limit,
-//             lastPage: totalPages,
-//         };
-//         console.log("PAGINATION: ", pagination, "\n\n");
-
-//         const responseData = {
-//             success: true,
-//             data: {
-//                 allBlogPosts,
-//                 pagination
-//             },
-//             message: "BLOG: Items retrieved successfully",
-//         }
-//         res.status(200).json(responseData);
-
-//     } catch (error) {
-//         console.error("Internal Server Error:", error);
-//         return res.status(500).send(`Internal Server Error: ${error.message}`);
-//     };
-// };  // THOROUGHLY Tested === Working
-
-
-// Our FIND All USERS Logic starts here
-exports.findRecentBlogPosts = async (req, res) => { 
+exports.findAllBlogPosts = async (req, res) => { 
 
     const { page = 1, limit = 10, status, sort } = req.query; // Destructure query parameters   
     // published
@@ -256,7 +207,7 @@ exports.findRecentBlogPosts = async (req, res) => {
                                 .sort(sortOrder)
                                 .skip((page - 1) * limit)
                                 .limit(parseInt(limit));
-        console.log("FIND BLOG POSTS BY MOST RECENT: ", allBlogPosts);
+        console.log("BLOG POSTS BY MOST RECENT: ", allBlogPosts);
 
 
         const totalBlogPosts = await Blog.countDocuments(query); // Total number of users with the given status
@@ -283,6 +234,74 @@ exports.findRecentBlogPosts = async (req, res) => {
     } catch (error) {
         console.error("Internal Server Error:", error);
         return res.status(500).send(`Internal Server Error: ${error.message}`);
+    };
+};  // THOROUGHLY Tested === Working
+
+
+// Our FIND All PUBLISHED BLOG POSTS Logic starts here
+exports.findAllPublishedPosts = async (req, res) => {
+
+    //  res.setHeader('Content-Type', 'application/json');
+    //  NOTE:  To filter a search results, specify a search condition using a "key-value" pair within curly braces, within the find method!
+    //  For example, User.find({ username: 'john' }) would find all users with the username 'john'.     i.e  username = "john"
+    //  In this case, We are searching for records where the isPublished property is equal to true.        i.e  isActive = true
+    try {
+
+        const allPublishedPosts = await Blog.find({ isPublished: true });
+        if (!allPublishedPosts) {
+            console.log("ALL PUBLISHED POSTS: ", allPublishedPosts, "\n\n");
+            const responseData = {
+                success: false,
+                message: "RETRIEVE ALL PUBLISHED BLOG POST: Failed"
+            };
+            return res.status(404).json(responseData);
+        };
+    
+        console.log("ALL PUBLISHED POSTS: ", allPublishedPosts, "\n\n");
+        const responseData = {
+            success: true,
+            data: allPublishedPosts,
+            message: "RETRIEVE ALL PUBLISHED BLOG POSTS: Successful"
+        };        
+        res.status(200).json(responseData);
+
+    } catch (error) {
+        // Catch error
+        return res.status(500).send(`Internal Server Error ${error}`);
+        // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    };
+};  // THOROUGHLY Tested === Working
+// Our FIND All PUBLISHED BLOG POSTS Logic starts here
+exports.findAllDraftPosts = async (req, res) => {
+
+    //  res.setHeader('Content-Type', 'application/json');
+    //  NOTE:  To filter a search results, specify a search condition using a "key-value" pair within curly braces, within the find method!
+    //  For example, User.find({ username: 'john' }) would find all users with the username 'john'.     i.e  username = "john"
+    //  In this case, We are searching for records where the isPublished property is equal to true.        i.e  isActive = true
+    try {
+
+        const allDraftPosts = await Blog.find({ isPublished: false });
+        if (!allDraftPosts) {
+            console.log("ALL POSTS IN DRAFT: ", allDraftPosts, "\n\n");
+            const responseData = {
+                success: false,
+                message: "RETRIEVE ALL BLOG POSTS IN DRAFT: Failed"
+            };
+            return res.status(404).json(responseData);
+        };
+
+        console.log("ALL POSTS IN DRAFT: ", allDraftPosts, "\n\n");
+        const responseData = {
+            success: true,
+            data: allDraftPosts,
+            message: "RETRIEVE ALL BLOG POSTS IN DRAFT: Successful"
+        };
+        res.status(200).json(responseData);
+
+    } catch (error) {
+        // Catch error
+        return res.status(500).send(`Internal Server Error ${error}`);
+        // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
     };
 };  // THOROUGHLY Tested === Working
 
@@ -355,3 +374,4 @@ exports.findBlogPostById = async (req, res) => {
         return res.status(500).send(`Internal Server Error ${error}`);
     };
 };  // THOROUGHLY Tested === Working
+

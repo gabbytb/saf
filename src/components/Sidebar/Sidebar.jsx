@@ -21,6 +21,7 @@ export default function Sidebar() {
         <>
             <nav className="md:left-0 md:block md:fixed md:top-0 md:bottom-0 md:overflow-y-auto md:flex-row md:flex-nowrap md:overflow-hidden shadow-xl bg-white flex flex-wrap items-center justify-between relative md:w-164 z-10 py-1 px-6">
                 <div className="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
+                   
                     {/* Toggler */}
                     <button className="w-12 cursor-pointer text-black opacity-50 mr-32 pl-0 md:hidden md:mr-0 px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent" type="button" onClick={() => setCollapseShow("bg-white m-2 py-3 px-6")}>
                         <i className="fas fa-bars"></i>
@@ -59,13 +60,13 @@ export default function Sidebar() {
                     {/* Form */}
                     <form className="mt-6 mb-4 md:hidden">
                         <div className="mb-3 pt-0">
-                            <input type="text" placeholder="Search" className="border-0 px-3 py-2 h-12 border border-solid  border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"/>
+                            <input type="text" placeholder="Search" className="px-3 py-2 h-12 border border-solid  border-blueGray-500 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-base leading-snug shadow-none outline-none focus:outline-none w-full font-normal"/>
                         </div>
                     </form>
 
 
 
-                    {/* Divider */}
+                    {/* Divider for Main Menu */}
                     <hr className="my-4 md:min-w-full" />
                     {/* Heading */}
                     <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-4 pb-4 no-underline">Main Menu</h6>
@@ -78,8 +79,14 @@ export default function Sidebar() {
                         </li>
 
                         <li className="items-center">
+                            <Link className={"text-xs uppercase py-3 font-bold block " + (window.location.href.indexOf("/admin/blog/manage") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/blog/manage">
+                                <i className={"fas fa-book mr-2 text-sm " + (window.location.href.indexOf("/admin/blog/manage") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}All Posts
+                            </Link>
+                        </li>
+
+                        <li className="items-center">
                             <Link className={"text-xs uppercase py-3 font-bold block " + (window.location.href.indexOf("/admin/blog/manage/create") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/blog/manage/create">
-                                <i className={"fas fa-book mr-2 text-sm " + (window.location.href.indexOf("/admin/blog/manage/create") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Blog Posts
+                                <i className={"fas fa-book mr-2 text-sm " + (window.location.href.indexOf("/admin/blog/manage/create") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Add New Post
                             </Link>
                         </li>
 
@@ -98,7 +105,7 @@ export default function Sidebar() {
 
 
 
-                    {/* Divider */}
+                    {/* Divider for Auth Layout Pages */}
                     <hr className="my-4 md:min-w-full" />
                     {/* Heading */}
                     <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">Auth Layout Pages</h6>
@@ -117,8 +124,8 @@ export default function Sidebar() {
                         </li>
                     </ul>
 
-
-
+                    
+                    
                     {/***************************************/}
                     {/*********** Manage Accounts ***********/}
                     {/***************************************/}
@@ -151,11 +158,11 @@ export default function Sidebar() {
 
 
                     {/* Divider */}
-                    <hr className="my-4 md:min-w-full" />
+                    {/* <hr className="my-4 md:min-w-full" /> */}
                     {/* Heading */}
-                    <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">Documentation</h6>
+                    {/* <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">Documentation</h6> */}
                     {/* Navigation */}
-                    <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
+                    {/* <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
                         <li className="inline-flex">
                             <Link to="https://www.creative-tim.com/learning-lab/tailwind/react/colors/notus" target="_blank" className="text-blueGray-700 hover:text-blueGray-500 text-sm block mb-4 no-underline font-semibold">
                                 <i className="fas fa-paint-brush mr-2 text-blueGray-300 text-base"></i>Styles
@@ -203,7 +210,7 @@ export default function Sidebar() {
                                 <i className="fab fa-vuejs mr-2 text-blueGray-300 text-base"></i>VueJS
                             </Link>
                         </li>
-                    </ul>
+                    </ul> */}
                     </div>
                 </div>
             </nav>

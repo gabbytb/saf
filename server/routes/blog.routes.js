@@ -8,9 +8,13 @@ module.exports = app => {
 
     router.post("/api/v1/admin/blogs/manage/create", blogs.createBlogPost);
 
-    // router.get("/api/v1/admin/blogs/manage", blogs.findAllBlogPosts);
+    router.get("/api/v1/admin/blogs/manage", blogs.findAllBlogPosts);
 
-    router.get("/api/v1/admin/blogs/manage", blogs.findRecentBlogPosts);
+    router.get("/api/v1/admin/blogs/manage/isPublished", blogs.findAllPublishedPosts); 
+    
+    router.get("/api/v1/admin/blogs/manage/unPublished", blogs.findAllDraftPosts); 
+    
+    // router.get("/api/v1/admin/blogs/manage/:isPublished", blogs.findAllPublishedPosts); 
     
     router.get("/api/v1/admin/blogs/manage/post/:uri", blogs.findBlogPostByUrl);
 

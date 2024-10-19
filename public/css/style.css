@@ -3513,7 +3513,7 @@ progress#file {
   background-color: var(--background-transparent-blue);
   padding-top: 1rem;
   padding-bottom: 1rem;
-  padding-left: 2.4rem;
+  padding-left: 1.75rem;
   padding-right: 2.4rem;
 }
 
@@ -3522,6 +3522,12 @@ progress#file {
   width: 100%;
   max-width: 33rem;
   font-size: 1.4rem;
+}
+
+@media (min-width: 1040px){
+  .footer_email input[type="email"]{
+    max-width: 30rem;
+  }
 }
 
 .footer-menu--wrap h4{
@@ -3595,6 +3601,11 @@ progress#file {
 }
 
 /**  Footer  **/
+
+textarea#comments{
+  font-size: 1.5rem;
+  line-height: 1.5;
+}
 
 .pointer-events-none{
   pointer-events: none;
@@ -4069,6 +4080,10 @@ progress#file {
 
 .h-16{
   height: 4rem;
+}
+
+.h-168{
+  height: 3.86rem;
 }
 
 .h-2{
@@ -4841,6 +4856,11 @@ progress#file {
 .bg-slate-200{
   --tw-bg-opacity: 1;
   background-color: rgb(226 232 240 / var(--tw-bg-opacity));
+}
+
+.bg-slate-800{
+  --tw-bg-opacity: 1;
+  background-color: rgb(30 41 59 / var(--tw-bg-opacity));
 }
 
 .bg-teal-500{
@@ -5806,6 +5826,12 @@ progress#file {
 .focus\:ring:focus{
   --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
   --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(3px + var(--tw-ring-offset-width)) var(--tw-ring-color);
+  box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
+}
+
+.focus\:ring-1:focus{
+  --tw-ring-offset-shadow: var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color);
+  --tw-ring-shadow: var(--tw-ring-inset) 0 0 0 calc(1px + var(--tw-ring-offset-width)) var(--tw-ring-color);
   box-shadow: var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow, 0 0 #0000);
 }
 

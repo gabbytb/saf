@@ -221,7 +221,7 @@ export default function CardAllAccountDetails() {
                         {/* FORM FOR SHOWING USER DATA */}
                         <form id="showUserFormID">
                             <h6 className="text-gray-500 text-2xl mt-12 mb-12 font-bold uppercase px-4">
-                            {/* User Information */}
+                                {/* User Information */}
                             </h6>
                             <div className="flex flex-wrap">
 
@@ -301,7 +301,7 @@ export default function CardAllAccountDetails() {
                             <hr className="mt-6 border-b-1 border-blueGray-300" />
 
                             <h6 className="text-gray-500 text-xl mt-10 mb-8 px-4 font-bold uppercase">
-                            Contact Information
+                                Contact Information
                             </h6>
                             <div className="flex flex-wrap">
                                 <div className="w-full lg:w-12/12 px-4 flex gap-8">
@@ -413,7 +413,7 @@ export default function CardAllAccountDetails() {
                             <hr className="mt-6 border-b-1 border-blueGray-300" />
 
                             <h6 className="text-gray-500 text-xl mt-10 mb-8 px-4 font-bold uppercase">
-                            About Me
+                                Optional
                             </h6>
                             <div className="flex flex-wrap">
                                 <div className="w-full lg:w-12/12 px-4">
@@ -422,11 +422,11 @@ export default function CardAllAccountDetails() {
                                             className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="grid-password"
                                         >
-                                            About me
+                                            ABOUT
                                         </label>
                                         <textarea
                                             type="text"
-                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-slate-800 rounded text-xs font-bold shadow focus:outline-none w-full ease-linear transition-all duration-150"
                                             // defaultValue="A beautiful UI Kit and Admin for React & Tailwind CSS. It is Free and Open Source."
                                             value={user?.aboutMe}
                                             disabled
@@ -468,7 +468,7 @@ export default function CardAllAccountDetails() {
                         {/* FORM FOR UPDATING USER DATA */}
                         <form id="userUpdateFormID" onSubmit={handleSubmitUserInfo}>
                             <h6 className="text-gray-500 text-2xl mt-12 mb-12 font-black uppercase px-4">
-                            {/* Update Information */}
+                                {/* Update Information */}
                             </h6>
                             <div className="flex flex-wrap">
                                                                                
@@ -476,13 +476,13 @@ export default function CardAllAccountDetails() {
                                 <div className="w-full lg:w-6/12 px-4">
                                     <div className="relative w-full mb-3">
                                         <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="firstName">
                                             First Name
                                            
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
                                                 placeholder={user?.firstName}
                                                 name="firstName"
                                                 onChange={handleChangeUserInfo}                                      
@@ -495,13 +495,13 @@ export default function CardAllAccountDetails() {
                                 <div className="w-full lg:w-6/12 px-4">
                                     <div className="relative w-full mb-3">
                                         <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="lastName">
                                             Last Name     
 
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
                                                 placeholder={user?.lastName}
                                                 name="lastName"
                                                 onChange={handleChangeUserInfo}                                            
@@ -514,13 +514,13 @@ export default function CardAllAccountDetails() {
                                 <div className="w-full lg:w-6/12 px-4">
                                     <div className="relative w-full mb-3">
                                         <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="email">
                                             Email address
                                         
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow hover:cursor-not-allowed focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                              
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150 hover:cursor-not-allowed"                                              
                                                 placeholder={user?.email} 
                                                 name="email"
                                                 onChange={handleChangeUserInfo} 
@@ -533,14 +533,14 @@ export default function CardAllAccountDetails() {
                                 {/* Phone Number */}
                                 <div className="w-full lg:w-6/12 px-4">
                                     <label
-                                        className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                        className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                         htmlFor="phone">
                                         Phone Number
                                     
                                         <input
                                             type="number"
                                             min={0}
-                                            className="indent-3 border-0 px-3 py-3 mt-0 mb-6 h-20 appearance-none placeholder-gray-500 text-blueGray-600 bg-white rounded-lg text-2xl tracking-verytight shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded-lg text-2xl tracking-verytight shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150 h-168 indent-3 appearance-none"
                                             placeholder={user?.phone}
                                             name="phone"
                                             onChange={handleChangeUserInfo}                                            
@@ -553,7 +553,7 @@ export default function CardAllAccountDetails() {
                             <hr className="mt-6 border-b-1 border-blueGray-300" />
 
                             <h6 className="text-gray-500 text-lg mt-10 mb-8 px-4 font-bold uppercase">
-                            Contact Information
+                                Contact Information
                             </h6>
                             <div className="flex flex-wrap">
 
@@ -563,13 +563,13 @@ export default function CardAllAccountDetails() {
                                     {/* Address */}
                                     <div className="relative w-3/6 mb-3">
                                         <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="address">
                                             Address
 
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                                
                                                 placeholder={user?.address}
                                                 name="address"
                                                 onChange={handleChangeUserInfo}                                              
@@ -580,13 +580,13 @@ export default function CardAllAccountDetails() {
                                     {/* Address 2 */}
                                     <div className="relative w-3/6 mb-3">
                                         <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="address2">
                                             Address 2
                                        
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
                                                 placeholder={user?.address2}
                                                 name="address2"
                                                 onChange={handleChangeUserInfo}                                        
@@ -602,13 +602,13 @@ export default function CardAllAccountDetails() {
                                     {/* City */}
                                     <div className="relative w-3/6 mb-3">
                                         <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="city">
                                             City
                                         
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                            
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                            
                                                 placeholder={user?.city}
                                                 name="city"
                                                 onChange={handleChangeUserInfo}                                                
@@ -619,13 +619,13 @@ export default function CardAllAccountDetails() {
                                     {/* State */}
                                     <div className="relative w-3/6 mb-3">
                                         <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="state">
                                             State
                                        
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                              
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                              
                                                 placeholder={user?.state}
                                                 name="state"
                                                 onChange={handleChangeUserInfo}                                               
@@ -641,13 +641,13 @@ export default function CardAllAccountDetails() {
                                     {/* Country */}
                                     <div className="relative w-3/6 mb-3">
                                         <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="country">
                                             Country
                                        
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                              
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                              
                                                 placeholder={user?.country}
                                                 name="country"
                                                 onChange={handleChangeUserInfo}                                                
@@ -658,13 +658,13 @@ export default function CardAllAccountDetails() {
                                     {/* Postal Code */}
                                     <div className="relative w-3/6 mb-3">
                                         <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="postalCode">
                                             Postal Code
                                      
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
                                                 placeholder={user?.postalCode}
                                                 name="postalCode"
                                                 onChange={handleChangeUserInfo}                                               
@@ -679,7 +679,7 @@ export default function CardAllAccountDetails() {
                             <hr className="mt-6 border-b-1 border-blueGray-300" />
 
                             <h6 className="text-gray-500 text-lg mt-10 mb-8 px-4 font-bold uppercase">
-                            About User
+                                About User
                             </h6>
                             <div className="flex flex-wrap">
                                 
@@ -689,13 +689,13 @@ export default function CardAllAccountDetails() {
                                     {/* About Me */}
                                     <div className="relative w-full mb-3">
                                         <label
-                                            className="block uppercase text-blueGray-600 text-xs font-bold mb-2"
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="aboutMe">
                                             About me
                                     
                                             <textarea
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-gray-900 rounded text-sm shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-gray-900 rounded text-sm shadow hover:bg-white focus:bg-white focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                                
                                                 placeholder={user?.aboutMe}
                                                 name="aboutMe"
                                                 onChange={handleChangeUserInfo}                                              
@@ -707,7 +707,6 @@ export default function CardAllAccountDetails() {
                                 </div>
 
                             </div>
-
 
                             <div className="rounded-t px-6 mt-4 mb-4">
                                 <div className="text-center flex justify-end">

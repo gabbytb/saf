@@ -3,6 +3,8 @@ const User = db.users;
 const Role = db.roles;
 const bcrypt = require("bcrypt");
 // const crypto = require('crypto');
+
+
 const ROLES = require("../constants/constants");
 
 
@@ -353,9 +355,9 @@ exports.verifySignUpWithGet = async (req, res) => {
         // Change Existing User status to "approved".
         // Assign the generated token to Existing User, as their accessToken..
         // Set isVerified as True for Existing User
-        const dataToUpdate = {
-            status: "approved",
+        const dataToUpdate = {           
             accessToken: token,
+            status: "approved",
             isVerified: true,
         };
         // Step 6: If user exists, find User by Email
@@ -865,18 +867,19 @@ exports.findAllUsers = async (req, res) => {
     // draft
     
     try {
+
         let query = {
             'roles.role': ROLES.USERS,
         };
 
         if (status) {
             query.status = status;
-        };
- 
+        };        
+
         const usersList = await User.find(query)
-                                .skip((page - 1) * limit)
+                                .skip(parseInt(page - 1) * limit)
                                 .limit(parseInt(limit));
-        console.log("USERS LIST: ", usersList);
+        console.log("ALL USERS: ", usersList);
 
         const totalUsers = await User.countDocuments(query); // Total number of users with the given status
         const totalPages = Math.ceil(totalUsers / limit); // Calculate total pages
@@ -894,7 +897,7 @@ exports.findAllUsers = async (req, res) => {
                 usersList,
                 pagination
             },
-            message: "Items retrieved successfully",
+            message: "ALL USERS retrieved successfully",
         }
         res.status(200).json(responseData);
 
@@ -903,6 +906,102 @@ exports.findAllUsers = async (req, res) => {
         return res.status(500).send(`Internal Server Error: ${error.message}`);
     };
 };  // THOROUGHLY Tested === Working
+// Get Length of All Approved Users
+exports.findAllApprovedUsers = async (req, res) => {
+
+    try {
+
+        let query = {                
+            "status": "approved",
+            "roles.role": ROLES.USERS,
+        };
+
+        const allApprovedUsers = await User.find(query);
+        if (!allApprovedUsers) {
+            const responseData = {
+                success: false,
+                message: "No user found"
+            };
+            return res.status(404).json(responseData);
+        };
+
+        const responseData = {
+            success: true,
+            data: allApprovedUsers.length,
+            message: "RETRIEVE LENGTH OF ALL APPROVED USERS: Successful"
+        };
+        res.status(200).json(responseData);
+
+    } catch (error) {
+        // Catch error
+        return res.status(500).send(`Internal Server Error ${error}`);
+        // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    };
+};
+// Get Length of All Pending Users
+exports.findAllPendingUsers = async (req, res) => {
+
+    try {
+
+        let query = {                
+            "status": "pending",
+            "roles.role": ROLES.USERS,
+        };
+
+        const allPendingUsers = await User.find(query);
+        if (!allPendingUsers) {
+            const responseData = {
+                success: false,
+                message: "No user found"
+            };
+            return res.status(404).json(responseData);
+        };
+
+        const responseData = {
+            success: true,
+            data: allPendingUsers.length,
+            message: "RETRIEVE LENGTH OF ALL PENDING USERS: Successful"
+        };
+        res.status(200).json(responseData);
+
+    } catch (error) {
+        // Catch error
+        return res.status(500).send(`Internal Server Error ${error}`);
+        // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    };
+};
+// Get Length of All Rejected Users
+exports.findAllRejectedUsers = async (req, res) => {
+
+    try {
+
+        let query = {                
+            "status": "rejected",
+            "roles.role": ROLES.USERS,
+        };
+
+        const allRejectedUsers = await User.find(query);
+        if (!allRejectedUsers) {
+            const responseData = {
+                success: false,
+                message: "No user found"
+            };
+            return res.status(404).json(responseData);
+        };
+
+        const responseData = {
+            success: true,
+            data: allRejectedUsers.length,
+            message: "RETRIEVE LENGTH OF ALL REJECTED USERS: Successful"
+        };
+        res.status(200).json(responseData);
+
+    } catch (error) {
+        // Catch error
+        return res.status(500).send(`Internal Server Error ${error}`);
+        // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    };
+};
 
 // Our FIND All ADMINS Logic starts here
 exports.findAllAdmins = async (req, res) => {
@@ -929,8 +1028,8 @@ exports.findAllAdmins = async (req, res) => {
         const staffsList = await User.find(query)
                                 .skip(skip)
                                 .limit(limit);
-        console.log("STAFFS LIST: ", staffsList);
-
+        console.log("ALL STAFFS: ", staffsList);
+    
         const totalAdminUsers = await User.countDocuments(query); // Total number of staffs with the given status
         const totalPages = Math.ceil(totalAdminUsers / limit); // Calculate total pages
         const pagination = {
@@ -956,6 +1055,102 @@ exports.findAllAdmins = async (req, res) => {
         return res.status(500).send(`Internal Server Error: ${error.message}`);
     };
 };  // THOROUGHLY Tested === Working
+// Get Length of All Approved Admins
+exports.findAllApprovedAdmins = async (req, res) => {
+
+    try {
+
+        let query = {                
+            "status": "approved",
+            "roles.role": ROLES.XYZ,
+        };
+
+        const allApprovedAdmins = await User.find(query);
+        if (!allApprovedAdmins) {
+            const responseData = {
+                success: false,
+                message: "No staff found"
+            };
+            return res.status(404).json(responseData);
+        };
+
+        const responseData = {
+            success: true,
+            data: allApprovedAdmins.length,
+            message: "RETRIEVE LENGTH OF ALL APPROVED ADMINS: Successful"
+        };
+        res.status(200).json(responseData);
+
+    } catch (error) {
+        // Catch error
+        return res.status(500).send(`Internal Server Error ${error}`);
+        // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    };
+};
+// Get Length of All Pending Admins
+exports.findAllPendingAdmins = async (req, res) => {
+
+    try {
+
+        let query = {                
+            "status": "pending",
+            "roles.role": ROLES.XYZ,
+        };
+
+        const allPendingAdmins = await User.find(query);
+        if (!allPendingAdmins) {
+            const responseData = {
+                success: false,
+                message: "No staff found"
+            };
+            return res.status(404).json(responseData);
+        };
+
+        const responseData = {
+            success: true,
+            data: allPendingAdmins.length,
+            message: "RETRIEVE LENGTH OF ALL PENDING ADMINS: Successful"
+        };
+        res.status(200).json(responseData);
+
+    } catch (error) {
+        // Catch error
+        return res.status(500).send(`Internal Server Error ${error}`);
+        // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    };
+};
+// Get Length of All Rejected Admins
+exports.findAllRejectedAdmins = async (req, res) => {
+
+    try {
+
+        let query = {                
+            "status": "rejected",
+            "roles.role": ROLES.XYZ,
+        };
+
+        const allRejectedAdmins = await User.find(query);
+        if (!allRejectedAdmins) {
+            const responseData = {
+                success: false,
+                message: "RETRIEVE ALL REJECTED ADMINS: Failed"
+            };
+            return res.status(404).json(responseData);
+        };
+
+        const responseData = {
+            success: true,
+            data: allRejectedAdmins.length,
+            message: "RETRIEVE LENGTH OF ALL REJECTED ADMINS: Successful"
+        };
+        res.status(200).json(responseData);
+
+    } catch (error) {
+        // Catch error
+        return res.status(500).send(`Internal Server Error ${error}`);
+        // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    };
+};
 
 // Our FIND SINGLE USER by ID Logic starts here
 exports.findSingleUserById = async (req, res) => {
@@ -989,38 +1184,6 @@ exports.findSingleUserById = async (req, res) => {
         return res.status(500).send(`Internal Server Error ${error}`);
     };
 };  // THOROUGHLY Tested === Working
-
-// Finding All isActivated Users
-exports.findAllActive = async (req, res) => {
-
-    //  res.setHeader('Content-Type', 'application/json');
-    //  NOTE:  To filter a search results, specify a search condition using a "key-value" pair within curly braces, within the find method!
-    //  For example, User.find({ username: 'john' }) would find all users with the username 'john'.     i.e  username = "john"
-    //  In this case, We are searching for records where the isActive property is equal to true.        i.e  isActive = true
-    try {
-
-        const allActiveUsers = await User.find({ isActive: true });
-        if (!allActiveUsers) {
-            const responseData = {
-                success: false,
-                message: "RETRIEVE ALL USERS: Failed"
-            };
-            return res.status(404).json(responseData);
-        };
-
-        const responseData = {
-            success: true,
-            data: allActiveUsers,
-            message: "RETRIEVE ALL ACTIVE USERS: Successful"
-        };
-        return res.status(200).json(responseData);
-
-    } catch (error) {
-        // Catch error
-        return res.status(500).send(`Internal Server Error ${error}`);
-        // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
-    };
-};
 
 // Update User Information
 exports.updateSingleUserById = async (req, res) => {
@@ -1071,7 +1234,7 @@ exports.updateSingleUserById = async (req, res) => {
             return res.json(responseData);
         };
 
-        const token = assignTwoDaysToken(updatedUser._id);
+        const token = await assignTwoDaysToken(updatedUser._id);
         updatedUser.accessToken = token;
 
         // User updated successfully
@@ -1091,12 +1254,66 @@ exports.updateSingleUserById = async (req, res) => {
     };
 };
 
+// Update User Information
+exports.updateSingleUserStatusById = async (req, res) => {
+    
+    try {
+        const _id = req.params.id;
+        const { status, isVerified, } = req.body;
+
+        // To Add New Roles to Existing User's Account
+        // const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
+        // const roleEditor = await Role.findOne({ role: "ROLE_EDITOR" });
+        // const roleStaff = await Role.findOne({ role: "ROLE_STAFF" });
+        // const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
+        
+        const dataToUpdate = {        
+            status,
+            isVerified,
+            // roles: [ {...roleAdmin} ],
+            // roles: [ {...roleEditor} ],
+            // roles: [ {...roleStaff} ],
+            // roles: [ {...roleUsers} ],
+            // Optional
+            // roles: [ {...roleAdmin}, {...roleEditor}, {...roleStaff} ],
+        };
+          
+        const updatedUser = await User.findByIdAndUpdate(_id, dataToUpdate, { new: true });
+        if (!updatedUser) {
+            const responseData = {
+                success: false,
+                message: "No match found"
+            };
+            console.log("UPDATE for EXISTING User Account: ", responseData);
+            return res.json(responseData);
+        };
+
+        const token = await assignTwoDaysToken(updatedUser._id);
+        updatedUser.accessToken = token;
+
+        // User updated successfully
+        const responseData = {
+            success: true,
+            data: updatedUser,
+            message: 'User Status updated successfully',
+        };
+        console.log("EXISTING User Account with E-mail: ", updatedUser.email + " was updated!", 
+                    "\nUPDATED USER DATA: ", responseData.data);
+        return res.status(200).json(responseData);
+
+    } catch (error) {
+        // Catch error
+        return res.status(500).send(`Internal Server Error ${error}`);
+        // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
+    };
+};   
+
 // Deleta a User with the Specified id in the request
-exports.deleteUser = async (req, res) => {
+exports.deleteUserById = async (req, res) => {
     try {
 
-        const { _id } = req.params.id;
-        const userId = User.findByIdAndRemove(_id, { useFindAndModify: false });
+        const _id = req.params.id;
+        const userId = await User.findByIdAndRemove(_id, { useFindAndModify: false });
         if (!(userId)) {
             const responseData = {
                 success: false,
@@ -1114,7 +1331,7 @@ exports.deleteUser = async (req, res) => {
     } catch (error) {
         return res.status(500).send(`Internal Server Error ${error}`);
         // return res.status(500).json({ message: `Could not delete User with ID = ${id}`, err });
-    }
+    };
 };
 
 // Deleta all Users from the Database
