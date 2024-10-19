@@ -249,6 +249,8 @@ exports.signUp = async (req, res) => {
     }
 };  // THOROUGHLY Tested === Working
 
+
+
 // Our ACCOUNT Re-ACTIVATION Logic starts here
 exports.reValidateSignUp = async (req, res) => {
 
@@ -327,6 +329,8 @@ exports.reValidateSignUp = async (req, res) => {
         return res.status(500).json(responseData); 
     }
 };  // THOROUGHLY Tested === Working
+
+
 
 // Our ACCOUNT VERIFICATION Logic USING GET request starts here
 exports.verifySignUpWithGet = async (req, res) => {        
@@ -487,6 +491,8 @@ exports.verifySignUpWithGet = async (req, res) => {
     // };
 };  // THOROUGHLY Tested === Working
 
+
+
 // Our ACCOUNT VERIFICATION Logic USING POST request using starts here
 exports.verifySignUpWithPost = async (req, res) => {
 
@@ -580,6 +586,8 @@ exports.verifySignUpWithPost = async (req, res) => {
         };
     };
 };  // THOROUGHLY Tested === Working
+
+
 
 // Our USER LOGIN Logic starts here
 exports.logIn = async (req, res) => {
@@ -762,6 +770,8 @@ exports.logIn = async (req, res) => {
 
 };  // THOROUGHLY Tested === Working
 
+
+
 // Our USER LOGIN via G-MAIL Logic starts here
 exports.googleSignOn = async (req, res) => {
     
@@ -859,6 +869,8 @@ exports.googleSignOn = async (req, res) => {
     };
 };  // THOROUGHLY Tested === Working
 
+
+
 // Our FIND All USERS Logic starts here
 exports.findAllUsers = async (req, res) => { 
 
@@ -905,7 +917,7 @@ exports.findAllUsers = async (req, res) => {
         console.error("Internal Server Error:", error);
         return res.status(500).send(`Internal Server Error: ${error.message}`);
     };
-};  // THOROUGHLY Tested === Working
+};
 // Get Length of All Approved Users
 exports.findAllApprovedUsers = async (req, res) => {
 
@@ -1001,7 +1013,9 @@ exports.findAllRejectedUsers = async (req, res) => {
         return res.status(500).send(`Internal Server Error ${error}`);
         // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
     };
-};
+};  // THOROUGHLY Tested === Working
+
+
 
 // Our FIND All ADMINS Logic starts here
 exports.findAllAdmins = async (req, res) => {
@@ -1054,7 +1068,7 @@ exports.findAllAdmins = async (req, res) => {
         console.error("Internal Server Error:", error);
         return res.status(500).send(`Internal Server Error: ${error.message}`);
     };
-};  // THOROUGHLY Tested === Working
+};
 // Get Length of All Approved Admins
 exports.findAllApprovedAdmins = async (req, res) => {
 
@@ -1150,7 +1164,9 @@ exports.findAllRejectedAdmins = async (req, res) => {
         return res.status(500).send(`Internal Server Error ${error}`);
         // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
     };
-};
+};  // THOROUGHLY Tested === Working
+
+
 
 // Our FIND SINGLE USER by ID Logic starts here
 exports.findSingleUserById = async (req, res) => {
@@ -1184,6 +1200,8 @@ exports.findSingleUserById = async (req, res) => {
         return res.status(500).send(`Internal Server Error ${error}`);
     };
 };  // THOROUGHLY Tested === Working
+
+
 
 // Update User Information
 exports.updateSingleUserById = async (req, res) => {
@@ -1254,6 +1272,8 @@ exports.updateSingleUserById = async (req, res) => {
     };
 };
 
+
+
 // Update User Information
 exports.updateSingleUserStatusById = async (req, res) => {
     
@@ -1308,6 +1328,8 @@ exports.updateSingleUserStatusById = async (req, res) => {
     };
 };   
 
+
+
 // Deleta a User with the Specified id in the request
 exports.deleteUserById = async (req, res) => {
     try {
@@ -1333,6 +1355,8 @@ exports.deleteUserById = async (req, res) => {
         // return res.status(500).json({ message: `Could not delete User with ID = ${id}`, err });
     };
 };
+
+
 
 // Deleta all Users from the Database
 exports.deleteAllUsers = (req, res) => {
