@@ -2,6 +2,7 @@ import { useRef, useEffect, } from "react";
 import { Link } from "react-router-dom";
 import { HomeNav, HomeFooter, } from "../components"
 import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
+import { hero1, hero2, hero3, hero4 } from "../assets/images";
 // import '../assets/styles/tailwindcss.css';
 
 
@@ -318,11 +319,12 @@ const Home = () => {
                   <div className="flex flex-wrap">
                     <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
                       <div className="px-6">
-                        {/* <img
+                        <img
                           alt="..."
-                          src={require("assets/img/team-1-800x800.jpg").default}
+                          /* src={require("assets/img/team-1-800x800.jpg").default} */
+                          src={hero1}
                           className="shadow-lg rounded-full mx-auto max-w-120-px"
-                        /> */}
+                        />
                         <div className="pt-6 text-center">
                           <h5 className="text-xl font-bold">Ryan Tompson</h5>
                           <p className="mt-1 text-sm text-blueGray-400 uppercase font-semibold">
@@ -351,13 +353,16 @@ const Home = () => {
                         </div>
                       </div>
                     </div>
+
+
                     <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
                       <div className="px-6">
-                        {/* <img
+                        <img
                           alt="..."
-                          src={require("assets/img/team-2-800x800.jpg").default}
+                          /* src={require("assets/img/team-2-800x800.jpg").default} */
+                          src={hero2}
                           className="shadow-lg rounded-full mx-auto max-w-120-px"
-                        /> */}
+                        />
                         <div className="pt-6 text-center">
                           <h5 className="text-xl font-bold">Romina Hadid</h5>
                           <p className="mt-1 text-sm text-blueGray-400 uppercase font-semibold">
@@ -380,13 +385,16 @@ const Home = () => {
                         </div>
                       </div>
                     </div>
+
+
                     <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
                       <div className="px-6">
-                        {/* <img
+                         <img
                           alt="..."
-                          src={require("assets/img/team-3-800x800.jpg").default}
+                          /* src={require("assets/img/team-3-800x800.jpg").default} */
+                          src={hero3}
                           className="shadow-lg rounded-full mx-auto max-w-120-px"
-                        /> */}
+                        />                       
                         <div className="pt-6 text-center">
                           <h5 className="text-xl font-bold">Alexa Smith</h5>
                           <p className="mt-1 text-sm text-blueGray-400 uppercase font-semibold">
@@ -415,13 +423,16 @@ const Home = () => {
                         </div>
                       </div>
                     </div>
+
+
                     <div className="w-full md:w-6/12 lg:w-3/12 lg:mb-0 mb-12 px-4">
                       <div className="px-6">
-                        {/* <img
+                        <img
                           alt="..."
-                          src={require("assets/img/team-4-470x470.png").default}
+                          /* src={require("assets/img/team-4-470x470.png").default} */
+                          src={hero4}
                           className="shadow-lg rounded-full mx-auto max-w-120-px"
-                        /> */}
+                        />                        
                         <div className="pt-6 text-center">
                           <h5 className="text-xl font-bold">Jenna Kardi</h5>
                           <p className="mt-1 text-sm text-blueGray-400 uppercase font-semibold">

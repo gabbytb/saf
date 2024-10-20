@@ -14,9 +14,10 @@ import investmentPlatform from "./investment-platform.png";
 import signUpIcon from "./user-icon.png";
 import adminDashboardIcon from "./admindb.png";
 
-
-
-
+import hero1 from "./team-1-800x800.jpg";
+import hero2 from "./team-2-800x800.jpg";
+import hero3 from "./team-3-800x800.jpg";
+import hero4 from "./team-4-470x470.png";
 
 
 
@@ -37,4 +38,9 @@ export {
 
     signUpIcon,
     adminDashboardIcon,
+
+    hero1,
+    hero2,
+    hero3,
+    hero4,
 }

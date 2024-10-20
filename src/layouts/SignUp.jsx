@@ -38,7 +38,7 @@ function SignUp() {
     // *** USER PAYLOAD FOR SIGN UP *** //
     // ******************************** //
     const [user, setUser] = useState({ firstName: "", lastName: "", email: "", password: "", approvesTandC: false, });
-    // console.log("*** ACCOUNT CREATION ***\nUser: ", user);
+    console.log("*** ACCOUNT CREATION ***\nUser: ", user);
     // ******************************** //
     // *** USER PAYLOAD FOR SIGN UP *** //
     // ******************************** //
