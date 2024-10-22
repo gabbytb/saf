@@ -177,9 +177,10 @@ export default function CardAllApprovedUsers({ color, activeDisplay, }) {
                     <tr>
                         <td></td>
                         <td></td>
-                        <td className="max-w-40 h-60 flex justify-center items-center">                                
+                        <td className="max-w-40 h-60 flex flex-col justify-center items-center">                                
                           {/* <Preloader /> */}
-                          <img src={spinner} alt="Spinning" className="ml-80" />
+                          <img src={spinner} alt="Spinning" className="ml-80 mx-auto" />                           
+                          <p className="text-xl tracking-extratight font-semibold">Loading...</p> 
                         </td>
                         <td></td>
                     </tr>

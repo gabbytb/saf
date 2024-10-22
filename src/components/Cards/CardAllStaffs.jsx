@@ -135,7 +135,7 @@ export default function CardAllStaffs({ color }) {
                 });
             };
 
-            var timer = setTimeout(fetchAllStaffs, 800);   // Delay execution of findAllStaffs by 1800ms
+            var timer = setTimeout(fetchAllStaffs, 80000);   // Delay execution of findAllStaffs by 1800ms
             return () => {
                 clearTimeout(timer);                  // Clean up timer if component unmounts or token changes
             };
@@ -261,9 +261,9 @@ export default function CardAllStaffs({ color }) {
                               <tr>
                                 <td></td>
                                 <td></td>
-                                <td className="max-w-40 h-60 flex justify-center items-center">                                
-                                  {/* <Preloader /> */}
-                                  <img src={spinner} alt="Spinning" className="ml-80" />
+                                <td className="max-w-40 h-60 flex flex-col justify-center items-center">                                                                                             
+                                    <img src={spinner} alt="Spinning" className="ml-80 mx-auto" />                                                              
+                                    <p className="text-xl tracking-extratight font-semibold">Loading...</p>                                  
                                 </td>
                                 <td></td>
                               </tr>                

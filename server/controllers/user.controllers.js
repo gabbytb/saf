@@ -883,7 +883,7 @@ exports.findAllUsers = async (req, res) => {
         let query = {
             'roles.role': ROLES.USERS,
         };
-
+       
         if (status) {
             query.status = status;
         };        
