@@ -43,12 +43,12 @@ export default function Sidebar() {
 
 
                     {/* Collapse */}
-                    <div className={"md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-0 md:shadow-none shadow absolute top-0 left-0 right-0 z-40 overflow-y-auto overflow-x-hidden h-auto items-center flex-1 rounded " + collapseShow}>                    
+                    <div className={"md:flex md:flex-col md:items-stretch md:opacity-100 md:relative md:mt-0 md:shadow-none shadow absolute top-0 -left-2 right-0 z-40 overflow-y-auto overflow-x-hidden w-100 h-screen items-center flex-1 rounded pb-16 " + collapseShow}>                    
                     {/* Collapse header */}
                     <div className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200">
                         <div className="flex flex-wrap">
                             <div className="w-6/12">
-                                <Link className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0" to="/">Samuel Akinola Foundation</Link>
+                                <Link className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0" to="/">Dashboard Samuel Akinola Foundation</Link>
                             </div>
                             <div className="w-6/12 flex justify-end">
                                 <button type="button" className="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent" onClick={() => setCollapseShow("hidden")}>
@@ -125,7 +125,7 @@ export default function Sidebar() {
                     </ul>
 
                     
-                    
+
                     {/***************************************/}
                     {/*********** Manage Accounts ***********/}
                     {/***************************************/}

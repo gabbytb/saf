@@ -21,11 +21,10 @@ export default function CardAllRejectedStaffs({ color, activeDisplay }) {
     // MANAGE STATE:-  FOR FIND ALL REJECTED STAFFS
     // ****************************************************************************
     const [allRejectedStaffs, setAllRejectedStaffs] = useState([]);
-    // console.log("ALL REJECTED STAFFS: ", allRejectedStaffs);
-
+    // console.log("ALL REJECTED ADMIN USERS: ", allRejectedStaffs);
     // eslint-disable-next-line
-    const [totalAdminUsers, setTotalAdminUsers] = useState(null);
-    // console.log("TOTAL STAFFS: ", totalAdminUsers);
+    const [totalRejectedAdminUsers, setTotalRejectedAdminUsers] = useState(null);
+    // console.log("TOTAL REJECTED ADMIN USERS: ", totalRejectedAdminUsers);
     const [totalPages, setTotalPages] = useState(0);
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -72,7 +71,7 @@ export default function CardAllRejectedStaffs({ color, activeDisplay }) {
 
                     setAllRejectedStaffs(staffsList);
                 
-                    setTotalAdminUsers(pagination?.staffsRecord);
+                    setTotalRejectedAdminUsers(pagination?.staffsRecord);
                     setTotalPages(pagination?.lastPage);
                 })
                 .catch((error) => {
@@ -98,6 +97,8 @@ export default function CardAllRejectedStaffs({ color, activeDisplay }) {
     // ****************************************************************************
 
 
+
+    
 
     
     if (isLoading) {
@@ -349,9 +350,9 @@ export default function CardAllRejectedStaffs({ color, activeDisplay }) {
     );
 };
 
-// CardAllRejectedStaffs.defaultProps = {
-//   color: "light",
-// };
+CardAllRejectedStaffs.defaultProps = {
+  color: "light",
+};
 
 CardAllRejectedStaffs.propTypes = {
   color: PropTypes.oneOf(["light", "dark"]),

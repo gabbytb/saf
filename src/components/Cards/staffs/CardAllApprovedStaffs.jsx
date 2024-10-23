@@ -14,24 +14,23 @@ import { spinner } from "../../../assets/images";
 
 
 
-export default function CardAllApprovedStaffs({ color, activeDisplay }) {
+export default function CardAllApprovedStaffs({ color, activeDisplay, }) {
 
 
     // ****************************************************************************
-    // MANAGE STATE:-  TO FIND ALL USERS
+    // MANAGE STATE:-  TO FIND ALL APPROVED ADMIN USERS
     // ****************************************************************************
-    const [allApprovedStaffs, setAllApprovedUsers] = useState([]);
-    // console.log("ALL USERS: ", allApprovedStaffs);
-
-    
+    const [allApprovedStaffs, setAllApprovedUsers] = useState([]); 
     // eslint-disable-next-line
-    const [totalAdminUsers, setTotalAdminUsers] = useState(null);
-    // console.log("TOTAL STAFFS: ", totalAdminUsers);
+    const [totalApprovedAdminUsers, setTotalApprovedAdminUsers] = useState(null);
+    // console.log("TOTAL APPROVED ADMIN USERS: ", totalApprovedAdminUsers);
+    
     const [totalPages, setTotalPages] = useState(0);
 
     const [currentPage, setCurrentPage] = useState(1);
     const limit = 10; // Number of items per page
     const leftArrow = "<", rightArrow = ">";
+
 
 
 
@@ -41,20 +40,13 @@ export default function CardAllApprovedStaffs({ color, activeDisplay }) {
     const [isLoading, setIsLoading] = useState(true);
 
 
-  
-    useEffect(() => {
-      const allApprovedStaffsLink = document.querySelector("#staffsLinkID .allApprovedStaffs");
-      // console.log("ALL STAFFS LINK", allApprovedStaffsLink);
-      if (activeDisplay === "allApprovedStaffs") {
-          allApprovedStaffsLink?.classList.add("activeStaffView");
-      } else {
-          allApprovedStaffsLink?.classList.remove("activeStaffView");
-      };
-    }, [activeDisplay]);
 
   
     useEffect(() => {
+        const allApprovedStaffsLink = document.querySelector("#staffsLinkID .allApprovedStaffs");
+        // console.log("ALL STAFFS LINK", allApprovedStaffsLink);
         if (activeDisplay === "allApprovedStaffs") {
+            allApprovedStaffsLink?.classList.add("activeStaffView");
 
             setIsLoading(true);
             
@@ -75,7 +67,7 @@ export default function CardAllApprovedStaffs({ color, activeDisplay }) {
 
                     setAllApprovedUsers(staffsList);
                 
-                    setTotalAdminUsers(pagination?.staffsRecord);
+                    setTotalApprovedAdminUsers(pagination?.staffsRecord);
                     setTotalPages(pagination?.lastPage);
                     
                 })
@@ -91,6 +83,8 @@ export default function CardAllApprovedStaffs({ color, activeDisplay }) {
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
+        } else {
+            allApprovedStaffsLink?.classList.remove("activeStaffView");
         };
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
@@ -100,7 +94,6 @@ export default function CardAllApprovedStaffs({ color, activeDisplay }) {
     };
     // ****************************************************************************
     // ****************************************************************************
-
 
 
 
@@ -357,9 +350,9 @@ export default function CardAllApprovedStaffs({ color, activeDisplay }) {
     );
 };
 
-// CardAllApprovedStaffs.defaultProps = {
-//   color: "light",
-// };
+CardAllApprovedStaffs.defaultProps = {
+  color: "light",
+};
 
 CardAllApprovedStaffs.propTypes = {
   color: PropTypes.oneOf(["light", "dark"]),

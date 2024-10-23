@@ -42,21 +42,16 @@ export default function CardAllApprovedUsers({ color, activeDisplay, }) {
     // MANAGE STATE:-  SPECIAL FEATURES
     // ****************************************************************************
     const [isLoading, setIsLoading] = useState(true);
+    const [errorMessage, setErrorMessage] = useState(true);
 
-    useEffect(() => {
-        var allApprovedUsersLink = document.querySelector("#usersLinkID .allApprovedUsers");
-        // console.log("ALL USERS LINK", allUsersLink);
-        if (activeDisplay === "allApprovedUsers") {
-            allApprovedUsersLink?.classList.add("activeUserView");
-        } else {
-            allApprovedUsersLink?.classList.remove("activeUserView");
-        };
-    }, [activeDisplay]);
 
+    
     useEffect(() => {
+        var allApprovedUsersLink = document.querySelector("#usersLinkID .allApprovedUsers");        // console.log("ALL USERS LINK", allUsersLink);    
         if (activeDisplay === "allApprovedUsers") {
             
             setIsLoading(true);
+            allApprovedUsersLink?.classList.add("activeUserView");
 
             // ****************************************************************************
             // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS
@@ -69,8 +64,9 @@ export default function CardAllApprovedUsers({ color, activeDisplay, }) {
                     const { usersList, pagination } = data;
 
                     if (!success && message === "No user found") {
+                        setErrorMessage(message)
                         console.log("Success: ", success);
-                        console.log("Message: ", message);
+                        console.log("Message: ", message);                        
                     };
 
                     setAllApprovedUsers(usersList);
@@ -91,6 +87,8 @@ export default function CardAllApprovedUsers({ color, activeDisplay, }) {
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
+        } else {
+            allApprovedUsersLink?.classList.remove("activeUserView");
         };
     }, [activeDisplay, currentPage]); // Fetch data when activeDisplay and currentPage changes
     // ****************************************************************************
@@ -195,6 +193,11 @@ export default function CardAllApprovedUsers({ color, activeDisplay, }) {
     return (
       <>
           <div className={`w-full overflow-x-auto ${activeDisplay === "allApprovedUsers" ? "block" : "hidden"}`}>
+            
+              <div className={`${errorMessage }`}>
+                  <div>{errorMessage}</div>
+              </div>
+
             {/* Projects table */}
             <table className="items-center w-full bg-transparent border-collapse">
               <thead>

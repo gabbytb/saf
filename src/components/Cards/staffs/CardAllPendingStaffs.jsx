@@ -15,19 +15,18 @@ import { spinner } from "../../../assets/images";
 
 
 
-export default function CardAllPendingStaffs({ color, activeDisplay }) {
+export default function CardAllPendingStaffs({ color, activeDisplay, }) {
 
 
     // ****************************************************************************
-    // MANAGE STATE:-  TO FIND ALL USERS
+    // MANAGE STATE:-  TO FIND ALL PENDING ADMIN USERS
     // ****************************************************************************
     const [allPendingStaffs, setAllPendingStaffs] = useState([]);
-    // console.log("ALL USERS: ", allApprovedStaffs);
-
-      
+    // console.log("ALL PENDING ADMIN USERS: ", allPendingStaffs);     
     // eslint-disable-next-line
-    const [totalAdminUsers, setTotalAdminUsers] = useState(null);
-    // console.log("TOTAL STAFFS: ", totalAdminUsers);
+    const [totalPendingAdminUsers, setTotalPendingAdminUsers] = useState(null);
+    // console.log("TOTAL PENDING ADMIN USERS: ", totalPendingAdminUsers);
+    
     const [totalPages, setTotalPages] = useState(0);
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -36,25 +35,22 @@ export default function CardAllPendingStaffs({ color, activeDisplay }) {
 
 
 
+
+
     // ****************************************************************************
     // MANAGE STATE:-  SPECIAL FEATURES
     // ****************************************************************************
     const [isLoading, setIsLoading] = useState(true);
 
+    
 
-  
-    useEffect(() => {
-      const allPendingStaffsLink = document.querySelector("#staffsLinkID .allPendingStaffs");
-      // console.log("ALL STAFFS LINK", allPendingStaffsLink);
-      if (activeDisplay === "allPendingStaffs") {
-          allPendingStaffsLink?.classList.add("activeStaffView");
-      } else {
-          allPendingStaffsLink?.classList.remove("activeStaffView");
-      };
-    }, [activeDisplay]);
+
 
     useEffect(() => {
+        const allPendingStaffsLink = document.querySelector("#staffsLinkID .allPendingStaffs");
+        // console.log("ALL STAFFS LINK", allPendingStaffsLink);
         if (activeDisplay === "allPendingStaffs") {
+            allPendingStaffsLink?.classList.add("activeStaffView");
 
             setIsLoading(true);
             
@@ -75,7 +71,7 @@ export default function CardAllPendingStaffs({ color, activeDisplay }) {
 
                     setAllPendingStaffs(staffsList);
                 
-                    setTotalAdminUsers(pagination?.staffsRecord);
+                    setTotalPendingAdminUsers(pagination?.staffsRecord);
                     setTotalPages(pagination?.lastPage);
 
                 })
@@ -91,6 +87,8 @@ export default function CardAllPendingStaffs({ color, activeDisplay }) {
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
+        } else {
+            allPendingStaffsLink?.classList.remove("activeStaffView");
         };
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
@@ -103,7 +101,7 @@ export default function CardAllPendingStaffs({ color, activeDisplay }) {
 
 
 
-
+    
 
     if (isLoading) {
         return (
@@ -355,9 +353,9 @@ export default function CardAllPendingStaffs({ color, activeDisplay }) {
     );
 };
 
-// CardAllPendingStaffs.defaultProps = {
-//   color: "light",
-// };
+CardAllPendingStaffs.defaultProps = {
+  color: "light",
+};
 
 CardAllPendingStaffs.propTypes = {
   color: PropTypes.oneOf(["light", "dark"]),

@@ -32,6 +32,9 @@ export default function CardAllStaffs({ color }) {
     // eslint-disable-next-line
     const [totalAdminUsers, setTotalAdminUsers] = useState(null);
     // console.log("TOTAL USERS: ", totalAdminUsers);
+    const [totalApprovedAdminUsers, setTotalApprovedAdminUsers] = useState(null);
+    console.log("TOTAL APPROVED USERS: ", totalApprovedAdminUsers);
+
     const [totalPages, setTotalPages] = useState(0);
 
     const [currentPage, setCurrentPage] = useState(1);
@@ -47,19 +50,12 @@ export default function CardAllStaffs({ color }) {
     const [activeDisplay, setActiveDisplay] = useState("allStaffs");
 
 
-    useEffect(() => {  
-        var allStaffsLink = document.querySelector("#staffsLinkID .allStaffs");
-        // console.log("ALL STAFFS LINK", allStaffsLink);
-        if (activeDisplay === "allStaffs") {        
-            allStaffsLink?.classList.add("activeStaffView");
-        } else {
-            allStaffsLink?.classList.remove("activeStaffView");
-        };
-    }, [activeDisplay]);
-
     
     useEffect(() => {
-      if (activeDisplay === "allStaffs") {
+      var allStaffsLink = document.querySelector("#staffsLinkID .allStaffs");
+      // console.log("ALL STAFFS LINK", allStaffsLink);
+      if (activeDisplay === "allStaffs") {        
+            allStaffsLink?.classList.add("activeStaffView");
 
             setIsLoading(true);
 
@@ -135,11 +131,13 @@ export default function CardAllStaffs({ color }) {
                 });
             };
 
-            var timer = setTimeout(fetchAllStaffs, 80000);   // Delay execution of findAllStaffs by 1800ms
+            var timer = setTimeout(fetchAllStaffs, 800);   // Delay execution of findAllStaffs by 1800ms
             return () => {
                 clearTimeout(timer);                  // Clean up timer if component unmounts or token changes
             };
-        };
+      } else {
+          allStaffsLink?.classList.remove("activeStaffView");
+      };
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
     // **************************************************************************** 
@@ -535,7 +533,8 @@ export default function CardAllStaffs({ color }) {
                     {/* Pagination controls */}
                 </div>
                 <Suspense fallback={<div>Loading...</div>}>
-                  <CardAllApprovedStaffs activeDisplay={activeDisplay} />
+                  {/* <CardAllApprovedStaffs activeDisplay={activeDisplay} approvedAdminUsers={totalApprovedAdminUsers} /> */}                   
+                  <CardAllApprovedStaffs activeDisplay={activeDisplay} approvedAdminUsers={() => setTotalApprovedAdminUsers(totalApprovedAdminUsers)} />
                 </Suspense>        
                 <Suspense fallback={<div>Loading...</div>}>                            
                   <CardAllPendingStaffs activeDisplay={activeDisplay} />
