@@ -810,6 +810,10 @@ tbody tr{
 
 /* ********************  LOGIN  ******************** */
 
+/* .widget-visible {
+    background-color: #1403a8 !important;
+  } */
+
 /* #blogSinglePost .tox .tox-statusbar__right-container .tox:not([dir=rtl]) .tox-statusbar__branding {
     @apply
       hidden
@@ -882,8 +886,7 @@ main#blogSinglePost section .rendered-output p{
 #homeTopBarID::before {
   content: '';
   position: absolute;
-  -webkit-clip-path: polygon(0 0%, 100% 0%, 100% 100%, 5% 100%);
-          clip-path: polygon(0 0%, 100% 0%, 100% 100%, 5% 100%);
+  clip-path: polygon(0 0%, 100% 0%, 100% 100%, 5% 100%);
   /* width: 124rem; */
   width: 89%;
   height: 3.6rem;
@@ -1304,18 +1307,15 @@ main#blogSinglePost section .rendered-output p{
 
 @keyframes slideUp{
   0%{
-    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
-            clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+    clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
   }
 
   50%{
-    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
-            clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
+    clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
   }
 
   100%{
-    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
-            clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+    clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
   }
 }
 
@@ -1496,18 +1496,15 @@ main#blogSinglePost section .rendered-output p{
 
 @keyframes slideUp{
   0%{
-    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
-            clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+    clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
   }
 
   50%{
-    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
-            clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
+    clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
   }
 
   100%{
-    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
-            clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+    clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
   }
 }
 
@@ -1521,18 +1518,15 @@ main#blogSinglePost section .rendered-output p{
 
 @keyframes slideUp{
   0%{
-    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
-            clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+    clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
   }
 
   50%{
-    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
-            clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
+    clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
   }
 
   100%{
-    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
-            clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+    clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
   }
 }
 
@@ -1699,7 +1693,6 @@ progress#file {
 .menu-item .nav-dropdown{
   position: absolute;
   top: 6.8rem;
-  width: -webkit-max-content;
   width: max-content;
 }
 
@@ -3640,6 +3633,10 @@ textarea#comments{
   right: 0px;
 }
 
+.-left-2{
+  left: -0.5rem;
+}
+
 .bottom-0{
   bottom: 0px;
 }
@@ -4122,10 +4119,6 @@ textarea#comments{
   height: 2rem;
 }
 
-.h-auto{
-  height: auto;
-}
-
 .h-full{
   height: 100%;
 }
@@ -4342,18 +4335,15 @@ textarea#comments{
 
 @keyframes slideUp{
   0%{
-    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
-            clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
+    clip-path: polygon(0% 100%, 100% 100%, 100% 100%, 0% 100%);
   }
 
   50%{
-    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
-            clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
+    clip-path: polygon(0% 100%, 100% 100%, 100% 50%, 0% 50%);
   }
 
   100%{
-    -webkit-clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
-            clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
+    clip-path: polygon(0% 100%, 100% 100%, 100% 0%, 0% 0%);
   }
 }
 
@@ -5076,6 +5066,10 @@ textarea#comments{
 
 .pb-12{
   padding-bottom: 3rem;
+}
+
+.pb-16{
+  padding-bottom: 4rem;
 }
 
 .pb-2{

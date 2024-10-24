@@ -73,13 +73,13 @@ export default function Sidebar() {
                     {/* Navigation */}
                     <ul className="md:flex-col md:min-w-full flex flex-col list-none">
                         <li className="items-center">
-                            <Link className={"text-xs uppercase py-3 font-bold block " + (window.location.href.indexOf("/admin/dashboard") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/dashboard">
-                                <i className={"fas fa-user mr-2 text-sm " + (window.location.href.indexOf("/admin/dashboard") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Dashboard
+                            <Link className={"uppercase py-3 text-xl font-semibold block " + (window.location.href.indexOf("/admin/dashboard") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/dashboard">
+                                <i className={"fas fa-user mr-2 text-xl " + (window.location.href.indexOf("/admin/dashboard") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Dashboard
                             </Link>
                         </li>
 
                         <li className="items-center">
-                            <Link className={"text-xs uppercase py-3 font-bold block " + (window.location.href.indexOf("/admin/blog/manage") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/blog/manage">
+                            <Link className={"uppercase py-3 text-xl font-semibold block " + (window.location.href.indexOf("/admin/blog/manage") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/blog/manage">
                                 <i className={"fas fa-book mr-2 text-sm " + (window.location.href.indexOf("/admin/blog/manage") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}All Posts
                             </Link>
                         </li>

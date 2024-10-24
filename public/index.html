@@ -65,7 +65,8 @@
      
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
-    <!--
+    
+    <!--    
       This HTML file is a template.
       If you open it directly in the browser, you will see an empty page.
 
@@ -75,7 +76,8 @@
       To begin the development, run `npm start` or `yarn start`.
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
-    
+        
+    <!--Start of Change Header type onScroll -->
     <script>
         function myFunction() {
             let scroll = window.scrollY;
@@ -83,21 +85,24 @@
             let foundHeader = document.getElementById('header');
             let foundHomeHeader = document.getElementById('#homeHeader');
             let beforePseudoElement = document.querySelector('.mobile-nav .hamburger span'); 
-            
+                           
+           
             if (scroll > 5) {
                 foundHeader?.classList.add('sticky-header');
                 foundHomeHeader?.classList.add('sticky-header');
                 foundScrollbar?.classList.add('no-scrollbar');
                 beforePseudoElement?.style.setProperty('--before-bg-color', "white");
-                beforePseudoElement?.style.setProperty('--after-bg-color', "white");
+                beforePseudoElement?.style.setProperty('--after-bg-color', "white");                      
             } else {
                 foundHeader?.classList.remove('sticky-header');
                 foundHomeHeader?.classList.remove('sticky-header');
                 foundScrollbar?.classList.remove('no-scrollbar');
                 beforePseudoElement?.style.setProperty('--before-bg-color', "black");
                 beforePseudoElement?.style.setProperty('--after-bg-color', "black");
-           };
-        };  
+            };
+        }; 
+        myFunction();
     </script>
+    <!--End of Change Header type onScroll -->
   </body>
 </html>

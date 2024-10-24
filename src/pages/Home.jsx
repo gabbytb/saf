@@ -15,7 +15,7 @@ const Home = () => {
 
 
     const tawkMessengerRef = useRef();
-
+    
 
     // console.log('WINDOW LOCATION = ', window.location);
     // console.log('WINDOW LOCATION PATHNAME = ', window.location.pathname);
@@ -34,11 +34,13 @@ const Home = () => {
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
 
-
     
+
     // const onLoad = () => {
     //   console.log('onLoad works!');
     // };
+
+
 
     const handleMinimize = () => {
       tawkMessengerRef.current.minimize();
@@ -55,7 +57,7 @@ const Home = () => {
           {/* <Footer /> */}
 
 
-          <main ref={tawkMessengerRef}>
+          <main>
               <div className="relative pt-16 pb-32 flex content-center items-center justify-center min-h-screen-75">
                 <div
                   className="absolute top-0 w-full h-full bg-center bg-cover"
@@ -698,7 +700,12 @@ const Home = () => {
           {/* <Footer /> */}
 
           {/* Production Data Supplied */}
-          <TawkMessengerReact propertyId="644562484247f20fefed482e" widgetId="1gungfrgj" onClick={handleMinimize} />
+          <TawkMessengerReact propertyId="644562484247f20fefed482e" 
+              widgetId="1gungfrgj" 
+              onClick={handleMinimize}
+              ref={tawkMessengerRef}             
+          />
+          
           {/* onLoad={onLoad} */}
           {/* Production Data Supplied */}
         </>

@@ -82,7 +82,7 @@
     --color-lighter-gray: rgb(108, 130, 163);  
     --color-lightest-gray: rgb(174, 185, 204);
     --admin-thead-bg-color: rgba(249, 250, 251, 1);
-
+    
     --sw-gray: hsla(0, 0%, 100%, 0.3);
     --sw-dark-blue: rgba(24, 26, 27, 0.3);
 
@@ -203,14 +203,17 @@
       h-16
       border-b
     ;
-  }
+  };
 }
 
 
 @layer components {
 
   /* ********************  LOGIN  ******************** */
-  
+  /* .widget-visible {
+    background-color: #1403a8 !important;
+  } */
+
   /* #blogSinglePost .tox .tox-statusbar__right-container .tox:not([dir=rtl]) .tox-statusbar__branding {
     @apply
       hidden
@@ -1902,6 +1905,7 @@
 
 
 @layer utilities {
+
   .pause {
     animation-play-state: paused;
   }
