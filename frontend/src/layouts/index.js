@@ -1,5 +1,5 @@
 import SignUp from "./SignUp";
-import VerifySignUp from "./VerifySignup";
+import VerifySignUp from "./VerifySignUp";
 import SignIn from "./SignIn";
 
 import Dashboard from "./Dashboard";

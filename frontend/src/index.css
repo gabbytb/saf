@@ -188,7 +188,7 @@
   thead {
     @apply
       /* bg-blue-900 */
-      bg-skin-admin-thead-bg 
+      /* bg-skin-admin-thead-bg */
       text-black
       text-10xl
       font-black
