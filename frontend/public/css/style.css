@@ -659,7 +659,6 @@ tr {
 thead{
   display: table-header-group;
   height: 4rem;
-  background-color: var(--admin-thead-bg-color);
   font-size: 1.3rem;
   font-weight: 900;
   letter-spacing: 0.06em;
