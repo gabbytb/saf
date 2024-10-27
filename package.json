@@ -1,17 +1,27 @@
 {
   "name": "saf",
   "version": "1.0.0",
-  "description": "RUN SERVER & CLIENT-SIDE SIMULTANEOUSLY.",
-  "scripts": {
-    "start": "concurrently \"npm start --prefix backend\" \"serve -s frontend/build\"",
-    "build": "concurrently \"npm start --prefix backend\" \"npm start --prefix frontend\"",    
+  "description": "REACHING OUT TO GREAT MINDS.",
+  "scripts": {    
+    "start": "concurrently \"npm start --prefix backend\" \"npm start --prefix frontend\"",    
+    "build": "concurrently \"npm start --prefix backend\" \"serve -s frontend/build\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/gabbytb/saf.git"
   },
-  "keywords": [],
+  "keywords": [
+    "MongoDB",
+    "mongoose",
+    "express js",
+    "react js",
+    "node js",
+    "axios",
+    "tailwindcss",
+    "serve",
+    "concurrently"
+  ],
   "author": "OYEBANJI GABRIEL IDOWU",
   "license": "ISC",
   "bugs": {
