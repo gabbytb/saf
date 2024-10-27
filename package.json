@@ -1,7 +1,7 @@
 {
   "name": "saf",
   "version": "1.0.0",
-  "description": "RUN SERVER-SIDE & CLIENT-SIDE & SIMULTANEOUSLY.",
+  "description": "RUN SERVER & CLIENT-SIDE SIMULTANEOUSLY.",
   "scripts": {
     "start": "concurrently \"npm start --prefix backend\" \"serve -s frontend/build\"",
     "build": "concurrently \"npm start --prefix backend\" \"npm start --prefix frontend\"",    
