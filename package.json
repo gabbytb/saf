@@ -4,6 +4,7 @@
   "description": "RUN SERVER-SIDE & CLIENT-SIDE & SIMULTANEOUSLY.",
   "scripts": {
     "start": "concurrently \"npm start --prefix backend\" \"serve -s frontend/build\"",
+    "serve": "concurrently \"npm start --prefix backend\" \"npm start --prefix frontend\"",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
