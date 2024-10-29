@@ -1,34 +1,30 @@
-const mongoose = require("mongoose");
-
-
-
-
 const DB_Connection = async (username, password) => {
-
-    // const emoji = process.env.emoji;
-    const db = require("../models");
-
+    
+    const mongoose = require("mongoose");    
+    const db = require("../models");    
+    const { smiley } = process.env;
 
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     // DATABASE:- Connection
-    ////////////////////////////////////////////////////////////////////////////////////////////////////////////    
-    var DB_URI = db.url || `mongodb+srv://${username}:${password}@safdb.71th1.mongodb.net/?retryWrites=true&w=majority`;
-    // var dbURI = db.url === db.url ? db.url : null;
-    // +''+dbURI;
-    // const DB_URI = linkURI 
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    var connType = db.url;
+    var DB_URI = connType+smiley || `mongodb+srv://${username}:${password}@safdb.71th1.mongodb.net/?retryWrites=true&w=majority`;   ;
+
 
     try {
         await mongoose.set("strictQuery", false);
         await mongoose.connect(DB_URI);
         console.log("***********************************************",
-                    "\n*********     DATABASE CONNECTION     *********",
+                    "\n******       DATABASE CONNECTION        *******",
                     `\n***********************************************`,
-                    `\n\nCONNECTED TO: ${DB_URI}`,
+                    `\n\nCONNECTED TO DATABASE: ${DB_URI}`,
                     "\n***********************************************",
-                    "\n***********************************************\n\n");
+                    "\n***********************************************\n\n");                
     } catch(error) {
         console.log("Could not connect to database!", error);
-    }
+    };
+
+
     // mongoose.connect(DB_URI)
     // .then(() => console.log("DATABASE:", db.url + "\n***********************************************\n***********************************************\n\n"))
     // .catch((err) => console.error(err));
@@ -43,6 +39,5 @@ const DB_Connection = async (username, password) => {
     // db.mongoose.connect(DB_URI);
     // ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 };
-
 
 module.exports = DB_Connection;

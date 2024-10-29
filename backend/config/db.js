@@ -1,9 +1,4 @@
-// const { smiley } = process.env;
-const { emoji } = process.env;
-
-
-
-
+const emoji = process.env.emoji;
 
 module.exports = {
     url: emoji || null

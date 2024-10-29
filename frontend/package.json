@@ -1,5 +1,6 @@
 {
-  "name": "samuelakinolafoundation",
+  "name": "fnf", 
+  "description": "REACHING OUT TO GREAT MINDS.",
   "version": "0.1.0",
   "private": true,
   "dependencies": {

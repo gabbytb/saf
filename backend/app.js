@@ -1,8 +1,19 @@
 const express = require("express");
 const cors = require('cors');
-const DB_Connection = require("./config/dbConfig");
 require("dotenv").config();
-const { port } = process.env;
+const USERNAME = process.env.uLog || null;
+const PASSWORD = process.env.uPwd || null;
+const port = process.env.port || null;
+
+
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// =======================================================================================================//
+// CONFIG ===========================================================================================//
+// =======================================================================================================//
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// const DB_Connection = require("./config/dbLocalConfig");
+const DB_Server_Connection = require("./config/dbServerConfig");
 
 
 
@@ -16,9 +27,8 @@ const app = express();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // 2. DATABASE:-  Connection
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// const USERNAME = process.env.DB_USERNAME;
-// const PASSWORD = process.env.DB_PASSWORD;
-DB_Connection();
+// DB_Connection();
+DB_Server_Connection(USERNAME, PASSWORD);
 
 
 
@@ -74,7 +84,6 @@ require("./routes/user.routes")(app);
 require("./routes/role.routes")(app);
 require("./routes/blog.routes")(app);
 require("./routes/image.routes")(app);
-require("./routes/product.routes")(app);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
@@ -92,8 +101,8 @@ let server = app.listen(port, process.env.IP, () => {
     console.log("***********************************************",
                 "\n*********      SERVER CONNECTION      *********",
                 `\n***********************************************`,
-                `\n\nSERVER URL(:PORT): http://127.0.0.1:${port}`,
-                `\nINTERNET PROTOCOL: ${family}`);
+                `\n\nINTERNET PROTOCOL: ${family}`,
+                `\nLISTENING ON PORT: ${port}`);
                 
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////

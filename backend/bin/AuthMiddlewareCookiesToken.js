@@ -14,7 +14,7 @@ module.exports.userVerification = (req, res) => {
     const token = req.cookies.token
     if (!token) {
         return res.json({ success: false, message: "Invalid token" })
-    }
+    };
 
     jwt.verify(token, secretKey, async (err, data) => {
         if (err) {
@@ -28,5 +28,5 @@ module.exports.userVerification = (req, res) => {
                 return res.json({ success: false, message: "Invalid token" })
             }
         }
-    })
+    });
 }

@@ -23,20 +23,16 @@ export default function CardAllStaffs({ color }) {
     // ****************************************************************************
     const [allStaffs, setAllStaffs] = useState([]);
     // console.log("ALL STAFFS: ", allStaffs);
-    const [totalApprovedStaffs, setTotalApprovedStaffs] = useState();
-    const [totalPendingStaffs, setTotalPendingStaffs] = useState();
-    const [totalRejectedStaffs, setTotalRejectedStaffs] = useState();
 
 
-    
-    // eslint-disable-next-line
     const [totalAdminUsers, setTotalAdminUsers] = useState(null);
-    // console.log("TOTAL USERS: ", totalAdminUsers);
-    const [totalApprovedAdminUsers, setTotalApprovedAdminUsers] = useState(null);
-    console.log("TOTAL APPROVED USERS: ", totalApprovedAdminUsers);
+    // console.log("TOTAL ADMIN USERS: ", totalAdminUsers);
+        const [totalApprovedStaffs, setTotalApprovedStaffs] = useState(null);
+        const [totalPendingStaffs, setTotalPendingStaffs] = useState(null);
+        const [totalRejectedStaffs, setTotalRejectedStaffs] = useState(null);
+
 
     const [totalPages, setTotalPages] = useState(0);
-
     const [currentPage, setCurrentPage] = useState(1);
     const limit = 10; // Number of items per page
     const leftArrow = "<", rightArrow = ">";
@@ -532,9 +528,8 @@ export default function CardAllStaffs({ color }) {
                     </div>
                     {/* Pagination controls */}
                 </div>
-                <Suspense fallback={<div>Loading...</div>}>
-                  {/* <CardAllApprovedStaffs activeDisplay={activeDisplay} approvedAdminUsers={totalApprovedAdminUsers} /> */}                   
-                  <CardAllApprovedStaffs activeDisplay={activeDisplay} approvedAdminUsers={() => setTotalApprovedAdminUsers(totalApprovedAdminUsers)} />
+                <Suspense fallback={<div>Loading...</div>}>                
+                  <CardAllApprovedStaffs activeDisplay={activeDisplay} />
                 </Suspense>        
                 <Suspense fallback={<div>Loading...</div>}>                            
                   <CardAllPendingStaffs activeDisplay={activeDisplay} />

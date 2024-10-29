@@ -1,7 +1,7 @@
 {
   "name": "saf",
   "version": "1.0.0",
-  "description": "REACHING OUT TO GREAT MINDS.",
+  "description": "MERN STACK:- MongoDB / Express js / React js / Node js",
   "scripts": {    
     "start": "concurrently \"npm start --prefix backend\" \"npm start --prefix frontend\"",    
     "build": "concurrently \"npm start --prefix backend\" \"serve -s frontend/build\"",
@@ -22,7 +22,7 @@
     "serve",
     "concurrently"
   ],
-  "author": "OYEBANJI GABRIEL IDOWU",
+  "author": "OYEBANJI GABRIEL I. (igabrieloyebanji@gmail.com)",
   "license": "ISC",
   "bugs": {
     "url": "https://github.com/gabbytb/saf/issues"
