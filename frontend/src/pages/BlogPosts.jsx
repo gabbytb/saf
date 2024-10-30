@@ -170,7 +170,7 @@ const BlogPosts = () => {
                         {/* POSTS LISTING */}    
                         {
                             allBlogPosts.length !== 0 ? 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-20 mx-28 sm:mx-8 lg:mx-16 flex-wrap">                                    
+                                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-20 mx-4 sm:mx-8 lg:mx-16 flex-wrap">                                    
                                     {
                                     
                                         allBlogPosts.map((post) => {                
