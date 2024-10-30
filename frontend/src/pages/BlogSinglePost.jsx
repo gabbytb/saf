@@ -158,9 +158,9 @@ const BlogSinglePost = () => {
                     <span>{leftArrow}</span>
                 </div>
 
-                <div class="mx-0 lg:mx-24 mt-32 lg:grid lg:grid-cols-28 gap-24">                       
+                <div class="xs:mx-0 sm:mx-24 lg:mx-8 mt-32 lg:grid lg:grid-cols-28 gap-20">                       
 
-                    <section className="p-0">   
+                    <section className="p-0 mb-24">   
                         <div className="max-w-full mx-auto flex flex-col items-center p-0">  
                                 
                                     {/* SINGLE POST PAGE */}           
@@ -232,7 +232,7 @@ const BlogSinglePost = () => {
 
 
 
-                    <aside className="xs:mt-24 sm:mt-24 lg:mt-0">
+                    <aside className="">
                         <div className="max-w-full mx-0">                        
                                     <div className="flex flex-wrap mx-auto gap-16">                            
                                         <h2 className="text-4xl font-black pb-2 tracking-tightened border-b-2 border-b-black w-full">Recent Posts</h2>
