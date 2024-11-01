@@ -13,7 +13,7 @@ import { Nav, HomeFooter, } from "../components";
 
 
 // ********************************* //
-// *** CONVERT URL STRING PARAMS *** // 
+// *** CONVERT DATE STRING PARAMS *** // 
 // ********************************* //
 const convertDate = (dateString) => {
     const date = new Date(dateString);
@@ -42,7 +42,7 @@ const BlogPosts = () => {
     // console.log('WINDOW LOCATION PATHNAME = ', window.location.pathname);
     // console.log('WINDOW LOCATION SEARCH = ', window.location.search);
 
-    
+
 
     // eslint-disable-next-line
     const [isLoading, setIsLoading] = useState(true);
