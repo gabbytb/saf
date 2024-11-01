@@ -3878,10 +3878,6 @@ textarea#comments{
   margin-bottom: 1.5rem;
 }
 
-.mb-64{
-  margin-bottom: 16rem;
-}
-
 .mb-8{
   margin-bottom: 2rem;
 }
@@ -4952,11 +4948,6 @@ textarea#comments{
   padding-right: 0.75rem;
 }
 
-.px-32{
-  padding-left: 8rem;
-  padding-right: 8rem;
-}
-
 .px-4{
   padding-left: 1rem;
   padding-right: 1rem;
@@ -5852,14 +5843,13 @@ textarea#comments{
 }
 
 @media (min-width: 601px){
-  .xs\:mx-0{
-    margin-left: 0px;
-    margin-right: 0px;
-  }
-
   .xs\:my-12{
     margin-top: 3rem;
     margin-bottom: 3rem;
+  }
+
+  .xs\:mt-0{
+    margin-top: 0px;
   }
 
   .xs\:flex{
@@ -5909,6 +5899,10 @@ textarea#comments{
 
   .sm\:mt-0{
     margin-top: 0px;
+  }
+
+  .sm\:mt-16{
+    margin-top: 4rem;
   }
 
   .sm\:block{
