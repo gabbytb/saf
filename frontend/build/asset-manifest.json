@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/static/css/main.e74412fb.css",
-    "main.js": "/static/js/main.df7b6351.js",
+    "main.css": "/static/css/main.5d9b1576.css",
+    "main.js": "/static/js/main.a12c9912.js",
     "static/js/453.ddbeb17b.chunk.js": "/static/js/453.ddbeb17b.chunk.js",
     "static/media/team-4-470x470.png": "/static/media/team-4-470x470.4ef82ef45a9598d24c4c.png",
     "static/media/BRFirmaCW-SemiBold.svg": "/static/media/BRFirmaCW-SemiBold.e669f8e5b93c979edfda.svg",
@@ -55,12 +55,12 @@
     "static/media/home-device-section.svg": "/static/media/home-device-section.6ddb14caf3451e07ab9e.svg",
     "static/media/dropdown.svg": "/static/media/dropdown.94deb0d847619fbc4400.svg",
     "static/media/return-pattern.svg": "/static/media/return-pattern.9a7b0eff4bbaef39673d.svg",
-    "main.e74412fb.css.map": "/static/css/main.e74412fb.css.map",
-    "main.df7b6351.js.map": "/static/js/main.df7b6351.js.map",
+    "main.5d9b1576.css.map": "/static/css/main.5d9b1576.css.map",
+    "main.a12c9912.js.map": "/static/js/main.a12c9912.js.map",
     "453.ddbeb17b.chunk.js.map": "/static/js/453.ddbeb17b.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.e74412fb.css",
-    "static/js/main.df7b6351.js"
+    "static/css/main.5d9b1576.css",
+    "static/js/main.a12c9912.js"
   ]
 }

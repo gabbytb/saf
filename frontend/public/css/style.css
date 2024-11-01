@@ -3755,9 +3755,9 @@ textarea#comments{
   margin-right: 3rem;
 }
 
-.mx-28{
-  margin-left: 7rem;
-  margin-right: 7rem;
+.mx-4{
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .mx-7{
@@ -3876,10 +3876,6 @@ textarea#comments{
 
 .mb-6{
   margin-bottom: 1.5rem;
-}
-
-.mb-64{
-  margin-bottom: 16rem;
 }
 
 .mb-8{
@@ -4393,10 +4389,6 @@ textarea#comments{
   grid-template-columns: repeat(2, minmax(0, 1fr));
 }
 
-.grid-cols-28{
-  grid-template-columns: 68% 1fr;
-}
-
 .grid-cols-3{
   grid-template-columns: repeat(3, minmax(0, 1fr));
 }
@@ -4489,8 +4481,8 @@ textarea#comments{
   gap: 0.5rem;
 }
 
-.gap-24{
-  gap: 6rem;
+.gap-20{
+  gap: 5rem;
 }
 
 .gap-3{
@@ -4956,11 +4948,6 @@ textarea#comments{
   padding-right: 0.75rem;
 }
 
-.px-32{
-  padding-left: 8rem;
-  padding-right: 8rem;
-}
-
 .px-4{
   padding-left: 1rem;
   padding-right: 1rem;
@@ -5101,10 +5088,6 @@ textarea#comments{
 
 .pl-10{
   padding-left: 2.5rem;
-}
-
-.pl-16{
-  padding-left: 4rem;
 }
 
 .pl-3{
@@ -5865,6 +5848,10 @@ textarea#comments{
     margin-bottom: 3rem;
   }
 
+  .xs\:mt-0{
+    margin-top: 0px;
+  }
+
   .xs\:flex{
     display: flex;
   }
@@ -5876,11 +5863,21 @@ textarea#comments{
   .xs\:basis-full{
     flex-basis: 100%;
   }
+
+  .xs\:px-0{
+    padding-left: 0px;
+    padding-right: 0px;
+  }
 }
 
 @media (min-width: 769px){
   .sm\:order-none{
     order: 0;
+  }
+
+  .sm\:mx-24{
+    margin-left: 6rem;
+    margin-right: 6rem;
   }
 
   .sm\:mx-8{
@@ -5902,6 +5899,10 @@ textarea#comments{
 
   .sm\:mt-0{
     margin-top: 0px;
+  }
+
+  .sm\:mt-16{
+    margin-top: 4rem;
   }
 
   .sm\:block{
@@ -5954,6 +5955,14 @@ textarea#comments{
     margin-bottom: calc(4rem * var(--tw-space-y-reverse));
   }
 
+  .sm\:pl-16{
+    padding-left: 4rem;
+  }
+
+  .sm\:pr-12{
+    padding-right: 3rem;
+  }
+
   .sm\:text-35xl\/tight{
     font-size: 6.4rem;
     line-height: 1.25;
@@ -5970,14 +5979,14 @@ textarea#comments{
     margin-right: 4rem;
   }
 
-  .lg\:mx-24{
-    margin-left: 6rem;
-    margin-right: 6rem;
-  }
-
   .lg\:mx-6{
     margin-left: 1.5rem;
     margin-right: 1.5rem;
+  }
+
+  .lg\:mx-8{
+    margin-left: 2rem;
+    margin-right: 2rem;
   }
 
   .lg\:my-5{
@@ -6063,6 +6072,10 @@ textarea#comments{
 
   .lg\:basis-5\/12{
     flex-basis: 41.666667%;
+  }
+
+  .lg\:grid-cols-28{
+    grid-template-columns: 68% 1fr;
   }
 
   .lg\:flex-row{

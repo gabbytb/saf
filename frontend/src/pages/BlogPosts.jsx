@@ -10,6 +10,11 @@ import { Nav, HomeFooter, } from "../components";
 
 
 
+
+
+// ********************************* //
+// *** CONVERT URL STRING PARAMS *** // 
+// ********************************* //
 const convertDate = (dateString) => {
     const date = new Date(dateString);
 
@@ -24,6 +29,8 @@ const convertDate = (dateString) => {
 
     return date.toLocaleString('en-GB', options);
 };
+// ******************************** //
+// ******************************** //
 
 
 
@@ -35,17 +42,13 @@ const BlogPosts = () => {
     // console.log('WINDOW LOCATION PATHNAME = ', window.location.pathname);
     // console.log('WINDOW LOCATION SEARCH = ', window.location.search);
 
-
-
-
+    
 
     // eslint-disable-next-line
     const [isLoading, setIsLoading] = useState(true);
     
     
 
-
-    
     // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL BLOG POSTS
     // ****************************************************************************
@@ -65,6 +68,7 @@ const BlogPosts = () => {
 
 
 
+
    
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
@@ -74,7 +78,6 @@ const BlogPosts = () => {
         // *************************************************************************************************************
         // Function:-  CONDITIONAL LOGIC TO HANDLE PAGE URL RE-DIRECT, and SET PAGE TITLE FOR EACH INDIVIDUAL PAGE
         // *************************************************************************************************************            
-        window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
         if (currentPage > 1 ) {                                           
             const pageTitle = `Blog News - Page ${currentPage}`, 
                   siteTitle = "Samuel Akinola Foundation";
@@ -98,12 +101,15 @@ const BlogPosts = () => {
         };
      
         async function fetchAllPublishedBlogPosts() {
-                const limit = 10; // Number of items per page  
-                var status = 'published';
-                var sort = 'recent';
+            
+            window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+                
+            const limit = 10; // Number of items per page  
+            var status = 'published';
+            var sort = 'recent';
               
-                await api.get(`/api/v1/admin/blogs/manage?page=${currentPage}&limit=${limit}&status=${status}&sort=${sort}`)
-                .then((response) => {
+            await api.get(`/api/v1/admin/blogs/manage?page=${currentPage}&limit=${limit}&status=${status}&sort=${sort}`)
+            .then((response) => {
                         const { success, data, message } = response.data;
                         const { allBlogPosts, pagination } = data;
         
@@ -116,34 +122,26 @@ const BlogPosts = () => {
                                                     
                         setTotalBlogPosts(pagination?.postsRecord);
                         setTotalPages(pagination?.lastPage);                           
-                })
-                .catch((error) => {
+            })
+            .catch((error) => {
                     console.log("Error fetching data: ", error);
-                })
-                .finally(() => {
+            })
+            .finally(() => {
                     setIsLoading(false);
-                });           
+            });           
         };
         var timerID = setTimeout(fetchAllPublishedBlogPosts, 400);   // Delay execution of findAllStaffs by 1800ms
         return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
         };                                               
      
-    }, [currentPage]); // Fetch data when currentPage changes and update URL with /page/currentPage value
-   
-    
-
-
-
+    }, [currentPage]); // Fetch data when currentPage changes and update URL with /page/currentPage value    
     // *************************** //
-    // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
- 
-    
 
 
     // ******************************** //
-    // *** FORMAT URL STRING PARAMS *** // 
+    // ***    HANDLE PAGE CHANGE    *** //
     // ******************************** //
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -162,7 +160,7 @@ const BlogPosts = () => {
 
             <main id="blogPostsID" className="container mx-auto">
                 <div className="mx-12 lg:mx-16 mt-36 mb-28 grid">                     
-                    <div className="mx-auto flex flex-col items-center pl-16 pr-12">  
+                    <div className="mx-auto flex flex-col items-center xs:px-0 sm:pl-16 sm:pr-12">  
 
                         <h1 className="text-4xl font-black mb-32 mt-4">RECENT POSTS</h1>   
            
@@ -170,12 +168,12 @@ const BlogPosts = () => {
                         {/* POSTS LISTING */}    
                         {
                             allBlogPosts.length !== 0 ? 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-20 mx-4 sm:mx-8 lg:mx-16 flex-wrap">                                    
+                                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-20 mx-auto sm:mx-8 lg:mx-16 flex-wrap">                                    
                                     {
                                     
                                         allBlogPosts.map((post) => {                
                                             return (                                        
-                                                    <div key={post._id} className="self-stretch p-2 mb-12">
+                                                    <div key={post._id} className="self-stretch mb-12">
                                                         <div className="rounded shadow-md h-full">
                                                             {/* <Link to={`/blog/${formatUrl(post.url)}`}> */}
                                                             <Link to={`/blog/${post.uri}`}>

@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require('cors');
 require("dotenv").config();
-const USERNAME = process.env.uLog || null;
-const PASSWORD = process.env.uPwd || null;
-const port = process.env.port || null;
+const USERNAME = process.env.uLog || 'saf';
+const PASSWORD = process.env.uPwd || 'pwd';
+const port = process.env.port || 8080;
 const ip = process.env.IP || '192.168.98.113';
 
 

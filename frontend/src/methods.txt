@@ -27,3 +27,11 @@
     // Usage example
     // const token = JSON.parse(getCookie('cookieToken')); // Replace 'authToken' with the name of your cookie
     // console.log('Token from cookie:', token);
+
+
+
+
+
+
+     mb-64 px-32
+     
