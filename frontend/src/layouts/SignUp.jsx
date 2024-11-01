@@ -230,7 +230,9 @@ function SignUp() {
                 </div>
                 {/* PAGE NAV */}
 
-                <form id="signUpForm" className='max-w-[400px] border flex flex-col bg-white w-full mx-auto mt-14 mb-12 rounded-3xl bg-skin-signup-signin-bg pt-2 pb-10 px-10' onSubmit={handleFormSubmission}>
+                <div class="flex justify-center items-center w-full px-8">
+                    <form id="signUpForm" className='max-w-[400px] border flex flex-col bg-white w-full mx-auto mt-14 mb-12 rounded-3xl bg-skin-signup-signin-bg pt-2 pb-10 px-10' onSubmit={handleFormSubmission}>
+
                                             
                     {/* PAGE ICON */}
                     <div className="flex justify-center">
@@ -321,7 +323,8 @@ function SignUp() {
                     </div>
                     {/* Success Message */}
 
-                </form>
+                    </form>
+                </div>
             </div>
         </div>
     );
