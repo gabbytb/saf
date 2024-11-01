@@ -23,7 +23,7 @@ export default function Sidebar() {
                 <div className="md:flex-col md:items-stretch md:min-h-full md:flex-nowrap px-0 flex flex-wrap items-center justify-between w-full mx-auto">
                    
                     {/* Toggler */}
-                    <button className="w-12 cursor-pointer text-black opacity-50 mr-32 pl-0 md:hidden md:mr-0 px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent" type="button" onClick={() => setCollapseShow("bg-white m-2 py-3 px-6")}>
+                    <button className="w-12 cursor-pointer text-black opacity-50 mr-14 sm:mr-32 pl-0 md:hidden md:mr-0 px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent" type="button" onClick={() => setCollapseShow("bg-white m-2 py-3 px-6")}>
                         <i className="fas fa-bars"></i>
                     </button>
                     {/* Brand */}
@@ -31,7 +31,7 @@ export default function Sidebar() {
                         <img src={brandOfficialLogo} alt="brand logo" />
                     </Link>
                     {/* Logged-in User */}
-                    <ul className="w-24 m-0 md:hidden justify-end items-center flex flex-nowrap list-none">
+                    <ul className="w-32 sm:w-24 m-0 md:hidden justify-end items-center flex flex-nowrap list-none">
                         <li className="inline-block relative items-center">
                             <NotificationDropdown />
                         </li>
