@@ -73,56 +73,56 @@ export default function Sidebar() {
                     {/* Navigation */}
                     <ul className="md:flex-col md:min-w-full flex flex-col list-none">
                         <li className="items-center">
-                            <Link className={"uppercase py-3 text-xl font-semibold block " + (window.location.href.indexOf("/admin/dashboard") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/dashboard">
-                                <i className={"fas fa-user mr-2 text-xl " + (window.location.href.indexOf("/admin/dashboard") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Dashboard
+                            <Link className={"uppercase py-3 text-xl font-bold block " + (window.location.href.indexOf("/admin/dashboard") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/dashboard">
+                                <i className={"fas fa-user mr-4 text-2xl " + (window.location.href.indexOf("/admin/dashboard") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Dashboard
                             </Link>
                         </li>
 
                         <li className="items-center">
-                            <Link className={"uppercase py-3 text-xl font-semibold block " + (window.location.href.indexOf("/admin/blog/manage") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/blog/manage">
-                                <i className={"fas fa-book mr-2 text-sm " + (window.location.href.indexOf("/admin/blog/manage") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}All Posts
+                            <Link className={"uppercase py-3 text-xl font-bold block " + (window.location.href.indexOf("/admin/blog/manage") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/blog/manage">
+                                <i className={"fas fa-book mr-4 text-2xl " + (window.location.href.indexOf("/admin/blog/manage") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}All Posts
                             </Link>
                         </li>
 
                         <li className="items-center">
-                            <Link className={"text-xs uppercase py-3 font-bold block " + (window.location.href.indexOf("/admin/blog/manage/create") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/blog/manage/create">
-                                <i className={"fas fa-book mr-2 text-sm " + (window.location.href.indexOf("/admin/blog/manage/create") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Add New Post
+                            <Link className={"uppercase py-3 text-xl font-bold block " + (window.location.href.indexOf("/admin/blog/manage/create") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/blog/manage/create">
+                                <i className={"fas fa-book mr-4 text-2xl " + (window.location.href.indexOf("/admin/blog/manage/create") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Add New Post
+                            </Link>
+                        </li>
+
+                          {/*<li className="items-center">
+                            <Link className={"uppercase py-3 text-xl font-bold block " + (window.location.href.indexOf("/admin/tables") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/tables">
+                                <i className={"fas fa-table mr-4 text-2xl " + (window.location.href.indexOf("/admin/tables") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Tables
                             </Link>
                         </li>
 
                         <li className="items-center">
-                            <Link className={"text-xs uppercase py-3 font-bold block " + (window.location.href.indexOf("/admin/tables") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/tables">
-                                <i className={"fas fa-table mr-2 text-sm " + (window.location.href.indexOf("/admin/tables") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Tables
+                            <Link className={"uppercase py-3 text-xl font-bold block " + (window.location.href.indexOf("/admin/maps") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/maps">
+                                <i className={"fas fa-map-marked mr-4 text-2xl " + (window.location.href.indexOf("/admin/maps") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Maps
                             </Link>
-                        </li>
-
-                        <li className="items-center">
-                            <Link className={"text-xs uppercase py-3 font-bold block " + (window.location.href.indexOf("/admin/maps") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/maps">
-                                <i className={"fas fa-map-marked mr-2 text-sm " + (window.location.href.indexOf("/admin/maps") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Maps
-                            </Link>
-                        </li>
+                        </li>*/}
                     </ul>
 
 
 
-                    {/* Divider for Auth Layout Pages */}
-                    <hr className="my-4 md:min-w-full" />
-                    {/* Heading */}
-                    <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">Auth Layout Pages</h6>
-                    {/* Navigation */}
+                    {/* Divider for Auth Layout Pages
+                    <hr className="my-4 md:min-w-full" /> */}
+                    {/* Heading 
+                    <h6 className="md:min-w-full text-blueGray-500 text-xs uppercase font-bold block pt-1 pb-4 no-underline">Auth Layout Pages</h6>*/} 
+                    {/* Navigation 
                     <ul className="md:flex-col md:min-w-full flex flex-col list-none md:mb-4">
                         <li className="items-center">
-                            <Link className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block" to="/auth/login">
-                                <i className="fas fa-fingerprint text-blueGray-400 mr-2 text-sm"></i>{" "}Login
+                            <Link className="text-blueGray-700 hover:text-blueGray-500 text-xl uppercase py-3 font-bold block" to="/auth/login">
+                                <i className="fas fa-fingerprint text-blueGray-400 mr-4 text-2xl"></i>{" "}Login
                             </Link>
                         </li>
 
                         <li className="items-center">
-                            <Link className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block" to="/auth/register">
-                                <i className="fas fa-clipboard-list text-blueGray-300 mr-2 text-sm"></i>{" "}Register
+                            <Link className="text-blueGray-700 hover:text-blueGray-500 text-xl uppercase py-3 font-bold block" to="/auth/register">
+                                <i className="fas fa-clipboard-list text-blueGray-300 mr-4 text-2xl"></i>{" "}Register
                             </Link>
                         </li>
-                    </ul>
+                    </ul>*/}
 
                     
 
@@ -141,13 +141,14 @@ export default function Sidebar() {
                             </Link>
                         </li> */}
                         <li className="items-center">
-                            <Link className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block" to="/admin/users">
-                                <i className="fas fa-users text-blueGray-400 mr-2 text-sm"></i>{" "}Users
+                            <Link className="text-blueGray-700 hover:text-blueGray-500 text-xl uppercase py-3 font-bold block" to="/admin/users">
+                                <i className="fas fa-users text-blueGray-400 mr-4 text-2xl"></i>{" "}Users
                             </Link>
                         </li>
+
                         <li className="items-center">
-                            <Link className="text-blueGray-700 hover:text-blueGray-500 text-xs uppercase py-3 font-bold block" to="/admin/staffs">
-                                <i className="fas fa-user-circle text-blueGray-400 mr-2 text-sm"></i>{" "}Staffs
+                            <Link className="text-blueGray-700 hover:text-blueGray-500 text-xl uppercase py-3 font-bold block" to="/admin/staffs">
+                                <i className="fas fa-user-circle text-blueGray-400 mr-4 text-2xl"></i>{" "}Staffs
                             </Link>
                         </li>
                     </ul>

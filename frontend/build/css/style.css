@@ -4005,10 +4005,6 @@ textarea#comments{
   margin-top: 2rem;
 }
 
-.mr-8{
-  margin-right: 2rem;
-}
-
 .block{
   display: block;
 }
@@ -4117,6 +4113,10 @@ textarea#comments{
   height: 100vh;
 }
 
+.h-3{
+  height: 0.75rem;
+}
+
 .min-h-138{
   min-height: 78rem;
 }
@@ -4173,16 +4173,16 @@ textarea#comments{
   width: 5rem;
 }
 
-.w-24{
-  width: 6rem;
-}
-
 .w-3\/5{
   width: 60%;
 }
 
 .w-3\/6{
   width: 50%;
+}
+
+.w-32{
+  width: 8rem;
 }
 
 .w-36{
@@ -4227,10 +4227,6 @@ textarea#comments{
 
 .w-screen{
   width: 100vw;
-}
-
-.w-32{
-  width: 8rem;
 }
 
 .min-w-0{
@@ -5924,12 +5920,12 @@ textarea#comments{
     width: 50%;
   }
 
-  .sm\:w-full{
-    width: 100%;
-  }
-
   .sm\:w-24{
     width: 6rem;
+  }
+
+  .sm\:w-full{
+    width: 100%;
   }
 
   .sm\:max-w-xs{
