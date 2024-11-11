@@ -1,55 +1,55 @@
-const db = require("../models");
-const Image = db.images;
+// const db = require("../models");
+// const Image = db.images;
 
 
 
 
 
 
-exports.create = async (req, res) => {
+// exports.create = async (req, res) => {
 
-    const randNumAsImageObjectID = await Math.floor(910*Math.random());
-    const { id=randNumAsImageObjectID, file, featured } = req.body;
+//     const randNumID = await Math.floor(910*Math.random());
+//     const { id=randNumID, url, alt, featured } = req.body;
     
-    try {
+//     try {
              
-        // FORM VALIDATION:  "Necessary Fields for Payload."
-        if (!file) {
-            const errorResponseData = { 
-                success: false,
-                message: "No image was uploaded"
-            }
-            res.status(400).json(errorResponseData);
-            console.log("UPLOADING PRODUCT IMAGE: ", errorResponseData);
-            return; 
-        }
+//         // FORM VALIDATION:  "Necessary Fields for Payload."
+//         if (!url) {
+//             const errorResponseData = { 
+//                 success: false,
+//                 message: "No image was uploaded"
+//             }
+//             res.status(400).json(errorResponseData);
+//             console.log("UPLOADING POST IMAGE: ", errorResponseData);
+//             return; 
+//         };
 
-        const newImage = new Image ({
-            _id: id*randNumAsImageObjectID,        // This is to prevent Duplicate ID entries for New Objects
-            url: file,
-            featured: featured,
-        });
-
-        
-        const savedImage = await newImage.save();                     
-        console.log(`\n||-----------------------------------------------------||
-                    \n||-----      NEW => IMAGE SUCCESSFULLY SAVED      -----||
-                    \n||-----------------------------------------------------||
-                    \nIMAGE UPLOADED: "${savedImage.url}"  AS FEATURED IMAGE: "${savedImage.featured}"
-                    \n||-----------------------------------------------------||`);
+//         const newImage = new Image({
+//             _id: id*randNumAsImageObjectID,        // This is to prevent Duplicate ID entries for New Objects
+//             url: url.toLowerCase(),
+//             alt: alt,
+//             featured: featured,
+//         });
+       
+//         const savedImage = await newImage.save();                     
+//         console.log(`\n||-----------------------------------------------------||
+//                     \n||-----      NEW => IMAGE SUCCESSFULLY SAVED      -----||
+//                     \n||-----------------------------------------------------||
+//                     \nIMAGE UPLOADED: "${savedImage.url}"  AS FEATURED IMAGE: "${savedImage.featured}"
+//                     \n||-----------------------------------------------------||`);
 
                     
-        const responseData = {
-            success: true,
-            data: savedImage,
-            message: "Upload Successful!",
-        }
-        return res.status(201).json(responseData);
+//         const responseData = {
+//             success: true,
+//             data: savedImage,
+//             message: "Upload Successful!",
+//         };
+//         return res.status(201).json(responseData);
         
-    } catch (error) {
-        return res.status(500).json({ message: "INTERNAL SERVER ERROR: ", error: error.message });
-    }
-};
+//     } catch (error) {
+//         return res.status(500).json({ message: "INTERNAL SERVER ERROR: ", error: error.message });
+//     }
+// };
 
 
 

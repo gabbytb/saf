@@ -62,12 +62,14 @@ import CardAllRejectedStaffs from "./Cards/staffs/CardAllRejectedStaffs";
 
 import CardAllAccountDetails from "./Cards/CardAllAccountDetails";
 import NewBlogPost from "./Forms/NewBlogPost";
+import PostUploader from "./Forms/PostUploader";
 
 
 
 
 
 export {
+
     // PRELOADER
     Preloader,
     // PRELOADER
@@ -110,6 +112,7 @@ export {
 
     CardAllAccountDetails,
     NewBlogPost,
+    PostUploader,
     // IMPORTED COMPONENTS //
     
 

@@ -40,8 +40,54 @@ export const googleAnalytics = [
 //     },    
 // ]
 
-
-
+export const AfroStyles = [
+    {
+      id: 1,
+      title: "Model 1",
+      description:
+        "Wearing a crisp white shirt paired with perfectly fitted denim jeans and classic canvas",
+      alt: "First Image",
+      src: "https://images.unsplash.com/photo-1528991435120-e73e05a58897?auto=format&fit=crop&q=80&w=2787&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      id: 2,
+      title: "Model 2",
+      description:
+        "Elevate your style with this Ankara long sleeve shirt and trouser",
+      alt: "Second Image",
+      src: "https://images.unsplash.com/photo-1572495532056-8583af1cbae0?auto=format&fit=crop&q=80&w=2787&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      id: 3,
+      title: "Model 3",
+      description: "Elevate your style with Ankara dresses.",
+      alt: "Third Image",
+      src: "https://images.unsplash.com/photo-1607823489283-1deb240f9e27?auto=format&fit=crop&q=60&w=800&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjZ8fEFmcmljYW4lMjBmYXNoaW9ufGVufDB8fDB8fHww",
+    },
+    {
+      id: 4,
+      title: "Model 4",
+      description:
+        "Wearing a crisp white shirt paired with perfectly fitted denim jeans and classic canvas",
+      alt: "Fourth Image",
+      src: "https://images.unsplash.com/photo-1528991435120-e73e05a58897?auto=format&fit=crop&q=80&w=2787&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      id: 5,
+      title: "Model 5",
+      description:
+        "Elevate your style with this Ankara long sleeve shirt and trouser",
+      alt: "Fifth Image",
+      src: "https://images.unsplash.com/photo-1572495532056-8583af1cbae0?auto=format&fit=crop&q=80&w=2787&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+    },
+    {
+      id: 6,
+      title: "Model 6",
+      description: "Elevate your style with Ankara dresses.",
+      alt: "Sixth Image",
+      src: "https://images.unsplash.com/photo-1607823489283-1deb240f9e27?auto=format&fit=crop&q=60&w=800&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxzZWFyY2h8MjZ8fEFmcmljYW4lMjBmYXNoaW9ufGVufDB8fDB8fHww",
+    },
+];
 
 export const customersQuotes = [
     { 

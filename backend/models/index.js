@@ -1,6 +1,8 @@
-const brandDB = require("../config/db.js");
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
+const brandDB = require("../config/db.js");
+
+
 
 
 const db = {};

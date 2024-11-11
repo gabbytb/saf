@@ -10,26 +10,40 @@ import api from "../../api";
 const NewBlogPost = () => {
 
 
-    console.clear();
+    // console.clear();
 
     // localStorage.clear();
 
+
+
+
+
+    // ******************************************************** //
+    // ** MANAGE STATE OF:- Form Message and Form Submitted *** //
+    // ******************************************************** //
+    const [formMessage, setFormMessage] = useState(null);
+    // console.log("Create Attempt: ", formMessage);
     
+    // eslint-disable-next-line
+    const [formSubmitted, setFormSubmitted] = useState(false);
+    // console.log("Created Successful: ", formSubmitted);
+    
+ 
+
+
 
 
     // ********************************* //
     // *** PAYLOAD FOR NEW BLOG POST *** //
     // ********************************* //
-    // const { quill, quillRef } = useQuill();
-    // console.log('QUILL = ', quill); // undefined > Quill Object
-    // console.log('QUILL REF = ', quillRef); // { current: undefined } > { current: Quill Editor Reference }
-  
-
     const [post, setPost] = useState({
-        // _id: null, // Assuming you'll set this when fetching or creating a post
-        img: '',        
+        // _id: null, // Assuming you'll set this when fetching or creating a post        
         title: '',
+        description: ' ',
         excerpt: '',
+        images: [
+            { id: 98, url: '', alt: '', featured: false }
+        ],  // Initialize with one image
         // author: {
         //     img: '',
         //     name: '',
@@ -46,24 +60,59 @@ const NewBlogPost = () => {
     // ********************************* //
     // *** PAYLOAD FOR NEW BLOG POST *** //
     // ********************************* //
-    const [postDesc, setPostDesc] = useState({ description: ' ' });
-    console.log("*** Blog Description: ", postDesc);
-    
+  
 
 
 
 
-    // ******************************************************** //
-    // ** MANAGE STATE OF:- Form Message and Form Submitted *** //
-    // ******************************************************** //
-    const [formMessage, setFormMessage] = useState(null);
-    // console.log("Create Attempt: ", formMessage);
-    
-    // eslint-disable-next-line
-    const [formSubmitted, setFormSubmitted] = useState(false);
-    // console.log("Created Successful: ", formSubmitted);
+    // Handle changes to post data
+    const handlePostData = (e) => {
+        const { name, type, checked, } = e.target;    
+        const value = type === 'checkbox' ? !checked : e.target.value;
 
-    // Function to update the tags
+        setPost({
+            ...post,
+            [name]: value
+       });
+    };
+
+    // Handle changes to image data
+    const handleImageChange = (index, e) => {
+        const { name, value, type, checked } = e.target;
+
+        const newImages = [...post.images];
+        newImages[index] = {
+            ...newImages[index],
+            [name]: type === 'checkbox' ? checked : value
+        };
+
+        setPost({
+            ...post,
+            images: newImages
+        });
+    };
+
+    // Add another image input
+    const addImageInput = async () => {
+        
+        setPost({
+            ...post,           
+            images: [
+                ...post.images,
+                { url: '', alt: '', featured: false }
+            ]
+        });
+    };
+
+    // Function to update post description
+    const updateDescription = (content) => {   
+        setPost((prevPost) => ({
+            ...prevPost,
+            description: content,
+        }));
+    };
+
+    // Function to update post tags
     const updateTags = (newTags) => {
         setPost((prevPost) => ({
             ...prevPost,
@@ -71,7 +120,7 @@ const NewBlogPost = () => {
         }));
     };
 
-    // Function to update the categories
+    // Function to update post categories
     const updateCategories = (newCategories) => {
         setPost((prevPost) => ({
             ...prevPost,
@@ -79,25 +128,25 @@ const NewBlogPost = () => {
         }));
     };
 
-    // Function to update description
-    const updateDescription = (content) => {   
-        setPostDesc((prevPost) => ({
-            ...prevPost,
-            description: content,
-        }));
-    };
      
+
+
     // Function to format url appropriately
     const formatUrl = (uri) => {
         return uri.replace(/[^A-Z0-9]+/ig, "-");
     };
-    
+
+
+
     // Function to handle form submission
     const handlePostFormSubmission = async (e) => {  
-        const payload = {
-            img: post.img,
+        
+        e.preventDefault();
+
+        var payload = {
+            images: post.images,
             title: post.title,
-            description: postDesc.description,
+            description: post.description,
             excerpt: post.excerpt,
             uri: post.uri === '' ? formatUrl(post.title.toLowerCase()) : formatUrl(post.uri.toLowerCase()),
             // author: {
@@ -110,12 +159,9 @@ const NewBlogPost = () => {
             tags: post.tags,
             categories: post.categories, 
         };
-        e.preventDefault();
-
-
         await api.post('/api/v1/admin/blogs/manage/create', payload) // Update the URL to your API endpoint
         .then((response) => {
-            const { success, message } = response.data;
+            const { success, message, data } = response.data;
             var errMsg = document.querySelector('#newPostFormID .create_error'); 
             var successMsg = document.querySelector('#newPostFormID .create_success');
         
@@ -156,7 +202,9 @@ const NewBlogPost = () => {
                 // Perform These Actions
 
             } else {
-
+                // Log the response
+                console.log('Post created successfully:', data);
+    
                 // console.log("Success: ", success);
                 // console.log("Data: ", data);
                 // console.log("Message: ", message);
@@ -195,6 +243,13 @@ const NewBlogPost = () => {
 
 
 
+
+
+
+
+
+
+
     return (
         <div id="createArticle" className="relative flex flex-col min-w-0 break-words w-full mb-16 shadow-lg rounded-lg bg-blueGray-100 border-0">
             <div>
@@ -213,6 +268,7 @@ const NewBlogPost = () => {
 
                 <div className="flex-auto px-4 lg:px-10 py-10 pt-0">
                     {/* FORM FOR UPDATING USER DATA */}
+
                     <form id="newPostFormID" onSubmit={handlePostFormSubmission}>
                       
                         {/* Error Message */}
@@ -225,28 +281,7 @@ const NewBlogPost = () => {
                         <h6 className="text-gray-500 text-2xl mt-12 mb-12 font-black uppercase px-4">
                             {/* Create New Post */}
                         </h6>
-                        <div className="flex flex-wrap">                                                            
-
-                            {/* Image */}
-                            <div className="w-full lg:w-12/12 px-4">
-                                <div className="relative w-full mb-3">
-                                    <label
-                                        className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2"
-                                        htmlFor="img">
-                                        Post Image
-                                    
-                                        <input
-                                            type="text"
-                                            className="border-0 px-3 py-3 mt-3 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                                                         
-                                            id="img"
-                                            name="img"                                                                              
-                                            placeholder="Enter Image URL"
-                                            // value={post.title}
-                                            onChange={(e) => setPost({ ...post, img: e.target.value })}                                                                                                                                                
-                                        />
-                                    </label>
-                                </div>
-                            </div>
+                        <div className="flex flex-wrap">                                                                          
 
                             {/* Post Title */}
                             <div className="w-full lg:w-12/12 px-4">
@@ -263,7 +298,7 @@ const NewBlogPost = () => {
                                             name="title"                                                                              
                                             placeholder="Post Title"
                                             // value={post.title}
-                                            onChange={(e) => setPost({ ...post, title: e.target.value })}                                                                                                                                                
+                                            onChange={handlePostData}                                                                                                                                                
                                         />
                                     </label>
                                 </div>
@@ -284,7 +319,7 @@ const NewBlogPost = () => {
                                             id="uri"   
                                             name="uri"   
                                             value={post.uri === '' ? formatUrl(post.title.toLowerCase()) : formatUrl(post.uri.toLowerCase())}                                      
-                                            onChange={(e) => setPost({ ...post, uri: e.target.value })}                                           
+                                            onChange={handlePostData}                                           
                                         />
                                     </label>
                                 </div>
@@ -299,14 +334,15 @@ const NewBlogPost = () => {
                                         Description
                                                 
                                         <Editor
-                                            apiKey="b68jaid3qmtd8i45pcq2e32l0m0lxo2lt1kpnp4xv97kgppi" // Get your free API key from TinyMCE website
-                                            initialValue=""
+                                            apiKey='b68jaid3qmtd8i45pcq2e32l0m0lxo2lt1kpnp4xv97kgppi'                                                                            
                                             // id="description" 
                                             name="description"
                                             init={{                                                                                             
                                                 height: 300,
                                                 // menubar: true,
                                                 branding: false,
+                                                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                                                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
                                                 // plugins: [
                                                   // Core editing features
                                                   // 'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
@@ -323,8 +359,11 @@ const NewBlogPost = () => {
                                                 //  { value: 'Email', title: 'Email' },
                                                 // ],
                                                 // ai_request: (request, respondWith) => respondWith.string(() => Promise.reject('See docs to implement AI Assistant')),
-                                            }}                                            
-                                            onEditorChange={updateDescription}                                                                                                                                                                                                                                                                                                            
+                                            }}           
+                                            initialValue=""                        
+                                            onEditorChange={updateDescription}
+                                            id='description'                                                                                                                                                       
+                                            className='description'                                            
                                         />
                                     </label>
                                 </div>
@@ -345,11 +384,80 @@ const NewBlogPost = () => {
                                             name="excerpt"                                                             
                                             // placeholder="Post excerpt"
                                             // value={post.excerpt}
-                                            onChange={(e) => setPost({ ...post, excerpt: e.target.value })}                                              
+                                            onChange={handlePostData}                                              
                                             rows="3">
                                         </textarea>
                                     </label>
                                 </div>
+                            </div>
+
+                            {/* Featured Image */}
+                            <div className="w-full lg:w-12/12 px-4">
+                                <div className="relative w-full mb-3">
+                                    <label
+                                        className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2"
+                                        htmlFor="img">
+                                        Featured Image
+                                        
+
+                                        <input
+                                                type="text"
+                                                className="border-0 px-3 py-3 mt-3 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                                                         
+                                                id="img"
+                                                name="img"                                                                              
+                                                placeholder="Enter Image URL"                                             
+                                                onChange={handlePostData}
+                                                // onChange={(e) => updateTags(e.target.value.split(','))}                                                                                                
+                                        />                                        
+                                    </label>
+                                </div>
+                            </div>
+
+                            {/* Post Images: Dynamic image inputs */}
+                            <div>                   
+                                {
+                                    post.images.map((image, index) => (
+                                            <div key={index}>                                               
+                                                <div>
+                                                    <label>Image URL:
+                                                        <input
+                                                        type="text"
+                                                        name="url"
+                                                        value={image.url}
+                                                        onChange={(e) => handleImageChange(index, e)}
+                                                        />
+                                                    </label>
+                                                </div>
+                                                
+                                                
+                                                <div>
+                                                    <label>Image Alt:
+                                                        <input
+                                                        type="text"
+                                                        name="alt"
+                                                        value={image.alt}
+                                                        onChange={(e) => handleImageChange(index, e)}
+                                                        />
+                                                    </label>
+                                                </div>
+
+
+                                                <div>
+                                                    <label>Featured:
+                                                        <input
+                                                        type="checkbox"
+                                                        name="featured"                                                        
+                                                        checked={image.featured}
+                                                        onChange={(e) => handleImageChange(index, e)}
+                                                        />
+                                                    </label>
+                                                </div>
+                                            </div>
+                                    ))
+                                }
+                                <button type="button" onClick={addImageInput}>
+                                    Add Another Image
+                                </button>
                             </div>
 
                         </div>
@@ -416,7 +524,7 @@ const NewBlogPost = () => {
                                             className="border-0 px-3 py-3 mt-0 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-8 h-8 ease-linear transition-all duration-150"                                        
                                             id="isPublished"    
                                             name="isPublished"                                                                                  
-                                            onChange={(e) => setPost({ ...post, isPublished: e.target.type === 'checkbox' ? !e.target.checked : e.target.value })}                                                                                  
+                                            onChange={handlePostData}                                                                                  
                                         /> Save as Draft
 
                                 </label>                                                                                      
@@ -441,7 +549,7 @@ const NewBlogPost = () => {
                             </div>                           
                         </div>
                         {/* Success Message */}
-                    </form>
+                    </form>          
                 </div>                   
                 {/* </div>   */}
 

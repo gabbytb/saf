@@ -1,21 +1,28 @@
 module.exports = mongoose => {
-    
 
-    var imageSchema = new mongoose.Schema({
-        _id : {
-            type: Number,
-        },
-        url: {
-            type: String,
-        },
-        featured: {
-            type: Boolean,
-            // required: true,
-        },
-    }, { versionKey: false, timestamps: true, });
+    const { Schema } = mongoose;
 
+    var imageSchema = new Schema({
+        url: { 
+            type: String,        
+        },
+        alt: { 
+            type: String 
+        },
+        featured: { 
+            type: Boolean, 
+            default: false 
+        },
+        id: {
+            type: Number,    
+              
+        },
+    }, { versionKey: false, timestamps: true });
+
+
+
+    const Image = mongoose.model('Image', imageSchema);
     
-    const Image = mongoose.model("Image", imageSchema);
     return Image;
 
 };

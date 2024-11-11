@@ -11,9 +11,9 @@ const DB_Server_Connection = async (username, password) => {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     const connType = db.url;
     var DB_URI = connType+`${username}`+cc+`${password}`+dd+srvr+saved || `mongodb+srv://${username}:${password}@safdb.71th1.mongodb.net/?retryWrites=true&w=majority`;   
+    
+    try {        
 
-
-    try {
         await mongoose.set("strictQuery", false);
         await mongoose.connect(DB_URI);
         console.log("***********************************************",

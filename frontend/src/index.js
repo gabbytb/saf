@@ -5,6 +5,7 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 // import "./assets/styles/tailwind.css";
 import "@fortawesome/fontawesome-free/css/all.min.css"; 
+
 import { googleClient } from './constants';
 import App from './App';
 import reportWebVitals from './reportWebVitals';

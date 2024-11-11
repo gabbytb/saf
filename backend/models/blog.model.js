@@ -5,9 +5,25 @@ module.exports = mongoose => {
         _id: {
             type: Number,
         },
-        img: {
-            type: String,
-        },
+        images: [
+            { 
+                id: { 
+                    type: Number,
+                },
+                url: { 
+                    type: String,
+                }, 
+                featured: { 
+                    type: Boolean,
+                }, 
+                createdTime: { 
+                    type: Date,
+                },
+                updatedTime: { 
+                    type: Date,
+                },
+            },
+        ], // Reference to Image model
         title: {
             type: String,
         },

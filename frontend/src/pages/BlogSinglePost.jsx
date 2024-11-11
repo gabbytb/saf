@@ -1,9 +1,8 @@
 import { useEffect, useState, } from "react";
 import { Link, useParams, } from "react-router-dom";
-import { HomeFooter, Nav } from "../components";
+import { HomeFooter, Nav, } from "../components";
 import api from "../api";
-
-
+import PostDetailsSlider from "../components/Slider/PostDetailsSlider.js";
 
 
 
@@ -33,7 +32,6 @@ const BlogSinglePost = () => {
 
     const { slug } = useParams();
 
-    
     // eslint-disable-next-line
     const [isLoading, setIsLoading] = useState(true);
     // console.log("IS LOADING: ", isLoading);
@@ -144,42 +142,43 @@ const BlogSinglePost = () => {
     }, [currentPage]);
 
 
+
+
     async function updateComments() {
 
     };
+
+
+
+
+
+
 
 
     return (
         <div id="singlePostWrapper">
             <Nav />
 
-            <main id="blogSinglePost" className="container mx-auto">            
+            <main id="blogSinglePost" className="container mx-auto">                                       
                
-                <div className="mx-12 lg:mx-16 mt-36 mb-28 sm:grid">                     
-                    <div className="mx-auto w-full flex flex-col items-center xs:px-0 sm:pl-16 sm:pr-12">                
-                        <div className="w-full flex justify-center gap-2 xs:mt-0 sm:mt-16">
-                            <h1 className="text-2xl font-bold"><Link to={'/blog'}>Blog Post </Link></h1>
-                            <span>{leftArrow}</span>
-                        </div>
+                <div className="mx-12 lg:mx-16 mb-28 mt-16 flex sm:grid">                     
+                    <div className="mx-auto w-full flex flex-col items-center xs:px-0 sm:px-32">                
+                                        
+                        <PostDetailsSlider /> 
 
-                        <div class="w-full sm:mx-24 lg:mx-8 mt-32 lg:grid lg:grid-cols-28 gap-20">                       
+                        <div class="w-full sm:mx-24 lg:mx-8 mt-0 lg:grid lg:grid-cols-28 gap-28">                                             
 
                             <section className="p-0 mb-24">   
                                 <div className="max-w-full mx-auto flex flex-col items-center p-0">  
                                         
-                                            {/* SINGLE POST PAGE */}           
-                                            <div className="block w-full">
+                                    {/* SINGLE POST PAGE */}           
+                                    <div className="block w-full">
                                                     
                                                 <div className="self-stretch p-0 mb-0">
-                                                    <div className="rounded shadow-md h-full">                                              
-                                                        <img className="w-full m-0 rounded-t lazy" 
-                                                            // data-src="/assets/img/small-business.jpg"                                                  
-                                                            src={blogSinglePost?.img}                                     
-                                                            alt="post cover" 
-                                                        />                                       
+                                                    <div className="rounded shadow-md h-full">                                                                                                                                                 
                                                         <div className="px-11 pt-10 pb-20 flex flex-col gap-8">
                                                             <div className="font-semibold text-lg mb-2 border-gray-500 border-b-2 pb-2">
-                                                                <p className="text-slate-900 text-4xl/tight font-semibold capitalize">{blogSinglePost?.title}</p>
+                                                                <p className="text-slate-900 text-4xl/tight font-black capitalize">{blogSinglePost?.title}</p>
                                                                 <div className="mt-3 pb-1 text-10xl italic font-bold">{convertDate(blogSinglePost?.createdAt)}</div>
                                                             </div>
                                                             {/* <p class="text-slate-700 mb-1" title="Post Author">{blogSinglePost?.author?.name}</p> */}                                             
@@ -227,22 +226,18 @@ const BlogSinglePost = () => {
                                                     </div>
                                                 </div>
 
-                                            </div>
-                                            {/* SINGLE POST PAGE */}    
+                                    </div>
+                                    {/* SINGLE POST PAGE */}    
 
                                 </div>
                             </section>
 
-
-
-
                             <aside className="">
                                 <div className="max-w-full mx-0">                        
-                                            <div className="flex flex-wrap mx-auto gap-16">                            
-                                                <h2 className="text-4xl font-black pb-2 tracking-tightened border-b-2 border-b-black w-full">Recent Posts</h2>
-
-                                                {
-                                                    sidebarPosts.map((post) => {                
+                                    <div className="flex flex-wrap mx-auto gap-20 pt-10">                            
+                                        <h2 className="text-4xl capitalize font-black pb-2 tracking-tightened border-b-2 border-b-black w-full ">Recent Posts</h2>
+                                        {
+                                            sidebarPosts.map((post) => {                
                                                         return (                                        
                                                             <div key={post?._id} className="w-full sm:w-1/2 md:w-1/3 self-stretch p-0 mb-4">
                                                                 <div className="rounded shadow-md h-full">
@@ -267,15 +262,16 @@ const BlogSinglePost = () => {
                                                                 </div>
                                                             </div>                                        
                                                         );
-                                                    })                                
-                                                }                                             
-                                            </div>                           
+                                            })                                
+                                        }                                             
+                                    </div>                           
                                 </div>
                             </aside>
 
                         </div>
                     </div>
                 </div>
+
             </main>
 
             <HomeFooter />
@@ -286,3 +282,16 @@ const BlogSinglePost = () => {
 
 export default BlogSinglePost;
 
+
+
+
+
+
+
+
+
+// <img className="w-full m-0 rounded-t lazy" 
+// data-src="/assets/img/small-business.jpg"                                                  
+// src={blogSinglePost?.img}                                     
+// alt="post cover" 
+// />  

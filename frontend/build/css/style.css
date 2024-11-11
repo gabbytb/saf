@@ -3607,6 +3607,10 @@ textarea#comments{
   visibility: collapse;
 }
 
+.static{
+  position: static;
+}
+
 .fixed{
   position: fixed;
 }
@@ -4105,6 +4109,10 @@ textarea#comments{
   height: 2rem;
 }
 
+.h-98{
+  height: 25rem;
+}
+
 .h-full{
   height: 100%;
 }
@@ -4474,6 +4482,10 @@ textarea#comments{
 
 .gap-20{
   gap: 5rem;
+}
+
+.gap-28{
+  gap: 7rem;
 }
 
 .gap-3{
@@ -5839,10 +5851,6 @@ textarea#comments{
     margin-bottom: 3rem;
   }
 
-  .xs\:mt-0{
-    margin-top: 0px;
-  }
-
   .xs\:flex{
     display: flex;
   }
@@ -5894,10 +5902,6 @@ textarea#comments{
 
   .sm\:mt-0{
     margin-top: 0px;
-  }
-
-  .sm\:mt-16{
-    margin-top: 4rem;
   }
 
   .sm\:block{
@@ -5952,6 +5956,11 @@ textarea#comments{
     --tw-space-y-reverse: 0;
     margin-top: calc(4rem * calc(1 - var(--tw-space-y-reverse)));
     margin-bottom: calc(4rem * var(--tw-space-y-reverse));
+  }
+
+  .sm\:px-32{
+    padding-left: 8rem;
+    padding-right: 8rem;
   }
 
   .sm\:pl-16{

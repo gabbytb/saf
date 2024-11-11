@@ -160,7 +160,7 @@ const BlogPosts = () => {
 
             <main id="blogPostsID" className="container mx-auto">
                 <div className="mx-12 lg:mx-16 mt-36 mb-28 grid">                     
-                    <div className="mx-auto flex flex-col items-center xs:px-0 sm:pl-16 sm:pr-12">  
+                    <div className="mx-auto flex flex-col items-center xs:px-0 sm:px-32">  
 
                         <h1 className="text-4xl font-black mb-32 mt-4">RECENT POSTS</h1>   
            
@@ -168,7 +168,7 @@ const BlogPosts = () => {
                         {/* POSTS LISTING */}    
                         {
                             allBlogPosts.length !== 0 ? 
-                                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-12 gap-y-20 mx-auto sm:mx-8 lg:mx-16 flex-wrap">                                    
+                                <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-16 gap-y-20 mx-auto sm:mx-8 lg:mx-16 flex-wrap">                                    
                                     {
                                     
                                         allBlogPosts.map((post) => {                

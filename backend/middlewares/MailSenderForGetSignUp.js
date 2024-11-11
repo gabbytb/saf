@@ -1,10 +1,10 @@
 const nodemailer = require("nodemailer");
 const { mailServiceProvider, mailServiceUser, mailServicePwd } = process.env;
 console.log("************************************************",
-            "\n*********    E-MAIL SERVICE CONFIG    **********",
+            "\n*********        E-MAIL CONFIG        **********",
             "\n************************************************",
-            `\n\nUSE SERVICE PROVIDER: ${mailServiceProvider.toUpperCase()}`,
-            `\nADMINISTRATOR E-MAIL: ${mailServiceUser}`);
+            `\n\nSERVICE PROVIDER: ${mailServiceProvider.toUpperCase()}`,
+            `\nADMIN E-MAIL: ${mailServiceUser}\n`);
 
 
 
@@ -38,10 +38,12 @@ const mailSenderForGetSignUp = (token, user) => {
         text: `Hello ${user.firstName} ${user.lastName}, \nThank you for registering with us at www.samuelakinolafoundation.com \nWe are more than just a foundation. \nPlease verify your account by clicking the link below to have a personalized experience. \n\n\n ${verificationLink} \n${activationLink}`,
         html: `<strong>Hello ${user.firstName} ${user.lastName}</strong>, <br /><br />Thank you for registering with us at ${siteURL}. <br /><br />We are more than just a charity organization. <br /><br />Please verify your account by clicking the link below to have a personalized experience. <br /><br /><div className="mailer-wrapper">${verificationLink}</div> <br />${activationLink}<br /><br /><br />`,
     };
+
     
     // Attempt to send email with retry logic
     let retryAttempts = 0;  // Track number of retry attempts
     const maxRetries = 100;   // Maximum number of retry attempts before giving up
+
 
     // Implement retry logic here to attempt resending
     function attemptSend() {

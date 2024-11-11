@@ -1,5 +1,5 @@
 {
-  "name": "fnf", 
+  "name": "fnf",
   "description": "REACHING OUT TO GREAT MINDS.",
   "version": "0.1.0",
   "private": true,
@@ -23,6 +23,8 @@
     "react-popper": "^2.3.0",
     "react-router-dom": "^6.23.0",
     "react-scripts": "5.0.1",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {

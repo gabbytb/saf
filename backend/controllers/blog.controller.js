@@ -1,6 +1,6 @@
 const db = require("../models");
 const Blog = db.blogs;
-
+const Image = db.images;
 
 
 
@@ -14,7 +14,7 @@ exports.createBlogPost = async (req, res) => {
     const uniqueId = Date.now();
 
     // Payload
-    const { id = 23401, img, title, description, uri, excerpt, tags, categories, author, isPublished } = req.body;
+    const { id = 23401, title, description, uri, excerpt, images, author, tags, categories, isPublished } = req.body;
     
     try {
 
@@ -49,14 +49,13 @@ exports.createBlogPost = async (req, res) => {
        
 
         // ************************************ //
-        // ***  FE: CREATE "BLOG" INSTANCE  *** //
+        // ***  FE: CREATE "POST"  *** //
         // ************************************ //      
-        const blog = new Blog({
+        const newPost = new Blog({
             _id: uniqueId % id,
-            img: img.toLowerCase(),     // sanitize: convert title to lowercase. NOTE: You must sanitize your data before forwarding to backend.                      
-            title,         
-            description,
-            uri,
+            title,          
+            uri: uri.toLowerCase(),     // sanitize: convert title to lowercase. NOTE: You must sanitize your data before forwarding to backend.                                 
+            description,     
             excerpt,
             author,
             tags,
@@ -64,110 +63,54 @@ exports.createBlogPost = async (req, res) => {
             isPublished,
             status: isPublished === true ? 'published' : 'draft' ,        
             // expirationInMs: encrypt(expiresIn),        // Encode: token lifespan  
+        });    
+        await newPost.save();
+        // **************************************** //
+        // ***    FE: SAVE POST    *** //
+        // **************************************** //
+
+
+        let autoInc = 358;
+        // Step 2: Create and save images, associating them with the new post
+        const imagePromises = images.map(async (imageData) => {
+            const newImage = new Image({                
+                id: autoInc++,    // Associate image with the post
+                url: imageData.url,
+                alt: imageData.alt,
+                featured: imageData.featured,
+                createdAt: imageData.createdAt,
+                updatedAt: imageData.updatedAt,
+            });
+            return await newImage.save();
         });
-        // // ******************************************************************************************************//
-        // // ***  FE: USE MIDDLEWARE: (JWT) TO ASSIGN "TOKEN" TO USER FOR AUTHENTICATION AND AUTHORIZATION  ***//
-        // // ******************************************************************************************************//
-        // const token = await assignTwoDaysToken(user._id);
-        // // ****************************************************
-        // // ***  FE: USE MIDDLEWARE: (JWT) TO VERIFY "TOKEN"
-        // // ****************************************************
-        // const tokenDecoded = await verifyToken(token);
-        
-        // RESULT:-  Token Details:  { id: 31825360, iat: 1722812853, exp: 1722816453 }
-        // NOTE:-
-        //      1) Token id (id): This is a custom payload claim, likely representing the user's unique identifier (e.g., user ID in the database).
-        //      2) Issued At (iat): This is a standard JWT claim representing the time at which the token was issued. It's typically expressed as a Unix timestamp, which counts the number of seconds since January 1, 1970 (UTC).
-        //      3) Expiration Time (exp): This is another standard JWT claim, indicating the time at which the token will expire. It's also expressed as a Unix timestamp.
-        // Format using: new Date(tokenDecoded.exp * 1000) 
-        // To Get Current Date Setting for Token Expiration Time to start counting from!       
-        // const tokenExpiryDate = new Date(tokenDecoded.exp * 1000);
-        // user.tokenExpires = tokenExpiryDate;
-        const newBlog = await blog.save();
-        // **************************************** //
-        // ***    FE: SAVE USER INFORMATION     *** //
-        // **************************************** //
+        // Save all images
+        const savedImages = await Promise.all(imagePromises);
+
+        // Step 3: Associate saved image IDs with the post
+        // newPost.images = savedImages.map(img => img._id); // Store image IDs in the post
+        newPost.images = savedImages;
+
+        // newPost.images =
+        const newBlog = await newPost.save(); // Update the post with the image references
+            
 
 
-
-
-        // // **************************************** //
-        // // ***    BE: SAVE USER INFORMATION     *** //
-        // // **************************************** //
-        // const user = new User({ 
-        //     _id: 666, 
-        //     username: "admin", 
-        //     firstName: "Oyebanji", 
-        //     lastName: "Gabriel", 
-        //     phone: 2347038662402, 
-        //     address: '11a, Chidison str', 
-        //     address2: '14, Lekan Muritala str, Aboru, Lagos', 
-        //     city: 'Iba', 
-        //     state: 'Oyo', 
-        //     country: 'Nigeria', 
-        //     zipCode: 23401, 
-        //     email: "try-email@example.com", 
-        //     password: encryptPassword("Administrativerightsonly"),
-        //     roles: [{ ...roleEditor }],
-        //     approvesTandC: true,
-        //     status: 'rejected',
-        //     isVerified: true, 
-        // });
-        // // ******************************************************************************************************//
-        // // ***  BE: USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
-        // // ******************************************************************************************************//
-        // const token = await assignOneDayToken(user._id);
-        // // ****************************************************
-        // // ***  BE: USE MIDDLEWARE: (JWT) TO VERIFY "TOKEN"
-        // // ****************************************************
-        // const decodedData = await verifyToken(token);
-        // // console.log("Token Details: ", decodedData);
-        // // RESULT:-  Token Details:  { id: 31825360, iat: 1722812853, exp: 1722816453 }
-        // // NOTE:-
-        // //     1) Token id (id): This is a custom payload claim, likely representing the user's unique identifier (e.g., user ID in the database).
-        // //     2) Issued At (iat): This is a standard JWT claim representing the time at which the token was issued. It's typically expressed as a Unix timestamp, which counts the number of seconds since January 1, 1970 (UTC).
-        // //     3) Expiration Time (exp): This is another standard JWT claim, indicating the time at which the token will expire. It's also expressed as a Unix timestamp.
-        // // ******************************************************************************************************//
-        // // ***  Add Generated TOKEN & TIME OF EXPIRY, to New User before Saving to DB ***//
-        // // ******************************************************************************************************//
-        // user.accessToken = token;
-        // user.tokenExpires = new Date(decodedData.exp * 1000);
-        // // **************************************** //
-        // // ***    BE: SAVE USER INFORMATION     *** //
-        // // **************************************** //
-        // const newUser = await user.save();
-        // // **************************************** //
-
-
-        // ***************************************************************//
-        // E-mail Service Config
-        // ***************************************************************//
-        // await mailSenderPostSignUp(token, newUser);
-        // await mailSenderForGetSignUp(token, newUser);
-
-        // let valueOfEncodedText = decrypt(newUser.expirationInMs);
-        // console.log("Encrypted token lifespan: ", valueOfEncodedText);
-        
-        // **************************************** //
-
-        console.log(
-            // "\n*********************************************************",
-            // "\n*****        TOKEN GENERATED FOR NEW USER           *****",
-            // `\n*********************************************************`,
-            // `\nToken: ${token}`,
-            // "\nToken Details: ", tokenDecoded,
-            "\n\n*********************************************************",
+        console.log(          
+            "\n*********************************************************",
             "\n*****          NEW BLOG ARTICLE DETAILS             *****",
             "\n*********************************************************",
             `\nBlog Article Status: ${newBlog}`,
             "\n******************************************************************************************\n");
-                
+        
+        
+        // Send response with the created post and images
         const responseData = {
             success: true,
             data: newBlog,
             message: "Successful",
         };
         return res.status(201).json(responseData);
+
     } catch (error) {
         // return res.status(409).json({ message: error.message});
         const responseData = { 
