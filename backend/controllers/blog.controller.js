@@ -70,11 +70,11 @@ exports.createBlogPost = async (req, res) => {
         // **************************************** //
 
 
-        let autoInc = 358;
+        let autoInc = uniqueId % id;
         // Step 2: Create and save images, associating them with the new post
         const imagePromises = images.map(async (imageData) => {
             const newImage = new Image({                
-                id: autoInc++,    // Associate image with the post
+                _id: autoInc++,    // Associate image with the post
                 url: imageData.url,
                 alt: imageData.alt,
                 featured: imageData.featured,
@@ -83,12 +83,19 @@ exports.createBlogPost = async (req, res) => {
             });
             return await newImage.save();
         });
+
         // Save all images
         const savedImages = await Promise.all(imagePromises);
+        console.log('Saved Images: ', savedImages);
+        
+        // Cleanly map over the objects, excluding the `_id`
+        // const cleanedImages = savedImages.map(({ _id, ...rest }) => rest);
+        // console.log(cleanedImages);
 
         // Step 3: Associate saved image IDs with the post
         // newPost.images = savedImages.map(img => img._id); // Store image IDs in the post
         newPost.images = savedImages;
+        // newPost.images = cleanedImages;
 
         // newPost.images =
         const newBlog = await newPost.save(); // Update the post with the image references

@@ -1,13 +1,14 @@
 module.exports = mongoose => {
        
     const { Schema } = mongoose;
+
     var blogSchema = new Schema({
         _id: {
             type: Number,
         },
         images: [
             { 
-                id: { 
+                _id: { 
                     type: Number,
                 },
                 url: { 
@@ -16,10 +17,10 @@ module.exports = mongoose => {
                 featured: { 
                     type: Boolean,
                 }, 
-                createdTime: { 
+                createdAt: { 
                     type: Date,
                 },
-                updatedTime: { 
+                updatedAt: { 
                     type: Date,
                 },
             },

@@ -3,6 +3,9 @@ module.exports = mongoose => {
     const { Schema } = mongoose;
 
     var imageSchema = new Schema({
+        _id: {
+            type: Number,              
+        },
         url: { 
             type: String,        
         },
@@ -13,16 +16,9 @@ module.exports = mongoose => {
             type: Boolean, 
             default: false 
         },
-        id: {
-            type: Number,    
-              
-        },
     }, { versionKey: false, timestamps: true });
 
-
-
     const Image = mongoose.model('Image', imageSchema);
-    
     return Image;
-
+    
 };

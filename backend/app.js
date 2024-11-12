@@ -19,13 +19,13 @@ const port = process.env.port || 98765;
 const db = require("./models");
 const mongoConnType = db.url;
 
-const username = process.env.MONGO_DB_USERNAME || "serverusername";
-const DB_SC = process.env.MONGO_DB_SEPERATOR || "serverseperator";
-const password = process.env.MONGO_DB_PASSWORD || "serverpassword";
-const DB_PORT = process.env.MONGO_DB_PORT || "serverport";
-const DB_NAME = process.env.MONGO_DB_DATABASE || "serverdatabase";
+const username = process.env.MONGO_DB_USERNAME || "serverUsername";
+const DB_SC = process.env.MONGO_DB_SEPERATOR || "serverSeperator";
+const password = process.env.MONGO_DB_PASSWORD || "serverPassword";
+const DB_PORT = process.env.MONGO_DB_PORT || "serverPort";
+const DB_NAME = process.env.MONGO_DB_DATABASE || "serverDatabase";
 
-const DB_URI = mongoConnType + username + DB_SC + password + DB_PORT + DB_NAME || `mongodb+srv://${username}:${password}@safdb.71th1.mongodb.net/?retryWrites=true&w=majority`;
+const mongoURI = mongoConnType + username + DB_SC + password + DB_PORT + DB_NAME || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
 
 
 
@@ -106,8 +106,25 @@ require("./routes/blog.routes")(app);
 // 5. DATABASE:- Connection
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 let _DB;
+
+// Options for Mongoose
+//   &retryWrites=true: Automatically retries write operations if they fail due to temporary network issues or other transient problems.
+//   &w=majority: Ensures that the write operations are confirmed by the majority of the nodes in the database replica set, making sure the data is safely written.
+//   &serverSelectionTimeoutMS: Time (in milliseconds) before Mongoose throws an error if it can't connect to any server.
+//   &socketTimeoutMS: The maximum time for a socket to wait before throwing a timeout error (useful if you expect to have slow connections).
+//   &autoIndex: Whether to automatically build indexes for your collections. By default, this is true in Mongoose, but you can set it to false if you want to manually manage indexes.
+const options = {
+    // keepAlive: true,
+    // keepAliveInitialDelay: 30000,  // 30 seconds delay for keep-alive
+    retryWrites: true,
+    w: 'majority',  // Ensures the write concern is majority
+    serverSelectionTimeoutMS: 45000, // Default 5/45-second timeout if the connection fails
+    socketTimeoutMS: 60000, // Default 45/60-second timeout for socket operations
+    autoIndex: false,
+};
+
 mongoose.set("strictQuery", false);
-mongoose.connect(DB_URI)
+mongoose.connect(mongoURI, options)
 .then(client => {
     _DB = client; // you can also use this "client.db();"
     console.log("************************************************",
@@ -134,8 +151,6 @@ mongoose.connect(DB_URI)
 })
 .catch(err => console.error(err));        
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
 
 
 
