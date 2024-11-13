@@ -207,12 +207,12 @@
       border-b
     ;
   };
-
 }
 
 
-@layer components {
 
+
+@layer components {
 
 
 
@@ -511,10 +511,15 @@
   }
 
   #homeHeader .container,
-  #header .container {
-    @apply h-full w-full my-0 mx-auto px-24
+  #header .container,
+  #blogPostsID .container {
+    @apply h-full w-full my-0 mx-auto px-12 sm:px-24
   }
-  
+
+  #blogPostsID .container {
+    @apply h-full w-full my-0 mx-auto px-12 sm:px-24
+  }
+
   #header .cta-menu a {
     @apply 
     text-slate-900 
@@ -643,13 +648,21 @@
   /*************************    Mobile Nav Config   *************************/
   /**************************************************************************/
   .mobile-nav {
-    @apply flex xs:flex lg:hidden
+    @apply 
+      flex 
+      xs:flex 
+      lg:hidden 
+      relative
   }
 
   .mobile-nav .hamburger {
     @apply 
-      w-10 
-      xs:w-10
+        w-10      
+        absolute
+        -top-12
+        right-2
+        xs:w-10
+    ;
   }
 
   .mobile-nav .hamburger span::before {
