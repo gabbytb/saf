@@ -110,7 +110,7 @@ const BlogSinglePost = () => {
     // eslint-disable-next-line
     const [currentPage, setCurrentPage] = useState(1);
 
-    let leftArrow = '>';
+    // let leftArrow = '>';
 
     useEffect(() => {
         async function fetchAllSidebarBlogPosts() {

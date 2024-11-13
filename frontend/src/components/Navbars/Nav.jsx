@@ -4,12 +4,12 @@ import {
     // BrandLogoWhite,
     brandOfficialLogo, 
     brandOfficialLogoDark,
-} from "../assets/images";
+} from "../../assets/images";
 import { 
     PersonalFirstIcon, PersonalSecondIcon, PersonalThirdIcon, 
     BusinessFirstIcon, DeveloperFirstIcon, DeveloperSecondIcon, 
     LearnFirstIcon, LearnSecondIcon, LearnThirdIcon, 
-} from "../assets/icons";
+} from "../../assets/icons";
 
 
 
@@ -37,11 +37,11 @@ const Nav = () => {
             <header id="header" className="default-header">
                 <div className="container">
                     <div className="flex justify-between items-center h-full px-0 relative ">                
-                        <Link to={"/"} className="mt-1.5 brand dark:block w-1/6 justify-start">
+                        <Link to={"/"} className="mt-1.5 w-1/6 justify-start brand dark:block">
                             {/* <BrandLogo /> */}
                             <img src={brandOfficialLogo} alt="official logo" />
                         </Link>
-                        <Link to={"/"} className="ml-16 brand-white dark:block w-1/6">
+                        <Link to={"/"} className="ml-0 sm:ml-16 w-full sm:w-1/6 brand-white dark:block">
                             {/* -mt-2 <BrandLogoWhite   /> */}
                             <img src={brandOfficialLogoDark} alt="official logo" />
                         </Link>

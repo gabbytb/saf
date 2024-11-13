@@ -75,8 +75,11 @@
       font-display: swap;
       font-style: normal;
   }
-
+   
   :root {
+    --before-bg-color: rgba(24, 26, 27, 0.3);
+    --after-bg-color: rgba(24, 26, 27, 0.3);
+
     --color-dark-blue: rgb(8, 37, 82);
     --color-light-blue: rgb(0, 102, 245);
     --color-lighter-gray: rgb(108, 130, 163);  
@@ -652,7 +655,8 @@
   .mobile-nav .hamburger span::before {
     @apply 
       content-beforeContent 
-      bg-skin-before-hamburger 
+      bg-skin-before-hamburger
+      bg-black
       sm:bg-black 
       w-10
       h-1 
@@ -665,7 +669,8 @@
     @apply
       content-afterContent 
       bg-skin-after-hamburger
-      sm:bg-black 
+      bg-black
+      sm:bg-black
       w-10 
       h-100 
       absolute 
@@ -695,7 +700,8 @@
       w-full 
       animate-slideDown 
       shadow-sm 
-      bg-blue-600 
+      /* bg-blue-600 */
+      bg-white
       sm:bg-white 
       !important
     ;
@@ -790,9 +796,6 @@
       font-semibold
       !important
     ;
-  }
-  label.progress_label {
-    /* font-size: 1rem; */
   }
   progress#file {
     width: -webkit-fill-available;

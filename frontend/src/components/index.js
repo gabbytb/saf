@@ -1,6 +1,6 @@
 // HEADER
 import HomeNav from "./HomeNav";
-import Nav from "./Nav";
+import Nav from "./Navbars/Nav";
 import NavNoTopBar from "./NavNoTopBar";
 import Preloader from "./Preloader";
 // HEADER

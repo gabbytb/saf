@@ -11,21 +11,30 @@ const port = process.env.port || 98765;
 
 
 
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // =======================================================================================================//
 // DATABASE PROPS  ================================================================================//
 // =======================================================================================================//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const db = require("./models");
-const mongoConnType = db.url;
+const authSource = db.url;
 
-const username = process.env.MONGO_DB_USERNAME || "serverUsername";
-const DB_SC = process.env.MONGO_DB_SEPERATOR || "serverSeperator";
-const password = process.env.MONGO_DB_PASSWORD || "serverPassword";
-const DB_PORT = process.env.MONGO_DB_PORT || "serverPort";
-const DB_NAME = process.env.MONGO_DB_DATABASE || "serverDatabase";
 
-const mongoURI = mongoConnType + username + DB_SC + password + DB_PORT + DB_NAME || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
+//   CLOUD CONFIGURATION
+const username = process.env.MONGO_DB_USERNAME || "userName";
+const authbinder = process.env.MONGO_DB_PLANNER || "serverAuthBinder";
+const password = process.env.MONGO_DB_PASSWORD || "usersPass";
+const host = process.env.MONGO_DB_HOST || "serverHost";
+const defaultauthdb = process.env.MONGO_DB_CLOUD_DATABASE || "serverAuthDatabase";
+
+//   LOCAL CONFIGURATION
+// const defaultauthdb = process.env.MONGO_DB_DATABASE || "localDatabase";
+
+
+const mongoURI = authSource + username + authbinder + password + host + defaultauthdb || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
+// const mongoURI =  authSource + defaultauthdb || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
+
 
 
 
@@ -130,8 +139,8 @@ mongoose.connect(mongoURI, options)
     console.log("************************************************",
         "\n*********     DATABASE CONNECTION     **********",
         `\n************************************************`,
-        `\n\nCONNECTED TO DATABASE: ${mongoConnType}${DB_NAME}\n`);
-
+        // `\n\nCONNECTED TO DATABASE: ${authSource}${defaultauthdb}\n`);
+        `\n\nCONNECTED TO DATABASE: ${authSource}${defaultauthdb}\n`);
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // 6. SERVER:-  Port
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////

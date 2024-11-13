@@ -1,8 +1,8 @@
 {
   "files": {
-    "main.css": "/static/css/main.8855b05e.css",
-    "main.js": "/static/js/main.2b47f005.js",
-    "static/js/453.17754b24.chunk.js": "/static/js/453.17754b24.chunk.js",
+    "main.css": "/static/css/main.fb9b3790.css",
+    "main.js": "/static/js/main.ea174e2f.js",
+    "static/js/453.52e4ac9c.chunk.js": "/static/js/453.52e4ac9c.chunk.js",
     "static/media/team-4-470x470.png": "/static/media/team-4-470x470.4ef82ef45a9598d24c4c.png",
     "static/media/BRFirmaCW-SemiBold.svg": "/static/media/BRFirmaCW-SemiBold.e669f8e5b93c979edfda.svg",
     "static/media/BRFirmaCW-Bold.svg": "/static/media/BRFirmaCW-Bold.6a32e6919e3119848a21.svg",
@@ -55,12 +55,12 @@
     "static/media/home-device-section.svg": "/static/media/home-device-section.6ddb14caf3451e07ab9e.svg",
     "static/media/dropdown.svg": "/static/media/dropdown.94deb0d847619fbc4400.svg",
     "static/media/return-pattern.svg": "/static/media/return-pattern.9a7b0eff4bbaef39673d.svg",
-    "main.8855b05e.css.map": "/static/css/main.8855b05e.css.map",
-    "main.2b47f005.js.map": "/static/js/main.2b47f005.js.map",
-    "453.17754b24.chunk.js.map": "/static/js/453.17754b24.chunk.js.map"
+    "main.fb9b3790.css.map": "/static/css/main.fb9b3790.css.map",
+    "main.ea174e2f.js.map": "/static/js/main.ea174e2f.js.map",
+    "453.52e4ac9c.chunk.js.map": "/static/js/453.52e4ac9c.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.8855b05e.css",
-    "static/js/main.2b47f005.js"
+    "static/css/main.fb9b3790.css",
+    "static/js/main.ea174e2f.js"
   ]
 }

@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect } from "react";
-const Nav = lazy(() => import("../components/Nav"));
+const Nav = lazy(() => import("../components/Navbars/Nav"));
 const OurProgressBody = lazy(() => import("../components/OurProgressBody"));
 const Footer = lazy(() => import("../components/Footer"));
 

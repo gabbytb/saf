@@ -10,6 +10,7 @@ import { DisqusCard } from "../../components";
 const OurProgressSectionSeven = () => {
     
     
+    // eslint-disable-next-line
     const [itemsToFlip, setItemsToFlip] = useState(flipItems);
     
     

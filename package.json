@@ -1,11 +1,10 @@
 {
-  "name": "saf",
-  "version": "1.0.0",
+  "name": "GABBY",
+  "version": "2.0",
   "description": "MERN STACK:- MongoDB / Express js / React js / Node js",
   "scripts": {    
     "start": "concurrently \"npm start --prefix backend\" \"npm start --prefix frontend\"",    
-    "build": "concurrently \"npm start --prefix backend\" \"serve -s frontend/build\"",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "serve": "concurrently \"npm start --prefix backend\" \"serve -s frontend/build\""
   },
   "repository": {
     "type": "git",
