@@ -1,3 +1,5 @@
+const assignOneDayToken = require("../middlewares/AssignOneDayToken");
+const verifyToken = require("../middlewares/VerifyToken");
 const db = require("../models");
 const Blog = db.blogs;
 const Image = db.images;
@@ -91,6 +93,8 @@ exports.createBlogPost = async (req, res) => {
         // Cleanly map over the objects, excluding the `_id`
         // const cleanedImages = savedImages.map(({ _id, ...rest }) => rest);
         // console.log(cleanedImages);
+
+        const token = assignOneDayToken(savedImages._id);
 
         // Step 3: Associate saved image IDs with the post
         // newPost.images = savedImages.map(img => img._id); // Store image IDs in the post

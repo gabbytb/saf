@@ -1202,7 +1202,6 @@ exports.findSingleUserById = async (req, res) => {
 };  // THOROUGHLY Tested === Working
 
 
-
 // Update User Information
 exports.updateSingleUserById = async (req, res) => {
     
@@ -1273,7 +1272,6 @@ exports.updateSingleUserById = async (req, res) => {
 };
 
 
-
 // Update User Information
 exports.updateSingleUserStatusById = async (req, res) => {
     
@@ -1329,7 +1327,6 @@ exports.updateSingleUserStatusById = async (req, res) => {
 };   
 
 
-
 // Deleta a User with the Specified id in the request
 exports.deleteUserById = async (req, res) => {
     try {
@@ -1355,7 +1352,6 @@ exports.deleteUserById = async (req, res) => {
         // return res.status(500).json({ message: `Could not delete User with ID = ${id}`, err });
     };
 };
-
 
 
 // Deleta all Users from the Database

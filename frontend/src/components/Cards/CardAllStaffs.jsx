@@ -49,10 +49,13 @@ export default function CardAllStaffs({ color }) {
     
     useEffect(() => {
       var allStaffsLink = document.querySelector("#staffsLinkID .allStaffs");
-      // console.log("ALL STAFFS LINK", allStaffsLink);
+      var allStaffsSpanLink = document.querySelector("#staffsLinkID .allStaffs > .text-back");
+      console.log("ALL STAFFS LINK", allStaffsSpanLink);
       if (activeDisplay === "allStaffs") {        
             allStaffsLink?.classList.add("activeStaffView");
+            allStaffsSpanLink?.classList.add("text-white");
 
+           
             setIsLoading(true);
 
             // ****************************************************************************
@@ -132,6 +135,7 @@ export default function CardAllStaffs({ color }) {
                 clearTimeout(timer);                  // Clean up timer if component unmounts or token changes
             };
       } else {
+        allStaffsSpanLink?.classList.remove("text-white");
           allStaffsLink?.classList.remove("activeStaffView");
       };
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
@@ -280,10 +284,10 @@ export default function CardAllStaffs({ color }) {
 
                 {/* Staffs Navigation */}
                 <div id="staffsLinkID" className="flex flex-row gap-3 mt-8 mb-10 px-7">
-                  <Link className="allStaffs activeStaffView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allStaffs")}>All ({ totalAdminUsers })</Link>
-                  <Link className="allApprovedStaffs pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allApprovedStaffs")}>Approved ({ totalApprovedStaffs })</Link>
-                  <Link className="allPendingStaffs pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allPendingStaffs")}>Pending ({ totalPendingStaffs })</Link>
-                  <Link className="allRejectedStaffs pt-3 pb-2 px-10 rounded-lg border text-xl" onClick={() => setActiveDisplay("allRejectedStaffs")}>Rejected ({ totalRejectedStaffs })</Link>
+                  <Link className="allStaffs activeStaffView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row" onClick={() => setActiveDisplay("allStaffs")}>All  <span className="text-white text-back">({ totalAdminUsers })</span> </Link>
+                  <Link className="allApprovedStaffs pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row" onClick={() => setActiveDisplay("allApprovedStaffs")}>Approved  <span className="text-back">({ totalApprovedStaffs })</span></Link>
+                  <Link className="allPendingStaffs pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row" onClick={() => setActiveDisplay("allPendingStaffs")}>Pending  <span className="text-back">({ totalPendingStaffs })</span></Link>
+                  <Link className="allRejectedStaffs pt-3 pb-2 px-10 rounded-lg border text-xl flex flex-row" onClick={() => setActiveDisplay("allRejectedStaffs")}>Rejected  <span className="text-back">({ totalRejectedStaffs })</span></Link>
                 </div>
                 {/* Users Navigation */}
 

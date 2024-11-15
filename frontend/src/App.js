@@ -61,7 +61,7 @@ export default function App() {
     //     // ReactGA.set({ page: window.location.pathname });
     // }, []);
     
-    
+
     return (
         <Routes>
           {/* add routes without layouts */}

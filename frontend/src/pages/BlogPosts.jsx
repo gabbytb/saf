@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, } from "react-router-dom";
 import api from "../api";
-import { Nav, HomeFooter, } from "../components";
+import { NavSlider, HomeFooter, } from "../components";
 
 
 
@@ -156,7 +156,7 @@ const BlogPosts = () => {
 
     return (
         <div id="blogPostsWrapper">
-            <Nav />
+            <NavSlider />
 
             <main id="blogPostsID" className="mx-auto">
                 <div className="container">

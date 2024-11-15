@@ -1,5 +1,5 @@
 import { Suspense, lazy, useEffect } from "react";
-const Nav = lazy(() => import("../components/Navbars/Nav"));
+const NavSlider = lazy(() => import("../components/Navbars/NavSlider"));
 const OurProgressBody = lazy(() => import("../components/OurProgressBody"));
 const Footer = lazy(() => import("../components/Footer"));
 
@@ -41,7 +41,7 @@ const OurProgress = () => {
                 </label>
             </div>
 
-            <Nav />
+            <NavSlider />
             <div className="absolute top-0 w-full -z-10">
                 <OurProgressBody />
                 <Footer />

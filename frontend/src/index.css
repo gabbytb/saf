@@ -362,7 +362,7 @@
 
   main#blogSinglePost section .rendered-output h2 {
     @apply 
-      text-4xl
+       text-3xl/loose sm:text-4xl
       font-black
       mb-2
     ;
@@ -370,7 +370,7 @@
 
   main#blogSinglePost section .rendered-output p {
       @apply
-        text-2xl/loose
+        text-14xl/loose sm:text-2xl/loose
         mb-10
       ;
   }

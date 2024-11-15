@@ -1,6 +1,6 @@
 import { useEffect, useState, } from "react";
 import { Link, useParams, } from "react-router-dom";
-import { HomeFooter, Nav, } from "../components";
+import { HomeFooter, NavSlider, } from "../components";
 import api from "../api";
 import PostDetailsSlider from "../components/Slider/PostDetailsSlider.js";
 
@@ -157,7 +157,7 @@ const BlogSinglePost = () => {
 
     return (
         <div id="singlePostWrapper">
-            <Nav />
+            <NavSlider />
 
             <main id="blogSinglePost" className="container mx-auto">                                       
                
@@ -176,17 +176,16 @@ const BlogSinglePost = () => {
                                                     
                                                 <div className="self-stretch p-0 mb-0">
                                                     <div className="rounded shadow-md h-full">                                                                                                                                                 
-                                                        <div className="px-11 pt-10 pb-20 flex flex-col gap-8">
+                                                        <div className="px-8 pt-10 pb-20 flex flex-col gap-8">
                                                             <div className="font-semibold text-lg mb-2 border-gray-500 border-b-2 pb-2">
-                                                                <p className="text-slate-900 text-4xl/tight font-black capitalize">{blogSinglePost?.title}</p>
-                                                                <div className="mt-3 pb-1 text-10xl italic font-bold">{convertDate(blogSinglePost?.createdAt)}</div>
+                                                                <p className="text-slate-900 text-14xl/tight sm:text-4xl/tight font-black capitalize">{blogSinglePost?.title}</p>
+                                                                <div className="mt-3 pb-1 text-lg/tight sm:text-10xl italic font-bold">{convertDate(blogSinglePost?.createdAt)}</div>
                                                             </div>
                                                             {/* <p class="text-slate-700 mb-1" title="Post Author">{blogSinglePost?.author?.name}</p> */}                                             
-                                                        
-                                                            <div
-                                                                className="rendered-output"
-                                                                dangerouslySetInnerHTML={{ __html: blogSinglePost?.description }} // Render HTML content here
-                                                            />   
+                                                            
+                                                            
+                                                            <div className="rendered-output" dangerouslySetInnerHTML={{ __html: blogSinglePost?.description }} // Render HTML content here
+                                                            />
 
                                                             <div className="pt-0 pb-6 flex flex-col gap-8">
                                                                 
