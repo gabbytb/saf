@@ -20,8 +20,6 @@ module.exports = mongoose => {
     // The first option disables the automatic creation of the default  "_v" attribute representing "versionKey".
     // Timestamps will keep track of "Time of Creation" and "Time of Update".
 
-
     const Image = mongoose.model('Image', imageSchema);
-    return Image;
-    
+    return Image;    
 };

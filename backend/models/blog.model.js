@@ -9,7 +9,7 @@ module.exports = mongoose => {
         images: [
             { 
                 _id: { 
-                    type: Number,
+                    type: Number,                   
                 },
                 url: { 
                     type: String,

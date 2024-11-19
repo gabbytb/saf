@@ -1,34 +1,64 @@
 {
-  "name": "GABBY",
-  "version": "2.0",
-  "description": "MERN STACK:- MongoDB / Express js / React js / Node js",
-  "scripts": {    
-    "start": "concurrently \"npm start --prefix backend\" \"npm start --prefix frontend\"",    
-    "serve": "concurrently \"npm start --prefix backend\" \"serve -s frontend/build\""
+  "name": "Gabriel's Website",
+  "description": "REACHING OUT TO GREAT MINDS",
+  "homepage": "http://192.168.0.145:3000",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@fortawesome/fontawesome-free": "^6.6.0",
+    "@popperjs/core": "^2.11.8",
+    "@react-oauth/google": "^0.12.1",
+    "@tawk.to/tawk-messenger-react": "^2.0.2",
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^13.5.0",
+    "@tinymce/tinymce-react": "^5.1.1",
+    "axios": "^1.7.7",
+    "chart.js": "^4.4.4",
+    "lottie-web": "^5.12.2",
+    "react": "^18.3.1",
+    "react-dom": "^18.3.1",
+    "react-ga": "^3.3.1",
+    "react-in-viewport": "^1.0.0-beta.2",
+    "react-paystack": "^6.0.0",
+    "react-popper": "^2.3.0",
+    "react-router-dom": "^6.23.0",
+    "react-scripts": "5.0.1",
+    "react-slick": "^0.30.2",
+    "slick-carousel": "^1.8.1",
+    "web-vitals": "^2.1.4"
   },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gabbytb/saf.git"
+  "scripts": {
+    "start": "react-scripts start ",
+    "build": "react-scripts build",
+    "concur": "concurrently \"npm start --prefix backend\" \"react-scripts start\"",    
+    "serve": "concurrently \"npm start --prefix backend\" \"serve -s build\"",
+    "style": "npx tailwindcss -i ./src/index.css -o ./public/css/style.css --watch",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject"
   },
-  "keywords": [
-    "MongoDB",
-    "mongoose",
-    "express js",
-    "react js",
-    "node js",
-    "axios",
-    "tailwindcss",
-    "serve",
-    "concurrently"
-  ],
-  "author": "OYEBANJI GABRIEL I. (igabrieloyebanji@gmail.com)",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gabbytb/saf/issues"
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
   },
-  "homepage": "https://github.com/gabbytb/saf#readme",
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
   "devDependencies": {
-    "concurrently": "^9.0.1",
-    "serve": "^14.2.4"
+    "@tailwindcss/typography": "^0.5.13",
+    "concurrently": "^9.1.0",
+    "serve": "^14.2.4",
+    "tailwindcss": "^3.4.3"
   }
 }

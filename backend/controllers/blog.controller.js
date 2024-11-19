@@ -66,7 +66,7 @@ exports.createBlogPost = async (req, res) => {
             status: isPublished === true ? 'published' : 'draft' ,        
             // expirationInMs: encrypt(expiresIn),        // Encode: token lifespan  
         });    
-        await newPost.save();
+        // await newPost.save();
         // **************************************** //
         // ***    FE: SAVE POST    *** //
         // **************************************** //
@@ -83,29 +83,24 @@ exports.createBlogPost = async (req, res) => {
                 createdAt: imageData.createdAt,
                 updatedAt: imageData.updatedAt,
             });
-            return await newImage.save();
+
+            console.log('NEW IMAGE BEING CREATED = ', newImage);
+            return await newImage.save();    
         });
+
 
         // Save all images
         const savedImages = await Promise.all(imagePromises);
         console.log('Saved Images: ', savedImages);
-        
-        // Cleanly map over the objects, excluding the `_id`
-        // const cleanedImages = savedImages.map(({ _id, ...rest }) => rest);
-        // console.log(cleanedImages);
+         
 
-        const token = assignOneDayToken(savedImages._id);
-
-        // Step 3: Associate saved image IDs with the post
-        // newPost.images = savedImages.map(img => img._id); // Store image IDs in the post
+        // Save all images to Post Object
         newPost.images = savedImages;
-        // newPost.images = cleanedImages;
-
-        // newPost.images =
+      
+        
+        // Save New Post
         const newBlog = await newPost.save(); // Update the post with the image references
             
-
-
         console.log(          
             "\n*********************************************************",
             "\n*****          NEW BLOG ARTICLE DETAILS             *****",

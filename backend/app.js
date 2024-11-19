@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 // Load environment variables from .env file
 dotenv.config();
 
-const ip = process.env.ip || "192.168.98.113";
+const ip = process.env.ip || "000.000.000.419";
 const port = process.env.port || 98765;
 
 

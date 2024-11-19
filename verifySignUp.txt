@@ -1,3 +1,6 @@
+//    "homepage": "http://192.168.0.145:3000",
+
+
 // exports.verifySignUp = async (req, res) => {
 //     const AuthHeader = req.headers.authorization;
 //     if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
