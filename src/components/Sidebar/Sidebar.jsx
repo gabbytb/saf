@@ -27,7 +27,7 @@ export default function Sidebar() {
                         <i className="fas fa-bars"></i>
                     </button>
                     {/* Brand */}
-                    <Link className="md:flex outline-none justify-center text-left py-0 md:pb-0 md:pt-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0 brand" to="/">
+                    <Link className="md:flex outline-none justify-center text-left py-0 md:pb-0 md:pt-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0 brand" to="/" target="_blank">
                         <img src={brandOfficialLogo} alt="brand logo" />
                     </Link>
                     {/* Logged-in User */}
@@ -48,7 +48,7 @@ export default function Sidebar() {
                     <div className="md:min-w-full md:hidden block pb-4 mb-4 border-b border-solid border-blueGray-200">
                         <div className="flex flex-wrap">
                             <div className="w-6/12">
-                                <Link className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0" to="/">Dashboard Samuel Akinola Foundation</Link>
+                                <Link className="md:block text-left md:pb-2 text-blueGray-600 mr-0 inline-block whitespace-nowrap text-sm uppercase font-bold p-4 px-0" to="/">My Dashboard </Link>
                             </div>
                             <div className="w-6/12 flex justify-end">
                                 <button type="button" className="cursor-pointer text-black opacity-50 md:hidden px-3 py-1 text-xl leading-none bg-transparent rounded border border-solid border-transparent" onClick={() => setCollapseShow("hidden")}>

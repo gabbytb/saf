@@ -35,14 +35,14 @@ const NewBlogPost = () => {
 
     // ********************************* //
     // *** PAYLOAD FOR NEW BLOG POST *** //
-    // ********************************* //
+    // ********************************* //    
     const [post, setPost] = useState({
         // _id: null, // Assuming you'll set this when fetching or creating a post        
         title: '',
         description: ' ',
         excerpt: '',
         images: [
-            { id: 98, url: '', alt: '', featured: false }
+            { id: 99, url: '', alt: '', featured: false }
         ],  // Initialize with one image
         // author: {
         //     img: '',
@@ -81,6 +81,7 @@ const NewBlogPost = () => {
         const { name, value, type, checked } = e.target;
 
         const newImages = [...post.images];
+        
         newImages[index] = {
             ...newImages[index],
             [name]: type === 'checkbox' ? checked : value
@@ -141,7 +142,7 @@ const NewBlogPost = () => {
     // Function to handle form submission
     const handlePostFormSubmission = async (e) => {  
         
-        e.preventDefault();
+        e.preventDefault();         
 
         var payload = {
             images: post.images,
@@ -159,6 +160,7 @@ const NewBlogPost = () => {
             tags: post.tags,
             categories: post.categories, 
         };
+ 
         await api.post('/api/v1/admin/blogs/manage/create', payload) // Update the URL to your API endpoint
         .then((response) => {
             const { success, message, data } = response.data;
@@ -393,66 +395,78 @@ const NewBlogPost = () => {
 
                             {/* Featured Image */}
                             <div className="w-full lg:w-12/12 px-4">
-                                <div className="relative w-full mb-3">
-                                    <label
-                                        className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2"
-                                        htmlFor="img">
-                                        Featured Image
-                                        
-
-                                        <input
-                                                type="text"
-                                                className="border-0 px-3 py-3 mt-3 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                                                         
-                                                id="img"
-                                                name="img"                                                                              
-                                                placeholder="Enter Image URL"                                             
-                                                onChange={handlePostData}
-                                                // onChange={(e) => updateTags(e.target.value.split(','))}                                                                                                
-                                        />                                        
-                                    </label>
-                                </div>
+                                {
+                                    post.images.map((image, index) => (
+                                        <div key={index} className="relative w-full mb-3">                                               
+                                            <label className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2" htmlFor="url">Featured Image:
+                                                <input
+                                                    type="text"
+                                                    name="url"
+                                                    value={image.url}
+                                                    onChange={(e) => handleImageChange(index, e)}
+                                                />
+                                            </label>
+                                               
+                                            
+                                            <label className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2" htmlFor="alt">Alt Text:
+                                                <input
+                                                    type="text"
+                                                    name="alt"
+                                                    value={image.alt}
+                                                    onChange={(e) => handleImageChange(index, e)}
+                                                />
+                                            </label>
+                                              
+   
+                                            <label className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2" htmlFor="featured">
+                                                <input                                                  
+                                                    // className="hidden"                                                    
+                                                    type="checkbox"
+                                                    name="featured"                                                        
+                                                    checked
+                                                    onChange={(e) => handleImageChange(index, e)}
+                                                />
+                                            </label>                                               
+                                        </div>
+                                    ))
+                                }
                             </div>
 
                             {/* Post Images: Dynamic image inputs */}
-                            <div>                   
+                            <div className="w-full lg:w-12/12 px-4">                   
                                 {
                                     post.images.map((image, index) => (
-                                            <div key={index}>                                               
-                                                <div>
-                                                    <label>Image URL:
-                                                        <input
-                                                        type="text"
-                                                        name="url"
-                                                        value={image.url}
-                                                        onChange={(e) => handleImageChange(index, e)}
-                                                        />
-                                                    </label>
-                                                </div>
-                                                
-                                                
-                                                <div>
-                                                    <label>Image Alt:
-                                                        <input
-                                                        type="text"
-                                                        name="alt"
-                                                        value={image.alt}
-                                                        onChange={(e) => handleImageChange(index, e)}
-                                                        />
-                                                    </label>
-                                                </div>
-
-
-                                                <div>
-                                                    <label>Featured:
-                                                        <input
-                                                        type="checkbox"
-                                                        name="featured"                                                        
-                                                        checked={image.featured}
-                                                        onChange={(e) => handleImageChange(index, e)}
-                                                        />
-                                                    </label>
-                                                </div>
-                                            </div>
+                                        <div key={index} className="relative w-full mb-3"> 
+                                            <label className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2" htmlFor="url">Image URL:
+                                                <input
+                                                    type="text"
+                                                    name="url"
+                                                    value={image.url}
+                                                    onChange={(e) => handleImageChange(index, e)}
+                                                />
+                                            </label>
+                                               
+                                            
+                                            <label className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2" htmlFor="alt">Alt Text:
+                                                <input
+                                                    type="text"
+                                                    name="alt"
+                                                    value={image.alt}
+                                                    onChange={(e) => handleImageChange(index, e)}
+                                                />
+                                            </label>
+                                              
+   
+                                            <label className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2" htmlFor="img">
+                                                <input
+                                                    // className="hidden"
+                                                    type="checkbox"
+                                                    name="featured"                                                        
+                                                    checked={image.featured}
+                                                    onChange={(e) => handleImageChange(index, e)}
+                                                />
+                                            </label>                                               
+                                        </div>
                                     ))
                                 }
                                 <button type="button" onClick={addImageInput}>

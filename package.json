@@ -20,6 +20,7 @@
     "react-dom": "^18.3.1",
     "react-ga": "^3.3.1",
     "react-in-viewport": "^1.0.0-beta.2",
+    "react-lazy-load-image-component": "^1.6.2",
     "react-paystack": "^6.0.0",
     "react-popper": "^2.3.0",
     "react-router-dom": "^6.23.0",
@@ -31,7 +32,7 @@
   "scripts": {
     "start": "react-scripts start ",
     "build": "react-scripts build",
-    "concur": "concurrently \"npm start --prefix backend\" \"react-scripts start\"",    
+    "concur": "concurrently \"npm start --prefix backend\" \"react-scripts start\"",
     "serve": "concurrently \"npm start --prefix backend\" \"serve -s build\"",
     "style": "npx tailwindcss -i ./src/index.css -o ./public/css/style.css --watch",
     "test": "react-scripts test",

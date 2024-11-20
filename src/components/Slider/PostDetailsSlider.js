@@ -1,4 +1,3 @@
-import React from "react";
 import Slider from "react-slick";
 
 
@@ -36,13 +35,14 @@ const SamplePrevArrow = (props) => {
 
 const PostDetailsSlider = ({ blogSinglePost }) => {
 
+
     var settings = {
         dots: false,
         infinite: false,
         speed: 500,
         slidesToShow: 3,
         slidesToScroll: 1,        
-        initialSlide: 0,
+        initialSlide: 0,        
         nextArrow: <SampleNextArrow />,
         prevArrow: <SamplePrevArrow />,
         responsive: [
@@ -67,11 +67,12 @@ const PostDetailsSlider = ({ blogSinglePost }) => {
                 breakpoint: 480,
                 settings: {
                     slidesToShow: 1,
-                    slidesToScroll: 1
+                    slidesToScroll: 1,              
                 }
             }
         ]
     };
+
 
     return (
         <div className="slider-container h-full w-full">

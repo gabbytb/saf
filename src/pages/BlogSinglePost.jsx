@@ -1,10 +1,8 @@
-import { useEffect, useState, } from "react";
+import { lazy, useEffect, useState, } from "react";
 import { Link, useParams, } from "react-router-dom";
 import { HomeFooter, NavSlider, } from "../components";
 import api from "../api";
 import PostDetailsSlider from "../components/Slider/PostDetailsSlider.js";
-
-
 
 
 
