@@ -56,6 +56,9 @@ const BlogSinglePost = () => {
 
     
     // If Tags exist, seperate them with a Comma. Otherwise, show Tag is Empty.
+    const formattedCategories = blogSinglePost?.categories?.length ? blogSinglePost.categories.join(", ") : "Empty categories";  // Fallback if no tags are present  
+    console.log("Formatted Categories: ", formattedCategories);
+
     const formattedTags = blogSinglePost?.tags?.length ? blogSinglePost.tags.join(", ") : "Empty tags";  // Fallback if no tags are present  
     console.log("Formatted Tags: ", formattedTags);
 
@@ -210,11 +213,11 @@ const BlogSinglePost = () => {
                                                             <div className="pt-0 pb-6 flex flex-col gap-8">
                                                                 
                                                                 <div className="mt-0 pt-0 pb-6 text-14xl italic font-bold flex flex-col justify-center items-center gap-5">Categorized in
-                                                                    <button type="button" className="bg-gray-100 text-slate-700 px-6 py-3.5 rounded-xl border-none outline-none hover:outline-none focus:outline-none hover:border-none focus:border-none">{blogSinglePost?.categories}</button>
+                                                                    <button type="button" className="bg-gray-100 text-slate-700 px-6 py-3.5 rounded-xl border-none outline-none hover:outline-none focus:outline-none hover:border-none focus:border-none">{formattedCategories}</button>
                                                                 </div>
 
-                                                                <div className="mt-0 pt-0 pb-2 text-14xl font-bold grid grid-cols-32 gap-2 items-baseline">Tagged in: 
-                                                                    <Link to={`/blog/tags/${blogSinglePost?.tags.tags}`} className="text-xl items-start border-none outline-none hover:outline-none focus:outline-none hover:border-none focus:border-none">{formattedTags}</Link>
+                                                                <div className="mt-0 pt-0 pb-2 text-14xl font-medium grid grid-cols-32 gap-2 items-baseline">Tagged in: 
+                                                                    <Link to={`/blog/tags/${blogSinglePost?.tags}`} className="text-xl items-start border-none outline-none hover:outline-none focus:outline-none hover:border-none focus:border-none">{formattedTags}</Link>
                                                                 </div >
 
                                                                 <form onSubmit={updateComments} className="flex flex-col gap-4">
