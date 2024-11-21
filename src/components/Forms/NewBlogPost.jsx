@@ -397,7 +397,7 @@ const NewBlogPost = () => {
                             </div>                            
 
                             {/* Post Images: Dynamic image inputs */}
-                            <div className="w-full lg:w-12/12 px-4">                   
+                            <div id="postImgID" className="w-full lg:w-12/12 px-4 image_wrap">                   
                                 {
                                     post.images.map((image, index) => (
                                         <div key={index} className="relative w-full mb-3">                                                                              
@@ -421,9 +421,9 @@ const NewBlogPost = () => {
                                             </label>
 
    
-                                            <label className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2" htmlFor="img">
+                                            <label className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2 hidden" htmlFor="featured">
                                                 <input
-                                                    // className="hidden"
+                                                    className="hidden"
                                                     type="checkbox"
                                                     name="featured"                                                        
                                                     checked={image.featured}
