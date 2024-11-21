@@ -381,6 +381,13 @@
       ;
   }
 
+  main#blogSinglePost section .rendered-output p img {          
+      @apply
+          w-full
+          h-125       
+      ;
+  }
+
   #singlePostWrapper #header, 
   #blogPostsWrapper #header {
     @apply

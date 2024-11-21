@@ -125,7 +125,7 @@ const BlogSinglePost = () => {
 
 
     const [sidebarPosts, setSidebarPosts] = useState([]);
-    console.log("Sidebar Post: ", sidebarPosts);
+    // console.log("Sidebar Post: ", sidebarPosts);
   
     // eslint-disable-next-line
     const [currentPage, setCurrentPage] = useState(1);
