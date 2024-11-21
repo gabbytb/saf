@@ -56,7 +56,8 @@ const DashboardStaffs = ({ isLoggedIn }) => {
 
 
 
-    
+
+
 
     return (
         <>
@@ -69,8 +70,8 @@ const DashboardStaffs = ({ isLoggedIn }) => {
 
             {/***** RIGHT-PANEL *****/}
             <div className="relative md:ml-64 bg-blueGray-100">
-                <AdminNavbar />
-                
+                <AdminNavbar />                
+
                 {/* Header */}
                 <div className="relative bg-blue-900 md:pt-32 pb-32 pt-12">
               

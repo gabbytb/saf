@@ -1,5 +1,6 @@
 // HEADER
 import HomeNav from "./HomeNav";
+import Search from "./Search/Search";
 import Nav from "./Navbars/Nav";
 import NavSlider from "./Navbars/NavSlider";
 import NavNoTopBar from "./NavNoTopBar";
@@ -73,6 +74,7 @@ export {
 
     // PRELOADER
     Preloader,
+    Search,
     // PRELOADER
        
     // HEADER
