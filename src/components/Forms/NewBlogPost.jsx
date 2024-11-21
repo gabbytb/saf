@@ -35,14 +35,22 @@ const NewBlogPost = () => {
 
     // ********************************* //
     // *** PAYLOAD FOR NEW BLOG POST *** //
-    // ********************************* //    
+    // ********************************* //   
+    const [featuredImage, setFeaturedImage] = useState({
+        images: [
+            { url: '', alt: '', featured: true }
+        ], 
+    });
+    console.log("*** NEW FEATURED POST ***\nBlog Featured Post: ", featuredImage);
+
+
     const [post, setPost] = useState({
         // _id: null, // Assuming you'll set this when fetching or creating a post        
         title: '',
         description: ' ',
         excerpt: '',
         images: [
-            { id: 99, url: '', alt: '', featured: false }
+            { url: '', alt: '', featured: false },
         ],  // Initialize with one image
         // author: {
         //     img: '',
@@ -94,15 +102,14 @@ const NewBlogPost = () => {
     };
 
     // Add another image input
-    const addImageInput = async () => {
-        
+    const addImageInput = async () => {  
         setPost({
-            ...post,           
-            images: [
-                ...post.images,
-                { url: '', alt: '', featured: false }
-            ]
-        });
+                ...post,           
+                images: [
+                    ...post.images,
+                    { url: '', alt: '', featured: false }
+                ],
+        });    
     };
 
     // Function to update post description
@@ -239,9 +246,6 @@ const NewBlogPost = () => {
             console.error('Error saving post:', error);
         });
     };
-
-
-
 
 
 
@@ -394,41 +398,41 @@ const NewBlogPost = () => {
                             </div>
 
                             {/* Featured Image */}
-                            <div className="w-full lg:w-12/12 px-4">
-                                {
-                                    post.images.map((image, index) => (
-                                        <div key={index} className="relative w-full mb-3">                                               
-                                            <label className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2" htmlFor="url">Featured Image:
-                                                <input
-                                                    type="text"
-                                                    name="url"
-                                                    value={image.url}
-                                                    onChange={(e) => handleImageChange(index, e)}
-                                                />
-                                            </label>
-                                               
-                                            
-                                            <label className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2" htmlFor="alt">Alt Text:
-                                                <input
-                                                    type="text"
-                                                    name="alt"
-                                                    value={image.alt}
-                                                    onChange={(e) => handleImageChange(index, e)}
-                                                />
-                                            </label>
-                                              
-   
-                                            <label className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2" htmlFor="featured">
-                                                <input                                                  
-                                                    // className="hidden"                                                    
-                                                    type="checkbox"
-                                                    name="featured"                                                        
-                                                    checked
-                                                    onChange={(e) => handleImageChange(index, e)}
-                                                />
-                                            </label>                                               
-                                        </div>
-                                    ))
+                            <div className="w-full lg:w-12/12 px-4 featured-image">
+                                {                                                             
+                                    post.images.map((image, index) => (                                                                                               
+                                        <div className="relative w-full mb-3">                                               
+                                                <label className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2" htmlFor="url">Featured Image:
+                                                        <input
+                                                            type="text"
+                                                            name="url"
+                                                            value={image.url}
+                                                            onChange={(e) => handleImageChange(index, e)}
+                                                        />
+                                                </label>
+                                                    
+                                                    
+                                                <label className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2" htmlFor="alt">Alt Text:
+                                                        <input
+                                                            type="text"
+                                                            name="alt"
+                                                            value={image.alt}
+                                                            onChange={(e) => handleImageChange(index, e)}
+                                                        />
+                                                </label>
+                                                    
+        
+                                                <label className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2" htmlFor="featured">
+                                                        <input                                                  
+                                                            // className="hidden"                                                    
+                                                            type="checkbox"
+                                                            name="featured"                                                        
+                                                            checked
+                                                            onChange={(e) => handleImageChange(index, e)}
+                                                        />
+                                                </label>                                               
+                                        </div>                                                                            
+                                    ))                                        
                                 }
                             </div>
 

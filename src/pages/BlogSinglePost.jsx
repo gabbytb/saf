@@ -1,8 +1,11 @@
-import { lazy, useEffect, useState, } from "react";
+import { useEffect, useState, } from "react";
 import { Link, useParams, } from "react-router-dom";
 import { HomeFooter, NavSlider, } from "../components";
 import api from "../api";
 import PostDetailsSlider from "../components/Slider/PostDetailsSlider.js";
+
+
+
 
 
 
@@ -26,9 +29,14 @@ const convertDate = (dateString) => {
 
 
 
+
+
+
 const BlogSinglePost = () => {
 
+    
     const { slug } = useParams();
+
 
     // eslint-disable-next-line
     const [isLoading, setIsLoading] = useState(true);
@@ -36,9 +44,24 @@ const BlogSinglePost = () => {
 
 
     const [blogSinglePost, setBlogSinglePost] = useState(null);
-    // console.log("Single Post: ", blogSinglePost);
-        
+    // console.log("Single Post: ", blogSinglePost);        
+
     
+    // const formattedTagsTotal = blogSinglePost?.tags;
+    // console.log("All Formatted Tags: ", formattedTagsTotal);
+
+
+    // const formattedTagsLength = blogSinglePost?.tags?.length;
+    // console.log("Formatted Tags Length: ", formattedTagsLength);
+
+    
+    // If tags exist and are not empty, join them.
+    // Otherwise, show a message.
+    const formattedTags = blogSinglePost?.tags?.length ? blogSinglePost.tags.join(", ") : "Empty tags";  // Fallback if no tags are present  
+    console.log("Formatted Tags: ", formattedTags);
+
+    
+
     // ************************ //
     // *** FIND POST BY URL *** //
     // ************************ //
@@ -164,7 +187,7 @@ const BlogSinglePost = () => {
                                         
                         <PostDetailsSlider blogSinglePost={blogSinglePost} /> 
 
-                        <div class="w-full sm:mx-24 lg:mx-8 mt-0 lg:grid lg:grid-cols-28 gap-28">                                             
+                        <div className="w-full sm:mx-24 lg:mx-8 mt-0 lg:grid lg:grid-cols-28 gap-28">                                             
 
                             <section className="p-0 mb-24">   
                                 <div className="max-w-full mx-auto flex flex-col items-center p-0">  
@@ -192,7 +215,7 @@ const BlogSinglePost = () => {
                                                                 </div>
 
                                                                 <div className="mt-0 pt-0 pb-2 text-14xl font-bold grid grid-cols-32 gap-2 items-baseline">Tagged in: 
-                                                                    <Link to={`/blog/tags/{}`} className="text-xl items-start border-none outline-none hover:outline-none focus:outline-none hover:border-none focus:border-none">{blogSinglePost?.tags}</Link>
+                                                                    <Link to={`/blog/tags/${blogSinglePost?.tags.tags}`} className="text-xl items-start border-none outline-none hover:outline-none focus:outline-none hover:border-none focus:border-none">{formattedTags}</Link>
                                                                 </div >
 
                                                                 <form onSubmit={updateComments} className="flex flex-col gap-4">
@@ -231,12 +254,12 @@ const BlogSinglePost = () => {
 
                             <aside className="">
                                 <div className="max-w-full mx-0">                        
-                                    <div className="flex flex-wrap mx-auto gap-20 pt-10">                            
+                                    <div className="flex flex-wrap mx-auto gap-12 pt-10">                            
                                         <h2 className="text-4xl capitalize font-black pb-2 tracking-tightened border-b-2 border-b-black w-full ">Recent Posts</h2>
                                         {
                                             sidebarPosts?.map((post) => {                
                                                 return (                                        
-                                                    <div key={post?._id} className="w-full sm:w-1/2 md:w-1/3 self-stretch p-0 mb-4">
+                                                    <div key={post?._id} className="w-full sm:w-1/2 md:w-1/3 self-stretch p-0 mb-6">
                                                         <div className="rounded shadow-md h-full">                                                                                                                              
                                                                     {
                                                                         post?.images.map((item, index) => {

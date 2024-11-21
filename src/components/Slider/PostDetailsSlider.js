@@ -6,6 +6,7 @@ import Slider from "react-slick";
 
 
 
+
 const SampleNextArrow = (props) => {  
     const { className, style, onClick } = props;
   
@@ -17,7 +18,6 @@ const SampleNextArrow = (props) => {
       />
     );
 };
-
 
 const SamplePrevArrow = (props) => {
     const { className, style, onClick } = props;
@@ -31,7 +31,6 @@ const SamplePrevArrow = (props) => {
     );
 };
         
-
 
 const PostDetailsSlider = ({ blogSinglePost }) => {
 
