@@ -55,12 +55,11 @@ const BlogSinglePost = () => {
     // console.log("Formatted Tags Length: ", formattedTagsLength);
 
     
-    // If tags exist and are not empty, join them.
-    // Otherwise, show a message.
+    // If Tags exist, seperate them with a Comma. Otherwise, show Tag is Empty.
     const formattedTags = blogSinglePost?.tags?.length ? blogSinglePost.tags.join(", ") : "Empty tags";  // Fallback if no tags are present  
     console.log("Formatted Tags: ", formattedTags);
 
-    
+
 
     // ************************ //
     // *** FIND POST BY URL *** //
