@@ -89,26 +89,6 @@ export default function Sidebar() {
                                 <i className={"fas fa-book mr-4 text-2xl " + (window.location.href.indexOf("/admin/blog/manage/create") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Add New Post
                             </Link>
                         </li>
-                        <li>
-                            <div>
-                                <p  id="menu-button" aria-expanded="true" aria-haspopup="true" className={"uppercase py-3 text-xl font-bold block " + (window.location.href.indexOf("") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")}>
-                                    <i className={"fas fa-book mr-4 text-2xl " + (window.location.href.indexOf("") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Options
-                                    <svg class="-mr-1 size-5 text-gray-400" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true" data-slot="icon">
-                                        <path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z" clip-rule="evenodd" />
-                                    </svg>
-                                </p>
-                            </div>
-                            <div class="absolute right-5 z-10 mt-2 origin-top-right rounded-md bg-white shadow-lg ring-1 ring-black/5 focus:outline-none" role="menu" aria-orientation="vertical" aria-labelledby="menu-button" tabindex="-1">
-                                <div class="py-1" role="none">                               
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-0">Account settings</a>
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-1">Support</a>
-                                    <a href="#" class="block px-4 py-2 text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-2">License</a>
-                                    <form method="POST" action="#" role="none">
-                                        <button type="submit" class="block w-full px-4 py-2 text-left text-sm text-gray-700" role="menuitem" tabindex="-1" id="menu-item-3">Sign out</button>
-                                    </form>
-                                </div>
-                            </div>
-                        </li>
                           {/*<li className="items-center">
                             <Link className={"uppercase py-3 text-xl font-bold block " + (window.location.href.indexOf("/admin/tables") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/tables">
                                 <i className={"fas fa-table mr-4 text-2xl " + (window.location.href.indexOf("/admin/tables") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Tables

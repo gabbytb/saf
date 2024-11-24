@@ -12,11 +12,6 @@ import { spinner } from "../../assets/images";
 
 
 
-
-
-
-
-
 export default function CardAllStaffs({ color, }) {
 
 
@@ -279,7 +274,7 @@ export default function CardAllStaffs({ color, }) {
     };
 
 
-    
+
     return (
         <>
             <div
@@ -314,6 +309,7 @@ export default function CardAllStaffs({ color, }) {
                   </div>
                 </div>
                 {/* Page Title */}
+
 
 
                 {/* Views */}
@@ -538,14 +534,17 @@ export default function CardAllStaffs({ color, }) {
                     </div>
                     {/* Pagination controls */}
                 </div>
+
                 <Suspense fallback={<div>Loading...</div>}>                
-                  <CardAllApprovedStaffs activeDisplay={activeDisplay} />
-                </Suspense>        
+                    <CardAllApprovedStaffs activeDisplay={activeDisplay} />
+                </Suspense>       
+
                 <Suspense fallback={<div>Loading...</div>}>                            
-                  <CardAllPendingStaffs activeDisplay={activeDisplay} />
-                </Suspense>                       
+                    <CardAllPendingStaffs activeDisplay={activeDisplay} />
+                </Suspense>     
+
                 <Suspense fallback={<div>Loading...</div>}>
-                  <CardAllRejectedStaffs activeDisplay={activeDisplay} />
+                    <CardAllRejectedStaffs activeDisplay={activeDisplay} />
                 </Suspense>
                 {/* Views */}
 
@@ -556,7 +555,7 @@ export default function CardAllStaffs({ color, }) {
 
 
 CardAllStaffs.defaultProps = {
-  color: "light",
+  color: "dark",
 };
 
 CardAllStaffs.propTypes = {

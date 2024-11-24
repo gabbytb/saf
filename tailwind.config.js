@@ -197,11 +197,12 @@ module.exports = {
         '840': '84rem',
         '850': '85rem',
         '99.5': '0.1rem',
-        '100': '0.2rem',      /** Hamburger::after Height */
+        '100': '0.2rem',      /** Hamburger::after Height */        
         '114.5': '7.5rem',
         '114.8': '7.8rem',
         '126.4': '12.4rem',
         '128.6': '18.6rem',
+        '178': '2.8rem',
         '168': '3.86rem',
       },
       inset: {
