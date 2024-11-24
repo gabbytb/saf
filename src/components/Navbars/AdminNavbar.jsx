@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import UserDropdown from "../Dropdowns/UserDropdown.jsx";
 import api from "../../api.js";
+import CardAllStaffsTable from "../Cards/staffs/CardAllStaffsTable.jsx";
+
+
+
+
 
 
 
@@ -9,32 +14,36 @@ import api from "../../api.js";
 
 
 export default function AdminNavbar() {
-
+  
+  
     const [data, setData] = useState([]);
 
-    const fetchData = () => {
-        return api.get(`/api/v1/auth/account/admins`)
-        .then((response) => {
-            const { success, data, message } = response.data;
-            const { staffsList, } = data;
 
-            if (!success && message === "No staff found") {
-                console.log("Success: ", success);
-                console.log("Message: ", message);
-            };
+    const fetchData = async () => {
+        try {
+        const response = await api.get(`/api/v1/auth/account/admins`);
+        const { success, data, message } = response.data;
+        const { staffsList, } = data;
 
-            setData(staffsList);
-        })
-        .catch((error) => {
-            console.log("Error fetching data: ", error);
-        });
+        if (!success && message === "No staff found") {
+          console.log("Success: ", success);
+          console.log("Message: ", message);
+        };
+
+        setData(staffsList);
+
+        localStorage.setItem('data', JSON.stringify(data));
+      } catch (error) {
+        console.log("Error fetching data: ", error);
+      }
     };
 
     useEffect(() => {
-        // fetchData();
+        fetchData();
     }, []);
+
     
-    const [query, setQuery] = useState("");
+    const [query, setQuery] = useState('');
     const search_parameters = Object.keys(Object.assign({}, ...data));
 
     function search(data) {
@@ -43,6 +52,7 @@ export default function AdminNavbar() {
               item[parameter]?.toString()?.toLowerCase()?.includes(query)
         ));
     };
+
 
 
 
@@ -80,20 +90,7 @@ export default function AdminNavbar() {
                         <button type="submit" onSubmit={fetchData}></button>
                     </div>
 
-                    <div className="block">
-                      {search(data).map((dataObj) => {
-                          return (
-                              <div className="box">
-                                  <div className="card">
-                                      <div className="category">@{dataObj?.firstName} </div>
-                                      <div className="heading">
-                                          {dataObj?.lastName} <div className="author">{dataObj?.email}</div>
-                                      </div>
-                                  </div>
-                              </div>
-                          );
-                      })}
-                    </div>
+                     <CardAllStaffsTable search={search} allStaffs={data} />                     
                 </form>
       
                 {/* User */}
@@ -103,7 +100,8 @@ export default function AdminNavbar() {
 
               </div>
           </nav>
-          {/* End Navbar */}
+          {/* End Navbar */}       
+          
         </>
     );
 };
