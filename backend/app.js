@@ -6,7 +6,7 @@ const dotenv = require("dotenv");
 // Load environment variables from .env file
 dotenv.config();
 
-const ip = process.env.ip || "000.000.000.419";
+const ip = process.env.ip || "0.0.0.419";
 const port = process.env.port || 98765;
 
 
@@ -130,6 +130,9 @@ const options = {
     serverSelectionTimeoutMS: 45000, // Default 5/45-second timeout if the connection fails
     socketTimeoutMS: 60000, // Default 45/60-second timeout for socket operations
     autoIndex: false,
+    
+    ssl: true,
+    tls: true
 };
 
 mongoose.set("strictQuery", false);
