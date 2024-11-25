@@ -1,3 +1,4 @@
+import homebg from  "./hmobg.jpeg";
 import spinner from "./spinning.gif";
 
 import brandOfficialLogo from "./logo.jpg";
@@ -23,7 +24,9 @@ import hero4 from "./team-4-470x470.png";
 
 
 
+
 export {
+    homebg,
     spinner,
 
     brandOfficialLogo,

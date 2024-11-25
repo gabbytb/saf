@@ -2,16 +2,27 @@ import { Suspense, useState, useEffect, } from "react";
 import { Link } from "react-router-dom";
 import { googleLogout } from "@react-oauth/google";
 import PropTypes from "prop-types";
-import "../assets/styles/tailwind.css";
+
 import api from "../api";
 import { spinner } from "../assets/images";
 import sketch from "../assets/img/sketch.jpg";
+import "../assets/styles/tailwind.css";
 
 // components
-import { Sidebar, CardAllApprovedStaffs, CardAllPendingStaffs, CardAllRejectedStaffs, TableDropdown, UserDropdown} from "../components";
+import { 
+    Sidebar, 
+    CardAllApprovedStaffs, CardAllPendingStaffs, CardAllRejectedStaffs, 
+    TableDropdown, 
+    UserDropdown, 
+} from "../components";
 
 // views
 // import { StaffsTable } from "../views";
+
+
+
+
+
 
 
 
@@ -31,8 +42,6 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
-
-  
 
 
 
@@ -61,17 +70,14 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
 
 
 
-
-
-
     // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL STAFFS
     // ****************************************************************************
     const [data, setData] = useState([]);
-    console.log("ALL STAFFS: ", data);
-  
+    console.log("ALL STAFF USERS: ", data);
+
     const [totalAdminUsers, setTotalAdminUsers] = useState(null);
-    // console.log("TOTAL ADMIN USERS: ", totalAdminUsers);
+    // console.log("TOTAL STAFF USERS: ", totalAdminUsers);
         const [totalApprovedStaffs, setTotalApprovedStaffs] = useState(null);
         const [totalPendingStaffs, setTotalPendingStaffs] = useState(null);
         const [totalRejectedStaffs, setTotalRejectedStaffs] = useState(null);
@@ -80,9 +86,6 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
     const [currentPage, setCurrentPage] = useState(1);
     const limit = 10; // Number of items per page
     const leftArrow = "<", rightArrow = ">";
-
-   
-
 
 
     
@@ -93,26 +96,25 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
     const [activeDisplay, setActiveDisplay] = useState("allStaffs");
 
     useEffect(() => {
-        var allStaffsLink = document.querySelector("#staffsLinkID .allStaffs");                               
+        var allStaffsLink = document.querySelector("#staffsLinkID .allStaffs");        
         if (activeDisplay === "allStaffs") {
-            setCurrentPage(1);          
-            allStaffsLink?.classList.add("activeStaffView");           
+            setCurrentPage(1);
+            allStaffsLink?.classList?.add("activeStaffView");          
         } else {
-            allStaffsLink?.classList.remove("activeStaffView");
+            allStaffsLink?.classList.remove("activeStaffView");     
         };
     }, [activeDisplay]);
+    // ****************************************************************************
+    // ****************************************************************************  
 
-    useEffect(() => {                            
-      if (activeDisplay === "allStaffs") {
-   
-          setIsLoading(true);
 
-          // ****************************************************************************
-          // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL STAFFS
-          // ****************************************************************************             
-          async function fetchAllStaffs() {
-                await api.get(`/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}`)
-                .then((response) => {
+
+    // ****************************************************************************            // ****************************************************************************
+    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL STAFFS
+    // ****************************************************************************             
+    async function fetchAllStaffs() {
+        await api.get(`/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}`)
+        .then((response) => {
                     const { success, data, message } = response.data;
                     const { staffsList, pagination } = data;
 
@@ -122,20 +124,20 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
                     };
 
                     setData(staffsList);
-                
+     
                     setTotalAdminUsers(pagination?.staffsRecord);
                     setTotalPages(pagination?.lastPage);
-                })
-                .catch((error) => {
+        })
+        .catch((error) => {
                     console.log("Error fetching data: ", error);
-                })
-                .finally(() => {
-                    setIsLoading(false);
-                });
+        })
+        .finally(() => {
+            setIsLoading(false);
+        });
 
 
-                await api.get(`/api/v1/admin/users/manage/approvedAdmins`)
-                .then((response) => {
+        await api.get(`/api/v1/admin/users/manage/approvedAdmins`)
+        .then((response) => {
                     const { success, data, message } = response.data;              
                     if (!success && message === "No staff found") {
                         console.log("Success: ", success);
@@ -143,14 +145,14 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
                     };
     
                     setTotalApprovedStaffs(data);
-                })
-                .catch((error) => {
+        })
+        .catch((error) => {
                     console.log("Error fetching data: ", error);
-                });
+        });
 
 
-                await api.get(`/api/v1/admin/users/manage/pendingAdmins`)
-                .then((response) => {
+        await api.get(`/api/v1/admin/users/manage/pendingAdmins`)
+        .then((response) => {
                     const { success, data, message } = response.data;              
                     if (!success && message === "No staff found") {
                         console.log("Success: ", success);
@@ -158,14 +160,14 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
                     };
     
                     setTotalPendingStaffs(data);
-                })
-                .catch((error) => {
+        })
+        .catch((error) => {
                     console.log("Error fetching data: ", error);
-                });
+        });
 
 
-                await api.get(`/api/v1/admin/users/manage/rejectedAdmins`)
-                .then((response) => {
+        await api.get(`/api/v1/admin/users/manage/rejectedAdmins`)
+        .then((response) => {
                     const { success, data, message } = response.data;              
                     if (!success && message === "No staff found") {
                         console.log("Success: ", success);
@@ -173,20 +175,25 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
                     };
     
                     setTotalRejectedStaffs(data);
-                })
-                .catch((error) => {
+        })
+        .catch((error) => {
                     console.log("Error fetching data: ", error);
-                });
-          };
+        });
+    };
 
-          var timer = setTimeout(fetchAllStaffs, 500);   // Delay execution of findAllStaffs by 1800ms
-          return () => {
-                clearTimeout(timer);                  // Clean up timer if component unmounts or token changes
-          };
-      };
+    useEffect(() => {                                 
+        if (activeDisplay === "allStaffs") {
+
+            setIsLoading(true);           
+
+            var timer = setTimeout(fetchAllStaffs, 300);   // Delay execution of findAllStaffs by 1800ms
+            return () => {
+                    clearTimeout(timer);                  // Clean up timer if component unmounts or token changes
+            };
+
+        };
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
-    // ****************************************************************************
-    // ****************************************************************************
+
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
@@ -195,34 +202,9 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
 
 
 
-
-
-
-
-    const fetchData = async () => {
-   
-        try {
-
-            const response = await api.get(`/api/v1/auth/account/admins`);
-            const { success, data, message } = response.data;
-            const { staffsList, } = data;
-
-            if (!success && message === "No staff found") {
-              console.log("Success: ", success);
-              console.log("Message: ", message);
-            };
-
-            setData(staffsList);
-
-        } catch (error) {
-          console.log("Error fetching data: ", error);
-        };
-    };
-
-    useEffect(() => {
-        // fetchData();
-    }, []);
-
+    // ****************************************************************************            // ****************************************************************************
+    // Works for Search
+    // ****************************************************************************
     const [query, setQuery] = useState('');
     const search_parameters = Object.keys(Object.assign({}, ...data));
 
@@ -232,6 +214,9 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
               item[parameter]?.toString()?.toLowerCase()?.includes(query)
         ));
     };
+    // ****************************************************************************
+    // ****************************************************************************
+
 
 
 
@@ -281,7 +266,7 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
                                             placeholder="Search user"
                                     />
 
-                                    <button type="submit" onSubmit={fetchData}></button>
+                                    <button type="submit" onSubmit={fetchAllStaffs}></button>
                                 </div>                                             
                             </form>
                 
@@ -322,10 +307,10 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
         
                                     {/* Staffs Navigation */}
                                     <div id="staffsLinkID" className="flex flex-row gap-3 mt-8 mb-10 px-7">
-                                    <Link className="allStaffs activeStaffView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allStaffs")}>All ({ totalAdminUsers })</Link>
-                                    <Link className="allApprovedStaffs pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allApprovedStaffs")}>Approved ({ totalApprovedStaffs })</Link>
-                                    <Link className="allPendingStaffs pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl" onClick={() => setActiveDisplay("allPendingStaffs")}>Pending ({ totalPendingStaffs })</Link>
-                                    <Link className="allRejectedStaffs pt-3 pb-2 px-10 rounded-lg border text-xl" onClick={() => setActiveDisplay("allRejectedStaffs")}>Rejected ({ totalRejectedStaffs })</Link>
+                                        <Link className="allStaffs activeStaffView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1" onClick={() => setActiveDisplay("allStaffs")}>All <span className="off_white"> ({ totalAdminUsers })</span> </Link>
+                                        <Link className="allApprovedStaffs pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1" onClick={() => setActiveDisplay("allApprovedStaffs")}>Approved  <span className="off_white"> ({ totalApprovedStaffs })</span></Link>
+                                        <Link className="allPendingStaffs pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1" onClick={() => setActiveDisplay("allPendingStaffs")}>Pending  <span className="off_white"> ({ totalPendingStaffs })</span></Link>
+                                        <Link className="allRejectedStaffs pt-3 pb-2 px-10 rounded-lg border text-xl flex flex-row gap-1" onClick={() => setActiveDisplay("allRejectedStaffs")}>Rejected  <span className="off_white"> ({ totalRejectedStaffs })</span></Link>
                                     </div>
                                     {/* Users Navigation */}
         
@@ -479,7 +464,7 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
                                         placeholder="Search user"
                                 />
 
-                                <button type="submit" onSubmit={fetchData}></button>
+                                <button type="submit" onSubmit={fetchAllStaffs}></button>
                             </div>                                             
                         </form>
             
@@ -518,12 +503,13 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
 
                                 {/* Staffs Navigation */}
                                 <div id="staffsLinkID" className="flex flex-row gap-3 mt-8 mb-10 px-7">
-                                    <Link className="allStaffs activeStaffView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1" onClick={() => setActiveDisplay("allStaffs")}>All <span className="texture"> ({ totalAdminUsers })</span> </Link>
-                                    <Link className="allApprovedStaffs pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1" onClick={() => setActiveDisplay("allApprovedStaffs")}>Approved  <span className="texture"> ({ totalApprovedStaffs })</span></Link>
-                                    <Link className="allPendingStaffs pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1" onClick={() => setActiveDisplay("allPendingStaffs")}>Pending  <span className="texture"> ({ totalPendingStaffs })</span></Link>
-                                    <Link className="allRejectedStaffs pt-3 pb-2 px-10 rounded-lg border text-xl flex flex-row gap-1" onClick={() => setActiveDisplay("allRejectedStaffs")}>Rejected  <span className="texture"> ({ totalRejectedStaffs })</span></Link>
+                                    <Link className="allStaffs activeStaffView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1" onClick={() => setActiveDisplay("allStaffs")}>All <span className="off_white"> ({ totalAdminUsers })</span> </Link>
+                                    <Link className="allApprovedStaffs pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1" onClick={() => setActiveDisplay("allApprovedStaffs")}>Approved  <span className="off_white"> ({ totalApprovedStaffs })</span></Link>
+                                    <Link className="allPendingStaffs pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1" onClick={() => setActiveDisplay("allPendingStaffs")}>Pending  <span className="off_white"> ({ totalPendingStaffs })</span></Link>
+                                    <Link className="allRejectedStaffs pt-3 pb-2 px-10 rounded-lg border text-xl flex flex-row gap-1" onClick={() => setActiveDisplay("allRejectedStaffs")}>Rejected  <span className="off_white"> ({ totalRejectedStaffs })</span></Link>
                                 </div>
                                 {/* Users Navigation */}
+
 
                                 
                                 {/* Page Title */}
