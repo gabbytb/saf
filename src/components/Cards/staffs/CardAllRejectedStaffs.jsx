@@ -24,10 +24,12 @@ export default function CardAllRejectedStaffs({ color, activeDisplay, search, })
     // eslint-disable-next-line
     const [totalRejectedAdminUsers, setTotalRejectedAdminUsers] = useState(null);
     // console.log("TOTAL REJECTED ADMIN USERS: ", totalRejectedAdminUsers);
-    const [totalPages, setTotalPages] = useState(0);
 
+    const [totalPages, setTotalPages] = useState(0);
+    const [pageLimit, setPageLimit] = useState(undefined);     // Number of items per page
+    console.log("PAGE LIMIT: ", pageLimit);
     const [currentPage, setCurrentPage] = useState(1);
-    const limit = 10; // Number of items per page
+
     const leftArrow = "<", rightArrow = ">";
 
 
@@ -63,7 +65,7 @@ export default function CardAllRejectedStaffs({ color, activeDisplay, search, })
             // ****************************************************************************             
             async function fetchAllRejectedStaffs() {
                 const rejected = 'rejected';
-                await api.get(`/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${rejected}`)
+                await api.get(`/api/v1/auth/account/admins?page=${currentPage}&limit=${pageLimit}&status=${rejected}`)
                 .then((response) => {
                     const { success, data, message } = response.data;
                     const { staffsList, pagination } = data;
@@ -74,7 +76,8 @@ export default function CardAllRejectedStaffs({ color, activeDisplay, search, })
                     };
 
                     setAllRejectedStaffs(staffsList);
-                
+                    setPageLimit(pagination?.recordLimit);
+
                     setTotalRejectedAdminUsers(pagination?.staffsRecord);
                     setTotalPages(pagination?.lastPage);
                 })
@@ -86,12 +89,12 @@ export default function CardAllRejectedStaffs({ color, activeDisplay, search, })
                 });
             };
 
-            var timerID = setTimeout(fetchAllRejectedStaffs, 800);   // Delay execution of findAllRejectedStaffs by 1800ms
+            var timerID = setTimeout(fetchAllRejectedStaffs, 300);   // Delay execution of findAllRejectedStaffs by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         };
-    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
+    }, [activeDisplay, search, currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
     // **************************************************************************** 
     const handlePageChange = (page) => {
@@ -315,7 +318,7 @@ export default function CardAllRejectedStaffs({ color, activeDisplay, search, })
             {/* Pagination controls */}
             <div className="flex justify-between items-center py-2 mr-6">
                                     <div className="p-4 font-medium text-3xl font-firma tracking-supertight flex flex-row gap-6 items-center">
-                                        {limit} 
+                                        {pageLimit} 
                                         <div className="text-xl normal-case">Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong></div>
                                     </div>
                                     <nav className="relative z-0 inline-flex shadow-sm">

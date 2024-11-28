@@ -26,10 +26,12 @@ export default function CardAllPendingStaffs({ color, activeDisplay, search, }) 
     // console.log("TOTAL PENDING ADMIN USERS: ", totalPendingAdminUsers);
     
     const [totalPages, setTotalPages] = useState(0);
-
+    const [pageLimit, setPageLimit] = useState(undefined);     // Number of items per page
+    console.log("PAGE LIMIT: ", pageLimit);
     const [currentPage, setCurrentPage] = useState(1);
-    const limit = 10; // Number of items per page
-    const leftArrow = "<", rightArrow = ">";
+
+    const leftArrow = "<", 
+          rightArrow = ">";
 
 
 
@@ -40,7 +42,7 @@ export default function CardAllPendingStaffs({ color, activeDisplay, search, }) 
     // ****************************************************************************
     const [isLoading, setIsLoading] = useState(true);
 
-    
+
 
 
 
@@ -57,7 +59,7 @@ export default function CardAllPendingStaffs({ color, activeDisplay, search, }) 
             // ****************************************************************************             
             async function fetchAllPendingStaffs() {
                 var pendingStaffs = 'pending';
-                await api.get(`/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${pendingStaffs}`)
+                await api.get(`/api/v1/auth/account/admins?page=${currentPage}&limit=${pageLimit}&status=${pendingStaffs}`)
                 .then((response) => {
                     const { success, data, message } = response.data;
                     const { staffsList, pagination } = data;
@@ -68,7 +70,8 @@ export default function CardAllPendingStaffs({ color, activeDisplay, search, }) 
                     };
 
                     setAllPendingStaffs(staffsList);
-                
+                    setPageLimit(pagination?.recordLimit);
+
                     setTotalPendingAdminUsers(pagination?.staffsRecord);
                     setTotalPages(pagination?.lastPage);
 
@@ -81,14 +84,14 @@ export default function CardAllPendingStaffs({ color, activeDisplay, search, }) 
                 });
             };
 
-            var timerID = setTimeout(fetchAllPendingStaffs, 800);   // Delay execution of findAllStaffs by 1800ms
+            var timerID = setTimeout(fetchAllPendingStaffs, 300);   // Delay execution of findAllStaffs by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         } else {
             allPendingStaffsLink?.classList.remove("activeStaffView");
         };
-    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
+    }, [activeDisplay, search, currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
     // **************************************************************************** 
     const handlePageChange = (page) => {
@@ -98,8 +101,6 @@ export default function CardAllPendingStaffs({ color, activeDisplay, search, }) 
     // ****************************************************************************
 
     
-
-
 
 
     
@@ -189,7 +190,6 @@ export default function CardAllPendingStaffs({ color, activeDisplay, search, }) 
             </>
         );
     };
-
 
     return (
       <>
@@ -314,8 +314,8 @@ export default function CardAllPendingStaffs({ color, activeDisplay, search, }) 
             {/* Pagination controls */}
             <div className="flex justify-between items-center py-2 mr-6">
                 <div className="p-4 font-medium text-3xl font-firma tracking-supertight flex flex-row gap-6 items-center">
-                                        {limit} 
-                                        <div className="text-xl normal-case">Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong></div>
+                    {pageLimit} 
+                    <div className="text-xl normal-case">Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong></div>
                 </div>
                 
                 <nav className="relative z-0 inline-flex shadow-sm">

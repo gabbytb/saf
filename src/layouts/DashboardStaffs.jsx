@@ -87,31 +87,39 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
         const [totalRejectedStaffs, setTotalRejectedStaffs] = useState(null);
 
     const [totalPages, setTotalPages] = useState(0);
-    const [pageLimit, setPageLimit] = useState(undefined);     // Number of items per page
-    console.log("PAGE LIMIT: ", pageLimit);
+    const [pageLimit, setPageLimit] = useState(undefined); // Number of items to display per page
     const [currentPage, setCurrentPage] = useState(1);  
    
 
 
 
 
-    
+    // ****************************************************************************
+    // Works for Search
+    // ****************************************************************************
+    const [query, setQuery] = useState('');
+    const search_parameters = Object.keys(Object.assign({}, ...data));
+
+    function search(data) {
+        return data?.filter((item) =>
+            search_parameters.some((parameter) =>
+              item[parameter]?.toString()?.toLowerCase()?.includes(query)
+        ));
+    };
+    // ****************************************************************************
+    // ****************************************************************************
+
+
+
+
+
     // ****************************************************************************
     // MANAGE STATE:-  SPECIAL FEATURES
     // ****************************************************************************
     const [isLoading, setIsLoading] = useState(true);
     const [activeDisplay, setActiveDisplay] = useState("allStaffs");
-    const leftArrow = "<", rightArrow = ">";
-
-    useEffect(() => {
-        var allStaffsLink = document.querySelector("#staffsLinkID .allStaffs");        
-        if (activeDisplay === "allStaffs") {
-            setCurrentPage(1);
-            allStaffsLink?.classList?.add("activeStaffView");          
-        } else {
-            allStaffsLink?.classList.remove("activeStaffView");     
-        };
-    }, [activeDisplay]);
+    const leftArrow = "<", 
+          rightArrow = ">";
     // ****************************************************************************
     // ****************************************************************************  
 
@@ -122,7 +130,17 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
     // ****************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL STAFFS
     // ****************************************************************************             
-    async function fetchAllStaffs() {
+    useEffect(() => {
+        var allStaffsLink = document.querySelector("#staffsLinkID .allStaffs");        
+        if (activeDisplay === "allStaffs") {
+            setCurrentPage(1);
+            allStaffsLink?.classList?.add("activeStaffView");          
+        } else {
+            allStaffsLink?.classList.remove("activeStaffView");     
+        };
+    }, [activeDisplay]);
+    
+    const fetchAllStaffs = async () =>  {
         await api.get(`/api/v1/auth/account/admins?page=${currentPage}&limit=${pageLimit}`)
         .then((response) => {
                     const { success, data, message } = response.data;
@@ -210,29 +228,6 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
     };
     // ****************************************************************************
     // ****************************************************************************
-
-
-
-    
-
-    // ****************************************************************************
-    // Works for Search
-    // ****************************************************************************
-    const [query, setQuery] = useState('');
-    const search_parameters = Object.keys(Object.assign({}, ...data));
-
-    function search(data) {
-        return data?.filter((item) =>
-            search_parameters.some((parameter) =>
-              item[parameter]?.toString()?.toLowerCase()?.includes(query)
-        ));
-    };
-    // ****************************************************************************
-    // ****************************************************************************
-
-
-
-
 
 
 
@@ -434,8 +429,6 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
             </>
         );
     };
-
-
 
     return (
         <>
@@ -788,8 +781,6 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
 };
 
 export default DashboardStaffs;
-
-
 
 DashboardStaffs.defaultProps = {
     color: "dark",

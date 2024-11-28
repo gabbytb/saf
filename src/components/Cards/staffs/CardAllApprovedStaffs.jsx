@@ -26,9 +26,10 @@ export default function CardAllApprovedStaffs({ color, activeDisplay, search, })
     // console.log("TOTAL APPROVED ADMIN USERS: ", totalApprovedAdminUsers);
     
     const [totalPages, setTotalPages] = useState(0);
-
+    const [pageLimit, setPageLimit] = useState(undefined);     // Number of items per page
+    console.log("PAGE LIMIT: ", pageLimit);
     const [currentPage, setCurrentPage] = useState(1);
-    const limit = 10; // Number of items per page
+
     const leftArrow = "<", rightArrow = ">";
 
 
@@ -55,7 +56,7 @@ export default function CardAllApprovedStaffs({ color, activeDisplay, search, })
             // ****************************************************************************             
             async function fetchAllApprovedStaffs() {
                 var approvedStaffs = 'approved';
-                await api.get(`/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}&status=${approvedStaffs}`)
+                await api.get(`/api/v1/auth/account/admins?page=${currentPage}&limit=${pageLimit}&status=${approvedStaffs}`)
                 .then((response) => {
                     const { success, data, message } = response.data;
                     const { staffsList, pagination } = data;
@@ -66,7 +67,8 @@ export default function CardAllApprovedStaffs({ color, activeDisplay, search, })
                     };
 
                     setAllApprovedUsers(staffsList);
-                
+                    setPageLimit(pagination?.recordLimit);
+
                     setTotalApprovedAdminUsers(pagination?.staffsRecord);
                     setTotalPages(pagination?.lastPage);
                     
@@ -79,14 +81,14 @@ export default function CardAllApprovedStaffs({ color, activeDisplay, search, })
                 });
             };
 
-            var timerID = setTimeout(fetchAllApprovedStaffs, 800);   // Delay execution of findAllStaffs by 1800ms
+            var timerID = setTimeout(fetchAllApprovedStaffs, 300);   // Delay execution of findAllStaffs by 1800ms
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         } else {
             allApprovedStaffsLink?.classList.remove("activeStaffView");
         };
-    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
+    }, [activeDisplay, search, currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
     // **************************************************************************** 
     const handlePageChange = (page) => {
@@ -257,10 +259,10 @@ export default function CardAllApprovedStaffs({ color, activeDisplay, search, })
                 </tr>
               </thead>
               {
-                allApprovedStaffs?.length !== 0 ?
+                 search(allApprovedStaffs)?.length !== 0 ?
                   <tbody>                                                    
                     {
-                        search(allApprovedStaffs)?.map((user, userIndex) => {                           
+                        allApprovedStaffs?.map((user, userIndex) => {                           
                             return (
                                 <tr key={userIndex}>
                                     <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
@@ -312,7 +314,7 @@ export default function CardAllApprovedStaffs({ color, activeDisplay, search, })
             {/* Pagination controls */}
             <div className="flex justify-between items-center py-2 mr-6">
                 <div className="p-4 font-medium text-3xl font-firma tracking-supertight flex flex-row gap-6 items-center">
-                    {limit} 
+                    {pageLimit} 
                     <div className="text-xl normal-case">Page 
                         <strong>{currentPage}</strong> of <strong>{totalPages}</strong>
                     </div>

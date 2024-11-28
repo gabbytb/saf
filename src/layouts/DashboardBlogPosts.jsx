@@ -119,7 +119,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL STAFFS
     // ****************************************************************************             
     async function fetchAllBlogPosts() {
-        await api.get(`/api/v1/auth/account/admins?page=${currentPage}&limit=${pageLimit}`)
+        await api.get(`/api/v1/admin/blogs/manage?page=${currentPage}&limit=${pageLimit}`)
         .then((response) => {
                     const { success, data, message } = response.data;
                     const { staffsList, pagination } = data;
