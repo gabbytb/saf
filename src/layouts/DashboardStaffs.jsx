@@ -760,13 +760,13 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
                                     {/* Pagination controls */}
                                 </div>
                                 <Suspense fallback={<div>Loading...</div>}>                
-                                    <CardAllApprovedStaffs color={color} activeDisplay={activeDisplay} search={search} />
+                                    <CardAllApprovedStaffs color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
                                 </Suspense>       
                                 <Suspense fallback={<div>Loading...</div>}>                            
-                                    <CardAllPendingStaffs color={color} activeDisplay={activeDisplay} search={search} />
+                                    <CardAllPendingStaffs color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
                                 </Suspense>     
                                 <Suspense fallback={<div>Loading...</div>}>
-                                    <CardAllRejectedStaffs color={color} activeDisplay={activeDisplay} search={search} />
+                                    <CardAllRejectedStaffs color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
                                 </Suspense>
                                 {/* Views */}
 

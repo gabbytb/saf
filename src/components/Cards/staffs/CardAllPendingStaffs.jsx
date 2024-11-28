@@ -12,7 +12,7 @@ import { spinner } from "../../../assets/images";
 
 
 
-export default function CardAllPendingStaffs({ color, activeDisplay, search, }) {
+export default function CardAllPendingStaffs({ color, activeDisplay, search, pageLimit }) {
 
 
     // ****************************************************************************
@@ -26,8 +26,10 @@ export default function CardAllPendingStaffs({ color, activeDisplay, search, }) 
     // console.log("TOTAL PENDING ADMIN USERS: ", totalPendingAdminUsers);
     
     const [totalPages, setTotalPages] = useState(0);
-    const [pageLimit, setPageLimit] = useState(undefined);     // Number of items per page
+    
+    // Number of items per page
     console.log("PAGE LIMIT: ", pageLimit);
+
     const [currentPage, setCurrentPage] = useState(1);
 
     const leftArrow = "<", 
@@ -70,7 +72,6 @@ export default function CardAllPendingStaffs({ color, activeDisplay, search, }) 
                     };
 
                     setAllPendingStaffs(staffsList);
-                    setPageLimit(pagination?.recordLimit);
 
                     setTotalPendingAdminUsers(pagination?.staffsRecord);
                     setTotalPages(pagination?.lastPage);

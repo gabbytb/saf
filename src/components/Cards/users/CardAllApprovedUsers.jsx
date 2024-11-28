@@ -16,7 +16,7 @@ import { spinner } from "../../../assets/images";
 
 
 
-export default function CardAllApprovedUsers({ color, activeDisplay, search, }) {
+export default function CardAllApprovedUsers({ color, activeDisplay, search, pageLimit }) {
 
 
     // ****************************************************************************
@@ -30,10 +30,14 @@ export default function CardAllApprovedUsers({ color, activeDisplay, search, }) 
     // console.log("TOTAL USERS: ", totalUsers);
 
     const [totalPages, setTotalPages] = useState(0);
+    
+    // Number of items per page
+    console.log("PAGE LIMIT: ", pageLimit);
+
     const [currentPage, setCurrentPage] = useState(1);
 
-    const limit = 10; // Number of items per page
-    const leftArrow = "<", rightArrow = ">";
+    const leftArrow = "<",
+          rightArrow = ">";
 
   
 
@@ -57,7 +61,7 @@ export default function CardAllApprovedUsers({ color, activeDisplay, search, }) 
             // ****************************************************************************             
             async function fetchAllApprovedUsers() {
                 var approved = 'approved';
-                await api.get(`/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}&status=${approved}`)
+                await api.get(`/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${pageLimit}&status=${approved}`)
                 .then((response) => {
                     const { success, data, message } = response.data;
                     const { usersList, pagination } = data;
@@ -89,7 +93,7 @@ export default function CardAllApprovedUsers({ color, activeDisplay, search, }) 
         } else {
             allApprovedUsersLink?.classList.remove("activeUserView");
         };
-    }, [activeDisplay, currentPage]); // Fetch data when activeDisplay and currentPage changes
+    }, [activeDisplay, search, currentPage]); // Fetch data when activeDisplay and currentPage changes
     // ****************************************************************************
     // **************************************************************************** 
     const handlePageChange = (page) => {
@@ -193,9 +197,10 @@ export default function CardAllApprovedUsers({ color, activeDisplay, search, }) 
       <>
           <div className={`w-full overflow-x-auto ${activeDisplay === "allApprovedUsers" ? "block" : "hidden"}`}>
             
-              <div className={`${errorMessage }`}>
+            <div className={`${errorMessage }`}>
                   <div>{errorMessage}</div>
-              </div>
+            </div>
+
 
             {/* Projects table */}
             <table className="items-center w-full bg-transparent border-collapse">
@@ -262,7 +267,7 @@ export default function CardAllApprovedUsers({ color, activeDisplay, search, }) 
                   </tr>
               </thead>
               {
-                allApprovedUsers?.length !== 0 ?
+                search(allApprovedUsers)?.length !== 0 ?
                   <tbody>                                                    
                     {
                         search(allApprovedUsers)?.map((user, userIndex) =>  {                       
@@ -317,7 +322,7 @@ export default function CardAllApprovedUsers({ color, activeDisplay, search, }) 
             {/* Pagination controls */}
             <div className="flex justify-between items-center py-2 mr-6">
                                     <div className="p-4 font-medium text-3xl font-firma tracking-supertight flex flex-row gap-6 items-center">
-                                        {limit} 
+                                        {pageLimit} 
                                         <div className="text-xl normal-case">Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong></div>
                                     </div>
 

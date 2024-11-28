@@ -12,7 +12,7 @@ import { spinner } from "../../../assets/images";
 
 
 
-export default function CardAllRejectedStaffs({ color, activeDisplay, search, }) {
+export default function CardAllRejectedStaffs({ color, activeDisplay, search, pageLimit }) {
 
 
     // ****************************************************************************
@@ -26,8 +26,10 @@ export default function CardAllRejectedStaffs({ color, activeDisplay, search, })
     // console.log("TOTAL REJECTED ADMIN USERS: ", totalRejectedAdminUsers);
 
     const [totalPages, setTotalPages] = useState(0);
-    const [pageLimit, setPageLimit] = useState(undefined);     // Number of items per page
+    
+    // Number of items per page
     console.log("PAGE LIMIT: ", pageLimit);
+
     const [currentPage, setCurrentPage] = useState(1);
 
     const leftArrow = "<", rightArrow = ">";
@@ -76,7 +78,6 @@ export default function CardAllRejectedStaffs({ color, activeDisplay, search, })
                     };
 
                     setAllRejectedStaffs(staffsList);
-                    setPageLimit(pagination?.recordLimit);
 
                     setTotalRejectedAdminUsers(pagination?.staffsRecord);
                     setTotalPages(pagination?.lastPage);

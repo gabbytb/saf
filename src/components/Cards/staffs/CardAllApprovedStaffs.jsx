@@ -12,7 +12,7 @@ import { spinner } from "../../../assets/images";
 
 
 
-export default function CardAllApprovedStaffs({ color, activeDisplay, search, }) {
+export default function CardAllApprovedStaffs({ color, activeDisplay, search, pageLimit }) {
 
 
     // ****************************************************************************
@@ -26,11 +26,14 @@ export default function CardAllApprovedStaffs({ color, activeDisplay, search, })
     // console.log("TOTAL APPROVED ADMIN USERS: ", totalApprovedAdminUsers);
     
     const [totalPages, setTotalPages] = useState(0);
-    const [pageLimit, setPageLimit] = useState(undefined);     // Number of items per page
+  
+    // Number of items per page
     console.log("PAGE LIMIT: ", pageLimit);
+
     const [currentPage, setCurrentPage] = useState(1);
 
-    const leftArrow = "<", rightArrow = ">";
+    const leftArrow = "<", 
+          rightArrow = ">";
 
 
 
@@ -66,8 +69,7 @@ export default function CardAllApprovedStaffs({ color, activeDisplay, search, })
                         console.log("Message: ", message);
                     };
 
-                    setAllApprovedUsers(staffsList);
-                    setPageLimit(pagination?.recordLimit);
+                    setAllApprovedUsers(staffsList);                   
 
                     setTotalApprovedAdminUsers(pagination?.staffsRecord);
                     setTotalPages(pagination?.lastPage);

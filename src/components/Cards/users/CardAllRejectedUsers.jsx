@@ -13,7 +13,7 @@ import { spinner } from "../../../assets/images";
 
 
 
-export default function CardAllRejectedUsers({ color, activeDisplay, search, }) {
+export default function CardAllRejectedUsers({ color, activeDisplay, search, pageLimit }) {
 
 
     // ****************************************************************************
@@ -35,8 +35,12 @@ export default function CardAllRejectedUsers({ color, activeDisplay, search, }) 
     const [totalPages, setTotalPages] = useState(0);
 
     const [currentPage, setCurrentPage] = useState(1);
-    const limit = 10; // Number of items per page
-    const leftArrow = "<", rightArrow = ">";
+    
+    // Number of items per page
+    console.log("PAGE LIMIT: ", pageLimit);
+
+    const leftArrow = "<", 
+          rightArrow = ">";
 
   
     useEffect(() => {
@@ -60,7 +64,7 @@ export default function CardAllRejectedUsers({ color, activeDisplay, search, }) 
             // ****************************************************************************             
             async function fetchAllRejectedUsers() {
                 var approved = 'rejected';
-                await api.get(`/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${limit}&status=${approved}`)
+                await api.get(`/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${pageLimit}&status=${approved}`)
                 .then((response) => {
                     const { success, data, message } = response.data;
                     const { usersList, pagination } = data;
@@ -88,7 +92,7 @@ export default function CardAllRejectedUsers({ color, activeDisplay, search, }) 
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
         };
-    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
+    }, [activeDisplay, search, currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
     // **************************************************************************** 
     const handlePageChange = (page) => {
@@ -257,7 +261,7 @@ export default function CardAllRejectedUsers({ color, activeDisplay, search, }) 
                       </tr>
               </thead>  
               {
-                allRejectedUsers?.length !== 0 ?
+                search(allRejectedUsers)?.length !== 0 ?
                   <tbody>                                                    
                     {
                         search(allRejectedUsers)?.map((user, userIndex) => {                      
@@ -312,7 +316,7 @@ export default function CardAllRejectedUsers({ color, activeDisplay, search, }) 
             {/* Pagination controls */}
             <div className="flex justify-between items-center py-2 mr-6">
                                     <div className="p-4 font-medium text-3xl font-firma tracking-supertight flex flex-row gap-6 items-center">
-                                        {limit} 
+                                        {pageLimit} 
                                         <div className="text-xl normal-case">Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong></div>
                                     </div>
 
