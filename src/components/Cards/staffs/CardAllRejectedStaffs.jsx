@@ -200,7 +200,7 @@ export default function CardAllRejectedStaffs({ color, activeDisplay, search, })
           <div className={`w-full overflow-x-auto ${activeDisplay === "allRejectedStaffs" ? "block" : "hidden"}`}>
             {/* Projects table */}
             <table className="items-center w-full bg-transparent border-collapse">
-              <thead>
+              <thead> 
                 <tr>
                   <th
                     className={
@@ -263,10 +263,10 @@ export default function CardAllRejectedStaffs({ color, activeDisplay, search, })
                 </tr>
               </thead>
               {
-                 search(allRejectedStaffs)?.length !== 0 ?
+                search(allRejectedStaffs)?.length !== 0 ?
                   <tbody>                                                    
                     {
-                        allRejectedStaffs?.map((user, userIndex) => {       
+                        search(allRejectedStaffs)?.map((user, userIndex) => {       
                             return (
                                 <tr key={userIndex}>
                                     <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">

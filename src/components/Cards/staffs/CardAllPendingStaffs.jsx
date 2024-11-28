@@ -262,7 +262,7 @@ export default function CardAllPendingStaffs({ color, activeDisplay, search, }) 
                 search(allPendingStaffs)?.length !== 0 ?
                   <tbody>                                                    
                     {
-                        allPendingStaffs?.map((user, userIndex) => {                    
+                        search(allPendingStaffs)?.map((user, userIndex) => {                    
                             return (                        
                                 <tr key={userIndex}>
                                     <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
@@ -286,7 +286,7 @@ export default function CardAllPendingStaffs({ color, activeDisplay, search, }) 
                                       <i className="fas fa-circle text-orange-400 mr-2"></i>{user?.status}
                                     </td>                  
                                     <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
-                                        <Link to={`/admin/staffs/${user._id}`}>View details</Link>
+                                        <Link to={`/admin/staffs/${user?._id}`}>View details</Link>
                                     </td>    
                                     <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
                                       <TableDropdown />

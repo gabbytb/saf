@@ -604,7 +604,7 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
                                         </tr>
                                         </thead>
                                         {
-                                            data?.length !== 0 ?
+                                             search(data)?.length !== 0 ?
                                                 <tbody>                                                    
                                                     {
                                                         search(data)?.map((user, userIndex) => {

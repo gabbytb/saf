@@ -259,10 +259,10 @@ export default function CardAllApprovedStaffs({ color, activeDisplay, search, })
                 </tr>
               </thead>
               {
-                 search(allApprovedStaffs)?.length !== 0 ?
+                search(allApprovedStaffs)?.length !== 0 ?
                   <tbody>                                                    
                     {
-                        allApprovedStaffs?.map((user, userIndex) => {                           
+                         search(allApprovedStaffs)?.map((user, userIndex) => {                           
                             return (
                                 <tr key={userIndex}>
                                     <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
