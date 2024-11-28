@@ -1,6 +1,5 @@
 import { useEffect, useState, } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import api from "../../../api";
 import sketch from '../../../assets/img/sketch.jpg';
 
@@ -13,8 +12,7 @@ import { spinner } from "../../../assets/images";
 
 
 
-
-export default function CardAllRejectedStaffs({ color, activeDisplay }) {
+export default function CardAllRejectedStaffs({ color, activeDisplay, search, }) {
 
 
     // ****************************************************************************
@@ -22,6 +20,7 @@ export default function CardAllRejectedStaffs({ color, activeDisplay }) {
     // ****************************************************************************
     const [allRejectedStaffs, setAllRejectedStaffs] = useState([]);
     // console.log("ALL REJECTED ADMIN USERS: ", allRejectedStaffs);
+
     // eslint-disable-next-line
     const [totalRejectedAdminUsers, setTotalRejectedAdminUsers] = useState(null);
     // console.log("TOTAL REJECTED ADMIN USERS: ", totalRejectedAdminUsers);
@@ -32,12 +31,17 @@ export default function CardAllRejectedStaffs({ color, activeDisplay }) {
     const leftArrow = "<", rightArrow = ">";
 
 
+
     
     
     // ****************************************************************************
     // MANAGE STATE:-  SPECIAL FEATURES
     // ****************************************************************************
     const [isLoading, setIsLoading] = useState(true);
+    
+
+
+
     
     useEffect(() => {
       var allRejectedStaffsLink = document.querySelector("#staffsLinkID .allRejectedStaffs");
@@ -256,7 +260,7 @@ export default function CardAllRejectedStaffs({ color, activeDisplay }) {
                 </tr>
               </thead>
               {
-                allRejectedStaffs?.length !== 0 ?
+                 search(allRejectedStaffs)?.length !== 0 ?
                   <tbody>                                                    
                     {
                         allRejectedStaffs?.map((user, userIndex) => {       
@@ -348,12 +352,4 @@ export default function CardAllRejectedStaffs({ color, activeDisplay }) {
           </div>       
       </>
     );
-};
-
-CardAllRejectedStaffs.defaultProps = {
-  color: "light",
-};
-
-CardAllRejectedStaffs.propTypes = {
-  color: PropTypes.oneOf(["light", "dark"]),
 };

@@ -28,7 +28,7 @@ import {
 
 
 
-const DashboardStaffs = ({ color, isLoggedIn }) => {
+const DashboardBlogPosts = ({ color, isLoggedIn }) => {
 
    
     // *************************** //
@@ -36,14 +36,12 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
     // *************************** //
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "Staffs Dashboard", siteTitle = "Samuel Akinola Foundation";
+        const pageTitle = "Blog Posts", siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
     }, []);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
-
-
 
 
 
@@ -72,27 +70,28 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
 
 
 
-
-
     // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL STAFFS
     // ****************************************************************************
-    const [data, setData] = useState([]);
-    console.log("LIST OF COMPANY STAFFS: ", data);
+    const [blogPosts, setBlogPosts] = useState([]);
+    console.log("ALL BLOG POSTS: ", blogPosts);
 
-    const [totalAdminUsers, setTotalAdminUsers] = useState(null);
-    // console.log("TOTAL STAFF USERS: ", totalAdminUsers);
-        const [totalApprovedStaffs, setTotalApprovedStaffs] = useState(null);
-        const [totalPendingStaffs, setTotalPendingStaffs] = useState(null);
-        const [totalRejectedStaffs, setTotalRejectedStaffs] = useState(null);
+    const [totalBlogPosts, setTotalBlogPosts] = useState(null);
+    // console.log("TOTAL BLOG POSTS: ", totalBlogPosts);
+
+        // const [totalApprovedStaffs, setTotalApprovedStaffs] = useState(null);
+        // const [totalPendingStaffs, setTotalPendingStaffs] = useState(null);
+        // const [totalRejectedStaffs, setTotalRejectedStaffs] = useState(null);
 
     const [totalPages, setTotalPages] = useState(0);
-    const [pageLimit, setPageLimit] = useState(undefined);     // Number of items per page
+
+    // Number of items per page
+    const [pageLimit, setPageLimit] = useState(undefined);
     console.log("PAGE LIMIT: ", pageLimit);
-    const [currentPage, setCurrentPage] = useState(1);  
+
+    const [currentPage, setCurrentPage] = useState(1);
    
-
-
+    const leftArrow = "<", rightArrow = ">";
 
 
     
@@ -100,8 +99,7 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
     // MANAGE STATE:-  SPECIAL FEATURES
     // ****************************************************************************
     const [isLoading, setIsLoading] = useState(true);
-    const [activeDisplay, setActiveDisplay] = useState("allStaffs");
-    const leftArrow = "<", rightArrow = ">";
+    const [activeDisplay, setActiveDisplay] = useState("blogPosts");
 
     useEffect(() => {
         var allStaffsLink = document.querySelector("#staffsLinkID .allStaffs");        
@@ -117,12 +115,10 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
 
 
 
-
-          
-    // ****************************************************************************
+    // ****************************************************************************            // ****************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL STAFFS
     // ****************************************************************************             
-    async function fetchAllStaffs() {
+    async function fetchAllBlogPosts() {
         await api.get(`/api/v1/auth/account/admins?page=${currentPage}&limit=${pageLimit}`)
         .then((response) => {
                     const { success, data, message } = response.data;
@@ -133,7 +129,7 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
                         console.log("Message: ", message);
                     };
 
-                    setData(staffsList);
+                    setBlogPosts(staffsList);
                     setPageLimit(pagination?.recordLimit);
 
                     setTotalAdminUsers(pagination?.staffsRecord);
@@ -147,7 +143,7 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
         });
 
 
-        await api.get(`/api/v1/admin/users/manage/approvedAdmins`)
+        await api.get(`/api/v1/admin/posts/manage/publishedPosts`)
         .then((response) => {
                     const { success, data, message } = response.data;              
                     if (!success && message === "No staff found") {
@@ -162,7 +158,7 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
         });
 
 
-        await api.get(`/api/v1/admin/users/manage/pendingAdmins`)
+        await api.get(`/api/v1/admin/posts/manage/draftPosts`)
         .then((response) => {
                     const { success, data, message } = response.data;              
                     if (!success && message === "No staff found") {
@@ -177,7 +173,7 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
         });
 
 
-        await api.get(`/api/v1/admin/users/manage/rejectedAdmins`)
+        await api.get(`/api/v1/admin/users/manage/scheduledPosts`)
         .then((response) => {
                     const { success, data, message } = response.data;              
                     if (!success && message === "No staff found") {
@@ -193,11 +189,11 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
     };
 
     useEffect(() => {                                 
-        if (activeDisplay === "allStaffs") {
+        if (activeDisplay === "blogPosts") {
 
             setIsLoading(true);           
 
-            var timer = setTimeout(fetchAllStaffs, 300);   // Delay execution of findAllStaffs by 1800ms
+            var timer = setTimeout(fetchAllBlogPosts, 300);   // Delay execution of findAllStaffs by 1800ms
             return () => {
                     clearTimeout(timer);                  // Clean up timer if component unmounts or token changes
             };
@@ -211,11 +207,9 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
     // ****************************************************************************
     // ****************************************************************************
 
-
-
     
 
-    // ****************************************************************************
+    // ****************************************************************************            // ****************************************************************************
     // Works for Search
     // ****************************************************************************
     const [query, setQuery] = useState('');
@@ -504,7 +498,7 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
                 </div>
 
 
-                 {/* Users Table */}
+                 {/* Admins Table */}
                 <div className="px-4 md:px-10 mx-auto w-full -m-24">               
                     <div className="flex flex-wrap mt-4">
                         <div className="w-full mb-12 px-4">         
@@ -787,14 +781,14 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
     );
 };
 
-export default DashboardStaffs;
+export default DashboardBlogPosts;
 
 
 
-DashboardStaffs.defaultProps = {
+DashboardBlogPosts.defaultProps = {
     color: "dark",
 };
   
-DashboardStaffs.propTypes = {
+DashboardBlogPosts.propTypes = {
     color: PropTypes.oneOf(["light", "dark"]),
 };

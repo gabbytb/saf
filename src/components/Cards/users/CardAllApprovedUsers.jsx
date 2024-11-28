@@ -1,6 +1,5 @@
 import { useEffect, useState, } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import api from "../../../api";
 import sketch from '../../../assets/img/sketch.jpg';
 
@@ -17,7 +16,7 @@ import { spinner } from "../../../assets/images";
 
 
 
-export default function CardAllApprovedUsers({ color, activeDisplay, }) {
+export default function CardAllApprovedUsers({ color, activeDisplay, search, }) {
 
 
     // ****************************************************************************
@@ -44,7 +43,7 @@ export default function CardAllApprovedUsers({ color, activeDisplay, }) {
     const [isLoading, setIsLoading] = useState(true);
     const [errorMessage, setErrorMessage] = useState(true);
 
-
+ 
     
     useEffect(() => {
         var allApprovedUsersLink = document.querySelector("#usersLinkID .allApprovedUsers");        // console.log("ALL USERS LINK", allUsersLink);    
@@ -100,7 +99,7 @@ export default function CardAllApprovedUsers({ color, activeDisplay, }) {
     // ****************************************************************************
 
 
-
+    
 
 
     if (isLoading) {
@@ -266,7 +265,7 @@ export default function CardAllApprovedUsers({ color, activeDisplay, }) {
                 allApprovedUsers?.length !== 0 ?
                   <tbody>                                                    
                     {
-                        allApprovedUsers?.map((user, userIndex) =>  {                       
+                        search(allApprovedUsers)?.map((user, userIndex) =>  {                       
                             return (
                                 <tr key={userIndex}>
                                     <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
@@ -356,12 +355,4 @@ export default function CardAllApprovedUsers({ color, activeDisplay, }) {
           </div>       
       </>
     );
-};
-
-CardAllApprovedUsers.defaultProps = {
-  color: "light",
-};
-
-CardAllApprovedUsers.propTypes = {
-  color: PropTypes.oneOf(["light", "dark"]),
 };

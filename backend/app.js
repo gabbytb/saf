@@ -3,7 +3,7 @@ const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 
-// Load environment variables from .env file
+// Load environment variables from .env file.
 dotenv.config();
 
 const ip = process.env.ip || "0.0.0.419";
@@ -21,20 +21,22 @@ const db = require("./models");
 const authSource = db.url;
 
 
-//   CLOUD CONFIGURATION
-const username = process.env.MONGO_DB_USERNAME || "userName";
-const authbinder = process.env.MONGO_DB_PLANNER || "serverAuthBinder";
-const password = process.env.MONGO_DB_PASSWORD || "usersPass";
-const host = process.env.MONGO_DB_HOST || "serverHost";
-const defaultauthdb = process.env.MONGO_DB_CLOUD_DATABASE || "serverAuthDatabase";
+//   CLOUD CONFIG.
+// const username = process.env.MONGO_DB_USERNAME || "userName";
+// const authbinder = process.env.MONGO_DB_PLANNER || "serverAuthBinder";
+// const password = process.env.MONGO_DB_PASSWORD || "usersPass";
+// const host = process.env.MONGO_DB_HOST || "serverHost";
+// const defaultauthdb = process.env.MONGO_DB_CLOUD_DATABASE || "serverAuthDatabase";
 
-//   LOCAL CONFIGURATION
-// const defaultauthdb = process.env.MONGO_DB_DATABASE || "localDatabase";
+//   CLOUD DB CONN.
+// const mongoURI = authSource + username + authbinder + password + host + defaultauthdb || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
 
 
-const mongoURI = authSource + username + authbinder + password + host + defaultauthdb || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
-// const mongoURI =  authSource + defaultauthdb || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
+//   LOCAL CONFIG.
+const defaultauthdb = process.env.MONGO_DB_DATABASE || "localDatabase";
 
+//   LOCAL DB CONN.
+const mongoURI =  authSource + defaultauthdb || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
 
 
 
@@ -130,9 +132,9 @@ const options = {
     serverSelectionTimeoutMS: 45000, // Default 5/45-second timeout if the connection fails
     socketTimeoutMS: 60000, // Default 45/60-second timeout for socket operations
     autoIndex: false,
-    
-    ssl: true,
-    tls: true
+
+    // ssl: true,
+    // tls: true
 };
 
 mongoose.set("strictQuery", false);
@@ -141,8 +143,7 @@ mongoose.connect(mongoURI, options)
     _DB = client; // you can also use this "client.db();"
     console.log("************************************************",
         "\n*********     DATABASE CONNECTION     **********",
-        `\n************************************************`,
-        // `\n\nCONNECTED TO DATABASE: ${authSource}${defaultauthdb}\n`);
+        `\n************************************************`,    
         `\n\nCONNECTED TO DATABASE: ${authSource}${defaultauthdb}\n`);
     ///////////////////////////////////////////////////////////////////////////////////////////////////////////
     // 6. SERVER:-  Port
@@ -163,7 +164,6 @@ mongoose.connect(mongoURI, options)
 })
 .catch(err => console.error(err));        
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 

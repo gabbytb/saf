@@ -1,6 +1,5 @@
 import { useEffect, useState, } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import api from "../../../api";
 import sketch from '../../../assets/img/sketch.jpg';
 
@@ -14,7 +13,7 @@ import { spinner } from "../../../assets/images";
 
 
 
-export default function CardAllRejectedUsers({ color, activeDisplay }) {
+export default function CardAllRejectedUsers({ color, activeDisplay, search, }) {
 
 
     // ****************************************************************************
@@ -261,7 +260,7 @@ export default function CardAllRejectedUsers({ color, activeDisplay }) {
                 allRejectedUsers?.length !== 0 ?
                   <tbody>                                                    
                     {
-                        allRejectedUsers?.map((user, userIndex) => {                      
+                        search(allRejectedUsers)?.map((user, userIndex) => {                      
                           return (
                             <tr key={userIndex}>
                                 <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
@@ -351,12 +350,4 @@ export default function CardAllRejectedUsers({ color, activeDisplay }) {
           </div>       
       </>
     );
-};
-
-CardAllRejectedUsers.defaultProps = {
-  color: "light",
-};
-
-CardAllRejectedUsers.propTypes = {
-  color: PropTypes.oneOf(["light", "dark"]),
 };

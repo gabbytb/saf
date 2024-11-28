@@ -89,7 +89,8 @@ export default function Sidebar() {
                                 <i className={"fas fa-book mr-4 text-2xl " + (window.location.href.indexOf("/admin/blog/manage/create") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Add New Post
                             </Link>
                         </li>
-                          {/*<li className="items-center">
+
+                        {/*<li className="items-center">
                             <Link className={"uppercase py-3 text-xl font-bold block " + (window.location.href.indexOf("/admin/tables") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/tables">
                                 <i className={"fas fa-table mr-4 text-2xl " + (window.location.href.indexOf("/admin/tables") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Tables
                             </Link>

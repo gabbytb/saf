@@ -1,10 +1,5 @@
-import React from "react";
-
 // components
 import { CardAllUsers } from "../../../components";
-
-
-
 
 
 

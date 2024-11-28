@@ -1,6 +1,5 @@
 import { useEffect, useState, } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import api from "../../../api";
 import sketch from '../../../assets/img/sketch.jpg';
 
@@ -13,16 +12,15 @@ import { spinner } from "../../../assets/images";
 
 
 
-
-
-export default function CardAllPendingStaffs({ color, activeDisplay, }) {
+export default function CardAllPendingStaffs({ color, activeDisplay, search, }) {
 
 
     // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL PENDING ADMIN USERS
     // ****************************************************************************
     const [allPendingStaffs, setAllPendingStaffs] = useState([]);
-    // console.log("ALL PENDING ADMIN USERS: ", allPendingStaffs);     
+    // console.log("ALL PENDING ADMIN USERS: ", allPendingStaffs);   
+
     // eslint-disable-next-line
     const [totalPendingAdminUsers, setTotalPendingAdminUsers] = useState(null);
     // console.log("TOTAL PENDING ADMIN USERS: ", totalPendingAdminUsers);
@@ -98,6 +96,9 @@ export default function CardAllPendingStaffs({ color, activeDisplay, }) {
     };
     // ****************************************************************************
     // ****************************************************************************
+
+    
+
 
 
 
@@ -258,7 +259,7 @@ export default function CardAllPendingStaffs({ color, activeDisplay, }) {
                 </tr>
               </thead>
               {
-                allPendingStaffs?.length !== 0 ?
+                search(allPendingStaffs)?.length !== 0 ?
                   <tbody>                                                    
                     {
                         allPendingStaffs?.map((user, userIndex) => {                    
@@ -351,12 +352,4 @@ export default function CardAllPendingStaffs({ color, activeDisplay, }) {
           </div>       
       </>
     );
-};
-
-CardAllPendingStaffs.defaultProps = {
-  color: "light",
-};
-
-CardAllPendingStaffs.propTypes = {
-  color: PropTypes.oneOf(["light", "dark"]),
 };

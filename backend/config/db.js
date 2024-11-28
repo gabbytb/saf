@@ -3,7 +3,7 @@
 
 
 //  CONNECT TO CLOUD DATABASE
-const emoji = process.env.MONGO_DB_CLOUD;
+const emoji = process.env.MONGO_DB;
 
 
 

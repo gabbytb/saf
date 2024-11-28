@@ -1,6 +1,5 @@
 import { useEffect, useState, } from "react";
 import { Link } from "react-router-dom";
-import PropTypes from "prop-types";
 import api from "../../../api";
 import sketch from '../../../assets/img/sketch.jpg';
 
@@ -13,14 +12,15 @@ import { spinner } from "../../../assets/images";
 
 
 
-
-export default function CardAllApprovedStaffs({ color, activeDisplay, }) {
+export default function CardAllApprovedStaffs({ color, activeDisplay, search, }) {
 
 
     // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL APPROVED ADMIN USERS
     // ****************************************************************************
-    const [allApprovedStaffs, setAllApprovedUsers] = useState([]); 
+    const [allApprovedStaffs, setAllApprovedUsers] = useState([]);
+    // console.log("ALL APPROVED ADMIN USERS: ", allPendingStaffs); 
+
     // eslint-disable-next-line
     const [totalApprovedAdminUsers, setTotalApprovedAdminUsers] = useState(null);
     // console.log("TOTAL APPROVED ADMIN USERS: ", totalApprovedAdminUsers);
@@ -98,6 +98,10 @@ export default function CardAllApprovedStaffs({ color, activeDisplay, }) {
 
 
 
+
+
+
+    
 
     if (isLoading) {
         return (
@@ -256,7 +260,7 @@ export default function CardAllApprovedStaffs({ color, activeDisplay, }) {
                 allApprovedStaffs?.length !== 0 ?
                   <tbody>                                                    
                     {
-                        allApprovedStaffs?.map((user, userIndex) => {                           
+                        search(allApprovedStaffs)?.map((user, userIndex) => {                           
                             return (
                                 <tr key={userIndex}>
                                     <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
@@ -348,12 +352,4 @@ export default function CardAllApprovedStaffs({ color, activeDisplay, }) {
             {/* Pagination controls */}
         </div>
     );
-};
-
-CardAllApprovedStaffs.defaultProps = {
-  color: "light",
-};
-
-CardAllApprovedStaffs.propTypes = {
-  color: PropTypes.oneOf(["light", "dark"]),
 };

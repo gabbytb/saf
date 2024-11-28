@@ -1,7 +1,7 @@
 {
   "name": "Gabriel's Website",
   "description": "REACHING OUT TO GREAT MINDS",
-  "homepage": "http://192.168.137.113:3000",
+  "homepage": "http://192.168.0.145:3000",
   "version": "2.0.1",
   "private": true,
   "dependencies": {
@@ -57,6 +57,7 @@
     ]
   },
   "devDependencies": {
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
     "@tailwindcss/typography": "^0.5.13",
     "concurrently": "^9.1.0",
     "serve": "^14.2.4",

@@ -1021,12 +1021,11 @@ exports.findAllRejectedUsers = async (req, res) => {
 exports.findAllAdmins = async (req, res) => {
     
     try {
-        // const { page = parseInt(1), limit = parseInt(10), status } = req.query; // Destructure query parameters  
-        
-        const status = req.query.status || "";
-        // Get Pagination Parameters from the request query
+              
+        // Get Pagination Parameters from the request query    
         const page = parseInt(req.query.page, 10) || 1;
-        const limit = parseInt(req.query.limit, 10) || 10;
+        const limit = parseInt(req.query.limit, 10) || 20; 
+        const status = req.query.status || "";
         const skip = (page - 1) * limit;
             
         const query = {
@@ -1040,8 +1039,8 @@ exports.findAllAdmins = async (req, res) => {
 
         // Query User Status and ROLES.role, & Pagination logic
         const staffsList = await User.find(query)
-                                .skip(skip)
-                                .limit(limit);
+                                .skip(parseInt(skip))
+                                .limit(parseInt(limit));
         console.log("ALL STAFFS: ", staffsList);
     
         const totalAdminUsers = await User.countDocuments(query); // Total number of staffs with the given status
@@ -1049,7 +1048,7 @@ exports.findAllAdmins = async (req, res) => {
         const pagination = {
             staffsRecord: totalAdminUsers,
             page,
-            limit,
+            recordLimit: limit,
             lastPage: totalPages,
         };
         console.log("PAGINATION: ", pagination, "\n\n");
