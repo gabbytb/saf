@@ -979,7 +979,8 @@
   }
 
   .menu-item p::after {
-    @apply content-[''] bg-dropdown-icon h-6 w-6 ml-1 absolute top-21 text-slate-800/50
+    @apply content-[''] h-6 w-6 ml-1 absolute top-21 text-slate-800/50 ;
+    /* bg-dropdown-icon */
   }  
 
   .nav-dropdown-item svg {

@@ -2,7 +2,7 @@ import { Suspense, useEffect, useState, } from "react";
 import { Link } from "react-router-dom";
 import PropTypes from "prop-types";
 import api from "../../api";
-import sketch from '../../assets/img/sketch.jpg';
+import sketch from "../../assets/img/sketch.jpg";
 
 // components
 import { CardAllApprovedUsers, CardAllPendingUsers, CardAllRejectedUsers, TableDropdown } from "..";
@@ -32,7 +32,9 @@ export default function CardAllUsers({ color }) {
     const [currentPage, setCurrentPage] = useState(1);
 
     const limit = 10; // Number of items per page
-    const leftArrow = "<", rightArrow = ">";
+
+    const leftArrow = "<", 
+          rightArrow = ">";
 
 
 

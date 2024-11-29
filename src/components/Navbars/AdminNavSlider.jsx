@@ -1,10 +1,13 @@
 import { Link } from "react-router-dom";
+import { googleLogout } from "@react-oauth/google";
+
 import { 
     // BrandLogo, 
     // BrandLogoWhite,
     brandOfficialLogo, 
     brandOfficialLogoDark,
 } from "../../assets/images";
+
 import {
     PersonalFirstIcon, PersonalSecondIcon, PersonalThirdIcon, 
     // BusinessFirstIcon, 
@@ -19,17 +22,42 @@ import {
 
 
 
+const AdminNavSlider = ({ isLoggedIn }) => {
 
-const NavSlider = () => {
+
+    // ***************************************************************************
+    // CURRENT ACTIVE USER:-
+    // ***************************************************************************
+    isLoggedIn = JSON.parse(localStorage.getItem("user"));
+    // ***************************************************************************
+    // FUNCTION TO LOG-OUT CURRENT ACTIVE USER
+    // ***************************************************************************
+    function logOut() {
+        // Clear User Details from Local Storage
+        localStorage.clear();
+        // log out function to log the user out of google and set the profile array to null
+        googleLogout();
+        // redirect to Login Page
+        const redirToLOGIN = "/user/login";
+        window.location.replace(redirToLOGIN);
+    };
+    // ***************************************************************************
+    // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
+    // ***************************************************************************
+    const lastName = isLoggedIn?.lastName ? isLoggedIn?.lastName : logOut();
+    // ***************************************************************************
+    // ***************************************************************************
+
+
+
 
 
     return (
         <>
             {/* Top bar */}
-            <Link className="bg-skin-darkblue h-20 text-xl text-white font-medium lg:font-black text-center flex flex-col md:flex-row justify-center items-center cursor-pointer" to={"/user/signup"}>For Help and Enquiries, kindly reach us on our email 
-                <strong className="text-xl xs:font-black sm:font-black lg:font-black">&nbsp; info@samuelakinolafoundation.com</strong>
-                {/* target="_blank" */}
-            </Link>
+            {/* <Link className="bg-skin-darkblue h-20 text-xl text-white font-medium lg:font-black text-center flex flex-col md:flex-row justify-center items-center cursor-pointer" to={"/user/signup"}>For Help and Enquiries, kindly reach us on our email 
+                <strong className="text-xl xs:font-black sm:font-black lg:font-black">&nbsp; info@samuelakinolafoundation.com</strong>                
+            </Link> */}
             {/* Top bar */}
 
 
@@ -46,6 +74,8 @@ const NavSlider = () => {
                             {/* -mt-2 <BrandLogoWhite   /> */}
                             <img src={brandOfficialLogoDark} alt="official logo" />
                         </Link>
+
+
 
                         <div className="flex justify-end items-center w-3/5 h-full sm:justify-end lg:justify-between">
                             <ul id="nav-menus-wrap" className="nav-links">
@@ -193,4 +223,4 @@ const NavSlider = () => {
         </>
     );
 };
-export default NavSlider;
+export default AdminNavSlider;

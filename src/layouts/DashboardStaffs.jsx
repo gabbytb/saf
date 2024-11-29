@@ -476,7 +476,7 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
             
                         {/* User */}
                         <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
-                        <UserDropdown />
+                            <UserDropdown />
                         </ul>
 
                     </div>

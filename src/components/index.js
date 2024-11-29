@@ -28,6 +28,7 @@ import FooterSocialCard from "./FooterSocialCard";
 // FOOTER
 
 // ADMIN DASHBOARD
+import AdminNavSlider from "./Navbars/AdminNavSlider";
 import DashboardMenuCard from "./DashboardMenuCard";
 import CardAllStaffsTable from "./Cards/staffs/CardAllStaffsTable";
 // ADMIN DASHBOARD
@@ -144,6 +145,7 @@ export {
     // FOOTER
 
     // ADMIN DASHBOARD
+    AdminNavSlider,
     DashboardMenuCard,    
     CardAllStaffsTable,
     // ADMIN DASHBOARD

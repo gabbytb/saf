@@ -13,7 +13,7 @@ import CardAllStaffsTable from "../Cards/staffs/CardAllStaffsTable.jsx";
 
 
 
-export default function AdminNavbar() {
+export default function AdminNavbar({ }) {
     
     const [data, setData] = useState([]);
 

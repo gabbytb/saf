@@ -237,14 +237,10 @@ const BlogPosts = () => {
 
 
 
-                            {/* Pagination controls */}
+                            {/* PAGINATION */}
                             {
                                 allBlogPosts.length !== 0 ? 
                                     <div className="flex justify-between items-center py-2 mt-16 mr-6">
-                                        {/* <div className="p-4 font-medium text-3xl font-firma tracking-supertight flex flex-row gap-6 items-center">
-                                            {limit} 
-                                            <div className="text-xl normal-case">Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong></div>
-                                        </div> */}
                                         <nav className="relative z-0 inline-flex gap-3">
                                             {/* Previous page button */}
                                             <button
@@ -280,7 +276,7 @@ const BlogPosts = () => {
                                         <nav className="hidden"></nav>
                                     </div>
                             }
-                            {/* Pagination controls */}
+                            {/* PAGINATION */}
                         </div>
                     </div>
                 </div>
