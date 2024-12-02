@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { Link, } from "react-router-dom";
 import api from "../api";
-import { NavSlider, HomeFooter, } from "../components";
+import { NavSlider, HomeFooter, AdminNavSlider, } from "../components";
 
 
 
@@ -34,7 +34,11 @@ const convertDate = (dateString) => {
 
 
 
-const BlogPosts = () => {
+const BlogPosts = ({ isLoggedIn }) => {
+
+
+    isLoggedIn = JSON.parse(localStorage.getItem('user'));
+    console.log('IS LOGGED IN = ', isLoggedIn?.isVerified);
 
 
     // { color }
@@ -156,7 +160,7 @@ const BlogPosts = () => {
 
     return (
         <div id="blogPostsWrapper">
-            <NavSlider />
+            { isLoggedIn?.isVerified ? <AdminNavSlider /> : <NavSlider /> }
 
             <main id="blogPostsID" className="mx-auto">
                 <div className="container">

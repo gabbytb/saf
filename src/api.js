@@ -8,7 +8,7 @@ import axios from 'axios';
 
 // Create an instance of Axios with default settings
 const api = axios.create({
-    baseURL: 'http://192.168.0.145:8080', // This is your server’s base URL
+    baseURL: 'http://192.168.0.113:8080', // This is your server’s base URL
     // baseURL: 'http://localhost:8080', // This is your server’s base URL
     timeout: 80000, // Optional: Maximum time to wait for a response
 });

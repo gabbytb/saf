@@ -14,6 +14,8 @@ import {
     DeveloperFirstIcon, DeveloperSecondIcon, 
     LearnFirstIcon, LearnSecondIcon, LearnThirdIcon, 
 } from "../../assets/icons";
+import UserDropdown from "../Dropdowns/UserDropdown";
+import UserDropdownPro from "../Dropdowns/UserDropdownPro";
 
 
 
@@ -206,11 +208,14 @@ const AdminNavSlider = ({ isLoggedIn }) => {
                             </ul>
                         </div>
                         
-                        <div className="space-x-10 cta-menu flex justify-end w-1/5">
-                            <Link to={"/user/login"}>log in</Link>
-                            <Link to={"/donations"}>donate now</Link>
+                        <div className="space-x-10 cta-menu flex justify-end w-1/5">                          
+                            <Link to={"/donations"}>donate now</Link>                        
                         </div>
-                        
+
+                        <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
+                            <UserDropdownPro />
+                        </ul>
+
                         <div className="mobile-nav">
                             <div className="hamburger">
                                 <span></span>

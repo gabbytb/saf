@@ -51,6 +51,7 @@ import CardSocialTraffic from "./Cards/CardSocialTraffic";
 import NotificationDropdown from "./Dropdowns/NotificationDropdown";
 import TableDropdown from  "./Dropdowns/TableDropdown";
 import UserDropdown from "./Dropdowns/UserDropdown";
+import UserDropdownPro from "./Dropdowns/UserDropdownPro";
 
 // USERS COMPONENTS
 import CardAllUsers from "./Cards/CardAllUsers";
@@ -93,6 +94,7 @@ export {
     // IMPORTED COMPONENTS //
     // DROPDOWNS
     UserDropdown,
+    UserDropdownPro,
     TableDropdown,
     NotificationDropdown,
     // DROPDOWNS
