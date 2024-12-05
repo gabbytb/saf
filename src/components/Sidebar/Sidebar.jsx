@@ -16,10 +16,7 @@ export default function Sidebar() {
     const [collapseShow, setCollapseShow] = useState("hidden");
 
 
-    console.log('Manager 1 === ', window.location.href.indexOf("/admin/blog/manage"));
-
-    console.log('Manager 2 === ', window.location.href.indexOf("/admin/blog/create"));
-
+ 
 
     return (
         <>
@@ -113,7 +110,7 @@ export default function Sidebar() {
                                                 <i className={"fas fa-book ml-6 mr-4 text-2xl " + (window.location.href.indexOf("/admin/blog/manage") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}All Posts
                                             </Link>
                                         </li>
-                                        
+
                                         <li className="items-center">
                                             <Link className={"uppercase py-3 text-xl font-bold block " + (window.location.href.indexOf("/admin/blog/create") !== -1 ? "text-lightBlue-600 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to={"/admin/blog/create"}>
                                                 <i className={"fas fa-book ml-6 mr-4 text-2xl " + (window.location.href.indexOf("/admin/blog/create") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}New Post
