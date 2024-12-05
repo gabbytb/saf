@@ -130,18 +130,15 @@ const BlogSinglePost = () => {
     const [sidebarPosts, setSidebarPosts] = useState([]);
     // console.log("Sidebar Post: ", sidebarPosts);
   
-    // eslint-disable-next-line
-    const [currentPage, setCurrentPage] = useState(1);
-
-    // let leftArrow = '>';
-
+    
+    const pageLimit = 3; // Number of items per page
+    var status = 'published';
+    var sort = 'recent';
+            
     useEffect(() => {
         async function fetchAllSidebarBlogPosts() {
-            const limit = 3; // Number of items per page
-            var status = 'published';
-            var sort = 'recent';
-            
-            await api.get(`/api/v1/admin/blogs/manage?page=${currentPage}&limit=${limit}&status=${status}&sort=${sort}`)
+
+            await api.get(`/api/v1/admin/posts/manage?&limit=${pageLimit}&status=${status}&sort=${sort}`)
             .then((response) => {
                 const { success, data, message } = response.data;
                 const { allBlogPosts, } = data;
@@ -162,7 +159,7 @@ const BlogSinglePost = () => {
         return () => {
             clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
         };
-    }, [currentPage]);
+    }, [pageLimit]);
 
 
 

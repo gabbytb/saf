@@ -113,7 +113,7 @@ const BlogPosts = ({ isLoggedIn, }) => {
             var status = 'published';
             var sort = 'recent';
               
-            await api.get(`/api/v1/admin/blogs/manage?page=${currentPage}&limit=${limit}&status=${status}&sort=${sort}`)
+            await api.get(`/api/v1/admin/posts/manage?page=${currentPage}&limit=${limit}&status=${status}&sort=${sort}`)
             .then((response) => {
                         const { success, data, message } = response.data;
                         const { allBlogPosts, pagination } = data;
