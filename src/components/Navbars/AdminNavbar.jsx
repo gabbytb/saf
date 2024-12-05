@@ -71,7 +71,7 @@ export default function AdminNavbar({ }) {
                 </Link>
 
                 {/* Form*/}
-                <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-12 w-98 h-178">
+                <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-12 lg:mr-28 w-98 h-178">
                     <div className="relative flex w-full flex-wrap items-stretch">                      
                         <span className="z-10 h-full leading-snug font-normal text-center text-blueGray-300 absolute bg-transparent rounded text-2xl flex items-center justify-center w-12 pl-3 py-3">
                             <i className="fas fa-search"></i>

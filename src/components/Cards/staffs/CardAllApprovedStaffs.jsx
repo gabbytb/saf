@@ -90,7 +90,7 @@ export default function CardAllApprovedStaffs({ color, activeDisplay, search, pa
         } else {
             allApprovedStaffsLink?.classList.remove("activeStaffView");
         };
-    }, [activeDisplay, search, currentPage]); // Fetch data when currentPage changes
+    }, [activeDisplay, search, pageLimit, currentPage]); // Fetch data when currentPage changes
     // ****************************************************************************
     // **************************************************************************** 
     const handlePageChange = (page) => {

@@ -23,6 +23,7 @@ import {
     SignIn,
 
     Dashboard,
+    DashboardBlogPosts,
     DashboardCreateBlog,
     DashboardUsers, 
     DashboardUsersDetails,
@@ -84,6 +85,7 @@ export default function App() {
 
           {/* add routes with layouts */}
           <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route path="/admin/blog/manage" element={<DashboardBlogPosts />} />
           <Route path="/admin/blog/manage/create" element={<DashboardCreateBlog />} />
           <Route path="/admin/users" element={<DashboardUsers />} />
           <Route path="/admin/users/:id" element={<DashboardUsersDetails />} />

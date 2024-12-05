@@ -161,8 +161,9 @@
     border-radius: 5px;
     padding: 10px 15px;
     outline: none;
-    font-size: 15px;    
-    letter-spacing: 0.06em;
+    /* font-size: 15px; 
+    letter-spacing: 0.13em; */
+    word-spacing: 0.05em;
     appearance: auto;
     border: 0.3px solid lightgray;
   }
@@ -359,16 +360,22 @@
     margin-top: 20px;
     background-color: #f9f9f9;
   } */
-
+ 
   #blogSinglePost section h3 {
-    font-size: 2.3rem;
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 0.5rem;
+  }
+
+  #blogSinglePost section h4 {
+    font-size: 1.8rem;
     font-weight: 900;
     margin-bottom: 0.5rem;
   }
 
   main#blogSinglePost section .rendered-output h2 {
     @apply 
-       text-3xl/loose sm:text-4xl
+       text-3xl/tight sm:text-4xl
       font-black
       mb-2
     ;
@@ -377,6 +384,7 @@
   main#blogSinglePost section .rendered-output p {
       @apply
         text-14xl/loose sm:text-2xl/loose
+        mt-2
         mb-10
       ;
   }
@@ -387,6 +395,23 @@
           h-125       
       ;
   }
+  
+  main#blogSinglePost section .rendered-output ul {
+      display: ruby;
+  }
+
+  main#blogSinglePost section .rendered-output ul li {
+      list-style: initial;
+  }
+
+  main#blogSinglePost section .rendered-output ul li::marker {
+      font-size: 2rem;
+  }
+
+  main#blogSinglePost section .rendered-output ul li strong {
+      font-size: 1.6rem;
+  }
+
 
   #singlePostWrapper #header, 
   #blogPostsWrapper #header {
@@ -490,6 +515,7 @@
       hidden
       xl:flex 
       items-center
+      h-80
     ;
   }
 

@@ -1,20 +1,16 @@
 import { Link } from "react-router-dom";
-import { googleLogout } from "@react-oauth/google";
 
-import { 
-    // BrandLogo, 
-    // BrandLogoWhite,
+import {
     brandOfficialLogo, 
     brandOfficialLogoDark,
 } from "../../assets/images";
 
 import {
-    PersonalFirstIcon, PersonalSecondIcon, PersonalThirdIcon, 
-    // BusinessFirstIcon, 
+    PersonalFirstIcon, PersonalSecondIcon, PersonalThirdIcon,
     DeveloperFirstIcon, DeveloperSecondIcon, 
     LearnFirstIcon, LearnSecondIcon, LearnThirdIcon, 
 } from "../../assets/icons";
-import UserDropdown from "../Dropdowns/UserDropdown";
+
 import UserDropdownPro from "../Dropdowns/UserDropdownPro";
 
 
@@ -24,33 +20,7 @@ import UserDropdownPro from "../Dropdowns/UserDropdownPro";
 
 
 
-const AdminNavSlider = ({ isLoggedIn }) => {
-
-
-    // ***************************************************************************
-    // CURRENT ACTIVE USER:-
-    // ***************************************************************************
-    isLoggedIn = JSON.parse(localStorage.getItem("user"));
-    // ***************************************************************************
-    // FUNCTION TO LOG-OUT CURRENT ACTIVE USER
-    // ***************************************************************************
-    function logOut() {
-        // Clear User Details from Local Storage
-        localStorage.clear();
-        // log out function to log the user out of google and set the profile array to null
-        googleLogout();
-        // redirect to Login Page
-        const redirToLOGIN = "/user/login";
-        window.location.replace(redirToLOGIN);
-    };
-    // ***************************************************************************
-    // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
-    // ***************************************************************************
-    const lastName = isLoggedIn?.lastName ? isLoggedIn?.lastName : logOut();
-    // ***************************************************************************
-    // ***************************************************************************
-
-
+const AdminNavSlider = () => {
 
 
 
@@ -68,11 +38,11 @@ const AdminNavSlider = ({ isLoggedIn }) => {
             <header id="header" className="default-header">
                 <div className="container">
                     <div className="flex justify-between items-center h-full px-0 relative ">                
-                        <Link to={"/"} className="mt-1.5 w-1/6 justify-start brand dark:block">
+                        <Link to={"/"} className="mt-1.5 w-5/8 justify-start brand dark:block">
                             {/* <BrandLogo /> */}
                             <img src={brandOfficialLogo} alt="official logo" />
                         </Link>
-                        <Link to={"/"} className="ml-0 sm:ml-16 w-full sm:w-1/6 brand-white dark:block">
+                        <Link to={"/"} className="ml-0 sm:ml-16 w-full sm:w-5/8 brand-white dark:block">
                             {/* -mt-2 <BrandLogoWhite   /> */}
                             <img src={brandOfficialLogoDark} alt="official logo" />
                         </Link>
@@ -212,7 +182,7 @@ const AdminNavSlider = ({ isLoggedIn }) => {
                             <Link to={"/donations"}>donate now</Link>                        
                         </div>
 
-                        <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
+                        <ul className="flex-col md:flex-row list-none items-center hidden md:block">
                             <UserDropdownPro />
                         </ul>
 

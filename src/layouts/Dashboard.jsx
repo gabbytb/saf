@@ -78,25 +78,26 @@ const Dashboard = ({ isLoggedIn }) => {
                 <AdminNavbar />
                 {/* Header */}
 
-                
-                <div className="relative bg-blue-900 md:pt-32 pb-32 pt-12">
-              
-                    {/* Welcome Logged-In User */}
+
+                {/* Welcome Logged-In User */}
+                <div className="relative bg-blue-900 md:pt-32 pb-32 pt-12">                                 
                     <div className="px-4 md:px-10 pb-6 mx-auto w-full">  
                         <p className="w-full lg:w-6/12 xl:w-3/12 px-4 text-3xl text-white">     
                             Welcome <span className="font-bold text-white">{lastName}</span>
                         </p>
                     </div>     
-                    {/* Welcome Logged-In User */}
-
-
+  
                     <HeaderStats />
-
                 </div>
+                {/* Welcome Logged-In User */}
 
+
+                {/* View */}
                 <div className="px-4 md:px-10 mx-auto w-full -m-24">               
                     <DashboardTable />                    
                 </div>
+                {/* View */}
+
             </div>
             {/***** RIGHT-PANEL *****/}
         </>

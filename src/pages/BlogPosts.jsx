@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { Link, } from "react-router-dom";
 import api from "../api";
 import { NavSlider, HomeFooter, AdminNavSlider, } from "../components";
+import { blogbg } from "../assets/images";
 
 
 
@@ -34,7 +35,7 @@ const convertDate = (dateString) => {
 
 
 
-const BlogPosts = ({ isLoggedIn }) => {
+const BlogPosts = ({ isLoggedIn, }) => {
 
 
     isLoggedIn = JSON.parse(localStorage.getItem('user'));
@@ -162,11 +163,16 @@ const BlogPosts = ({ isLoggedIn }) => {
         <div id="blogPostsWrapper">
             { isLoggedIn?.isVerified ? <AdminNavSlider /> : <NavSlider /> }
 
-            <main id="blogPostsID" className="mx-auto">
+            <main id="blogPostsID" className="mx-auto">      
+                <div className="w-full h-122 h-26.88">
+                    <img src={blogbg} alt="blog background" className="w-full h-full" />
+                </div>
+                        
                 <div className="container">
-                    <div className="px-6 mt-36 mb-28 grid">                     
+                    <div className="px-6 mt-28 mb-28 grid">                     
                         <div className="mx-auto flex flex-col items-center sm:px-20">  
 
+                      
                             <h1 className="text-4xl font-black mb-32 mt-4">RECENT POSTS</h1>   
             
             
@@ -186,7 +192,7 @@ const BlogPosts = ({ isLoggedIn }) => {
                                                                         post.images.map((item) => {
                                                                             if (item.featured) {
                                                                                 return (
-                                                                                    <img className="w-full m-0 rounded-t lazy sm:min-h-72 lg:min-h-103" 
+                                                                                    <img className="w-full m-0 rounded-t lazy sm:min-h-72 lg:min-h-96" 
                                                                                         // src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E"
                                                                                         //  data-src="/assets/img/small-business.jpg" 
                                                                                         src={item.url}

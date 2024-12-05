@@ -16,7 +16,7 @@ import {
 
 
 
-const DashboardCreateBlog = ({ isLoggedIn }) => {
+const DashboardCreateBlog = ({ color, isLoggedIn }) => {
 
     // console.clear();
 
@@ -64,6 +64,7 @@ const DashboardCreateBlog = ({ isLoggedIn }) => {
     // console.log("Logged-In User E-mail: ", email);
     // ***************************************************************************
     // ***************************************************************************
+
 
 
 

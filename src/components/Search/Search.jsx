@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import api from "../../api";
 
 
@@ -14,7 +14,7 @@ function Search() {
     const [currentPage, setCurrentPage] = useState(1);
     const limit = 10; // Number of items per page
 
-    const fetchData = () => {
+    const fetchData = async () => {
         return api.get(`/api/v1/auth/account/admins?page=${currentPage}&limit=${limit}`)
         .then((response) => {
             const { success, data, message } = response.data;
@@ -33,7 +33,7 @@ function Search() {
     };
     
     useEffect(() => {
-        // fetchData();
+        fetchData();
     }, []);
 
     

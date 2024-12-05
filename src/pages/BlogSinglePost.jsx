@@ -1,6 +1,6 @@
 import { useEffect, useState, } from "react";
 import { Link, useParams, } from "react-router-dom";
-import { HomeFooter, NavSlider, } from "../components";
+import { HomeFooter, AdminNavSlider, } from "../components";
 import api from "../api";
 import PostDetailsSlider from "../components/Slider/PostDetailsSlider.js";
 
@@ -180,7 +180,7 @@ const BlogSinglePost = () => {
 
     return (
         <div id="singlePostWrapper">
-            <NavSlider />
+            <AdminNavSlider />
 
             <main id="blogSinglePost" className="container mx-auto">                                       
                

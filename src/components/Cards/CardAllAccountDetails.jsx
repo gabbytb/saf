@@ -203,7 +203,7 @@ export default function CardAllAccountDetails() {
 
     return (
         <>
-            <div id="accountDetails" className="relative flex flex-col min-w-0 break-words w-full mb-16 shadow-lg rounded-lg bg-blueGray-100 border-0">
+            <div id="accountDetails" className="relative flex flex-col min-w-0 break-words xs:w-full lg:w-781 mb-16 shadow-lg rounded-lg bg-blueGray-100 border-0">
 
                 <div className={`activeDisplay ${activeForm === 'user-form' ? 'block' : 'hidden'}`}>
                     <div className="rounded-t bg-white mb-0 p-6">
@@ -235,7 +235,7 @@ export default function CardAllAccountDetails() {
                                         </label>
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="Lucky"
                                             value={user?.firstName}
                                             disabled
@@ -253,7 +253,7 @@ export default function CardAllAccountDetails() {
                                     </label>
                                     <input
                                         type="text"
-                                        className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                        className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                         // defaultValue="Jesse"
                                         value={user?.lastName}
                                         disabled
@@ -271,7 +271,7 @@ export default function CardAllAccountDetails() {
                                     </label>
                                     <input
                                         type="email"
-                                        className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                        className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                         // defaultValue="jesse@example.com"
                                         value={user?.email}
                                         disabled
@@ -288,7 +288,7 @@ export default function CardAllAccountDetails() {
                                         </label>
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="Phone Number"
                                             value={user?.phone}
                                             disabled
@@ -315,7 +315,7 @@ export default function CardAllAccountDetails() {
                                         </label>
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
                                             value={user?.address}
                                             disabled
@@ -331,7 +331,7 @@ export default function CardAllAccountDetails() {
                                         </label>
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="Bld Mihail Kogalniceanu, nr. 8 Bl 1, Sc 1, Ap 09"
                                             value={user?.address2}
                                             disabled
@@ -351,7 +351,7 @@ export default function CardAllAccountDetails() {
                                         </label>
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="New York"
                                             value={user?.city}
                                             disabled
@@ -367,7 +367,7 @@ export default function CardAllAccountDetails() {
                                         </label>
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                           
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                           
                                             value={user?.state}
                                             disabled
                                         />
@@ -385,7 +385,7 @@ export default function CardAllAccountDetails() {
                                         </label>
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="United States"
                                             value={user?.country}
                                             disabled
@@ -401,7 +401,7 @@ export default function CardAllAccountDetails() {
                                         </label>
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xs font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="Postal Code"
                                             value={user?.postalCode}
                                             disabled
@@ -422,15 +422,15 @@ export default function CardAllAccountDetails() {
                                             className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="grid-password"
                                         >
-                                            ABOUT
+                                            about user
                                         </label>
                                         <textarea
                                             type="text"
-                                            className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-slate-800 rounded text-xs font-bold shadow focus:outline-none w-full ease-linear transition-all duration-150"
+                                            className="border-0 py-6 indent-4 mt-1.5 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-slate-800 rounded text-xl font-bold shadow focus:outline-none w-full ease-linear transition-all duration-150"
                                             // defaultValue="A beautiful UI Kit and Admin for React & Tailwind CSS. It is Free and Open Source."
                                             value={user?.aboutMe}
                                             disabled
-                                            rows="8"
+                                            rows="6"
                                         ></textarea>
                                     </div>
                                 </div>
@@ -438,7 +438,7 @@ export default function CardAllAccountDetails() {
                         </form>
 
                         <div className="rounded-t px-6 mt-4 mb-4">
-                            <div className="text-center flex justify-end"> 
+                            <div className="text-center flex justify-start"> 
                                 <button onClick={showUpdateForm}
                                     className="bg-lightBlue-500 text-white hover:bg-blue-600 active:bg-lightBlue-600 font-semibold uppercase text-lg tracking-verytight px-8 py-4 rounded-xl shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                                     type="button">Edit details
@@ -484,7 +484,7 @@ export default function CardAllAccountDetails() {
                                            
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
                                                 placeholder={user?.firstName}
                                                 name="firstName"
                                                 onChange={handleChangeUserInfo}                                      
@@ -503,7 +503,7 @@ export default function CardAllAccountDetails() {
 
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
                                                 placeholder={user?.lastName}
                                                 name="lastName"
                                                 onChange={handleChangeUserInfo}                                            
@@ -522,7 +522,7 @@ export default function CardAllAccountDetails() {
                                         
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150 hover:cursor-not-allowed"                                              
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150 hover:cursor-not-allowed"                                              
                                                 placeholder={user?.email} 
                                                 name="email"
                                                 onChange={handleChangeUserInfo} 
@@ -542,7 +542,7 @@ export default function CardAllAccountDetails() {
                                         <input
                                             type="number"
                                             min={0}
-                                            className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded-lg text-2xl tracking-verytight shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150 h-168 indent-3 appearance-none"
+                                            className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded-lg text-xl tracking-verytight shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150 h-168 indent-3 appearance-none"
                                             placeholder={user?.phone}
                                             name="phone"
                                             onChange={handleChangeUserInfo}                                            
@@ -571,7 +571,7 @@ export default function CardAllAccountDetails() {
 
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                                
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                                
                                                 placeholder={user?.address}
                                                 name="address"
                                                 onChange={handleChangeUserInfo}                                              
@@ -588,7 +588,7 @@ export default function CardAllAccountDetails() {
                                        
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
                                                 placeholder={user?.address2}
                                                 name="address2"
                                                 onChange={handleChangeUserInfo}                                        
@@ -610,7 +610,7 @@ export default function CardAllAccountDetails() {
                                         
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                            
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                            
                                                 placeholder={user?.city}
                                                 name="city"
                                                 onChange={handleChangeUserInfo}                                                
@@ -627,7 +627,7 @@ export default function CardAllAccountDetails() {
                                        
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                              
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                              
                                                 placeholder={user?.state}
                                                 name="state"
                                                 onChange={handleChangeUserInfo}                                               
@@ -649,7 +649,7 @@ export default function CardAllAccountDetails() {
                                        
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                              
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                              
                                                 placeholder={user?.country}
                                                 name="country"
                                                 onChange={handleChangeUserInfo}                                                
@@ -666,7 +666,7 @@ export default function CardAllAccountDetails() {
                                      
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
                                                 placeholder={user?.postalCode}
                                                 name="postalCode"
                                                 onChange={handleChangeUserInfo}                                               
@@ -681,7 +681,7 @@ export default function CardAllAccountDetails() {
                             <hr className="mt-6 border-b-1 border-blueGray-300" />
 
                             <h6 className="text-gray-500 text-lg mt-10 mb-8 px-4 font-bold uppercase">
-                                About User
+                                about user
                             </h6>
                             <div className="flex flex-wrap">
                                 
@@ -697,11 +697,11 @@ export default function CardAllAccountDetails() {
                                     
                                             <textarea
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-gray-900 rounded text-sm shadow hover:bg-white focus:bg-white focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                                
+                                                className="border-0 py-6 indent-4 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-gray-900 rounded text-xl shadow hover:bg-white focus:bg-white focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                                
                                                 placeholder={user?.aboutMe}
                                                 name="aboutMe"
                                                 onChange={handleChangeUserInfo}                                              
-                                                rows="6">
+                                                rows="8">
                                             </textarea>
                                         </label>
                                     </div>
@@ -711,7 +711,7 @@ export default function CardAllAccountDetails() {
                             </div>
 
                             <div className="rounded-t px-6 mt-4 mb-4">
-                                <div className="text-center flex justify-end">
+                                <div className="text-center flex justify-start">
                                     <button type="submit"
                                         onClick={handleSubmitUserInfo}
                                         className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-semibold uppercase text-lg tracking-verytight px-8 py-4 rounded-xl shadow hover:bg-blue-600 hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"

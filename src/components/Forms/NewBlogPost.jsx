@@ -1,5 +1,5 @@
-import { useState } from 'react';
-import { Editor } from '@tinymce/tinymce-react';
+import { useEffect, useState } from 'react';
+import { Editor, } from '@tinymce/tinymce-react';
 import api from "../../api";
 
 
@@ -146,8 +146,7 @@ const NewBlogPost = () => {
 
 
     // Function to handle form submission
-    const handlePostFormSubmission = async (e) => {  
-        
+    const handlePostFormSubmission = async (e) => {
         e.preventDefault();         
 
         var payload = {
@@ -226,7 +225,7 @@ const NewBlogPost = () => {
                 successMsg.classList.add('success-message-info'); 
                                     
                 // Scroll to Bottom
-                window.scrollTo({ left: 0, top: 1200, behavior: 'smooth', });
+                window.scrollTo({ left: 0, top: 2000, behavior: 'smooth', });
 
                 setTimeout(() => {
                     successMsg.classList.remove('success-message-info');
@@ -250,19 +249,29 @@ const NewBlogPost = () => {
 
 
 
-
+    useEffect(() => {
+        function autoInitiate() {
+            var pImg = document.querySelectorAll(".post_img");
+            for (var n = 0; n < pImg?.length; n++) {
+                if (n === 0) {
+                   pImg[n].innerHTML='Featured Image: '; 
+                };
+            };   
+        };
+        autoInitiate();
+    }, []);
 
 
 
 
     return (
-        <div id="createArticle" className="relative flex flex-col min-w-0 break-words w-full mb-16 shadow-lg rounded-lg bg-blueGray-100 border-0">
+        <div id="createArticle" className="relative flex flex-col min-w-0 break-words xs:w-full lg:w-781 mb-16 shadow-lg rounded-lg bg-blueGray-100 border-0">
             <div>
 
                 {/* <div className={`activeDisplay ${activeForm === 'update-form' ? 'block' : 'hidden'}`}> */}
                 <div className="rounded-t bg-white mb-0 p-6">
                     <div className="text-center flex justify-between items-center">
-                        <h6 className="text-blueGray-700 text-42xl tracking-tightener font-bold capitalize">Create New Post</h6>                          
+                        <h6 className="text-blueGray-700 text-42xl tracking-tightener font-bold capitalize">Create Article</h6>                          
                         {/* <button onClick={showUserInfo}
                             className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-lg tracking-tightener px-8 py-2 rounded-lg shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                             type="button"> Back
@@ -292,16 +301,16 @@ const NewBlogPost = () => {
                             <div className="w-full lg:w-12/12 px-4">
                                 <div className="relative w-full mb-3">
                                     <label
-                                        className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2"
+                                        className="flex flex-col uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                         htmlFor="title">
                                         Post Title
                                     
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 mt-3 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                                                         
+                                            className="border-0 px-3 py-3 mt-3 mb-6 placeholder-blueGray-600 text-black bg-white rounded text-xl tracking-verytight font-bold shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                                                         
                                             id="title"  
                                             name="title"                                                                              
-                                            placeholder="Post Title"
+                                            placeholder=""
                                             // value={post.title}
                                             onChange={handlePostData}                                                                                                                                                
                                         />
@@ -313,14 +322,14 @@ const NewBlogPost = () => {
                             <div className="w-full lg:w-12/12 px-4">
                                 <div className="relative w-full mb-3">
                                     <label
-                                        className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2"
+                                        className="flex flex-col uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                         htmlFor="uri">
-                                        URL 
+                                        Link URL 
                                     
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 mt-3 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                                                         
-                                            placeholder="Article Slug"   
+                                            className="border-0 px-3 py-3 mt-3 mb-6 placeholder-blueGray-600 text-black bg-white rounded text-xl tracking-verytight font-medium shadow hover:bg-white focus:bg-white focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                                                         
+                                            placeholder=""   
                                             id="uri"   
                                             name="uri"   
                                             value={post.uri === '' ? formatUrl(post.title.toLowerCase()) : formatUrl(post.uri.toLowerCase())}                                      
@@ -332,9 +341,9 @@ const NewBlogPost = () => {
 
                             {/* Post Description */}
                             <div className="w-full lg:w-12/12 px-4">
-                                <div className="relative w-full mb-3">                                    
+                                <div className="relative w-full mb-9">                                    
                                     <label
-                                        className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2"
+                                        className="flex flex-col uppercase text-blueGray-600 text-lg tracking-tightener font-bold gap-3"
                                         htmlFor="description">                                       
                                         Description
                                                 
@@ -345,9 +354,29 @@ const NewBlogPost = () => {
                                             init={{                                                                                             
                                                 height: 300,
                                                 // menubar: true,
+                                                // language: editorLanguage,
                                                 branding: false,
-                                                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-                                                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',
+                                                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount,paste',
+                                                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table | align lineheight | numlist bullist indent outdent | emoticons charmap | removeformat',                                                
+                                                selector: "textarea",                    
+                                                // plugins: [
+                                                //    "autolink lists link image anchor",
+                                                //    "searchreplace visualblocks",
+                                                //    "insertdatetime media contextmenu paste"
+                                                // ],
+                                                 // plugins: [
+                                                //    "autolink lists link image anchor",
+                                                //    "searchreplace visualblocks",
+                                                //    "insertdatetime media contextmenu paste"
+                                                // ],
+                                                menu: {
+                                                    edit: { title: 'Edit', items: 'undo redo | cut copy paste | selectall' },
+                                                    insert: { title: 'Insert', items: 'link image' },
+                                                    view: { title: 'View', items: 'visualaid' },
+                                                    format: { title: 'Format', items: 'bold italic underline strikethrough superscript subscript | formats | removeformat' }
+                                                },
+                                                convert_urls: false,
+                                                paste_data_images: true
                                                 // plugins: [
                                                   // Core editing features
                                                   // 'anchor', 'autolink', 'charmap', 'codesample', 'emoticons', 'image', 'link', 'lists', 'media', 'searchreplace', 'table', 'visualblocks', 'wordcount',
@@ -378,7 +407,7 @@ const NewBlogPost = () => {
                             <div className="w-full lg:w-12/12 px-4">
                                 <div className="relative w-full mb-3">
                                     <label
-                                        className="flex flex-col uppercase text-black text-lg font-extrabold tracking-moretight mb-2"
+                                        className="flex flex-col uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-4"
                                         htmlFor="excerpt">
                                         Excerpt
 
@@ -401,35 +430,29 @@ const NewBlogPost = () => {
                                 {
                                     post.images.map((image, index) => (
                                         <div key={index} className="relative w-full mb-3">                                                                              
-                                            <label className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2" htmlFor="url">Image URL:
-                                                <input
-                                                    type="text"
-                                                    name="url"
-                                                    value={image.url}
-                                                    onChange={(e) => handleImageChange(index, e)}
-                                                />
+                                            <label className="flex flex-col uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-3 post_img" htmlFor="url">
+                                                Image URL:   
                                             </label>
+                                            <input
+                                                type="text"
+                                                name="url"
+                                                value={image.url}
+                                                className="border-0 px-3 py-3 mt-0 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl tracking-verytight font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 mb-3.5"
+                                                onChange={(e) => handleImageChange(index, e)}
+                                            />
+                                         
                                                
                                             
-                                            <label className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2" htmlFor="alt">Alt Text:
-                                                <input
-                                                    type="text"
-                                                    name="alt"
-                                                    value={image.alt}
-                                                    onChange={(e) => handleImageChange(index, e)}
-                                                />
-                                            </label>
-
-   
-                                            <label className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2 hidden" htmlFor="featured">
-                                                <input
-                                                    className="hidden"
-                                                    type="checkbox"
-                                                    name="featured"                                                        
-                                                    checked={image.featured}
-                                                    onChange={(e) => handleImageChange(index, e)}
-                                                />
-                                            </label>                                                         
+                                            <label className="flex flex-col capitalize text-blueGray-600 text-lg tracking-tightener font-bold mb-1" htmlFor="alt">
+                                                ALT TEXT (For SEO purpose):
+                                            </label>  
+                                            <input
+                                                type="text"
+                                                name="alt"
+                                                value={image.alt}
+                                                className="border-0 px-3 py-3 mt-0 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-lg tracking-verytight font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 mb-6 h-11"
+                                                onChange={(e) => handleImageChange(index, e)}
+                                            />                                                                                                
                                         </div>
                                     ))
                                 }
@@ -442,7 +465,7 @@ const NewBlogPost = () => {
 
                         <hr className="mt-6 border-b-1 border-blueGray-300" />
 
-                        <h6 className="text-slate-700 text-xl mt-10 mb-8 px-4 font-bold uppercase">
+                        <h6 className="text-slate-700 text-xl tracking-verytight mt-10 mb-8 px-4 font-bold uppercase">
                             Post Attributes
                         </h6>
                         <div className="flex flex-wrap">
@@ -459,7 +482,7 @@ const NewBlogPost = () => {
 
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-xl font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
                                             id="tags"
                                             name="tags"
                                             placeholder="Enter Tags (comma separated)"
@@ -477,7 +500,7 @@ const NewBlogPost = () => {
                                     
                                         <input
                                             type="text"
-                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                        
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-xl font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                        
                                             id="categories"
                                             name="categories"
                                             placeholder="Categories (comma separated)"
@@ -510,9 +533,11 @@ const NewBlogPost = () => {
 
                         </div>    
                     
+
+
                         {/* SUBMIT BUTTON */}
                         <div className="rounded-t px-6 mt-4 mb-4">
-                            <div className="text-center flex justify-end">
+                            <div className="text-center flex justify-start">
                                 <button type="submit"                           
                                     className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-semibold uppercase text-lg tracking-verytight px-8 py-4 rounded-xl shadow hover:bg-blue-600 hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
                                 > Submit</button>
@@ -520,13 +545,15 @@ const NewBlogPost = () => {
                         </div>
                         {/* SUBMIT BUTTON */}   
 
+
+
                         {/* Success Message */}
                         <div className="mx-auto flex justify-center w-2/4">
                             <div className="create_success">
                                 {formMessage}
                             </div>                           
                         </div>
-                        {/* Success Message */}
+                        {/* Success Message */}                        
                     </form>          
                 </div>                   
                 {/* </div>   */}
