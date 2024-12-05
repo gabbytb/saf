@@ -10,11 +10,15 @@ import {
 
 
 
-
-
 export default function Sidebar() {
     
+
     const [collapseShow, setCollapseShow] = useState("hidden");
+
+
+    console.log('Manager 1 === ', window.location.href.indexOf("/admin/blog/manage"));
+
+    console.log('Manager 2 === ', window.location.href.indexOf("/admin/blog/create"));
 
 
     return (
@@ -78,17 +82,48 @@ export default function Sidebar() {
                             </Link>
                         </li>
 
-                        <li className="items-center">
-                            <Link className={"uppercase py-3 text-xl font-bold block " + (window.location.href.indexOf("/admin/blog/manage") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/blog/manage">
-                                <i className={"fas fa-book mr-4 text-2xl " + (window.location.href.indexOf("/admin/blog/manage") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}All Posts
-                            </Link>
-                        </li>
 
-                        <li className="items-center">
-                            <Link className={"uppercase py-3 text-xl font-bold block " + (window.location.href.indexOf("/admin/blog/manage/create") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/blog/manage/create">
-                                <i className={"fas fa-book mr-4 text-2xl " + (window.location.href.indexOf("/admin/blog/manage/create") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Add New Post
-                            </Link>
+                        <li className="items-center cursor-pointer relative text-left flex flex-col"> 
+                            <label className="w-full">
+                                <input className="peer/showLabel absolute scale-0" type="checkbox" />
+                                <span className="block max-h-14 max-w-xl overflow-hidden rounded-lg p-0 text-cyan-800 transition-all duration-300 peer-checked/showLabel:max-h-52">
+                                    <p className={"uppercase flex items-center py-3 text-xl font-bold " + (window.location.href.indexOf("/admin/blog/") !== -1 ? "text-lightBlue-600 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")}>                                
+                                        <i className={"fas fa-book mr-4 h-14 text-2xl flex items-center " + (window.location.href.indexOf("/admin/blog/") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Blog
+                                        <svg
+                                            className="ml-auto mr-1 h-5 w-5"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            stroke="currentColor"
+                                            aria-hidden="true"
+                                        >
+                                            <path                                               
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                strokeWidth="4"
+                                                d="M19 9l-7 7-7-7"
+                                            />
+                                        </svg>                           
+                                    </p>
+
+
+                                    <ul className="mb-2">
+                                        <li className="items-center">
+                                            <Link className={"uppercase py-3 text-xl font-bold block " + (window.location.href.indexOf("/admin/blog/manage") !== -1 ? "text-lightBlue-600 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to={"/admin/blog/manage"}>
+                                                <i className={"fas fa-book ml-6 mr-4 text-2xl " + (window.location.href.indexOf("/admin/blog/manage") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}All Posts
+                                            </Link>
+                                        </li>
+                                        
+                                        <li className="items-center">
+                                            <Link className={"uppercase py-3 text-xl font-bold block " + (window.location.href.indexOf("/admin/blog/create") !== -1 ? "text-lightBlue-600 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to={"/admin/blog/create"}>
+                                                <i className={"fas fa-book ml-6 mr-4 text-2xl " + (window.location.href.indexOf("/admin/blog/create") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}New Post
+                                            </Link>
+                                        </li>
+                                    </ul>                                                               
+                                </span>
+                            </label>                           
                         </li>
+                    
 
                         {/*<li className="items-center">
                             <Link className={"uppercase py-3 text-xl font-bold block " + (window.location.href.indexOf("/admin/tables") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to="/admin/tables">
