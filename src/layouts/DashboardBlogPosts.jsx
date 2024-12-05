@@ -216,7 +216,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
     // Works for Search
     // ****************************************************************************
     const [query, setQuery] = useState('');
-    const search_parameters = Object.keys(Object.assign({}, ...data));
+    const search_parameters = Object.keys(Object.assign({}, ...blogPosts));
 
     function search(blogPosts) {
         return blogPosts?.filter((item) =>
@@ -277,7 +277,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                             placeholder="Search user"
                                     />
 
-                                    <button type="submit" onSubmit={fetchAllStaffs}></button>
+                                    <button type="submit" onSubmit={fetchAllBlogPosts}></button>
                                 </div>                                             
                             </form>
                 
@@ -450,7 +450,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                         placeholder="Search user"
                                 />
 
-                                <button type="submit" onSubmit={fetchAllStaffs}></button>
+                                <button type="submit" onSubmit={fetchAllBlogPosts}></button>
                             </div>                                             
                         </form>
             
@@ -498,7 +498,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                             (color === "dark" ? "text-blueGray-700" : "text-white")
                                         }
                                         >
-                                        All Staffs
+                                        All Articles
                                         </h3>
                                     </div>
                                     </div>
