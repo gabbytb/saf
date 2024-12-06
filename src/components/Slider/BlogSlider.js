@@ -32,7 +32,7 @@ const SamplePrevArrow = (props) => {
 };
         
 
-const PostDetailsSlider = ({ blogSinglePost }) => {
+const BlogSlider = ({ bgImage }) => {
 
 
     var settings = {
@@ -77,7 +77,7 @@ const PostDetailsSlider = ({ blogSinglePost }) => {
         <div className="slider-container h-full w-full">
             <Slider {...settings} className='grid h-full'>
                 {
-                    blogSinglePost?.images.map((item, index) => {
+                    bgImage?.images.map((item, index) => {
                         // if (!item?.featured) {
                             return (
                                 <div key={index} className="slider-wrapper">
@@ -94,4 +94,4 @@ const PostDetailsSlider = ({ blogSinglePost }) => {
     );
 };
 
-export default PostDetailsSlider;
+export default BlogSlider;

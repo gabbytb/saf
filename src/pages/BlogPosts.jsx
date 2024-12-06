@@ -160,140 +160,159 @@ const BlogPosts = ({ isLoggedIn, }) => {
 
 
     return (
-        <div id="blogPostsWrapper">
-            { isLoggedIn?.isVerified ? <AdminNavSlider /> : <NavSlider /> }
+        <>
+            {/* PAGE ID - OPENING TAG */} 
+            <div id="blogPostsWrapper">
 
-            <main id="blogPostsID" className="mx-auto">      
-                <div className="w-full h-122 h-26.88">
-                    <img src={blogbg} alt="blog background" className="w-full h-full" />
-                </div>
+                
+                {/* NAV HEADER */}    
+                { isLoggedIn?.isVerified ? <AdminNavSlider /> : <NavSlider /> }
+                {/* NAV HEADER */}    
+
+
+                {/* BODY */}    
+                <main id="blogPostsID" className="mx-auto">  
+
+
+                    <div className="w-full h-122 h-123">
+                        <img src={blogbg} alt="blog background" className="w-full h-full" />
+                    </div>
+                            
+
+                    <div className="container">
+                        <div className="px-6 mt-28 mb-28 grid">                     
+                            <div className="mx-auto flex flex-col items-center sm:px-20">  
+
                         
-                <div className="container">
-                    <div className="px-6 mt-28 mb-28 grid">                     
-                        <div className="mx-auto flex flex-col items-center sm:px-20">  
-
-                      
-                            <h1 className="text-4xl font-black mb-32 mt-4">RECENT POSTS</h1>   
-            
-            
-                            {/* POSTS LISTING */}    
-                            {
-                                allBlogPosts.length !== 0 ? 
-                                    <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-16 gap-y-20 mx-auto sm:mx-8 lg:mx-16 flex-wrap">                                    
-                                        {
-                                        
-                                            allBlogPosts.map((post) => {                
-                                                return (                                        
-                                                        <div key={post._id} className="self-stretch mb-12">
-                                                            <div className="rounded shadow-md h-full">
-                                                                {/* <Link to={`/blog/${formatUrl(post.url)}`}> */}
-                                                                <Link to={`/blog/${post.uri}`}>
-                                                                    {
-                                                                        post.images.map((item) => {
-                                                                            if (item.featured) {
-                                                                                return (
-                                                                                    <img className="w-full m-0 rounded-t lazy sm:min-h-72 lg:min-h-96" 
-                                                                                        // src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E"
-                                                                                        //  data-src="/assets/img/small-business.jpg" 
-                                                                                        src={item.url}
-                                                                                        width="960" 
-                                                                                        height="500" 
-                                                                                        alt="post thumbnail" 
-                                                                                    />
-                                                                                );
-                                                                            };
-                                                                        })
-                                                                    }                                                                
-                                                                </Link>
-                                                                <div className="px-6 pt-7 pb-12">
-                                                                    <div className="font-black text-lg mb-1.5">
-                                                                        <Link className="text-slate-900 hover:text-slate-700 text-14xl/tighter" to={`/blog/${post.uri}`}>
-                                                                            {post.title}
+                                <h1 className="text-4xl font-black mb-32 mt-2">RECENT POSTS</h1>   
+                
+                
+                                {/* POSTS LISTING */}    
+                                {
+                                    allBlogPosts.length !== 0 ? 
+                                        <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-x-16 gap-y-20 mx-auto sm:mx-8 lg:mx-16 flex-wrap">                                    
+                                            {
+                                            
+                                                allBlogPosts.map((post) => {                
+                                                    return (                                        
+                                                            <div key={post._id} className="self-stretch mb-12">
+                                                                <div className="rounded shadow-md h-full">
+                                                                    {/* <Link to={`/blog/${formatUrl(post.url)}`}> */}
+                                                                    <Link to={`/blog/${post.uri}`}>
+                                                                        {
+                                                                            post.images.map((item) => {
+                                                                                if (item.featured) {
+                                                                                    return (
+                                                                                        <img className="w-full m-0 rounded-t lazy sm:min-h-72 lg:min-h-96" 
+                                                                                            // src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E"
+                                                                                            //  data-src="/assets/img/small-business.jpg" 
+                                                                                            src={item.url}
+                                                                                            width="960" 
+                                                                                            height="500" 
+                                                                                            alt="post thumbnail" 
+                                                                                        />
+                                                                                    );
+                                                                                };
+                                                                            })
+                                                                        }                                                                
+                                                                    </Link>
+                                                                    <div className="px-6 pt-7 pb-12">
+                                                                        <div className="font-black text-lg mb-1.5">
+                                                                            <Link className="text-slate-900 hover:text-slate-700 text-14xl/tighter" to={`/blog/${post.uri}`}>
+                                                                                {post.title}
+                                                                            </Link>
+                                                                        </div>
+                                                                        <p className="text-slate-700 text-xl font-medium mb-5" title="Published date">{convertDate(post.createdAt)}</p>
+                                                                        <p className="text-slate-800 text-xl/9 mb-5">            
+                                                                            {post?.excerpt}                
+                                                                        </p>
+                                                                        <br />
+                                                                        <Link to={`/blog/${post.uri}`} className="bg-green-500 text-white hover:text-gray-300 px-8 py-3 rounded-full">
+                                                                            <button type="button">Read More</button>
                                                                         </Link>
                                                                     </div>
-                                                                    <p className="text-slate-700 text-xl font-medium mb-5" title="Published date">{convertDate(post.createdAt)}</p>
-                                                                    <p className="text-slate-800 text-xl/9 mb-5">            
-                                                                        {post?.excerpt}                
-                                                                    </p>
-                                                                    <br />
-                                                                    <Link to={`/blog/${post.uri}`} className="bg-green-500 text-white hover:text-gray-300 px-8 py-3 rounded-full">
-                                                                        <button type="button">Read More</button>
-                                                                    </Link>
                                                                 </div>
-                                                            </div>
-                                                        </div>                                        
-                                                );
-                                            })                                
-                                                
-                                        }                          
-                                    </div>
-                                    :
-                                    
-                                    <div className="flex justify-center mb-32"> 
-                                        <p className="text-2xl font-medium">No Article found</p>
-                                    </div>
+                                                            </div>                                        
+                                                    );
+                                                })                                
+                                                    
+                                            }                          
+                                        </div>
+                                        :
+                                        
+                                        <div className="flex justify-center mb-32"> 
+                                            <p className="text-2xl font-medium">No Article found</p>
+                                        </div>
 
-                            }
-                            {/* POSTS LISTING */}    
-                                                                    
-
-
-                            {/* PAGINATION */}
-                            {/* <div class="mt-12 mb-28 flow-root">
-                                        <a href="/" class="float-left bg-white font-semibold py-2 px-4 border rounded shadow-md text-slate-800 cursor-pointer hover:bg-slate-100">Previous</a>
-                                        <a href="javascript:void(0)" class="float-right bg-white font-semibold py-2 px-4 border rounded shadow-md text-slate-800 cursor-default text-opacity-50">Next</a>
-                            </div> */}
-                            {/* PAGINATION */}
+                                }
+                                {/* POSTS LISTING */}    
+                                                                        
 
 
-
-                            {/* PAGINATION */}
-                            {
-                                allBlogPosts.length !== 0 ? 
-                                    <div className="flex justify-between items-center py-2 mt-16 mr-6">
-                                        <nav className="relative z-0 inline-flex gap-3">
-                                            {/* Previous page button */}
-                                            <button
-                                                onClick={() => handlePageChange(currentPage - 1)}
-                                                className={`relative inline-flex items-center px-2 py-2 rounded-full border border-gray-300 bg-white text-xl font-medium text-black tracking-extratight hover:bg-gray-50 w-20 justify-center h-20 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed hidden' : ''}`}
-                                                disabled={currentPage === 1}
-                                            >prev
-                                            </button>
+                                {/* PAGINATION */}
+                                {/* <div class="mt-12 mb-28 flow-root">
+                                            <a href="/" class="float-left bg-white font-semibold py-2 px-4 border rounded shadow-md text-slate-800 cursor-pointer hover:bg-slate-100">Previous</a>
+                                            <a href="javascript:void(0)" class="float-right bg-white font-semibold py-2 px-4 border rounded shadow-md text-slate-800 cursor-default text-opacity-50">Next</a>
+                                </div> */}
+                                {/* PAGINATION */}
 
 
-                                            {/* Page numbers */}
-                                            {Array.from({ length: totalPages }, (_, index) => (
+
+                                {/* PAGINATION */}
+                                {
+                                    allBlogPosts.length !== 0 ? 
+                                        <div className="flex justify-between items-center py-2 mt-16 mr-6">
+                                            <nav className="relative z-0 inline-flex gap-3">
+                                                {/* Previous page button */}
                                                 <button
-                                                key={index}
-                                                onClick={() => handlePageChange(index + 1)}
-                                                className={`-ml-px relative inline-flex items-center px-4 py-2 rounded-full border border-gray-300 text-xl font-bold outline-none focus:outline-none hover:bg-gray-50 w-20 justify-center h-20 ${currentPage === index + 1 ? 'bg-gray-100 text-blue-800' : ''}`}>
-                                                {index + 1}
+                                                    onClick={() => handlePageChange(currentPage - 1)}
+                                                    className={`relative inline-flex items-center px-2 py-2 rounded-full border border-gray-300 bg-white text-xl font-medium text-black tracking-extratight hover:bg-gray-50 w-20 justify-center h-20 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed hidden' : ''}`}
+                                                    disabled={currentPage === 1}
+                                                >prev
                                                 </button>
-                                            ))}
 
 
-                                            {/* Next page button */}
-                                            <button
-                                                onClick={() => handlePageChange(currentPage + 1)}
-                                                className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-full rounded-r-md border border-gray-300 bg-white text-xl font-medium text-black tracking-extratight hover:bg-gray-50 w-20 justify-center h-20 next-pg ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                                // disabled={currentPage === totalPages}
-                                            >next
-                                            </button>
-                                        </nav>
-                                    </div>
-                                    :
-                                    <div className="flex justify-between items-center py-2 mt-16 mr-6">                              
-                                        <nav className="hidden"></nav>
-                                    </div>
-                            }
-                            {/* PAGINATION */}
+                                                {/* Page numbers */}
+                                                {Array.from({ length: totalPages }, (_, index) => (
+                                                    <button
+                                                    key={index}
+                                                    onClick={() => handlePageChange(index + 1)}
+                                                    className={`-ml-px relative inline-flex items-center px-4 py-2 rounded-full border border-gray-300 text-xl font-bold outline-none focus:outline-none hover:bg-gray-50 w-20 justify-center h-20 ${currentPage === index + 1 ? 'bg-gray-100 text-blue-800' : ''}`}>
+                                                    {index + 1}
+                                                    </button>
+                                                ))}
+
+
+                                                {/* Next page button */}
+                                                <button
+                                                    onClick={() => handlePageChange(currentPage + 1)}
+                                                    className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-full rounded-r-md border border-gray-300 bg-white text-xl font-medium text-black tracking-extratight hover:bg-gray-50 w-20 justify-center h-20 next-pg ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                                    // disabled={currentPage === totalPages}
+                                                >next
+                                                </button>
+                                            </nav>
+                                        </div>
+                                        :
+                                        <div className="flex justify-between items-center py-2 mt-16 mr-6">                              
+                                            <nav className="hidden"></nav>
+                                        </div>
+                                }
+                                {/* PAGINATION */}
+                            </div>
                         </div>
                     </div>
-                </div>
-            </main>
+                </main>
+                {/* BODY */}
 
-            <HomeFooter />
-        </div>
+
+                {/* FOOTER */} 
+                <HomeFooter />
+                {/* FOOTER */} 
+
+
+            </div>
+            {/* PAGE ID - CLOSING TAG */}
+        </>
     );
 };
 

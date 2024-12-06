@@ -13,8 +13,8 @@ import PostDetailsSlider from "../components/Slider/PostDetailsSlider.js";
 
 
 const convertDate = (dateString) => {
+    
     const date = new Date(dateString);
-
     const options = {
         year: 'numeric',
         month: 'long',
@@ -30,35 +30,37 @@ const convertDate = (dateString) => {
 
 
 
-
-
 const BlogSinglePost = () => {
 
     
     const { slug } = useParams();
 
 
+
+
+
     // eslint-disable-next-line
     const [isLoading, setIsLoading] = useState(true);
     // console.log("IS LOADING: ", isLoading);
 
-
     const [blogSinglePost, setBlogSinglePost] = useState(null);
     // console.log("Single Post: ", blogSinglePost);        
 
-    
     // const formattedTagsTotal = blogSinglePost?.tags;
     // console.log("All Formatted Tags: ", formattedTagsTotal);
-
 
     // const formattedTagsLength = blogSinglePost?.tags?.length;
     // console.log("Formatted Tags Length: ", formattedTagsLength);
 
+
     
-    // If Tags exist, seperate them with a Comma. Otherwise, show Tag is Empty.
-    const formattedCategories = blogSinglePost?.categories?.length ? blogSinglePost.categories.join(", ") : "Empty categories";  // Fallback if no tags are present  
+
+
+    // If more than One Category, seperate them with a Comma. Otherwise, show Category is Empty.
+    const formattedCategories = blogSinglePost?.categories?.length ? blogSinglePost.categories.join(", ") : "Empty categories";  // Fallback if no categories are present  
     console.log("Formatted Categories: ", formattedCategories);
 
+    // If more than One Tag, seperate them with a Comma. Otherwise, show Tag is Empty.
     const formattedTags = blogSinglePost?.tags?.length ? blogSinglePost.tags.join(", ") : "Empty tags";  // Fallback if no tags are present  
     console.log("Formatted Tags: ", formattedTags);
 
@@ -130,7 +132,6 @@ const BlogSinglePost = () => {
     const [sidebarPosts, setSidebarPosts] = useState([]);
     // console.log("Sidebar Post: ", sidebarPosts);
   
-    
     const pageLimit = 3; // Number of items per page
     var status = 'published';
     var sort = 'recent';
@@ -277,9 +278,7 @@ const BlogSinglePost = () => {
                                                                
                                                                     <div className="px-6 py-5">
                                                                         <div className="mb-0">
-                                                                            <Link 
-                                                                                to={`/blog/${post?.uri}`}
-                                                                                className="text-slate-900 text-15xl/more-loose font-bold hover:text-slate-700">
+                                                                            <Link className="text-slate-900 text-15xl/more-loose font-bold hover:text-slate-700" to={`/blog/${post?.uri}`}>
                                                                                 {post?.title}
                                                                             </Link>
                                                                         </div>

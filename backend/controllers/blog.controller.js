@@ -154,7 +154,7 @@ exports.findAllBlogPosts = async (req, res) => {
 
         const allBlogPosts = await Blog.find(query)
                                 .sort(sortOrder)
-                                .skip((page - 1) * limit)
+                                .skip((page - 1) * parseInt(limit))
                                 .limit(parseInt(limit));
         console.log("BLOG POSTS BY MOST RECENT: ", allBlogPosts);
 
@@ -167,7 +167,7 @@ exports.findAllBlogPosts = async (req, res) => {
             limit,
             lastPage: totalPages,
         };
-        console.log("PAGINATION: ", pagination, "\n\n");
+        // console.log("PAGINATION: ", pagination, "\n\n");
 
         
         const responseData = {
