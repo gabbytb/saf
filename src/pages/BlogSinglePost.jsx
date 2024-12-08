@@ -185,7 +185,7 @@ const BlogSinglePost = () => {
                 <div className="mx-12 lg:mx-16 mb-28 mt-16 flex sm:grid">                     
                     <div className="mx-auto w-full flex flex-col items-center xs:px-0 sm:px-32">                
                                         
-                        <PostDetailsSlider blogSinglePost={blogSinglePost} /> 
+                        <PostDetailsSlider sliderCards={blogSinglePost} /> 
 
                         <div className="w-full sm:mx-24 lg:mx-8 mt-0 lg:grid lg:grid-cols-28 gap-28">                                             
 

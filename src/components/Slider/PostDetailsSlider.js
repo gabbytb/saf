@@ -1,4 +1,5 @@
 import Slider from "react-slick";
+import SliderCards from "../SliderCards";
 
 
 
@@ -32,7 +33,7 @@ const SamplePrevArrow = (props) => {
 };
         
 
-const PostDetailsSlider = ({ blogSinglePost }) => {
+const PostDetailsSlider = ({ sliderCards }) => {
 
 
     var settings = {
@@ -77,7 +78,7 @@ const PostDetailsSlider = ({ blogSinglePost }) => {
         <div className="slider-container h-full w-full">
             <Slider {...settings} className='grid h-full'>
                 {
-                    blogSinglePost?.images.map((item, index) => {
+                    sliderCards.images.map((item, index) => {
                         // if (!item?.featured) {
                             return (
                                 <div key={index} className="slider-wrapper">
