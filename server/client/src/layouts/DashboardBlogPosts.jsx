@@ -636,24 +636,34 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
                                                                             #{userIndex+1}
                                                                         </td>
-                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap text-left flex items-center">
-                                                                            <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap text-left flex items-center">                                                                         
+                                                                            {   
+                                                                                post?.images?.map((item, itemIndex) => {
+                                                                                    if (item?.featured === true) {
+                                                                                        return (
+                                                                                            <div key={itemIndex} className="">
+                                                                                                <img src={item?.featured} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
+                                                                                            </div>
+                                                                                        );
+                                                                                    }
+                                                                                })
+                                                                            }    
                                                                             <span
                                                                                 className={
                                                                                 "ml-3 font-bold " +
                                                                                 +(color === "light" ? "text-blueGray-600" : "text-white")
                                                                                 }>
                                                                                 {post?.title}
-                                                                            </span>
+                                                                            </span>                                                                                                                                      
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
-                                                                            {post?.email}
+                                                                            {post?.excerpt}
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">
                                                                             <i className="fas fa-circle text-green-500 mr-2"></i>{post?.status}
                                                                         </td>  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
-                                                                            <Link to={`/admin/blog/post/${post?._id}`}>View details</Link>
+                                                                            <Link to={`/admin/blog/manage/${post?._id}`}>View details</Link>
                                                                         </td>                  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
                                                                             <TableDropdown />

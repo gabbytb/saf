@@ -138,13 +138,12 @@ exports.createBlogPost = async (req, res) => {
 // Our FIND All BLOG POSTS Logic starts here
 exports.findAllBlogPosts = async (req, res) => { 
 
-    // Get Pagination Parameters from the request query     
+    // Get Pagination Parameters from the request query        
     const status = req.query.status || "";               
     const page = parseInt(req.query.page, 10) || 1;        
-    const limit = parseInt(req.query.limit, 10) || 20;                        
+    const limit = parseInt(req.query.limit, 10) || 10;
     const skip = (page - 1) * limit;
-    let sort = 'recent';
-
+    const sort = "recent";
 
     try {
         // Set for DB Query
@@ -154,7 +153,6 @@ exports.findAllBlogPosts = async (req, res) => {
             query.status = status;
         };
 
- 
         // Set the sorting order
         let sortOrder = { };
         if (sort === 'recent') {
@@ -162,7 +160,6 @@ exports.findAllBlogPosts = async (req, res) => {
         } else {
             sortOrder.createdAt = 1; // Default sorting (ascending)
         };
-
 
         const allBlogPosts = await Blog.find(query)
                                 .sort(sortOrder)
@@ -182,13 +179,14 @@ exports.findAllBlogPosts = async (req, res) => {
         console.log("PAGINATION: ", pagination, "\n\n");
         
 
+
         const responseData = {
             success: true,
             data: {
                 allBlogPosts,
                 pagination
             },
-            message: "Post Item retrieved successfully",
+            message: "Items retrieved successfully",
         };
         res.status(200).json(responseData);
 
@@ -201,8 +199,12 @@ exports.findAllBlogPosts = async (req, res) => {
 // Our FIND All BLOG POSTS Logic starts here
 exports.totalPublishedPosts = async (req, res) => { 
 
-    const { page = 1, limit = 10, status, sort } = req.query; // Destructure query parameters   
-    
+    // Get Pagination Parameters from the request query        
+    const status = req.query.status || "";               
+    const page = parseInt(req.query.page, 10) || 1;        
+    const limit = parseInt(req.query.limit, 10) || 10;
+    const sort = "recent";
+
     try {
         // Set for DB Query
         let query = { };

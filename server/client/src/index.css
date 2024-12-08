@@ -841,7 +841,8 @@
     @apply animate-slideUpSecond
   }
   .activeStaffView,
-  .activeUserView {    /** Working for Selecting Active Staff Link from Dashboard */
+  .activeUserView,
+  .activePostView {    /** Working for Selecting Active Nav-menu Link for Dashboard */
     @apply
       bg-blue-900
       text-white
