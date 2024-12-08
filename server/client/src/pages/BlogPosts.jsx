@@ -107,9 +107,8 @@ const BlogPosts = ({ isLoggedIn, }) => {
         async function fetchAllBlogPosts() {                                    
             const pageLimit = 10;   // Number of items per page  
             var status = 'published';   // Status is Published
-            var sort = 'recent';    // Sort-by Most Recent
               
-            await api.get(`/api/v1/admin/posts/manage?page=${currentPage}&limit=${pageLimit}&status=${status}&sort=${sort}`)
+            await api.get(`/api/v1/admin/posts/manage?page=${currentPage}&limit=${pageLimit}&status=${status}`)
             .then((response) => {
                 const { success, data, message } = response?.data;
                 const { allBlogPosts, pagination } = data;

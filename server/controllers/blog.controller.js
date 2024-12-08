@@ -131,16 +131,25 @@ exports.createBlogPost = async (req, res) => {
 };  // THOROUGHLY Tested === Working
 
 
+
+
+
+
 // Our FIND All BLOG POSTS Logic starts here
 exports.findAllBlogPosts = async (req, res) => { 
 
-    const { page = 1, limit = 10, status, sort } = req.query; // Destructure query parameters   
-    // published
-    // draft
-    
+    // Get Pagination Parameters from the request query     
+    const status = req.query.status || "";               
+    const page = parseInt(req.query.page, 10) || 1;        
+    const limit = parseInt(req.query.limit, 10) || 20;                        
+    const skip = (page - 1) * limit;
+    let sort = 'recent';
+
+
     try {
         // Set for DB Query
         let query = { };
+
         if (status) {
             query.status = status;
         };
@@ -157,8 +166,8 @@ exports.findAllBlogPosts = async (req, res) => {
 
         const allBlogPosts = await Blog.find(query)
                                 .sort(sortOrder)
-                                .skip((page - 1) * parseInt(limit))
-                                .limit(parseInt(limit));    
+                                .skip(parseInt(skip))
+                                .limit(parseInt(limit)); 
         console.log("BLOG POSTS BY MOST RECENT: ", allBlogPosts);
 
         
@@ -188,6 +197,95 @@ exports.findAllBlogPosts = async (req, res) => {
         return res.status(500).send(`Internal Server Error: ${error.message}`);
     };
 };  // THOROUGHLY Tested === Working
+
+// Our FIND All BLOG POSTS Logic starts here
+exports.totalPublishedPosts = async (req, res) => { 
+
+    const { page = 1, limit = 10, status, sort } = req.query; // Destructure query parameters   
+    
+    try {
+        // Set for DB Query
+        let query = { };
+        
+        if (status === 'published') {
+            query.status = status;
+        };
+
+        // Set the sorting order
+        let sortOrder = { };
+        if (sort === 'recent') {
+            sortOrder.createdAt = -1; // Sort by createdAt in descending order
+        } else {
+            sortOrder.createdAt = 1; // Default sorting (ascending)
+        };
+
+
+        const allPublishedPosts = await Blog.find(query)
+                                .sort(sortOrder)
+                                .skip((page - 1) * parseInt(limit))
+                                .limit(parseInt(limit));    
+        console.log("ALL PUBLISHED BLOG POSTS BY MOST RECENT: ", allPublishedPosts);
+
+
+        
+        const responseData = {
+            success: true,
+            data: allPublishedPosts.length,
+            message: "Items retrieved successfully",
+        };
+        res.status(200).json(responseData);
+
+    } catch (error) {
+        console.error("Internal Server Error:", error);
+        return res.status(500).send(`Internal Server Error: ${error.message}`);
+    };
+};  // THOROUGHLY Tested === Working
+
+// Our FIND All BLOG POSTS Logic starts here
+exports.totalDraftPosts = async (req, res) => { 
+
+    const { page = 1, limit = 10, status, sort } = req.query; // Destructure query parameters   
+    
+    try {
+        // Set for DB Query
+        let query = { };
+        
+        if (status === 'draft') {
+            query.status = status;
+        };
+
+        // Set the sorting order
+        let sortOrder = { };
+        if (sort === 'recent') {
+            sortOrder.createdAt = -1; // Sort by createdAt in descending order
+        } else {
+            sortOrder.createdAt = 1; // Default sorting (ascending)
+        };
+
+
+        const allDraftPosts = await Blog.find(query)
+                                .sort(sortOrder)
+                                .skip((page - 1) * parseInt(limit))
+                                .limit(parseInt(limit));    
+        console.log("ALL PUBLISHED BLOG POSTS BY MOST RECENT: ", allDraftPosts);
+
+
+
+        const responseData = {
+            success: true,
+            data: allDraftPosts.length,
+            message: "Items retrieved successfully",
+        };
+        res.status(200).json(responseData);
+
+    } catch (error) {
+        console.error("Internal Server Error:", error);
+        return res.status(500).send(`Internal Server Error: ${error.message}`);
+    };
+};  // THOROUGHLY Tested === Working
+
+
+
 
 
 // Our FIND All PUBLISHED BLOG POSTS Logic starts here

@@ -2,6 +2,35 @@
 //    "homepage": "http://192.168.68.113:5000",
 
 
+        await api.get(`/api/v1/admin/posts/manage/publishedPosts`)
+        .then((response) => {
+                    const { success, data, message } = response.data;              
+                    if (!success && message === "No staff found") {
+                        console.log("Success: ", success);
+                        console.log("Message: ", message);
+                    };
+    
+                    setTotalPublishedPosts(data);
+        })
+        .catch((error) => {
+                    console.log("Error fetching data: ", error);
+        });
+
+
+        await api.get(`/api/v1/admin/posts/manage/draftPosts`)
+        .then((response) => {
+                    const { success, data, message } = response.data;              
+                    if (!success && message === "No staff found") {
+                        console.log("Success: ", success);
+                        console.log("Message: ", message);
+                    };
+    
+                    setTotalDraftPosts(data);
+        })
+        .catch((error) => {
+                    console.log("Error fetching data: ", error);
+        });
+
 
 
 

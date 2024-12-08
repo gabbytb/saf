@@ -1,4 +1,4 @@
-import { Suspense, useState, useEffect, } from "react";
+import { useState, useEffect, } from "react";
 import { Link } from "react-router-dom";
 import { googleLogout } from "@react-oauth/google";
 import PropTypes from "prop-types";
@@ -11,7 +11,7 @@ import "../assets/styles/tailwind.css";
 // components
 import { 
     Sidebar, 
-    CardAllApprovedStaffs, CardAllPendingStaffs, CardAllRejectedStaffs, 
+    // CardAllPublishedPosts, CardAllDraftPosts, CardAllScheduledPosts, 
     TableDropdown, 
     UserDropdown, 
 } from "../components";
@@ -45,6 +45,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
 
 
 
+
     // ***************************************************************************
     // CURRENT ACTIVE USER:-
     // ***************************************************************************
@@ -70,6 +71,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
 
 
 
+
     // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL STAFFS
     // ****************************************************************************
@@ -78,24 +80,24 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
 
     const [totalBlogPosts, setTotalBlogPosts] = useState(null);
     // console.log("TOTAL BLOG POSTS: ", totalBlogPosts);
-
-        const [totalPublishedPosts, setTotalPublishedPosts] = useState(null);
-        const [totalDraftPosts, setTotalDraftPosts] = useState(null);
-        const [totalScheduledPosts, setTotalScheduledPosts] = useState(null);
+        // const [totalPublishedPosts, setTotalPublishedPosts] = useState(null);
+        // const [totalDraftPosts, setTotalDraftPosts] = useState(null);
+        // const [totalScheduledPosts, setTotalScheduledPosts] = useState(null);
 
     const [totalPages, setTotalPages] = useState(0);
-
-    // Number of items per page
-    const [pageLimit, setPageLimit] = useState(undefined);
-    console.log("PAGE LIMIT: ", pageLimit);
-
     const [currentPage, setCurrentPage] = useState(1);
    
     const leftArrow = "<", 
           rightArrow = ">";
 
-
+    // Number of items per page
+    const [pageLimit, setPageLimit] = useState(undefined);
+    console.log("PAGE LIMIT: ", pageLimit);
     
+
+
+
+
     // ****************************************************************************
     // MANAGE STATE:-  SPECIAL FEATURES
     // ****************************************************************************
@@ -103,12 +105,12 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
     const [activeDisplay, setActiveDisplay] = useState("blogPosts");
 
     useEffect(() => {
-        var allStaffsLink = document.querySelector("#staffsLinkID .allStaffs");        
-        if (activeDisplay === "allStaffs") {
+        var allPostsLink = document.querySelector("#postsLinkID .blogPosts");        
+        if (activeDisplay === "blogPosts") {
             setCurrentPage(1);
-            allStaffsLink?.classList?.add("activeStaffView");          
+            allPostsLink?.classList?.add("activePostView");          
         } else {
-            allStaffsLink?.classList.remove("activeStaffView");     
+            allPostsLink?.classList.remove("activePostView");     
         };
     }, [activeDisplay]);
     // ****************************************************************************
@@ -116,22 +118,23 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
 
 
 
+
     // ****************************************************************************            
     // ****************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL STAFFS
     // ****************************************************************************             
-    async function fetchAllBlogPosts() {
+    async function fetchAllBlogPosts() {               
         await api.get(`/api/v1/admin/posts/manage?page=${currentPage}&limit=${pageLimit}`)
         .then((response) => {
                     const { success, data, message } = response.data;
-                    const { staffsList, pagination } = data;
+                    const { allBlogPosts, pagination } = data;
 
                     if (!success && message === "No staff found") {
                         console.log("Success: ", success);
                         console.log("Message: ", message);
                     };
 
-                    setBlogPosts(staffsList);
+                    setBlogPosts(allBlogPosts);
                     setPageLimit(pagination?.recordLimit);
 
                     setTotalBlogPosts(pagination?.postsRecord);
@@ -142,51 +145,6 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
         })
         .finally(() => {
             setIsLoading(false);
-        });
-
-
-        await api.get(`/api/v1/admin/posts/manage/publishedPosts`)
-        .then((response) => {
-                    const { success, data, message } = response.data;              
-                    if (!success && message === "No staff found") {
-                        console.log("Success: ", success);
-                        console.log("Message: ", message);
-                    };
-    
-                    setTotalPublishedPosts(data);
-        })
-        .catch((error) => {
-                    console.log("Error fetching data: ", error);
-        });
-
-
-        await api.get(`/api/v1/admin/posts/manage/draftPosts`)
-        .then((response) => {
-                    const { success, data, message } = response.data;              
-                    if (!success && message === "No staff found") {
-                        console.log("Success: ", success);
-                        console.log("Message: ", message);
-                    };
-    
-                    setTotalDraftPosts(data);
-        })
-        .catch((error) => {
-                    console.log("Error fetching data: ", error);
-        });
-
-
-        await api.get(`/api/v1/admin/posts/manage/scheduledPosts`)
-        .then((response) => {
-                    const { success, data, message } = response.data;              
-                    if (!success && message === "No staff found") {
-                        console.log("Success: ", success);
-                        console.log("Message: ", message);
-                    };
-    
-                    setTotalScheduledPosts(data);
-        })
-        .catch((error) => {
-                    console.log("Error fetching data: ", error);
         });
     };
 
@@ -211,6 +169,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
 
     
 
+
     // ****************************************************************************            
     // ****************************************************************************
     // Works for Search
@@ -218,14 +177,15 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
     const [query, setQuery] = useState('');
     const search_parameters = Object.keys(Object.assign({}, ...blogPosts));
 
-    function search(blogPosts) {
-        return blogPosts?.filter((item) =>
+    function search(data) {
+        return data?.filter((item) =>
             search_parameters.some((parameter) =>
               item[parameter]?.toString()?.toLowerCase()?.includes(query)
         ));
     };
     // ****************************************************************************
     // ****************************************************************************
+
 
 
 
@@ -249,20 +209,19 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                 <div className="relative md:ml-64 bg-blueGray-100">
                 
                     <nav className="absolute top-0 left-0 w-full z-1 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
-                        <div className="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">
-                            
+                        <div className="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">                            
                             {/* Brand */}
                             <Link
-                            className="text-white text-sm uppercase hidden lg:inline-block font-semibold"
-                            to="/admin/dashboard"
-                            onClick={(e) => e.preventDefault()}
+                                className="text-white text-sm uppercase hidden lg:inline-block font-semibold"
+                                to="/admin/dashboard"
+                                onClick={(e) => e.preventDefault()}
                             >
                                 Dashboard
                             </Link>
 
 
-                            {/* Search */}
-                            <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-12 w-98 h-178">
+                            {/* Form*/}
+                            <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-12 lg:mr-28 w-98 h-178">
                                 <div className="relative flex w-full flex-wrap items-stretch">                      
                                     <span className="z-10 h-full leading-snug font-normal text-center text-blueGray-300 absolute bg-transparent rounded text-2xl flex items-center justify-center w-12 pl-3 py-3">
                                         <i className="fas fa-search"></i>
@@ -270,11 +229,11 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                         
                                     <input
                                         type="search"
-                                            name="q"
-                                            id="search-form"
-                                            className="search-input border-0 px-3 py-3 indent-8 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"       
-                                            onChange={(e) => setQuery(e.target.value)}
-                                            placeholder="Search user"
+                                        name="q"
+                                        id="search-form"
+                                        className="search-input border-0 px-3 py-3 indent-8 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"       
+                                        onChange={(e) => setQuery(e.target.value)}
+                                        placeholder="Search user"
                                     />
 
                                     <button type="submit" onSubmit={fetchAllBlogPosts}></button>
@@ -282,11 +241,10 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                             </form>
                 
 
-                            {/* LoggedIn User */}
+                            {/* User */}
                             <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
                                 <UserDropdown />
                             </ul>
-
                         </div>
                     </nav>
 
@@ -305,7 +263,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                     </div>
 
 
-                    {/* Users Table */}
+                    {/* Posts Table */}
                     <div className="px-4 md:px-10 mx-auto w-full -m-24">   
             
                         <div className="flex flex-wrap mt-4">
@@ -317,83 +275,111 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                     }
                                 >
         
-                                    <div className={`w-full overflow-x-auto ${activeDisplay === "allBlogPosts" ? "block" : "hidden"}`}>
-                                    {/* Staffs table */}
-                                    <table className="items-center w-full bg-transparent border-collapse">
-                                        <thead>
-                                        <tr>
-                                            <th
-                                            className={
-                                                "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                                                (color === "light"
-                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                                : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                                            }
-                                            >
-                                            S/N
-                                            </th>
-                                            <th
-                                            className={
-                                                "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                                                (color === "light"
-                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                                : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                                            }
-                                            >
-                                            Full Name
-                                            </th>
-                                            <th
-                                            className={
-                                                "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                                                (color === "light"
-                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                                : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                                            }
-                                            >
-                                            E-mail address
-                                            </th>
-                                            <th
-                                            className={
-                                                "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                                                (color === "light"
-                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                                : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                                            }
-                                            >
-                                            Status
-                                            </th> 
-                                            <th
-                                            className={
-                                                "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                                                (color === "light"
-                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                                : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                                            }
-                                            >
-                                            Action
-                                            </th>              
-                                            <th
-                                            className={
-                                                "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                                                (color === "light"
-                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                                : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                                            }
-                                            ></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody className='w-16 h-16'>
+                                    {/* Staffs Navigation */}
+                                    <div id="postsLinkID" className="flex flex-row flex-wrap gap-3 mt-8 mb-10 px-7">
+                                        <Link className="blogPosts activePostView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("blogPosts")}>All <span className="off_white"> ({ totalBlogPosts })</span> </Link>
+                                        <Link className="publishedPosts pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("publishedPosts")}>Published  <span className="off_white"> ({ totalBlogPosts })</span></Link>
+                                        <Link className="draftPosts pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("draftPosts")}>Draft  <span className="off_white"> ({ totalBlogPosts })</span></Link>
+                                        <Link className="scheduledPosts pt-3 pb-2 px-10 rounded-lg border text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("scheduledPosts")}>Scheduled  <span className="off_white"> ({ totalBlogPosts })</span></Link>
+                                    </div>
+                                    {/* Users Navigation */}
+        
+                                    
+                                    {/* Page Title */}
+                                    <div className="rounded-t mb-0 px-4 py-3 border-0">
+                                        <div className="flex flex-wrap items-center">
+                                            <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+                                                <h3
+                                                    className={
+                                                    "font-semibold text-lg " +
+                                                    (color === "dark" ? "text-blueGray-700" : "text-white")
+                                                    }
+                                                >
+                                                    All Posts
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* Page Title */}
+        
+        
+                                    <div className={`w-full overflow-x-auto ${activeDisplay === "blogPosts" ? "block" : "hidden"}`}>
+                                        {/* Blog Posts table */}
+                                        <table className="items-center w-full bg-transparent border-collapse">
+                                            <thead>
                                                 <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td className="max-w-40 h-60 flex flex-col justify-center items-center">                                                                                             
-                                                    <img src={spinner} alt="Spinning" className="ml-80 mx-auto" />                                                              
-                                                    <p className="text-xl tracking-extratight font-semibold">Loading...</p>                                  
-                                                </td>
-                                                <td></td>
+                                                    <th
+                                                        className={
+                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                            (color === "light"
+                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                        }
+                                                    >
+                                                        S/N
+                                                    </th>
+                                                    <th
+                                                        className={
+                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                            (color === "light"
+                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                        }
+                                                    >
+                                                        Title
+                                                    </th>
+                                                    <th
+                                                        className={
+                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                            (color === "light"
+                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                        }
+                                                    >
+                                                        Excerpt
+                                                    </th>
+                                                    <th
+                                                        className={
+                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                            (color === "light"
+                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                        }
+                                                    >
+                                                        Status
+                                                    </th> 
+                                                    <th
+                                                        className={
+                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                            (color === "light"
+                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                        }
+                                                    >
+                                                    Action
+                                                    </th>              
+                                                    <th
+                                                        className={
+                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                            (color === "light"
+                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                        }
+                                                    ></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className='w-16 h-16'>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td className="max-w-40 h-60 flex flex-col justify-center items-center">                                                                                             
+                                                        <img src={spinner} alt="Spinning" className="ml-80 mx-auto" />                                                              
+                                                        <p className="text-xl tracking-extratight font-semibold">Loading...</p>                                  
+                                                    </td>
+                                                    <td></td>
                                                 </tr>                
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
                                     </div> 
                                 </div>    
                             </div>
@@ -408,6 +394,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
 
 
 
+
     return (
         <>
             {/***** LEFT-PANEL *****/}
@@ -415,27 +402,21 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
             {/***** LEFT-PANEL *****/}
             
 
-            
-
             {/***** RIGHT-PANEL *****/}
             <div className="relative md:ml-64 bg-blueGray-100">
-               
+                {/* Navbar */}
                 <nav className="absolute top-0 left-0 w-full z-1 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
-                    <div className="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">
+                    <div className="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">                            
                         
                         {/* Brand */}
-                        <Link
-                        className="text-white text-sm uppercase hidden lg:inline-block font-semibold"
-                        to="/admin/dashboard"
-                        onClick={(e) => e.preventDefault()}
-                        >
-                            Dashboard
+                        <Link className="text-white text-sm uppercase hidden lg:inline-block font-semibold"
+                            to={"/admin/dashboard"} onClick={(e) => e.preventDefault()}>Dashboard 
                         </Link>
                         {/* Brand */}
 
 
-                        {/* Search */}
-                        <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-12 w-98 h-178">
+                        {/* Form */}
+                        <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-12 lg:mr-28  w-98 h-178">
                             <div className="relative flex w-full flex-wrap items-stretch">                      
                                 <span className="z-10 h-full leading-snug font-normal text-center text-blueGray-300 absolute bg-transparent rounded text-2xl flex items-center justify-center w-12 pl-3 py-3">
                                     <i className="fas fa-search"></i>
@@ -443,24 +424,28 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                     
                                 <input
                                     type="search"
-                                        name="q"
-                                        id="search-form"
-                                        className="search-input border-0 px-3 py-3 indent-8 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"       
-                                        onChange={(e) => setQuery(e.target.value)}
-                                        placeholder="Search user"
+                                    name="q"
+                                    id="search-form"
+                                    className="search-input border-0 px-3 py-3 indent-8 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"       
+                                    onChange={(e) => setQuery(e.target.value)}
+                                    placeholder="Search here "
                                 />
 
                                 <button type="submit" onSubmit={fetchAllBlogPosts}></button>
                             </div>                                             
                         </form>
-            
+                        {/* Form */}
 
-                        {/* LoggedIn User */}
+
+                        {/* User */}
                         <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
                             <UserDropdown />
                         </ul>
+                        {/* User */}
+
                     </div>
                 </nav>
+                {/* Navbar */}
 
 
                 {/* Header */}
@@ -475,9 +460,10 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                     {/* <HeaderStats /> */}
 
                 </div>
+                {/* Header */}
 
-
-                 {/* Admins Table */}
+                
+                {/* Users Table */}
                 <div className="px-4 md:px-10 mx-auto w-full -m-24">               
                     <div className="flex flex-wrap mt-4">
                         <div className="w-full mb-12 px-4">         
@@ -487,28 +473,267 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                     (color === "dark" ? "bg-white" : "bg-lightBlue-900 text-white")
                                 }>
 
+
+
+                                {/* Staffs Navigation */}
+                                <div id="postsLinkID" className="flex flex-row flex-wrap gap-3 mt-8 mb-10 px-7">
+                                    <Link className="blogPosts activePostView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("blogPosts")}>All <span className="off_white"> ({ totalBlogPosts })</span></Link>
+                                    <Link className="publishedPosts pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("publishedPosts")}>Published  <span className="off_white"> ({ totalBlogPosts })</span></Link>
+                                    <Link className="draftPosts pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("draftPosts")}>Drafts  <span className="off_white"> ({ totalBlogPosts })</span></Link>
+                                    <Link className="scheduledPosts pt-3 pb-2 px-10 rounded-lg border text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("scheduledPosts")}>Scheduled  <span className="off_white"> ({ totalBlogPosts })</span></Link>
+                                </div>
+                                {/* Users Navigation */}
+
+
                                 
                                 {/* Page Title */}
                                 <div className="rounded-t mb-0 px-4 py-3 border-0">
                                     <div className="flex flex-wrap items-center">
-                                    <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-                                        <h3
-                                        className={
-                                            "font-semibold text-lg " +
-                                            (color === "dark" ? "text-blueGray-700" : "text-white")
-                                        }
-                                        >
-                                        All Articles
-                                        </h3>
-                                    </div>
+                                        <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+                                            <h3
+                                                className={
+                                                    "font-semibold text-lg " +
+                                                    (color === "dark" ? "text-blueGray-700" : "text-white")
+                                                }
+                                            >
+                                                All Posts
+                                            </h3>
+                                        </div>
                                     </div>
                                 </div>
                                 {/* Page Title */}
+
+
+
+                                {/* Views */}
+                                <div className={`w-full overflow-x-auto ${activeDisplay === "blogPosts" ? "block" : "hidden"}`}>
+                                    {/* Projects table */}
+                                    <table className="items-center w-full bg-transparent border-collapse">
+                                        <thead>
+                                                <tr>
+                                                    <th
+                                                        className={
+                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                            (color === "light"
+                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                        }
+                                                    >
+                                                        S/N
+                                                    </th>
+                                                    <th
+                                                        className={
+                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                            (color === "light"
+                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                        }
+                                                    >
+                                                        Title
+                                                    </th>
+                                                    <th
+                                                        className={
+                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                            (color === "light"
+                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                        }
+                                                    >
+                                                        Excerpt
+                                                    </th>
+                                                    <th
+                                                        className={
+                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                            (color === "light"
+                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                        }
+                                                    >
+                                                        Status
+                                                    </th> 
+                                                    <th
+                                                        className={
+                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                            (color === "light"
+                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                        }
+                                                    >
+                                                    Action
+                                                    </th>              
+                                                    <th
+                                                        className={
+                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                            (color === "light"
+                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                        }
+                                                    ></th>
+                                                </tr>
+                                        </thead>
+                                        {search(blogPosts)?.length !== 0 ?
+                                                <tbody>                                                    
+                                                    {search(blogPosts)?.map((post, userIndex) => {
+                                                            if (post?.status === "draft") {
+                                                                return (
+                                                                    <tr key={userIndex}>
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
+                                                                            #{userIndex+1}
+                                                                        </td>
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap text-left flex items-center capitalize">
+                                                                            <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
+                                                                            <span className={"ml-3 font-bold " +  +(color === "light" ? "text-blueGray-600" : "text-white")}>
+                                                                                {post?.title}
+                                                                            </span>
+                                                                        </td>
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
+                                                                            {post?.excerpt}
+                                                                        </td>
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">
+                                                                            <i className="fas fa-circle text-orange-400 mr-2"></i>{post?.status}
+                                                                        </td>                  
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
+                                                                            <Link to={`/admin/blog/post/${post?._id}`}>View details</Link>
+                                                                        </td>    
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
+                                                                            <TableDropdown />
+                                                                        </td>
+                                                                    </tr>               
+                                                                );
+                                                            } else if (post?.status === "scheduled") {
+                                                                return (
+                                                                    <tr key={userIndex}>
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
+                                                                            #{userIndex+1}
+                                                                        </td>
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap text-left flex items-center">
+                                                                            <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
+                                                                            <span
+                                                                                className={
+                                                                                    "ml-3 font-bold " +
+                                                                                    + (color === "light" ? "text-blueGray-600" : "text-white")
+                                                                                }>
+                                                                                {post?.title}
+                                                                            </span>
+                                                                        </td>
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
+                                                                            {post?.excerpt}
+                                                                        </td>
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">
+                                                                            <i className="fas fa-circle text-red-500 mr-2"></i>{post?.status}
+                                                                        </td> 
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
+                                                                            <Link to={`/admin/blog/post/${post?._id}`}>View details</Link>
+                                                                        </td>                   
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
+                                                                            <TableDropdown />
+                                                                        </td>
+                                                                    </tr>               
+                                                                );
+                                                            } else {
+                                                                return (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                    <tr key={userIndex}>
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
+                                                                            #{userIndex+1}
+                                                                        </td>
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap text-left flex items-center">
+                                                                            <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
+                                                                            <span
+                                                                                className={
+                                                                                "ml-3 font-bold " +
+                                                                                +(color === "light" ? "text-blueGray-600" : "text-white")
+                                                                                }>
+                                                                                {post?.title}
+                                                                            </span>
+                                                                        </td>
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
+                                                                            {post?.email}
+                                                                        </td>
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">
+                                                                            <i className="fas fa-circle text-green-500 mr-2"></i>{post?.status}
+                                                                        </td>  
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
+                                                                            <Link to={`/admin/blog/post/${post?._id}`}>View details</Link>
+                                                                        </td>                  
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
+                                                                            <TableDropdown />
+                                                                        </td>
+                                                                    </tr>               
+                                                                );
+                                                            };
+                                                        })
+                                                    }
+                                                </tbody>
+                                                :
+                                                <tbody>                    
+                                                    <tr>
+                                                        <td className=""></td>
+                                                        <td className=""></td>
+                                                        <td className="text-left max-w-60 pl-6 h-60 flex justify-start items-center">No post found</td>
+                                                        <td className=""></td>
+                                                        <td className=""></td>
+                                                        <td className=""></td>
+                                                    </tr>
+                                                </tbody>
+                                        }
+                                    </table>
+
+
+                                    {/* Pagination controls */}
+                                    <div className="flex justify-between items-center py-2 mr-6">
+                                        <div className="p-4 font-medium text-3xl font-firma tracking-supertight flex flex-row gap-6 items-center">
+                                            {pageLimit} 
+                                        <div className="text-xl normal-case">Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong></div>
+                                        </div>
+                                        
+                                        <nav className="relative z-0 inline-flex shadow-sm">
+                                                                {/* Previous page button */}
+                                                                <button
+                                                                    onClick={() => handlePageChange(currentPage - 1)}
+                                                                    className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-xl font-black text-gray-500 hover:bg-gray-50 w-16 justify-center h-14 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                                                    disabled={currentPage === 1}
+                                                                >{leftArrow}
+                                                                </button>
+
+
+                                                                {/* Page numbers */}
+                                                                {Array.from({ length: totalPages }, (_, index) => (
+                                                                        <button
+                                                                        key={index}
+                                                                        onClick={() => handlePageChange(index + 1)}
+                                                                        className={`-ml-px relative inline-flex items-center border border-gray-300 text-xl font-black outline-none focus:outline-none hover:bg-gray-50 w-16 justify-center h-14 ${currentPage === index + 1 ? 'bg-gray-100 text-blue-800' : ''}`}>
+                                                                        {index + 1}
+                                                                        </button>
+                                                                ))}
+
+
+                                                                {/* Next page button */}
+                                                                <button
+                                                                    onClick={() => handlePageChange(currentPage + 1)}
+                                                                    className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-xl font-black text-gray-500 hover:bg-gray-50 w-16 justify-center h-14 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                                                    disabled={currentPage === totalPages}
+                                                                >{rightArrow}
+                                                                </button>
+                                        </nav>
+                                    </div>
+                                    {/* Pagination controls */}
+                                </div>
+                                {/* <Suspense fallback={<div>Loading...</div>}>                
+                                    <CardAllApprovedStaffs color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
+                                </Suspense>       
+                                <Suspense fallback={<div>Loading...</div>}>                            
+                                    <CardAllPendingStaffs color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
+                                </Suspense>     
+                                <Suspense fallback={<div>Loading...</div>}>
+                                    <CardAllRejectedStaffs color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
+                                </Suspense> */}
+                                {/* Views */}
 
                             </div>
                         </div>
                     </div>                  
                 </div>
+                {/* Users Table */}
             </div>            
             {/***** RIGHT-PANEL *****/}            
         </>
