@@ -27,6 +27,25 @@ import {
 
 
 
+const convertDate = (dateString) => {
+    
+    const date = new Date(dateString);
+    const options = {
+        year: 'numeric',
+        month: 'long',
+        day: 'numeric',
+        hour: '2-digit',
+        minute: '2-digit',
+        hour12: true
+    };
+
+    return date.toLocaleString('en-GB', options);
+};
+
+
+
+
+
 
 const DashboardBlogPosts = ({ color, isLoggedIn }) => {
 
@@ -489,7 +508,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                 {/* Page Title */}
                                 <div className="rounded-t mb-0 px-4 py-3 border-0">
                                     <div className="flex flex-wrap items-center">
-                                        <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+                                        <div className="relative w-full px-4 max-w-full flex justify-between items-center flex-grow flex-1">
                                             <h3
                                                 className={
                                                     "font-semibold text-lg " +
@@ -498,6 +517,10 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                             >
                                                 All Posts
                                             </h3>
+
+                                            <Link to={'/admin/blog/create'} alt='create new article'>
+                                                <button className="bg-blue-500 text-white active:bg-lightBlue-500 font-bold uppercase text-lg tracking-tightener px-7 py-3 rounded-lg shadow hover:bg-blue-600 hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-300">add new</button>
+                                            </Link>
                                         </div>
                                     </div>
                                 </div>
@@ -539,7 +562,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                                             : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
                                                         }
                                                     >
-                                                        Excerpt
+                                                        Date Published
                                                     </th>
                                                     <th
                                                         className={
@@ -581,19 +604,33 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                                                             #{userIndex+1}
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap text-left flex items-center capitalize">
-                                                                            <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
-                                                                            <span className={"ml-3 font-bold " +  +(color === "light" ? "text-blueGray-600" : "text-white")}>
-                                                                                {post?.title}
+                                                                            {   
+                                                                                post?.images?.map((item, itemIndex) => {
+                                                                                    if (item?.featured === true) {
+                                                                                        return (
+                                                                                            <div key={itemIndex} className="">
+                                                                                                <img src={item?.featured} className="h-12 w-12 bg-white rounded-full border" alt={item?.alt} />{" "}
+                                                                                            </div>
+                                                                                        );
+                                                                                    }
+                                                                                })
+                                                                            }  
+                                                                            <span
+                                                                                className={
+                                                                                    "ml-3 font-bold " +
+                                                                                    + (color === "light" ? "text-blueGray-600" : "text-white")
+                                                                                }>
+                                                                                {post?.title?.substring(0,10)+"..."}
                                                                             </span>
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
-                                                                            {post?.excerpt}
+                                                                            {convertDate(post?.createdAt)}                        
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">
                                                                             <i className="fas fa-circle text-orange-400 mr-2"></i>{post?.status}
                                                                         </td>                  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
-                                                                            <Link to={`/admin/blog/post/${post?._id}`}>View details</Link>
+                                                                            <Link to={`/admin/blog/manage/${post?._id}`}>View details</Link>
                                                                         </td>    
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
                                                                             <TableDropdown />
@@ -607,23 +644,33 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                                                             #{userIndex+1}
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap text-left flex items-center">
-                                                                            <img src={sketch} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
+                                                                            {   
+                                                                                post?.images?.map((item, itemIndex) => {
+                                                                                    if (item?.featured === true) {
+                                                                                        return (
+                                                                                            <div key={itemIndex} className="">
+                                                                                                <img src={item?.featured} className="h-12 w-12 bg-white rounded-full border" alt={item?.alt} />{" "}
+                                                                                            </div>
+                                                                                        );
+                                                                                    }
+                                                                                })
+                                                                            }
                                                                             <span
                                                                                 className={
                                                                                     "ml-3 font-bold " +
                                                                                     + (color === "light" ? "text-blueGray-600" : "text-white")
                                                                                 }>
-                                                                                {post?.title}
+                                                                                {post?.title?.substring(0,10)+"..."}
                                                                             </span>
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
-                                                                            {post?.excerpt}
+                                                                            {convertDate(post?.createdAt)}                        
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">
                                                                             <i className="fas fa-circle text-red-500 mr-2"></i>{post?.status}
                                                                         </td> 
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
-                                                                            <Link to={`/admin/blog/post/${post?._id}`}>View details</Link>
+                                                                            <Link to={`/admin/blog/manage/${post?._id}`}>View details</Link>
                                                                         </td>                   
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
                                                                             <TableDropdown />
@@ -650,14 +697,14 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                                                             }    
                                                                             <span
                                                                                 className={
-                                                                                "ml-3 font-bold " +
-                                                                                +(color === "light" ? "text-blueGray-600" : "text-white")
+                                                                                    "ml-3 font-bold " +
+                                                                                    + (color === "light" ? "text-blueGray-600" : "text-white")
                                                                                 }>
-                                                                                {post?.title}
-                                                                            </span>                                                                                                                                      
+                                                                                {post?.title?.substring(0,50)+"..."}
+                                                                            </span>
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
-                                                                            {post?.excerpt}
+                                                                            {convertDate(post?.createdAt)}                        
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">
                                                                             <i className="fas fa-circle text-green-500 mr-2"></i>{post?.status}

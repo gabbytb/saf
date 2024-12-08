@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 import { Editor, } from '@tinymce/tinymce-react';
 import api from "../../api";
+import { Link } from 'react-router-dom';
 
 
 
@@ -270,7 +271,11 @@ const NewBlogPost = () => {
 
                 {/* <div className={`activeDisplay ${activeForm === 'update-form' ? 'block' : 'hidden'}`}> */}
                 <div className="rounded-t bg-white mb-0 p-6">
-                    <div className="text-center flex justify-between items-center">
+                    <div className="text-center flex justify-start items-center">
+                        <Link to={'/admin/blog/manage'} alt='create new article' className='mr-6'>
+                            <button className="bg-blue-500 text-white active:bg-lightBlue-500 font-bold uppercase text-lg tracking-tightener px-7 py-3 rounded-lg shadow hover:bg-blue-600 hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-300">back</button>
+                        </Link>
+
                         <h6 className="text-blueGray-700 text-42xl tracking-tightener font-bold capitalize">Create Article</h6>                          
                         {/* <button onClick={showUserInfo}
                             className="bg-lightBlue-500 text-white active:bg-lightBlue-600 font-bold uppercase text-lg tracking-tightener px-8 py-2 rounded-lg shadow hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-150"
