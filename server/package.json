@@ -1,24 +1,28 @@
 {
-  "name": "bmf",
+  "name": "server",
+  "description": "MERN stack app",
   "version": "1.0.0",
-  "description": "Restful CRUD APIs",
   "main": "app.js",
+  "bin": {
+    "server": "bin/AuthMiddlewareCookiesToken.js"
+  },  
   "scripts": {
-    "start": "nodemon app.js",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "nodemon app.js",              
+    "client": "npm run start --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "MongoDB",
-    "mongoose",
-    "express js",
     "bcrypt",
     "cors",
-    "nodemon: npm i -D nodemon (OR) npm i --save-dev nodemon ==> To call only nodemon, to restart server anytime a Changes is detected on the Server",
     "dotenv",
-    "jsonwebtoken",
-    "nodemailer"
+    "express",
+    "mongoose",
+    "nodemailer",
+    "concurrently",
+    "nodemon"
   ],
-  "author": "Oyebanji Gabriel (igabriel.oyebanji@travelbeta.com)",
+  "author": "",
   "license": "ISC",
   "dependencies": {
     "bcrypt": "^5.1.1",
@@ -30,6 +34,7 @@
     "nodemailer": "^6.9.8"
   },
   "devDependencies": {
+    "concurrently": "^9.1.0",
     "nodemon": "^3.1.7"
   }
 }
