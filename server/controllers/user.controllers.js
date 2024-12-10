@@ -874,8 +874,12 @@ exports.googleSignOn = async (req, res) => {
 // Our FIND All USERS Logic starts here
 exports.findAllUsers = async (req, res) => { 
 
-    const { page = 1, limit = 10, status } = req.query; // Destructure query parameters   
-    
+    // Get Pagination Parameters from the request query     
+    const status = req.query.status || "";               
+    const page = parseInt(req.query.page, 10) || 1;        
+    const limit = parseInt(req.query.limit, 10) || 20;                        
+    const skip = (page - 1) * limit;
+
     try {
 
         let query = {
@@ -888,7 +892,7 @@ exports.findAllUsers = async (req, res) => {
 
         // FIND ALL ROLE_USERS
         const allUsers = await User.find(query)
-                                .skip(parseInt(page - 1) * limit)
+                                .skip(parseInt(skip))
                                 .limit(parseInt(limit));
         console.log("ALL USERS: ", allUsers);
 

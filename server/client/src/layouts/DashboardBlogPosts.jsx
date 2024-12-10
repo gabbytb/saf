@@ -550,7 +550,17 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                                             : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
                                                         }
                                                     >
-                                                        Title
+                                                        Featured Image
+                                                    </th>
+                                                    <th
+                                                        className={
+                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center " +
+                                                            (color === "light"
+                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                        }
+                                                    >
+                                                        Post Title
                                                     </th>
                                                     <th
                                                         className={
@@ -607,7 +617,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                                                                     if (item?.featured === true) {
                                                                                         return (
                                                                                             <div key={itemIndex} className="">
-                                                                                                <img src={item?.featured} className="h-12 w-12 bg-white rounded-full border" alt={item?.alt} />{" "}
+                                                                                                <img src={item?.url} className="h-12 w-12 bg-white rounded-full border" alt={item?.alt} />{" "}
                                                                                             </div>
                                                                                         );
                                                                                     }
@@ -647,7 +657,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                                                                     if (item?.featured === true) {
                                                                                         return (
                                                                                             <div key={itemIndex} className="">
-                                                                                                <img src={item?.featured} className="h-12 w-12 bg-white rounded-full border" alt={item?.alt} />{" "}
+                                                                                                <img src={item?.url} className="h-12 w-12 bg-white rounded-full border" alt={item?.alt} />{" "}
                                                                                             </div>
                                                                                         );
                                                                                     }
@@ -681,18 +691,21 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
                                                                             #{userIndex+1}
                                                                         </td>
-                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap text-left flex items-center">                                                                         
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap flex justify-center items-center">                                                                         
                                                                             {   
                                                                                 post?.images?.map((item, itemIndex) => {
                                                                                     if (item?.featured === true) {
                                                                                         return (
                                                                                             <div key={itemIndex} className="">
-                                                                                                <img src={item?.featured} className="h-12 w-12 bg-white rounded-full border" alt="user-profile-pic" />{" "}
+                                                                                                <img src={item?.url} className="h-20 max-w-24 bg-white rounded-lg border" alt={item?.alt} />{" "}
                                                                                             </div>
                                                                                         );
                                                                                     }
                                                                                 })
                                                                             }    
+                                                             
+                                                                        </td>
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">   
                                                                             <span
                                                                                 className={
                                                                                     "ml-3 font-bold " +
@@ -716,8 +729,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                                                     </tr>               
                                                                 );
                                                             };
-                                                        })
-                                                    }
+                                                    })}
                                                 </tbody>
                                                 :
                                                 <tbody>                    
@@ -774,13 +786,13 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                     {/* Pagination controls */}
                                 </div>
                                 {/* <Suspense fallback={<div>Loading...</div>}>                
-                                    <CardAllApprovedStaffs color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
+                                    <CardAllPublishedPosts color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
                                 </Suspense>       
                                 <Suspense fallback={<div>Loading...</div>}>                            
-                                    <CardAllPendingStaffs color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
+                                    <CardAllDraftPosts color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
                                 </Suspense>     
                                 <Suspense fallback={<div>Loading...</div>}>
-                                    <CardAllRejectedStaffs color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
+                                    <CardAllScheduledPosts color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
                                 </Suspense> */}
                                 {/* Views */}
 

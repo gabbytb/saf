@@ -2,7 +2,7 @@
   "name": "server",
   "description": "MERN stack app",
   "version": "1.0.0",
-  "main": "app.js",
+  "main": "nodemon app.js",
   "bin": {
     "server": "bin/AuthMiddlewareCookiesToken.js"
   },  

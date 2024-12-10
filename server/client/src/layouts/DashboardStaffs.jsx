@@ -301,7 +301,7 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
                     </div>
 
 
-                    {/* Users Table */}
+                    {/* Staffs Table */}
                     <div className="px-4 md:px-10 mx-auto w-full -m-24">   
             
                         <div className="flex flex-wrap mt-4">
@@ -325,99 +325,99 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
                                     
                                     {/* Page Title */}
                                     <div className="rounded-t mb-0 px-4 py-3 border-0">
-                                    <div className="flex flex-wrap items-center">
-                                        <div className="relative w-full px-4 max-w-full flex-grow flex-1">
-                                        <h3
-                                            className={
-                                            "font-semibold text-lg " +
-                                            (color === "dark" ? "text-blueGray-700" : "text-white")
-                                            }
-                                        >
-                                            All Staffs
-                                        </h3>
+                                        <div className="flex flex-wrap items-center">
+                                            <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+                                                <h3
+                                                    className={
+                                                    "font-semibold text-lg " +
+                                                    (color === "dark" ? "text-blueGray-700" : "text-white")
+                                                    }
+                                                >
+                                                    All Staffs
+                                                </h3>
+                                            </div>
                                         </div>
-                                    </div>
                                     </div>
                                     {/* Page Title */}
         
         
                                     <div className={`w-full overflow-x-auto ${activeDisplay === "allStaffs" ? "block" : "hidden"}`}>
-                                    {/* Staffs table */}
-                                    <table className="items-center w-full bg-transparent border-collapse">
-                                        <thead>
-                                        <tr>
-                                            <th
-                                            className={
-                                                "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                                                (color === "light"
-                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                                : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                                            }
-                                            >
-                                            S/N
-                                            </th>
-                                            <th
-                                            className={
-                                                "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                                                (color === "light"
-                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                                : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                                            }
-                                            >
-                                            Full Name
-                                            </th>
-                                            <th
-                                            className={
-                                                "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                                                (color === "light"
-                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                                : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                                            }
-                                            >
-                                            E-mail address
-                                            </th>
-                                            <th
-                                            className={
-                                                "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                                                (color === "light"
-                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                                : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                                            }
-                                            >
-                                            Status
-                                            </th> 
-                                            <th
-                                            className={
-                                                "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                                                (color === "light"
-                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                                : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                                            }
-                                            >
-                                            Action
-                                            </th>              
-                                            <th
-                                            className={
-                                                "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                                                (color === "light"
-                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                                : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                                            }
-                                            ></th>
-                                        </tr>
-                                        </thead>
-                                        <tbody className='w-16 h-16'>
+                                        {/* Staffs table */}
+                                        <table className="items-center w-full bg-transparent border-collapse">
+                                            <thead>
                                                 <tr>
-                                                <td></td>
-                                                <td></td>
-                                                <td className="max-w-40 h-60 flex flex-col justify-center items-center">                                                                                             
-                                                    <img src={spinner} alt="Spinning" className="ml-80 mx-auto" />                                                              
-                                                    <p className="text-xl tracking-extratight font-semibold">Loading...</p>                                  
-                                                </td>
-                                                <td></td>
+                                                    <th
+                                                    className={
+                                                        "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                        (color === "light"
+                                                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                        : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                    }
+                                                    >
+                                                    S/N
+                                                    </th>
+                                                    <th
+                                                    className={
+                                                        "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                        (color === "light"
+                                                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                        : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                    }
+                                                    >
+                                                    Full Name
+                                                    </th>
+                                                    <th
+                                                    className={
+                                                        "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                        (color === "light"
+                                                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                        : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                    }
+                                                    >
+                                                    E-mail address
+                                                    </th>
+                                                    <th
+                                                    className={
+                                                        "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                        (color === "light"
+                                                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                        : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                    }
+                                                    >
+                                                    Status
+                                                    </th> 
+                                                    <th
+                                                    className={
+                                                        "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                        (color === "light"
+                                                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                        : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                    }
+                                                    >
+                                                    Action
+                                                    </th>              
+                                                    <th
+                                                    className={
+                                                        "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                        (color === "light"
+                                                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                        : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                    }
+                                                    ></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className='w-16 h-16'>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td className="max-w-40 h-60 flex flex-col justify-center items-center">                                                                                             
+                                                        <img src={spinner} alt="Spinning" className="ml-80 mx-auto" />                                                              
+                                                        <p className="text-xl tracking-extratight font-semibold">Loading...</p>                                  
+                                                    </td>
+                                                    <td></td>
                                                 </tr>                
-                                        </tbody>
-                                    </table>
+                                            </tbody>
+                                        </table>
                                     </div> 
                                 </div>    
                             </div>
@@ -442,6 +442,7 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
 
             {/***** RIGHT-PANEL *****/}
             <div className="relative md:ml-64 bg-blueGray-100">
+                
                 {/* Navbar */}
                 <nav className="absolute top-0 left-0 w-full z-1 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
                     <div className="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">                            
@@ -501,7 +502,7 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
                 {/* Header */}
 
                 
-                {/* Users Table */}
+                {/* Staffs Table */}
                 <div className="px-4 md:px-10 mx-auto w-full -m-24">               
                     <div className="flex flex-wrap mt-4">
                         <div className="w-full mb-12 px-4">         
@@ -547,7 +548,7 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
                                 </div>
                                 {/* Page Title */}
 
-
+ 
 
                                 {/* Views */}
                                 <div className={`w-full overflow-x-auto ${activeDisplay === "allStaffs" ? "block" : "hidden"}`}>
@@ -721,13 +722,13 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
                                     {/* Pagination controls */}
                                 </div>
                                 <Suspense fallback={<div>Loading...</div>}>                
-                                    <CardAllApprovedStaffs color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
+                                    <CardAllApprovedStaffs color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} leftArrow={leftArrow} rightArrow={rightArrow} />
                                 </Suspense>       
                                 <Suspense fallback={<div>Loading...</div>}>                            
-                                    <CardAllPendingStaffs color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
+                                    <CardAllPendingStaffs color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} leftArrow={leftArrow} rightArrow={rightArrow} />
                                 </Suspense>     
                                 <Suspense fallback={<div>Loading...</div>}>
-                                    <CardAllRejectedStaffs color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
+                                    <CardAllRejectedStaffs color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} leftArrow={leftArrow} rightArrow={rightArrow} />
                                 </Suspense>
                                 {/* Views */}
 
@@ -735,7 +736,8 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
                         </div>
                     </div>                  
                 </div>
-                {/* Users Table */}
+                {/* Staffs Table */}
+
             </div>            
             {/***** RIGHT-PANEL *****/}            
         </>

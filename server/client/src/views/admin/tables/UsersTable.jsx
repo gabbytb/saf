@@ -1,5 +1,5 @@
 // components
-import { CardAllUsers } from "../../../components";
+// import { CardAllUsers } from "../../../components";
 
 
 
@@ -12,7 +12,7 @@ export default function UsersTable() {
     <>
       <div className="flex flex-wrap mt-4">
         <div className="w-full mb-12 px-4">
-          <CardAllUsers />
+          {/* <CardAllUsers /> */}
         </div>
       </div>
     </>

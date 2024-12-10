@@ -66,11 +66,11 @@ module.exports = app => {
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage") for the frontend to access.
         
     // Fetch DATA using this API
-    router.get("/api/v1/account/users/manage/approvedUsers", users.totalApprovedUsers);
+    router.get("/api/v1/account/users/manage/approved", users.totalApprovedUsers);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/published") for the frontend to access.
-    router.get("/api/v1/account/users/manage/pendingUsers", users.totalPendingUsers);
+    router.get("/api/v1/account/users/manage/pending", users.totalPendingUsers);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/published") for the frontend to access.
-    router.get("/api/v1/account/users/manage/rejectedUsers", users.totalRejectedUsers);       
+    router.get("/api/v1/account/users/manage/rejected", users.totalRejectedUsers);       
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/published") for the frontend to access.
   
 

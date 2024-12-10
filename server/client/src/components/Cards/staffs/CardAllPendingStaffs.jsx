@@ -12,7 +12,7 @@ import { spinner } from "../../../assets/images";
 
 
 
-export default function CardAllPendingStaffs({ color, activeDisplay, search, pageLimit }) {
+export default function CardAllPendingStaffs({ color, activeDisplay, search, pageLimit, leftArrow, rightArrow, }) {
 
 
     // ****************************************************************************
@@ -28,11 +28,8 @@ export default function CardAllPendingStaffs({ color, activeDisplay, search, pag
     const [totalPages, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
 
-    const leftArrow = "<", 
-          rightArrow = ">";
-
     // Number of items per page
-    console.log("PAGE LIMIT: ", pageLimit);
+    // console.log("PAGE LIMIT: ", pageLimit);
 
 
 

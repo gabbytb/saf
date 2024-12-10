@@ -53,13 +53,11 @@ import UserDropdown from "./Dropdowns/UserDropdown";
 import UserDropdownPro from "./Dropdowns/UserDropdownPro";
 
 // USERS COMPONENTS
-import CardAllUsers from "./Cards/users/CardAllUsers";
 import CardAllApprovedUsers from "./Cards/users/CardAllApprovedUsers";
 import CardAllPendingUsers from "./Cards/users/CardAllPendingUsers";
 import CardAllRejectedUsers from "./Cards/users/CardAllRejectedUsers";
 
 // STAFFS COMPONENTS
-import CardAllStaffs from "./Cards/staffs/CardAllStaffs";
 import CardAllApprovedStaffs from "./Cards/staffs/CardAllApprovedStaffs";
 import CardAllPendingStaffs from "./Cards/staffs/CardAllPendingStaffs";
 import CardAllRejectedStaffs from "./Cards/staffs/CardAllRejectedStaffs";
@@ -107,12 +105,10 @@ export {
     CardPageVisits,
     CardSocialTraffic,
 
-    CardAllUsers,
     CardAllApprovedUsers,
     CardAllPendingUsers,
     CardAllRejectedUsers,
 
-    CardAllStaffs,
     CardAllApprovedStaffs,
     CardAllPendingStaffs,
     CardAllRejectedStaffs,

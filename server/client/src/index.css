@@ -386,13 +386,15 @@
         text-14xl/loose sm:text-2xl/loose
         mt-2
         mb-10
+        w-full
       ;
   }
 
   main#blogSinglePost section .rendered-output p img {          
-      @apply
-          w-full
+      @apply         
+          w-11/12
           h-125       
+          m-auto
       ;
   }
   

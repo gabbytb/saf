@@ -32,7 +32,7 @@ export default function CardAllApprovedUsers({ color, activeDisplay, search, pag
     const [totalPages, setTotalPages] = useState(0);
     
     // Number of items per page
-    console.log("PAGE LIMIT: ", pageLimit);
+    // console.log("PAGE LIMIT: ", pageLimit);
 
     const [currentPage, setCurrentPage] = useState(1);
 
@@ -45,7 +45,7 @@ export default function CardAllApprovedUsers({ color, activeDisplay, search, pag
     // MANAGE STATE:-  SPECIAL FEATURES
     // ****************************************************************************
     const [isLoading, setIsLoading] = useState(true);
-    const [errorMessage, setErrorMessage] = useState(true);
+    // const [errorMessage, setErrorMessage] = useState(true);
 
  
     
@@ -60,19 +60,19 @@ export default function CardAllApprovedUsers({ color, activeDisplay, search, pag
             // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS
             // ****************************************************************************             
             async function fetchAllApprovedUsers() {
-                var approved = 'approved';
+                const approved = 'approved';
                 await api.get(`/api/v1/auth/account/by-role/ROLE_USERS?page=${currentPage}&limit=${pageLimit}&status=${approved}`)
                 .then((response) => {
                     const { success, data, message } = response.data;
-                    const { usersList, pagination } = data;
+                    const { allUsers, pagination } = data;
 
                     if (!success && message === "No user found") {
-                        setErrorMessage(message)
+                        // setErrorMessage(message)
                         console.log("Success: ", success);
                         console.log("Message: ", message);                        
                     };
 
-                    setAllApprovedUsers(usersList);
+                    setAllApprovedUsers(allUsers);
                                             
                     setTotalUsers(pagination?.usersRecord);
                     setTotalPages(pagination?.lastPage);
@@ -107,170 +107,163 @@ export default function CardAllApprovedUsers({ color, activeDisplay, search, pag
 
 
     if (isLoading) {
-        return (
-        <>
-            <div className={`w-full overflow-x-auto ${activeDisplay === "allApprovedUsers" ? "block" : "hidden"}`}>
-              {/* Projects table */}
-              <table className="items-center w-full bg-transparent border-collapse">
-                <thead>
+      return (
+          <>
+              <div className={`w-full overflow-x-auto ${activeDisplay === "allApprovedUsers" ? "block" : "hidden"}`}>
+                {/* Projects table */}
+                <table className="items-center w-full bg-transparent border-collapse">
+                  <thead>
                     <tr>
-                        <th
-                          className={
-                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                            (color === "light"
+                      <th
+                        className={
+                          "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                          (color === "light"
+                          ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                          : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                        }
+                      >
+                        S/N
+                      </th>
+                      <th
+                        className={
+                          "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                          (color === "light"
                             ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
                             : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                          }
-                        >
-                          S/N
-                        </th>
-                        <th
-                          className={
-                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                            (color === "light"
-                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                          }
-                        >
-                          Full Name
-                        </th>
-                        <th
-                          className={
-                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                            (color === "light"
-                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                          }
-                        >
-                          E-mail address
-                        </th>
-                        <th
-                          className={
-                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                            (color === "light"
-                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                          }
-                        >
-                          Status
-                        </th> 
-                        <th
-                          className={
-                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                            (color === "light"
-                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                          }
-                        >
-                          Action
-                        </th>              
-                        <th
-                          className={
-                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                            (color === "light"
-                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                          }
-                        ></th>
+                        }
+                      >
+                        Full Name
+                      </th>
+                      <th
+                        className={
+                          "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                          (color === "light"
+                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                        }
+                      >
+                        E-mail address
+                      </th>
+                      <th
+                        className={
+                          "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                          (color === "light"
+                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                        }
+                      >
+                        Status
+                      </th> 
+                      <th
+                        className={
+                          "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                          (color === "light"
+                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                        }
+                      >
+                        Action
+                      </th>              
+                      <th
+                        className={
+                          "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                          (color === "light"
+                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                        }
+                      ></th>
                     </tr>
-                </thead>          
-                <tbody className='w-16 h-16 '>
-                    <tr>
-                        <td></td>
-                        <td></td>
-                        <td className="max-w-40 h-60 flex flex-col justify-center items-center">                                
-                          {/* <Preloader /> */}
-                          <img src={spinner} alt="Spinning" className="ml-80 mx-auto" />                           
-                          <p className="text-xl tracking-extratight font-semibold">Loading...</p> 
-                        </td>
-                        <td></td>
-                    </tr>
-                </tbody>
-              </table>
-            </div>       
-        </>
-        );
+                  </thead>        
+                  <tbody className='w-16 h-16 '>
+                      <tr>
+                          <td></td>
+                          <td></td>
+                          <td className="max-w-40 h-60 flex flex-col justify-center items-center">                                
+                            {/* <Preloader /> */}
+                            <img src={spinner} alt="Spinning" className="ml-80 mx-auto" />                           
+                            <p className="text-xl tracking-extratight font-semibold">Loading...</p> 
+                          </td>
+                          <td></td>
+                      </tr>
+                  </tbody>
+                </table>
+              </div>       
+          </>
+      );
     };
 
 
     return (
-      <>
-          <div className={`w-full overflow-x-auto ${activeDisplay === "allApprovedUsers" ? "block" : "hidden"}`}>
-            
-            <div className={`${errorMessage }`}>
-                  <div>{errorMessage}</div>
-            </div>
-
-
+        <div className={`w-full overflow-x-auto ${activeDisplay === "allApprovedUsers" ? "block" : "hidden"}`}>
             {/* Projects table */}
             <table className="items-center w-full bg-transparent border-collapse">
               <thead>
-                  <tr>
-                        <th
-                          className={
-                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                            (color === "light"
-                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                          }
-                        >
-                          S/N
-                        </th>
-                        <th
-                          className={
-                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                            (color === "light"
-                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                          }
-                        >
-                          Full Name
-                        </th>
-                        <th
-                          className={
-                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                            (color === "light"
-                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                          }
-                        >
-                          E-mail address
-                        </th>
-                        <th
-                          className={
-                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                            (color === "light"
-                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                          }
-                        >
-                          Status
-                        </th> 
-                        <th
-                          className={
-                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                            (color === "light"
-                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                          }
-                        >
-                          Action
-                        </th>              
-                        <th
-                          className={
-                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                            (color === "light"
-                              ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                              : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                          }
-                        ></th>
-                  </tr>
+                <tr>
+                  <th
+                    className={
+                      "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                      (color === "light"
+                      ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                      : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                    }
+                  >
+                    S/N
+                  </th>
+                  <th
+                    className={
+                      "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                      (color === "light"
+                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                    }
+                  >
+                    Full Name
+                  </th>
+                  <th
+                    className={
+                      "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                      (color === "light"
+                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                    }
+                  >
+                    E-mail address
+                  </th>
+                  <th
+                    className={
+                      "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                      (color === "light"
+                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                    }
+                  >
+                    Status
+                  </th> 
+                  <th
+                    className={
+                      "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                      (color === "light"
+                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                    }
+                  >
+                    Action
+                  </th>              
+                  <th
+                    className={
+                      "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                      (color === "light"
+                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                        : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                    }
+                  ></th>
+                </tr>
               </thead>
               {
                 search(allApprovedUsers)?.length !== 0 ?
                   <tbody>                                                    
                     {
-                        search(allApprovedUsers)?.map((user, userIndex) =>  {                       
+                        search(allApprovedUsers)?.map((user, userIndex) => {                           
                             return (
                                 <tr key={userIndex}>
                                     <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
@@ -294,13 +287,13 @@ export default function CardAllApprovedUsers({ color, activeDisplay, search, pag
                                       <i className="fas fa-circle text-green-500 mr-2"></i>{user?.status}
                                     </td>  
                                     <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
-                                        <Link to={`/admin/staffs/${user._id}`}>View details</Link>
+                                        <Link to={`/admin/users/${user._id}`}>View details</Link>
                                     </td>                  
                                     <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
                                       <TableDropdown />
                                     </td>
                                 </tr>              
-                            );                                                                     
+                            );                          
                         })
                     }
                   </tbody>
@@ -321,43 +314,45 @@ export default function CardAllApprovedUsers({ color, activeDisplay, search, pag
 
             {/* Pagination controls */}
             <div className="flex justify-between items-center py-2 mr-6">
-                                    <div className="p-4 font-medium text-3xl font-firma tracking-supertight flex flex-row gap-6 items-center">
-                                        {pageLimit} 
-                                        <div className="text-xl normal-case">Page <strong>{currentPage}</strong> of <strong>{totalPages}</strong></div>
-                                    </div>
-
-                                    <nav className="relative z-0 inline-flex shadow-sm">
-                                        {/* Previous page button */}
-                                        <button
-                                            onClick={() => handlePageChange(currentPage - 1)}
-                                            className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-xl font-black text-gray-500 hover:bg-gray-50 w-16 justify-center h-14 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                            disabled={currentPage === 1}
-                                        >{leftArrow}
-                                        </button>
+                <div className="p-4 font-medium text-3xl font-firma tracking-supertight flex flex-row gap-6 items-center">
+                    {pageLimit} 
+                    <div className="text-xl normal-case">Page 
+                        <strong>{currentPage}</strong> of <strong>{totalPages}</strong>
+                    </div>
+                </div>
 
 
-                                        {/* Page numbers */}
-                                        {Array.from({ length: totalPages }, (_, index) => (
-                                                    <button
+                <nav className="relative z-0 inline-flex shadow-sm">
+                                            {/* Previous page button */}
+                                            <button
+                                                onClick={() => handlePageChange(currentPage - 1)}
+                                                className={`relative inline-flex items-center px-2 py-2 rounded-l-md border border-gray-300 bg-white text-xl font-black text-gray-500 hover:bg-gray-50 w-16 justify-center h-14 ${currentPage === 1 ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                                disabled={currentPage === 1}
+                                            >{leftArrow}
+                                            </button>
+
+
+                                            {/* Page numbers */}
+                                            {Array.from({ length: totalPages }, (_, index) => (
+                                                <button
                                                     key={index}
                                                     onClick={() => handlePageChange(index + 1)}
                                                     className={`-ml-px relative inline-flex items-center border border-gray-300 text-xl font-black outline-none focus:outline-none hover:bg-gray-50 w-16 justify-center h-14 ${currentPage === index + 1 ? 'bg-gray-100 text-blue-800' : ''}`}>
                                                     {index + 1}
-                                                    </button>
-                                        ))}
+                                                </button>
+                                            ))}
 
 
-                                        {/* Next page button */}
-                                        <button
-                                            onClick={() => handlePageChange(currentPage + 1)}
-                                            className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-xl font-black text-gray-500 hover:bg-gray-50 w-16 justify-center h-14 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
-                                            disabled={currentPage === totalPages}
-                                        >{rightArrow}
-                                        </button>
-                                    </nav>
+                                            {/* Next page button */}
+                                            <button
+                                                onClick={() => handlePageChange(currentPage + 1)}
+                                                className={`-ml-px relative inline-flex items-center px-2 py-2 rounded-r-md border border-gray-300 bg-white text-xl font-black text-gray-500 hover:bg-gray-50 w-16 justify-center h-14 ${currentPage === totalPages ? 'opacity-50 cursor-not-allowed' : ''}`}
+                                                disabled={currentPage === totalPages}
+                                            >{rightArrow}
+                                            </button>
+                </nav>
             </div>
             {/* Pagination controls */}
-          </div>       
-      </>
+        </div>
     );
 };
