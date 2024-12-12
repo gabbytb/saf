@@ -52,6 +52,7 @@ const assignTwoDaysToken = require("../middlewares/AssignTwoDaysToken");    // F
 // const assignThreeDaysToken = require("../middlewares/AssignThreeDaysToken");    // For Sign Up
 const verifyToken = require("../middlewares/VerifyToken");
 const mailSenderForGetSignUp = require("../middlewares/MailSenderForGetSignUp");
+const { data } = require("autoprefixer");
 // const mailSenderForPostSignUp = require("../middlewares/MailSenderForPostSignUp");
 // const mailSenderForVerifiedAccount = require("../middlewares/MailSenderForVerifiedAccount");
 // *****************************************************************
@@ -599,6 +600,9 @@ exports.verifySignUpWithPost = async (req, res) => {
 
 
 
+
+
+
 // Our USER LOGIN Logic starts here
 exports.logIn = async (req, res) => {
 
@@ -770,12 +774,12 @@ exports.logIn = async (req, res) => {
         return res.status(200).json(responseData);
 
     } catch (error) {
-        const responseData = { 
-            success: false, 
-            message: "Internal Server Error",
+        const responseData = {          
+            message: "Internal Server Error",   
+            success: false,
+            data: error.message,
         };
-        console.log("Unexpected error during Login 1: ", responseData.message);
-        console.error("Unexpected error during Login 2: ", error);
+        console.log("Caught Error attempting Login: ", responseData);
         return res.status(500).json(responseData);  
     };
 
@@ -792,8 +796,8 @@ exports.googleSignOn = async (req, res) => {
         // Exchange the authorization code for an access token
         const response = await axios.post('https://oauth2.googleapis.com/token', {
             code,
-            client_id: '58730156701-d27fqgjb0.apps.googleusercontent.com',
-            client_secret: 'GOCSPX-u02eNiucPXxRAsQVi',
+            client_id: '1014327754286-emt2refui7rqci9tfrnc5ssi8id3m95a.apps.googleusercontent.com',
+            client_secret: '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',
             redirect_uri: 'postmessage',
             grant_type: 'authorization_code'
         });
@@ -820,6 +824,7 @@ exports.googleSignOn = async (req, res) => {
         res.status(500).json({ message: 'Failed to save code' });
     };
 };
+
 
 
 // Our FIND All USERS Logic starts here
