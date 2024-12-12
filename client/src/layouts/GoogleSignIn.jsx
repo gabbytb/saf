@@ -14,7 +14,6 @@ const GoogleSignIn = () => {
     const [userDetails, setUserDetails] = useState(null);
     const [error, setError] = useState(null);
 
-
     const handleGoogleLogin = async (response) => {
 
         try {
@@ -45,7 +44,6 @@ const GoogleSignIn = () => {
 
     };
 
-
     const handleFailure = (error) => {
         setError('Google login failed');
         console.error('Login failed:', error);
@@ -71,7 +69,7 @@ const GoogleSignIn = () => {
                         <img src={userDetails ? userDetails.picture : ''} alt="User" />
                     </div>
                   )}
-              </div>
+        </div>
     );
 };
 

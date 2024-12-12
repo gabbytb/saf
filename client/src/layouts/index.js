@@ -10,7 +10,7 @@ import DashboardUsersDetails from "./DashboardUsersDetails";
 import DashboardStaffs from "./DashboardStaffs";
 import DashboardStaffsDetails from "./DashboardStaffsDetails";
 
-
+import GoogleSignIn from "./GoogleSignIn";
 
 
 
@@ -28,4 +28,6 @@ export {
     DashboardUsersDetails,
     DashboardStaffs,
     DashboardStaffsDetails,
+
+    GoogleSignIn,
 };

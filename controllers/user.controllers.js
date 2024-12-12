@@ -849,9 +849,20 @@ exports.findAllUsers = async (req, res) => {
         // FIND ALL ROLE_USERS
         const allUsers = await User.find(query)
                                 .skip(parseInt(skip))
-                                .limit(parseInt(limit));
-        console.log("ALL USERS: ", allUsers);
-
+                                .limit(parseInt(limit));        
+        
+        if (allUsers !== null) {             
+            if (status === 'approved') {
+                console.log("APPROVED USERS/DONORS/CUSTOMERS:: ", allUsers);   
+            } else if (status === 'pending') {
+                console.log("PENDNG USERS/DONORS/CUSTOMERS:: ", allUsers);    
+            } else if (status === 'rejected') {
+                console.log("REJECTED USERS/DONORS/CUSTOMERS:: ", allUsers);
+            } else {
+                console.log("ALL USERS/DONORS/CUSTOMERS: ", allUsers);
+            };
+        };
+        
         const totalUsers = await User.countDocuments(query);   // Total number of users with the given status
         const totalPages = Math.ceil(totalUsers / limit);   // Calculate total pages
         const pagination = {
@@ -1025,6 +1036,7 @@ exports.findAllAdmins = async (req, res) => {
         };
         console.log("PAGINATION: ", pagination, "\n\n");        
 
+        
         const responseData = {
             success: true,
             data: {
