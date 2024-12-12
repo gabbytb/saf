@@ -776,9 +776,9 @@ exports.logIn = async (req, res) => {
 // Our USER LOGIN via G-MAIL Logic starts here
 exports.googleSignOn = async (req, res) => {
     
-    const { email } = req.body;
-
     try {
+        
+        const email = req.body.email || "";
 
         // 1) Find Existing User
         const existingUser = await User.findOne({ email: email }); 
@@ -1046,7 +1046,7 @@ exports.findAllAdmins = async (req, res) => {
         const allAdminRole = await User.find(query)     // Query User by Status [And that have ADMIN ROLE.]
                                 .skip(parseInt(skip))
                                 .limit(parseInt(limit));
-                                     
+
         if (allAdminRole !== null) {             
             if (status === 'approved') {
                 console.log("APPROVED ADMIN USERS: ", allAdminRole);   
