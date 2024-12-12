@@ -1,13 +1,17 @@
 const mongoose = require("mongoose");
 mongoose.Promise = global.Promise;
-const brandDB = require("../config/db.js");
+const dataBase = require("../config/db.js");
 
 
 
 
-const db = {};
+const db = {
+
+};
 db.mongoose = mongoose;
-db.url = brandDB.url;
+db.url = dataBase.url;
+
+
 
 
 db.users = require("./user.model.js")(mongoose);

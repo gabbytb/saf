@@ -1,6 +1,7 @@
 const db = require("../models");
 const User = db.users;
 const Role = db.roles;
+const path = require("path");
 const bcrypt = require("bcrypt");
 // const crypto = require('crypto');
 
@@ -914,8 +915,8 @@ exports.findAllUsers = async (req, res) => {
                 pagination
             },
             message: "ALL USERS retrieved successfully",
-        }
-        res.status(200).json(responseData);
+        }    
+        return res.status(200).json(responseData);
 
     } catch (error) {
         console.error("Internal Server Error:", error);
@@ -1025,14 +1026,14 @@ exports.totalRejectedUsers = async (req, res) => {
 
 // Our FIND All ADMINS Logic starts here
 exports.findAllAdmins = async (req, res) => {
-    
+            
+    // Get Pagination Parameters from the request query     
+    const status = req.query.status || "";               
+    const page = parseInt(req.query.page, 10) || 1;        
+    const limit = parseInt(req.query.limit, 10) || 20;                        
+    const skip = (page - 1) * limit;
+
     try {
-              
-        // Get Pagination Parameters from the request query     
-        const status = req.query.status || "";               
-        const page = parseInt(req.query.page, 10) || 1;        
-        const limit = parseInt(req.query.limit, 10) || 20;                        
-        const skip = (page - 1) * limit;
 
         const query = {            
             'roles.role': ROLES.XYZ,    // Find ROLE_ADMIN, ROLE_STAFF, ROLE_EDITOR
@@ -1045,7 +1046,18 @@ exports.findAllAdmins = async (req, res) => {
         const allAdminRole = await User.find(query)     // Query User by Status [And that have ADMIN ROLE.]
                                 .skip(parseInt(skip))
                                 .limit(parseInt(limit));
-        console.log("ADMIN USERS: ", allAdminRole);
+                                     
+        if (allAdminRole !== null) {             
+            if (status === 'approved') {
+                console.log("APPROVED ADMIN USERS: ", allAdminRole);   
+            } else if (status === 'pending') {
+                console.log("PENDNG ADMIN USERS: ", allAdminRole);    
+            } else if (status === 'rejected') {
+                console.log("REJECTED ADMIN USERS: ", allAdminRole);
+            } else {
+                console.log("ALL ADMIN USERS: ", allAdminRole);
+            };
+        };
         
         // Pagination logic
         const totalAdminUsers = await User.countDocuments(query);   // Total number of staffs
@@ -1065,7 +1077,7 @@ exports.findAllAdmins = async (req, res) => {
                 pagination
             },
             message: "Items retrieved successfully",
-        };
+        };       
         return res.status(200).json(responseData);
 
     } catch (error) {

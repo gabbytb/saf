@@ -1,5 +1,5 @@
 const express = require("express");
-// const path = require('path');
+const path = require('path');
 const cors = require("cors");
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
@@ -13,6 +13,10 @@ dotenv.config();
 // =======================================================================================================//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const app = express();
+
+require("./routes/user.routes")(app);
+require("./routes/role.routes")(app);
+require("./routes/blog.routes")(app);
 
 const ip = process.env.IP || "0.0.0.419";
 const port = process.env.PORT || 9080;
@@ -39,6 +43,11 @@ app.use(express.urlencoded({ limit: "50mb", extended: false }));
 // NOTE:- req.body in your route handler function will allow you to access this data.
 app.use(express.json({ limit: "50mb" , extended: true }));
 
+// Serve static files from the React app (build folder)
+app.use(express.static(path.join(__dirname, 'client/build')));
+
+// app.use(express.static('public'));
+
 
 
 
@@ -53,21 +62,21 @@ const authSource = db.url;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //   CLOUD CONFIG.
-// const username = process.env.MONGO_DB_USERNAME || "userName";
-// const authbinder = process.env.MONGO_DB_PLANNER || "serverAuthBinder";
-// const password = process.env.MONGO_DB_PASSWORD || "usersPass";
-// const host = process.env.MONGO_DB_HOST || "serverHost";
-// const defaultauthdb = process.env.MONGO_DB_CLOUD_DATABASE || "serverAuthDatabase";
+const username = process.env.MONGO_DB_USERNAME || "userName";
+const authbinder = process.env.MONGO_DB_PLANNER || "serverAuthBinder";
+const pswd = process.env.MONGO_DB_PASSWORD || "usersPass";
+const host = process.env.MONGO_DB_HOST || "serverHost";
+const defaultauthdb = process.env.MONGO_DB_CLOUD_DATABASE || "serverAuthDatabase";
 
 //   SELECT CLOUD
-// const mongoURI = authSource + username + authbinder + password + host + defaultauthdb || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
+const mongoURI = authSource + username + authbinder + pswd + host + defaultauthdb || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //   LOCAL CONFIG.
-const defaultauthdb = process.env.MONGO_DB_DATABASE || "localDatabase";
+// const defaultauthdb = process.env.MONGO_DB_DATABASE || "localDatabase";
 
 //   SELECT LOCAL
-const mongoURI =  authSource + defaultauthdb || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
+// const mongoURI =  authSource + defaultauthdb || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // =======================================================================================================//
 // =====  DATABASE CONNECTION  ===========================================================================//
@@ -130,30 +139,17 @@ mongoose.connect(mongoURI, options)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // 4. API ROUTES
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Serve static files from the React app (build folder)
-// app.use(express.static(path.join(__dirname, 'client/build')));
-
-// app.use(express.static('public'));
-
-require("./routes/user.routes")(app);
-require("./routes/role.routes")(app);
-require("./routes/blog.routes")(app);
-
 // Example API route
-app.get('/', (req, res) => {    
-    const responseData = {
-        success: true,
-        data: null,
-        message: "App | Samuel Akinola Foundation"
-    };
-    return res.json(responseData);
-});
-
+// app.get('/', (req, res) => {    
+//    const responseData = { success: true, data: null, message: "App | Samuel Akinola Foundation" };  
+//    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+//    res.json(responseData);
+// });
 
 // Serve React app for all other routes
-// app.get('*', (req, res) => {
-//  res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
-// });
+app.get(['*', '/'], (req, res) => {
+    res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
+});
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
