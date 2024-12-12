@@ -2,7 +2,6 @@ import { useState, useEffect, } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useGoogleLogin } from '@react-oauth/google';
 import api from '../api';
-import googleApi from "../googleApi";
 import { Preloader } from '../components';
 import { brandOfficialLogoDark, signUpIcon } from '../assets/images';
 import { GoogleIcon } from '../assets/icons';
@@ -12,7 +11,9 @@ import { GoogleIcon } from '../assets/icons';
 
 
 
+
 function SignIn() {
+
 
     // console.clear();   
     const navigate = useNavigate();
@@ -20,6 +21,7 @@ function SignIn() {
 
 
     
+
 
     // ***************************************************************************
     // FUNCTION:-  AUTO-REDIRECT lOGGED-IN USERS to DASHBOARD
@@ -71,20 +73,20 @@ function SignIn() {
     const [isLoggedInWithGmail, setIsLoggedInWithGmail] = useState(false);
     // console.log("Is Logged In With Gmail: ", isLoggedInWithGmail);
 
-    useEffect(() => {                
-        if (googleUser.length !== 0) {
-            googleApi.get(`/oauth2/v1/userinfo?access_token=${googleUser.access_token}`, {
-                headers: {
-                    Authorization: `Bearer ${googleUser.access_token}`,
-                    Accept: 'application/json'
-                },
-            })
-            .then((response) => {               
-                setProfile(response.data);
-            })
-            .catch((error) => console.log("Failed Google Login: ", error));
-        };
-    }, [googleUser]);
+        //    useEffect(() => {      
+        // if (googleUser.length !== 0) {
+        //     googleApi.get(`/oauth2/v1/userinfo?access_token=${googleUser.access_token}`, {
+        //         headers: {
+        //             Authorization: `Bearer ${googleUser.access_token}`,
+        //             Accept: 'application/json'
+        //         },
+        //     })
+        //     .then((response) => {               
+        //         setProfile(response.data);
+        //     })
+        //     .catch((error) => console.log("Failed Google Login: ", error));
+        // };
+        // }, [googleUser]);
    
     useEffect(() => {
         if (profile?.length !== 0) {
