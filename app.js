@@ -46,7 +46,6 @@ app.use(express.json({ limit: "50mb" , extended: true }));
 // Serve static files from the React app (build folder)
 app.use(express.static(path.join(__dirname, 'client/build')));
 
-// app.use(express.static('public'));
 
 
 

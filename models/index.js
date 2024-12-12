@@ -3,21 +3,18 @@ mongoose.Promise = global.Promise;
 const dataBase = require("../config/db.js");
 
 
-
-
 const db = {
 
 };
+
+
 db.mongoose = mongoose;
 db.url = dataBase.url;
-
-
 
 
 db.users = require("./user.model.js")(mongoose);
 db.roles = require("./role.model.js")(mongoose);
 db.blogs = require("./blog.model.js")(mongoose);
 db.images = require("./image.model.js")(mongoose);
-
 
 module.exports = db;

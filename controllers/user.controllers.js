@@ -1,12 +1,19 @@
 const db = require("../models");
 const User = db.users;
 const Role = db.roles;
-const path = require("path");
 const bcrypt = require("bcrypt");
 // const crypto = require('crypto');
 
 
 const ROLES = require("../constants/constants");
+
+
+const { OAuth2Client } = require('google-auth-library');
+const oauth2Client = new OAuth2Client()
+
+
+
+
 
 
 // // FOR CRYPTO: Replace with a secure, secret key.
@@ -590,186 +597,6 @@ exports.verifySignUpWithPost = async (req, res) => {
 
 
 
-// Our USER LOGIN Logic starts here
-exports.logIn = async (req, res) => {
-
-    try {
-
-        // 0) Required Payload
-        const { email, password } = req.body;
-
-        // 1) Use E-mail to find User
-        const existingUser = await User.findOne({ email });
-       
-        // 2) CHECK IF USER EXISTS
-        if (!existingUser) {
-            const responseData = { 
-                success: false, 
-                message: "Account with this details does not exist",
-            };
-            console.log("Login Failed: ", responseData.message, "\n\n");
-            // return res.status(404).json(responseData);
-            return res.json(responseData);
-        };
-
-        // 3) Use Middleware: 'bCrypt' to compare Password provided, with User's Password.
-        const isPasswordCorrect = await bcrypt.compare(password, existingUser.password);
-        
-        // 4) CHECK IF USER CORRECT
-        if (!isPasswordCorrect) {      
-
-            for (var i = 0; i < existingUser.roles.length; i++) {
-                if (i < existingUser.roles.length) {
-                    console.log("***************************************",
-                        "\n*****      LOG-IN ATTEMPT BY      *****",
-                        "\n***************************************",
-                        "\nUser ID: ", existingUser._id,
-                        "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
-                        "\nUser E-mail: ", existingUser.email,
-                        "\nUser Password is CORRECT: ", isPasswordCorrect,
-                        "\n***************************************",
-                        "\n***   ADDITIONAL USER INFORMATION  ***",
-                        "\n***************************************",
-                        "\nUser isVerified: ", existingUser.isVerified,
-                        "\nUser Status: ", existingUser.status.toUpperCase(),
-                        "\nUser ROLE(S): ", existingUser.roles[i].role,
-                        "\nPrevious User AccessToken: ", existingUser.accessToken,
-                        "\n***************************************",
-                        "\n");
-                };
-            };
-
-            const responseData = { 
-                success: false, 
-                message: "Incorrect password",
-            };
-            console.log("Login Failed: ", responseData.message, "\n\n");
-            // return res.status(401).json(responseData);
-            return res.json(responseData);
-        };        
-
-        // 5) Check if User Has Verified their Account after Registration
-        if (!existingUser.isVerified) {
-            // ***********************************************************************************//
-            // *************         UNVERIFIED USER ATTEMPTING TO LOG-IN           **************//
-            // ***********************************************************************************//
-    
-            for (var i = 0; i < existingUser.roles.length; i++) {
-                if (i < existingUser.roles.length) {
-                    console.log("*******************************************************",
-                        "\n*****      LOG-IN ATTEMPT BY UNVERIFIED USER      *****",
-                        "\n*******************************************************",
-                        // "\nUser ID: ", existingUser._id,
-                        "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
-                        "\nUser E-mail: ", existingUser.email,
-                        "\nUser Password is CORRECT: ", isPasswordCorrect,
-                        "\n***************************************",
-                        "\n***   ADDITIONAL USER INFORMATION  ***",
-                        "\n***************************************",
-                        "\nUser isVerified: ", existingUser.isVerified,
-                        "\nUser Status: ", existingUser.status.toUpperCase(),
-                        "\nUser ROLE(S): ", existingUser.roles[i].role,
-                        "\nPrevious User AccessToken: ", existingUser.accessToken,
-                        "\n***************************************",
-                        "\n\n");
-                };
-            };
-
-            // ***********************************************************************************//
-            // NOTE:- Use the USER 'accessToken' for Authentication & Authorization
-            // ***********************************************************************************//  
-            const responseData = {
-                success: false,
-                message: "Kindly verify your account",
-            };
-            console.log("Login Failed: ", responseData.message, "\n\n");
-            // return res.status(401).json(responseData);
-            return res.json(responseData);
-        };
-        
-        console.log("***********************************************",
-            "\n******       🔐   ACTIVE USER  🔑        ******",
-            "\n***********************************************",
-            // "\nUser ID: ", existingUser._id,
-            "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
-            "\nUser E-mail: ", existingUser.email,
-            "\n**********************************************",
-            "\n****      ADDITIONAL USER INFORMATION      ****",
-            "\n***********************************************",
-            "\nPrev. AccessToken: ", existingUser.accessToken,
-            "\nPrev. AccessToken [TIME TO EXPIRE]: ", existingUser.tokenExpires,
-            "\n***********************************************",
-            "\n\n");
- 
-        // 6) Create Token for User logging-in.  (NOTE:-  Token will have a Life-span once created.)
-        const token = await assignOneDayToken(existingUser._id);    // console.log("Generated Token Data: ", token);
-        
-        // 7) Verify token to get Lifespan of Token
-        const verifiedToken = await verifyToken(token);   // console.log("Verified or Decoded Token Data: ", verifiedToken);
-        
-        // 8. Update user.tokenExpires with value of tokenExpiryDate
-        // NOTE: USE new Date() function to make expire date begin with current date and time.
-        existingUser.tokenExpires = new Date(verifiedToken.exp * 1000);
-                
-        // 9. Update user.accessToken with value of token
-        existingUser.accessToken = token;
-
-        // 10. Save to Update USER DETAILS with values parsed
-        const loggedInUser = await existingUser.save();
-      
-        for (var n = 0; n < loggedInUser.roles.length; n++) {
-            if (n < loggedInUser.roles.length) {
-                // ***********************************************************************************//
-                // *************                CURRENT LOGGED-IN USER                  **************//
-                // ***********************************************************************************//
-                console.log("***********************************************",
-                    "\n******      🔐  LOGIN SUCCESSFUL 🔑      ******",
-                    "\n***********************************************",
-                    // "\nUser ID: ", loggedInUser._id,
-                    "\nUser Name: ", loggedInUser.firstName + " " + loggedInUser.lastName,
-                    "\nUser E-mail: ", loggedInUser.email,
-                    "\n***********************************************",
-                    "\n****      ADDITIONAL USER INFORMATION      ****",
-                    "\n***********************************************",
-                    "\nUser ROLE(S): ", loggedInUser.roles[n].role,
-                    // "\nUser isVerified: ", loggedInUser.isVerified,
-                    "\nUser Status: ", loggedInUser.status.toUpperCase(),
-                    "\nUser AccessToken: ", loggedInUser.accessToken,
-                    "\nSESSION WILL EXPIRE: ", loggedInUser.tokenExpires,
-                    "\n***********************************************",
-                    "\n=====>       CURRENT LOGGED-IN USER      <=====",
-                    "\n***********************************************",
-                    "\n\n");
-            };
-        };
-        
-        // ***********************************************************************************//
-        // NOTE:- By assigning Token to Logged-in User,
-        //        Now you can use User's "accessToken" 
-        //        for Headers Authentication & Authorization
-        // ***********************************************************************************//  
-        const responseData = {
-            success: true,
-            data: loggedInUser,
-            // data: {
-            //     userId: existingUser._id,
-            //     accessToken: existingUser.accessToken,
-            // },
-            message: "Successful",
-        };       
-        return res.status(200).json(responseData);
-
-    } catch (error) {
-        const responseData = { 
-            success: false, 
-            message: "Internal Server Error",
-        };
-        console.log("Unexpected error during Login 1: ", responseData.message);
-        console.error("Unexpected error during Login 2: ", error);
-        return res.status(500).json(responseData);  
-    };
-
-};  // THOROUGHLY Tested === Working
 
 
 
@@ -868,8 +695,227 @@ exports.googleSignOn = async (req, res) => {
         console.error('Error saving code:', error);
         res.status(500).json({ message: 'Failed to save code' });
     };
+
+    try {
+        const code = req.headers.authorization;
+        console.log('Authorization Code:', code);
+  
+        // Exchange the authorization code for an access token
+        const response = await axios.post('https://oauth2.googleapis.com/token', {
+                                                                                    code,
+                                                                                    client_id: '58730156701-d27fqgjb0.apps.googleusercontent.com',
+                                                                                    client_secret: 'GOCSPX-u02eNiucPXxRAsQVi',
+                                                                                    redirect_uri: 'postmessage',
+                                                                                    grant_type: 'authorization_code'
+                                                                                }
+        );
+        const accessToken = response.data.access_token;
+        console.log('Access Token:', accessToken);
+  
+
+        // Fetch user details using the access token
+        const userResponse = await axios.get(
+          'https://www.googleapis.com/oauth2/v3/userinfo',
+          {
+            headers: {
+              Authorization: `Bearer ${accessToken}`
+            }
+          }
+        );
+        const userDetails = userResponse.data;
+        console.log('User Details:', userDetails);
+  
+        // Process user details and perform necessary actions
+  
+        res.status(200).json({ message: 'Authentication successful' });
+    } catch (error) {
+        console.error('Error saving code:', error);
+        res.status(500).json({ message: 'Failed to save code' });
+    };
 };  // THOROUGHLY Tested === Working
 
+
+// Our USER LOGIN Logic starts here
+exports.logIn = async (req, res) => {
+
+    try {
+
+        // 0) Required Payload
+        const email = req.body.email || "";
+        const password = req.body.password || "";
+
+        // 1) Use E-mail to find User
+        const existingUser = await User.findOne({ email: email });
+       
+        // 2) CHECK IF USER EXISTS
+        if (!existingUser) {
+            const responseData = { 
+                success: false, 
+                message: "Account with this details does not exist",
+            };
+            console.log("Login Failed: ", responseData.message, "\n\n");
+            // return res.status(404).json(responseData);
+            return res.json(responseData);
+        };
+
+        // 3) Use Middleware: 'bCrypt' to compare Password provided, with User's Password.
+        const isPasswordCorrect = await bcrypt.compare(password, existingUser?.password);
+        
+        // 4) CHECK IF USER CORRECT
+        if (!isPasswordCorrect) {      
+
+            for (var i = 0; i < existingUser.roles.length; i++) {
+                if (i < existingUser.roles.length) {
+                    console.log("***************************************",
+                        "\n*****      LOG-IN ATTEMPT BY      *****",
+                        "\n***************************************",
+                        "\nUser ID: ", existingUser._id,
+                        "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
+                        "\nUser E-mail: ", existingUser.email,
+                        "\nUser Password is CORRECT: ", isPasswordCorrect,
+                        "\n***************************************",
+                        "\n***   ADDITIONAL USER INFORMATION  ***",
+                        "\n***************************************",
+                        "\nUser isVerified: ", existingUser.isVerified,
+                        "\nUser Status: ", existingUser.status.toUpperCase(),
+                        "\nUser ROLE(S): ", existingUser.roles[i].role,
+                        "\nPrevious User AccessToken: ", existingUser.accessToken,
+                        "\n***************************************",
+                        "\n");
+                };
+            };
+
+            const responseData = { 
+                success: false, 
+                message: "Incorrect password",
+            };
+            console.log("Login Failed: ", responseData.message, "\n\n");
+            // return res.status(401).json(responseData);
+            return res.json(responseData);
+        };        
+
+        // 5) Check if User Has Verified their Account after Registration
+        if (!existingUser?.isVerified) {
+            // ***********************************************************************************//
+            // *************         UNVERIFIED USER ATTEMPTING TO LOG-IN           **************//
+            // ***********************************************************************************//
+    
+            for (var i = 0; i < existingUser.roles.length; i++) {
+                if (i < existingUser.roles.length) {
+                    console.log("*******************************************************",
+                        "\n*****      LOG-IN ATTEMPT BY UNVERIFIED USER      *****",
+                        "\n*******************************************************",
+                        // "\nUser ID: ", existingUser._id,
+                        "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
+                        "\nUser E-mail: ", existingUser.email,
+                        "\nUser Password is CORRECT: ", isPasswordCorrect,
+                        "\n***************************************",
+                        "\n***   ADDITIONAL USER INFORMATION  ***",
+                        "\n***************************************",
+                        "\nUser isVerified: ", existingUser.isVerified,
+                        "\nUser Status: ", existingUser.status.toUpperCase(),
+                        "\nUser ROLE(S): ", existingUser.roles[i].role,
+                        "\nPrevious User AccessToken: ", existingUser.accessToken,
+                        "\n***************************************",
+                        "\n\n");
+                };
+            };
+
+            // ***********************************************************************************//
+            // NOTE:- Use the USER 'accessToken' for Authentication & Authorization
+            // ***********************************************************************************//  
+            const responseData = {
+                success: false,
+                message: "Kindly verify your account",
+            };
+            console.log("Login Failed: ", responseData.message, "\n\n");
+            // return res.status(401).json(responseData);
+            return res.json(responseData);
+        };
+        
+        console.log("***********************************************",
+            "\n******       🔐   ACTIVE USER  🔑        ******",
+            "\n***********************************************",
+            // "\nUser ID: ", existingUser._id,
+            "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
+            "\nUser E-mail: ", existingUser.email,
+            "\n**********************************************",
+            "\n****      ADDITIONAL USER INFORMATION      ****",
+            "\n***********************************************",
+            "\nPrev. AccessToken: ", existingUser.accessToken,
+            "\nPrev. AccessToken [TIME TO EXPIRE]: ", existingUser.tokenExpires,
+            "\n***********************************************",
+            "\n\n");
+ 
+        // 6) Create Token for User logging-in.  (NOTE:-  Token will have a Life-span once created.)
+        const token = await assignOneDayToken(existingUser?._id);    // console.log("Generated Token Data: ", token);
+        
+        // 7) Verify token to get Lifespan of Token
+        const verifiedToken = await verifyToken(token);   // console.log("Verified or Decoded Token Data: ", verifiedToken);
+        
+        // 8. Update user.tokenExpires with value of tokenExpiryDate
+        // NOTE: USE new Date() function to make expire date begin with current date and time.
+        existingUser.tokenExpires = new Date(verifiedToken.exp * 1000);
+                
+        // 9. Update user.accessToken with value of token
+        existingUser.accessToken = token;
+
+        // 10. Save to Update USER DETAILS with values parsed
+        const loggedInUser = await existingUser.save();
+      
+        for (var n = 0; n < loggedInUser.roles.length; n++) {
+            if (n < loggedInUser.roles.length) {
+                // ***********************************************************************************//
+                // *************                CURRENT LOGGED-IN USER                  **************//
+                // ***********************************************************************************//
+                console.log("***********************************************",
+                    "\n******      🔐  LOGIN SUCCESSFUL 🔑      ******",
+                    "\n***********************************************",
+                    // "\nUser ID: ", loggedInUser._id,
+                    "\nUser Name: ", loggedInUser.firstName + " " + loggedInUser.lastName,
+                    "\nUser E-mail: ", loggedInUser.email,
+                    "\n***********************************************",
+                    "\n****      ADDITIONAL USER INFORMATION      ****",
+                    "\n***********************************************",
+                    "\nUser ROLE(S): ", loggedInUser.roles[n].role,
+                    // "\nUser isVerified: ", loggedInUser.isVerified,
+                    "\nUser Status: ", loggedInUser.status.toUpperCase(),
+                    "\nUser AccessToken: ", loggedInUser.accessToken,
+                    "\nSESSION WILL EXPIRE: ", loggedInUser.tokenExpires,
+                    "\n***********************************************",
+                    "\n=====>       CURRENT LOGGED-IN USER      <=====",
+                    "\n***********************************************",
+                    "\n\n");
+            };
+        };
+        
+        // ***********************************************************************************//
+        // NOTE:- By assigning Token to Logged-in User,
+        //        Now you can use User's "accessToken" 
+        //        for Headers Authentication & Authorization
+        // ***********************************************************************************//  
+        const responseData = {
+            success: true,
+            data: loggedInUser,
+            // data: {
+            //     userId: existingUser._id,
+            //     accessToken: existingUser.accessToken,
+            // },
+            message: "Successful",
+        };       
+        return res.status(200).json(responseData);
+
+    } catch (error) {
+        const responseData = { 
+            success: false, 
+            message: "Internal Server Error",
+        };
+        console.log("Unexpected error during Login 1: ", responseData.message);
+        console.error("Unexpected error during Login 2: ", error);
+        return res.status(500).json(responseData);  
+    };
+
+};  // THOROUGHLY Tested === Working
 
 
 // Our FIND All USERS Logic starts here

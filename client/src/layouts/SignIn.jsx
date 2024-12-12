@@ -182,10 +182,15 @@ function SignIn() {
 
     async function handleLogin(e) {
         e.preventDefault();
-
         const uri = "/api/v1/auth/login";
-        if (user.email !== "") {
-            await api.post(uri, user)
+
+        if (user?.email !== "") {
+            const payload = {
+                email: user?.email,
+                password: user?.password
+            };
+
+            await api.post(uri, payload)
             .then((response) => {
                 const { success, message, data } = response.data; 
 
@@ -320,6 +325,7 @@ function SignIn() {
         const payload = {
             email: user?.email,
         };
+
         const url = "/api/v1/admin/users/manage/account/verify";
         await api.post(url, payload)
         .then((response) => {
