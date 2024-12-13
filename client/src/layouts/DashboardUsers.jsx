@@ -4,18 +4,16 @@ import { googleLogout } from "@react-oauth/google";
 import PropTypes from "prop-types";
 
 import api from "../api";
-// import { spinner } from "../assets/images";
+import { spinner } from "../assets/images";
 import sketch from "../assets/img/sketch.jpg";
 import "../assets/styles/tailwind.css";
 
 // components
 import { 
-    Sidebar,  
-    UserDropdown,
+    Sidebar,      
+    CardAllApprovedUsers, CardAllPendingUsers, CardAllRejectedUsers,
     TableDropdown,
-    CardAllApprovedUsers,
-    CardAllPendingUsers,
-    CardAllRejectedUsers,
+    UserDropdown,
 } from "../components";
 
 // views
@@ -233,6 +231,206 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
 
 
 
+
+
+    if (isLoading) {
+        return (
+            <>
+                {/***** LEFT-PANEL *****/}
+                <Sidebar />
+                {/***** LEFT-PANEL *****/}
+                
+
+                
+
+                {/***** RIGHT-PANEL *****/}
+                <div className="relative md:ml-64 bg-blueGray-100">
+                
+                    <nav className="absolute top-0 left-0 w-full z-1 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
+                        <div className="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">
+                            
+                            {/* Brand */}
+                            <Link
+                            className="text-white text-sm uppercase hidden lg:inline-block font-semibold"
+                            to="/admin/dashboard"
+                            onClick={(e) => e.preventDefault()}
+                            >
+                                Dashboard
+                            </Link>
+
+                            {/* Form*/}
+                            <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-12 lg:mr-28 w-98 h-178">
+                                <div className="relative flex w-full flex-wrap items-stretch">                      
+                                    <span className="z-10 h-full leading-snug font-normal text-center text-blueGray-300 absolute bg-transparent rounded text-2xl flex items-center justify-center w-12 pl-3 py-3">
+                                        <i className="fas fa-search"></i>
+                                    </span>
+                                        
+                                    <input
+                                        type="search"
+                                            name="q"
+                                            id="search-form"
+                                            className="search-input border-0 px-3 py-3 indent-8 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"       
+                                            onChange={(e) => setQuery(e.target.value)}
+                                            placeholder="Search user"
+                                    />
+
+                                    <button type="submit" onSubmit={fetchAllUsers}></button>
+                                </div>                                             
+                            </form>
+                
+                            {/* User */}
+                            <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
+                                <UserDropdown />
+                            </ul>
+
+                        </div>
+                    </nav>
+
+
+                    {/* Header */}
+                    <div className="relative bg-blue-900 md:pt-32 pb-32 pt-12">
+                
+                        {/* Welcome Logged-In User */}
+                        <div className="px-4 md:px-10 pb-6 mx-auto w-full">  
+                            <p className="w-full lg:w-6/12 xl:w-3/12 px-4 text-3xl text-white">     
+                                Welcome <span className="font-bold text-white">{lastName}</span>
+                            </p>
+                        </div>                
+                        {/* <HeaderStats /> */}
+
+                    </div>
+
+
+                    {/* Users Table */}
+                    <div className="px-4 md:px-10 mx-auto w-full -m-24">   
+            
+                        <div className="flex flex-wrap mt-4">
+                            <div className="w-full mb-12 px-4">
+                                <div
+                                    className={
+                                    "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded " +
+                                    (color === "dark" ? "bg-white" : "bg-lightBlue-900 text-white")
+                                    }
+                                >
+        
+                                    {/* Users Navigation */}
+                                    <div id="usersLinkID" className="flex flex-row flex-wrap gap-3 mt-8 mb-10 px-7">
+                                        <Link className="allUsers activeUserView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("allUsers")}>All <span className="off_white"> ({ totalUsers })</span> </Link>
+                                        <Link className="allApprovedUsers pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("allApprovedUsers")}>Approved  <span className="off_white"> ({ totalApprovedUsers })</span></Link>
+                                        <Link className="allPendingUsers pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("allPendingUsers")}>Pending  <span className="off_white"> ({ totalPendingUsers })</span></Link>
+                                        <Link className="allRejectedUsers pt-3 pb-2 px-10 rounded-lg border text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("allRejectedUsers")}>Rejected  <span className="off_white"> ({ totalRejectedUsers })</span></Link>
+                                    </div>
+                                    {/* Users Navigation */}
+        
+                                    
+                                    {/* Page Title */}
+                                    <div className="rounded-t mb-0 px-4 py-3 border-0">
+                                        <div className="flex flex-wrap items-center">
+                                            <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+                                                <h3
+                                                    className={
+                                                    "font-semibold text-lg " +
+                                                    (color === "dark" ? "text-blueGray-700" : "text-white")
+                                                    }
+                                                >
+                                                    All Users
+                                                </h3>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    {/* Page Title */}
+        
+        
+                                    <div className={`w-full overflow-x-auto ${activeDisplay === "allUsers" ? "block" : "hidden"}`}>
+                                        {/* Staffs table */}
+                                        <table className="items-center w-full bg-transparent border-collapse">
+                                            <thead>
+                                                <tr>
+                                                    <th
+                                                    className={
+                                                        "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                        (color === "light"
+                                                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                        : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                    }
+                                                    >
+                                                    S/N
+                                                    </th>
+                                                    <th
+                                                    className={
+                                                        "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                        (color === "light"
+                                                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                        : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                    }
+                                                    >
+                                                    Full Name
+                                                    </th>
+                                                    <th
+                                                    className={
+                                                        "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                        (color === "light"
+                                                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                        : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                    }
+                                                    >
+                                                    E-mail address
+                                                    </th>
+                                                    <th
+                                                    className={
+                                                        "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                        (color === "light"
+                                                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                        : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                    }
+                                                    >
+                                                    Status
+                                                    </th> 
+                                                    <th
+                                                    className={
+                                                        "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                        (color === "light"
+                                                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                        : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                    }
+                                                    >
+                                                    Action
+                                                    </th>              
+                                                    <th
+                                                    className={
+                                                        "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                        (color === "light"
+                                                        ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                        : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                    }
+                                                    ></th>
+                                                </tr>
+                                            </thead>
+                                            <tbody className='w-16 h-16'>
+                                                <tr>
+                                                    <td></td>
+                                                    <td></td>
+                                                    <td className="max-w-40 h-60 flex flex-col justify-center items-center">                                                                                             
+                                                        <img src={spinner} alt="Spinning" className="ml-80 mx-auto" />                                                              
+                                                        <p className="text-xl tracking-extratight font-semibold">Loading...</p>                                  
+                                                    </td>
+                                                    <td></td>
+                                                </tr>                
+                                            </tbody>
+                                        </table>
+                                    </div> 
+                                </div>    
+                            </div>
+                        </div>
+
+                    </div>
+                </div>            
+            {/***** RIGHT-PANEL *****/}     
+            </>
+        );
+    };
+
+    
     return (
         <>
             {/***** LEFT-PANEL *****/}

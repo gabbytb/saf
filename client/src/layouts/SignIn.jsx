@@ -147,49 +147,49 @@ function SignIn() {
     //     onError: (error) => console.log('Login Failed: ', error)
     // });
 
-    // const [isAuthenticated, setIsAuthenticated] = useState(false);
-    // console.log("G-mail Is Authenticated: ", isAuthenticated);
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
+    console.log("G-mail Is Authenticated: ", isAuthenticated);
 
-    // const [userDetails, setUserDetails] = useState(null);
-    // console.log("G-mail Logged-In User: ", userDetails);
+    const [userDetails, setUserDetails] = useState(null);
+    console.log("G-mail Logged-In User: ", userDetails);
 
-    // const [error, setError] = useState(null);
-    // console.log("G-mail Login error: ", error);
+    const [error, setError] = useState(null);
+    console.log("G-mail Login error: ", error);
 
-    // const handleGoogleLogin = async (response) => {
+    const handleGoogleLogin = async (response) => {
 
-    //     try {
+        try {
 
-    //         const authorizationCode = response.code;
-    //         console.log('Authorization Code:', authorizationCode);
-
-
-    //         // Send the authorization code to the backend to get the access token
-    //         const result = await api.post('/api/v1/auth/gmail/login', {}, {  // Replace with your backend URL  
-    //                 headers: {
-    //                     Authorization: authorizationCode,
-    //                 },
-    //             },
-    //         );
+            const authorizationCode = response.code;
+            console.log('Authorization Code:', authorizationCode);
 
 
-    //         if (result.status === 200) {
-    //             setIsAuthenticated(true);
-    //             setUserDetails(result.data);
-    //             console.log('User details:', result.data);
-    //         };
+            // Send the authorization code to the backend to get the access token
+            const result = await api.post('/api/v1/auth/gmail/login', {}, {  // Replace with your backend URL  
+                    headers: {
+                        Authorization: authorizationCode,
+                    },
+                },
+            );
 
-    //     } catch (error) {
-    //         setError('Authentication failed');
-    //         console.error('Error during authentication', error);
-    //     };
 
-    // };
+            if (result.status === 200) {
+                setIsAuthenticated(true);
+                setUserDetails(result.data);
+                console.log('User details:', result.data);
+            };
 
-    // const handleFailure = (error) => {
-    //     setError('Google login failed');
-    //     console.error('Login failed:', error);
-    // };
+        } catch (error) {
+            setError('Authentication failed');
+            console.error('Error during authentication', error);
+        };
+
+    };
+
+    const handleFailure = (error) => {
+        setError('Google login failed');
+        console.error('Login failed:', error);
+    };
 
 
 
@@ -437,7 +437,7 @@ function SignIn() {
                 {/* PAGE NAV */}
 
                 <GoogleSignIn />
-                
+
                 {/* Sign-In Methods */}
                 <form id="logInForm" onSubmit={handleLogin} className='max-w-[400px] w-full mx-auto mb-0 rounded-lg bg-skin-signup-signin-bg pt-2 pb-0 px-8 z-1'>
                     
@@ -510,25 +510,21 @@ function SignIn() {
                 {/* Sign-In Methods */}
 
 
+                <div className="g-signin2" data-onsuccess={handleGoogleLogin} data-onfailure={handleFailure}>                            
+                    Sign In with Google <span className="w-8 h-8"><GoogleIcon /></span>                
+                </div>
+
+
                 {/* Alternative Sign-In Methods */}
-                {/* <div className="alt_sso flex justify-center align-middle pb-12 mb-20 gap-10">
-                    <div className="w-full flex justify-center px-8"> */}
+                <div className="alt_sso flex justify-center align-middle pb-12 mb-20 gap-10">
+                    <div className="w-full flex justify-center px-8">
                          {/* <button className="w-123.3 hover:outline-none focus:outline-none" onClick={() => login()}>
                             <div className="flex flex-wrap justify-center gap-3 bg-white hover:bg-cyan-500 focus:bg-cyan-500 hover:ease-in-out hover:duration-150 hover:text-white text-black text-15xl tracking-extratight font-medium items-center py-3 px-12 rounded-full">
                                 Sign In with Google <span className="w-8 h-8"><GoogleIcon /></span>
                             </div>
-                        </button> */}
-                        {/* <button className="w-123.3 hover:outline-none focus:outline-none">
-                            <div className="g-signin2 flex flex-wrap justify-center gap-3 bg-white hover:bg-cyan-500 focus:bg-cyan-500 hover:ease-in-out hover:duration-150 hover:text-white text-black text-15xl tracking-extratight font-medium items-center py-3 px-12 rounded-full" data-onsuccess={handleGoogleLogin} data-onfailure={handleFailure}>
-                                Sign In with Google <span className="w-8 h-8"><GoogleIcon /></span>
-                            </div>
-                        </button>
-                        {
-                            error 
-                                && <p>{error}</p>
-                        }                         */}
-                    {/* </div>
-                </div> */}
+                        </button> */}                                          
+                    </div>
+                </div>
                 {/* Alternative Sign-In Methods */}
 
             </div>

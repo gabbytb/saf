@@ -52,7 +52,6 @@ const assignTwoDaysToken = require("../middlewares/AssignTwoDaysToken");    // F
 // const assignThreeDaysToken = require("../middlewares/AssignThreeDaysToken");    // For Sign Up
 const verifyToken = require("../middlewares/VerifyToken");
 const mailSenderForGetSignUp = require("../middlewares/MailSenderForGetSignUp");
-const { data } = require("autoprefixer");
 // const mailSenderForPostSignUp = require("../middlewares/MailSenderForPostSignUp");
 // const mailSenderForVerifiedAccount = require("../middlewares/MailSenderForVerifiedAccount");
 // *****************************************************************
@@ -109,10 +108,10 @@ exports.signUp = async (req, res) => {
         // ***************************************************************//
         // PICK A SINGLE ROLE
         // ***************************************************************//        
-        const roleAdmin = await Role.findOne({ role: ROLES.ADMIN });
+        // const roleAdmin = await Role.findOne({ role: ROLES.ADMIN });
         // const roleEditor = await Role.findOne({ role: ROLES.EDITOR });
         // const roleStaff = await Role.findOne({ role: ROLES.STAFF });
-        // const roleUsers = await Role.findOne({ role: ROLES.USERS });
+        const roleUsers = await Role.findOne({ role: ROLES.USERS });
         // ***************************************************************//
         // PICK ALL ADMIN ROLES
         // ***************************************************************//
@@ -140,7 +139,7 @@ exports.signUp = async (req, res) => {
             approvesTandC,
             status: "pending",
             // expirationInMs: encrypt(expiresIn),        // Encode: token lifespan
-            roles: [{ ...roleAdmin }],
+            roles: [{ ...roleUsers }],
         });
         // ******************************************************************************************************//
         // ***  FE: USE MIDDLEWARE: (JWT) TO ASSIGN "TOKEN" TO USER FOR AUTHENTICATION AND AUTHORIZATION  ***//
@@ -349,11 +348,14 @@ exports.verifySignUpWithGet = async (req, res) => {
         // parse token as ==> request parameters
         const { token } = req.query;
 
+        
         const decoded = await verifyToken(token);
         // res.send(`Token is valid. User ID: ${decoded.id}`);
 
+
         const _id = decoded.id;
         const userExists = await User.findById(_id);
+
 
         if (!(userExists)) {
             const responseData = { 
@@ -363,6 +365,7 @@ exports.verifySignUpWithGet = async (req, res) => {
             console.log("VERIFIED USER: ", responseData);
             return res.json(responseData);
         };
+
 
         // Step 6: If user exists, find User by Email 
         // const email = userExists.email;   
@@ -377,6 +380,7 @@ exports.verifySignUpWithGet = async (req, res) => {
         // Step 6: If user exists, find User by Email
         const updatedUser = await User.findOneAndUpdate({ email: userExists.email }, dataToUpdate, { new: true });               
     
+
         const responseData = {
             success: true,
             data: updatedUser,
@@ -396,28 +400,31 @@ exports.verifySignUpWithGet = async (req, res) => {
                 success: false, 
                 message: "Token has expired",
             };
-            console.log("Token verification status: ", responseData);
-            return res.json(responseData);
+            console.error("Token verification status: ", responseData);
+            return res.status(500).json(responseData);
         } else if (error.name === 'JsonWebTokenError') {
             // console.error("Token does not exist");
             const responseData = { 
                 success: false, 
                 message: "Token does not exist",
+                error,
             };
-            console.log("Token verification status: ", responseData);
-            return res.json(responseData);
+            console.error("Token verification status: ", responseData);
+            return res.status(500).json(responseData);
         } else if (error.name === 'MongoServerError') {
             // console.error("Mulitple user entry");
             const responseData = { 
                 success: false, 
                 message: "Mulitple User entry",
+                error,
             };
-            console.log("Mulitple User entry: ", responseData);
-            return res.json(responseData);
+            console.error("Mulitple User entry: ", responseData);
+            return res.status(500).json(responseData);
         } else {
             const responseData = { 
                 success: false, 
                 message: "Internal Server Error",
+                error,
             };
             console.error("Internal Server Error during account verification: ", error.message);
             return res.status(500).json(responseData);
@@ -1036,7 +1043,7 @@ exports.findAllAdmins = async (req, res) => {
         };
         console.log("PAGINATION: ", pagination, "\n\n");        
 
-        
+
         const responseData = {
             success: true,
             data: {
