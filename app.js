@@ -1,6 +1,11 @@
 const express = require("express");
 const path = require('path');
 const cors = require("cors");
+// const corsOptions = {        
+//     origin: ["http://127.0.0.1:3000"],
+//     methods: ["GET", "POST", "PUT", "DELETE"],
+//     credentials: true,
+// };
 const mongoose = require("mongoose");
 const dotenv = require("dotenv");
 
@@ -147,6 +152,7 @@ app.get('*', (req, res) => {
     res.sendFile(path.join(__dirname, 'client/build', 'index.html'));
 });
 // ['*', '/']
+// '*'
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
