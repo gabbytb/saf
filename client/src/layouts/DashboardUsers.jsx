@@ -222,7 +222,7 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
 
     const handlePageChange = (page) => {
-      setCurrentPage(page);
+        setCurrentPage(page);
     };
     // ****************************************************************************
     // ****************************************************************************
@@ -430,7 +430,7 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
         );
     };
 
-    
+
     return (
         <>
             {/***** LEFT-PANEL *****/}
