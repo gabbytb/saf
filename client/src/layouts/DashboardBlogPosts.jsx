@@ -199,7 +199,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
 
     useEffect(() => {                                 
         if (activeDisplay === "blogPosts") {
-
+                        
             setIsLoading(true);           
 
             var timer = setTimeout(fetchAllBlogPosts, 300);   // Delay execution of findAllStaffs by 1800ms

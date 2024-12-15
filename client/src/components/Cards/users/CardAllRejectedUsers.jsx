@@ -13,6 +13,10 @@ import { spinner } from "../../../assets/images";
 
 
 
+
+
+
+
 export default function CardAllRejectedUsers({ color, activeDisplay, search, pageLimit }) {
 
 
@@ -32,21 +36,22 @@ export default function CardAllRejectedUsers({ color, activeDisplay, search, pag
     // eslint-disable-next-line
     const [totalUsers, setTotalUsers] = useState(null);
     // console.log("TOTAL USERS: ", totalUsers);
-    const [totalPages, setTotalPages] = useState(0);
 
+    const [totalPages, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     
     // Number of items per page
-    console.log("PAGE LIMIT: ", pageLimit);
+    // console.log("PAGE LIMIT: ", pageLimit);
 
     const leftArrow = "<", 
           rightArrow = ">";
-
   
+
     useEffect(() => {
         var allRejectedUsersLink = document.querySelector("#usersLinkID .allRejectedUsers");
         // console.log("ALL USERS LINK", allUsersLink);
         if (activeDisplay === "allRejectedUsers") {
+            setCurrentPage(1);
             allRejectedUsersLink?.classList.add("activeUserView");
         } else {
             allRejectedUsersLink?.classList.remove("activeUserView");

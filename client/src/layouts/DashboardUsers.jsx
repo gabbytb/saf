@@ -122,7 +122,7 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
             setQuery(searchedTerm);
         };
 
-    }, [activeDisplay, window.location]);
+    }, [window.location]);
 
     function search(allUserss) {
         return allUserss?.filter((item) =>
@@ -142,8 +142,7 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS
     // ****************************************************************************             
     useEffect(() => {
-        var allUsersLink = document.querySelector("#usersLinkID .allUsers");               
-        
+        var allUsersLink = document.querySelector("#usersLinkID .allUsers");                       
         if (activeDisplay === "allUsers") {
             setCurrentPage(1);
             allUsersLink?.classList.add("activeUserView");

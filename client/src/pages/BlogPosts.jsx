@@ -80,11 +80,13 @@ const BlogPosts = ({ isLoggedIn, }) => {
         // *************************************************************************************************************
         // Function:-  CONDITIONAL LOGIC TO HANDLE PAGE URL RE-DIRECT, and SET PAGE TITLE FOR EACH INDIVIDUAL PAGE
         // *************************************************************************************************************            
-        if (currentPage > 1 ) {                                           
+        if (currentPage > 1 ) {               
+            
             const pageTitle = `Blog News - Page ${currentPage}`, 
                   siteTitle = "Samuel Akinola Foundation";
             document.title = `${pageTitle} | ${siteTitle}`;                 
-                
+            window.scrollTo({ top: 170, left: 0, behavior: 'smooth' });
+
             const new_URL = window.location.origin + `/blog/page/${currentPage}`;
             window.history.replaceState({}, document.title, new_URL );
 
@@ -93,10 +95,12 @@ const BlogPosts = ({ isLoggedIn, }) => {
                 nextBtn.classList.add('hidden')
             };
 
-        } else {                                                 
+        } else {    
+
             const pageTitle = 'Blog News', 
                   siteTitle = "Samuel Akinola Foundation";
             document.title = `${pageTitle} | ${siteTitle}`;                 
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
             const new_URL = window.location.origin + '/blog';                                               
             window.history.replaceState({}, document.title, new_URL );     
@@ -130,6 +134,7 @@ const BlogPosts = ({ isLoggedIn, }) => {
                 setIsLoading(false);
             });           
         };      
+
         var timerID = setTimeout(fetchAllBlogPosts, 400);   // Delay execution by 400ms
         return () => {
             clearTimeout(timerID);     // Clean up timer if component unmounts or token changes

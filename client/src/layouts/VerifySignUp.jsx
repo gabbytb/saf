@@ -183,9 +183,9 @@ const VerifySignUp = () => {
     useEffect(() => {   
 
         // Assuming the token is passed as a query parameter
-        console.log("CURRENT LOCATION OF URL: ", window.location);
+        console.log("CURRENT LOCATION OF URL SEARCH: ", window.location.search);
        
-        const { search } = window.location;
+        const search = window.location.search;
         const queryParams = new URLSearchParams(search);        
         
         const token = queryParams.get('token'); 
@@ -195,9 +195,9 @@ const VerifySignUp = () => {
 
             const uri = "/user/verify";
             await api.get(uri, { 
-                headers: { 
-                    Authorization: `Bearer ${token}`,
-                }, 
+                // headers: { 
+                //    Authorization: `Bearer ${token}`,
+                //}, 
                 params: { 
                    token 
                 }, 

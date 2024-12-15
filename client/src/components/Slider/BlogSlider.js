@@ -58,7 +58,7 @@ const BlogSlider = ({ sliderCards }) => {
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
-                    infinite: false,
+                    infinite: true,
                     dots: false
                 }
             },
@@ -67,7 +67,8 @@ const BlogSlider = ({ sliderCards }) => {
                 settings: {
                     slidesToShow: 1,
                     slidesToScroll: 1,
-                    initialSlide: 2
+                    initialSlide: 2,
+                    infinite: true,
                 }
             },
             {
@@ -102,6 +103,8 @@ const BlogSlider = ({ sliderCards }) => {
             </Slider> 
         </div>   
     );
+
+    
 };
 
 export default BlogSlider;

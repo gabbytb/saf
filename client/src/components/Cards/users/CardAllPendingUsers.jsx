@@ -14,6 +14,9 @@ import { spinner } from "../../../assets/images";
 
 
 
+
+
+
 export default function CardAllPendingUsers({ color, activeDisplay, search, pageLimit }) {
 
 
@@ -33,12 +36,12 @@ export default function CardAllPendingUsers({ color, activeDisplay, search, page
     // eslint-disable-next-line
     const [totalUsers, setTotalUsers] = useState(null);
     // console.log("TOTAL USERS: ", totalUsers);
-    const [totalPages, setTotalPages] = useState(0);
 
+    const [totalPages, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
     
     // Number of items per page
-    console.log("PAGE LIMIT: ", pageLimit);
+    // console.log("PAGE LIMIT: ", pageLimit);
 
     const leftArrow = "<",
           rightArrow = ">";
@@ -48,6 +51,7 @@ export default function CardAllPendingUsers({ color, activeDisplay, search, page
         var allPendingUsersLink = document.querySelector("#usersLinkID .allPendingUsers");
         // console.log("ALL USERS LINK", allUsersLink);
         if (activeDisplay === "allPendingUsers") {
+            setCurrentPage(1);
             allPendingUsersLink?.classList.add("activeUserView");
         } else {
             allPendingUsersLink?.classList.remove("activeUserView");

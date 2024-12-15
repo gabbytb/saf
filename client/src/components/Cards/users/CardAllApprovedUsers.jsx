@@ -16,48 +16,55 @@ import { spinner } from "../../../assets/images";
 
 
 
+
 export default function CardAllApprovedUsers({ color, activeDisplay, search, pageLimit }) {
 
 
+    // ****************************************************************************
+    // MANAGE STATE:-  SPECIAL FEATURES
+    // ****************************************************************************
+    const [isLoading, setIsLoading] = useState(true);   
+
+ 
     // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
     const [allApprovedUsers, setAllApprovedUsers] = useState([]);
     // console.log("ALL USERS: ", allUsers);
 
+
     // eslint-disable-next-line
     const [totalUsers, setTotalUsers] = useState(null);
     // console.log("TOTAL USERS: ", totalUsers);
 
     const [totalPages, setTotalPages] = useState(0);
-    
-    // Number of items per page
-    // console.log("PAGE LIMIT: ", pageLimit);
-
     const [currentPage, setCurrentPage] = useState(1);
 
+    // Number of items per page
+    // console.log("PAGE LIMIT: ", pageLimit);
     const leftArrow = "<",
           rightArrow = ">";
 
   
-
-    // ****************************************************************************
-    // MANAGE STATE:-  SPECIAL FEATURES
-    // ****************************************************************************
-    const [isLoading, setIsLoading] = useState(true);
-    // const [errorMessage, setErrorMessage] = useState(true);
-
- 
+    useEffect(() => {
+        var allApprovedUsersLink = document.querySelector("#usersLinkID .allApprovedUsers");
+        // console.log("ALL USERS LINK", allUsersLink);
+        if (activeDisplay === "allApprovedUsers") {
+            setCurrentPage(1);
+            allApprovedUsersLink?.classList.add("activeUserView");
+        } else {
+            allApprovedUsersLink?.classList.remove("activeUserView");
+        };
+    }, [activeDisplay]);
+    
     
     useEffect(() => {
-        var allApprovedUsersLink = document.querySelector("#usersLinkID .allApprovedUsers");        // console.log("ALL USERS LINK", allUsersLink);    
         if (activeDisplay === "allApprovedUsers") {
             
             setIsLoading(true);
-            allApprovedUsersLink?.classList.add("activeUserView");
 
             // ****************************************************************************
-            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL USERS
+            // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL APPROVED USERS
             // ****************************************************************************             
             async function fetchAllApprovedUsers() {
                 const approved = 'approved';
@@ -67,31 +74,27 @@ export default function CardAllApprovedUsers({ color, activeDisplay, search, pag
                     const { allUsers, pagination } = data;
 
                     if (!success && message === "No user found") {
-                        // setErrorMessage(message)
                         console.log("Success: ", success);
-                        console.log("Message: ", message);                        
+                        console.log("Message: ", message);
                     };
 
                     setAllApprovedUsers(allUsers);
-                                            
+                
                     setTotalUsers(pagination?.usersRecord);
                     setTotalPages(pagination?.lastPage);
-
                 })
                 .catch((error) => {
-                      console.log("Error fetching data: ", error);
+                    console.log("Error fetching data: ", error);
                 })
                 .finally(() => {
-                      setIsLoading(false);
+                    setIsLoading(false);
                 });
             };
+
             var timerID = setTimeout(fetchAllApprovedUsers, 800);   // Delay execution of findAllApprovedUsers by 1800ms
-        
             return () => {
                 clearTimeout(timerID);                  // Clean up timer if component unmounts or token changes
             };
-        } else {
-            allApprovedUsersLink?.classList.remove("activeUserView");
         };
     }, [activeDisplay, search, currentPage]); // Fetch data when activeDisplay and currentPage changes
     // ****************************************************************************

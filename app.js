@@ -58,21 +58,21 @@ const authSource = db.url;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //   CLOUD CONFIG.
-const username = process.env.MONGO_DB_USERNAME || "userName";
-const authbinder = process.env.MONGO_DB_PLANNER || "serverAuthBinder";
-const pswd = process.env.MONGO_DB_PASSWORD || "usersPass";
-const host = process.env.MONGO_DB_HOST || "serverHost";
-const defaultauthdb = process.env.MONGO_DB_CLOUD_DATABASE || "serverAuthDatabase";
+// const username = process.env.MONGO_DB_USERNAME || "userName";
+// const authbinder = process.env.MONGO_DB_PLANNER || "serverAuthBinder";
+// const pswd = process.env.MONGO_DB_PASSWORD || "usersPass";
+// const host = process.env.MONGO_DB_HOST || "serverHost";
+// const defaultauthdb = process.env.MONGO_DB_CLOUD_DATABASE || "serverAuthDatabase";
 
 //   SELECT CLOUD
-const mongoURI = authSource + username + authbinder + pswd + host + defaultauthdb || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
+// const mongoURI = authSource + username + authbinder + pswd + host + defaultauthdb || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 //   LOCAL CONFIG.
-// const defaultauthdb = process.env.MONGO_DB_DATABASE || "localDatabase";
+const defaultauthdb = process.env.MONGO_DB_DATABASE || "localDatabase";
 
 //   SELECT LOCAL
-// const mongoURI =  authSource + defaultauthdb || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
+const mongoURI =  authSource + defaultauthdb || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
