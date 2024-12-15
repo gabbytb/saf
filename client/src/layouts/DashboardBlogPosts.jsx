@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 
 import api from "../api";
 import { spinner } from "../assets/images";
-import sketch from "../assets/img/sketch.jpg";
 import "../assets/styles/tailwind.css";
 
 // components
@@ -18,6 +17,7 @@ import {
 
 // views
 // import { StaffsTable } from "../views";
+
 
 
 
@@ -93,13 +93,15 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
     // MANAGE STATE:-  TO FIND ALL STAFFS
     // ****************************************************************************
     const [blogPosts, setBlogPosts] = useState([]);
-    console.log("ALL BLOG POSTS: ", blogPosts);
-
+    // console.log("ALL BLOG POSTS: ", blogPosts);
     const [totalBlogPosts, setTotalBlogPosts] = useState(null);
     // console.log("TOTAL BLOG POSTS: ", totalBlogPosts);
-        // const [totalPublishedPosts, setTotalPublishedPosts] = useState(null);
-        // const [totalDraftPosts, setTotalDraftPosts] = useState(null);
+        const [totalPublishedPosts, setTotalPublishedPosts] = useState(null);
+        // console.log("TOTAL PUBLISHED POSTS: ", totalPublishedPosts);
+        const [totalDraftPosts, setTotalDraftPosts] = useState(null);
+        // console.log("TOTAL DRAFT POSTS: ", totalDraftPosts);
         // const [totalScheduledPosts, setTotalScheduledPosts] = useState(null);
+        // console.log("TOTAL SCHEDULED POSTS: ", totalScheduledPosts);
 
     const [totalPages, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
@@ -109,7 +111,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
 
     // Number of items per page
     const [pageLimit, setPageLimit] = useState(undefined);
-    console.log("PAGE LIMIT: ", pageLimit);
+    // console.log("PAGE LIMIT: ", pageLimit);
     
 
 
@@ -146,7 +148,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                     const { success, data, message } = response.data;
                     const { allBlogPosts, pagination } = data;
 
-                    if (!success && message === "No staff found") {
+                    if (!success && message === "No post found") {
                         console.log("Success: ", success);
                         console.log("Message: ", message);
                     };
@@ -162,6 +164,36 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
         })
         .finally(() => {
             setIsLoading(false);
+        });
+
+
+        await api.get(`/api/v1/admin/posts/manage/publishedPosts`)
+        .then((response) => {
+            const { success, data, message } = response.data;
+            if (!success && message === "No post found") {
+                console.log("Success: ", success);
+                console.log("Message: ", message);
+            };
+    
+            setTotalPublishedPosts(data);
+        })
+        .catch((error) => {
+            console.log("Error fetching data: ", error);
+        });
+
+
+        await api.get(`/api/v1/admin/posts/manage/draftPosts`)
+        .then((response) => {
+            const { success, data, message } = response.data;              
+            if (!success && message === "No post found") {
+                console.log("Success: ", success);
+                console.log("Message: ", message);
+            };
+    
+            setTotalDraftPosts(data);
+        })
+        .catch((error) => {
+            console.log("Error fetching data: ", error);
         });
     };
 
@@ -492,14 +524,14 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
 
 
 
-                                {/* Staffs Navigation */}
+                                {/* Posts Navigation */}
                                 <div id="postsLinkID" className="flex flex-row flex-wrap gap-3 mt-8 mb-10 px-7">
                                     <Link className="blogPosts activePostView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("blogPosts")}>All <span className="off_white"> ({ totalBlogPosts })</span></Link>
-                                    <Link className="publishedPosts pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("publishedPosts")}>Published  <span className="off_white"> ({ totalBlogPosts })</span></Link>
-                                    <Link className="draftPosts pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("draftPosts")}>Drafts  <span className="off_white"> ({ totalBlogPosts })</span></Link>
+                                    <Link className="publishedPosts pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("publishedPosts")}>Published  <span className="off_white"> ({ totalPublishedPosts })</span></Link>
+                                    <Link className="draftPosts pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("draftPosts")}>Drafts  <span className="off_white"> ({ totalDraftPosts })</span></Link>
                                     <Link className="scheduledPosts pt-3 pb-2 px-10 rounded-lg border text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("scheduledPosts")}>Scheduled  <span className="off_white"> ({ totalBlogPosts })</span></Link>
                                 </div>
-                                {/* Users Navigation */}
+                                {/* Posts Navigation */}
 
 
                                 
@@ -516,7 +548,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                                 All Posts
                                             </h3>
 
-                                            <Link to={'/admin/blog/create'} alt='create new article'>
+                                            <Link className="relative -top-2" to={'/admin/blog/create'} alt='create new article'>
                                                 <button className="bg-blue-500 text-white active:bg-lightBlue-500 font-bold uppercase text-lg tracking-tightener px-7 py-3 rounded-lg shadow hover:bg-blue-600 hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-300">add new</button>
                                             </Link>
                                         </div>
@@ -606,80 +638,86 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                                 <tbody>                                                    
                                                     {search(blogPosts)?.map((post, userIndex) => {
                                                             if (post?.status === "draft") {
-                                                                return (
+                                                                return (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                                                                     <tr key={userIndex}>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
                                                                             #{userIndex+1}
                                                                         </td>
-                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap text-left flex items-center capitalize">
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap flex justify-center items-center">                                                                         
                                                                             {   
                                                                                 post?.images?.map((item, itemIndex) => {
                                                                                     if (item?.featured === true) {
                                                                                         return (
                                                                                             <div key={itemIndex} className="">
-                                                                                                <img src={item?.url} className="h-12 w-12 bg-white rounded-full border" alt={item?.alt} />{" "}
+                                                                                                <img src={item?.url} className="h-20 max-w-24 bg-white rounded-lg border" alt={item?.alt} />{" "}
                                                                                             </div>
                                                                                         );
                                                                                     }
                                                                                 })
-                                                                            }  
+                                                                            }    
+                                                             
+                                                                        </td>
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">   
                                                                             <span
                                                                                 className={
                                                                                     "ml-3 font-bold " +
                                                                                     + (color === "light" ? "text-blueGray-600" : "text-white")
                                                                                 }>
-                                                                                {post?.title?.substring(0,10)+"..."}
+                                                                                {post?.title?.substring(0,50)+"..."}
                                                                             </span>
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
                                                                             {convertDate(post?.createdAt)}                        
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">
-                                                                            <i className="fas fa-circle text-orange-400 mr-2"></i>{post?.status}
-                                                                        </td>                  
+                                                                            <i className="fas fa-circle text-orange-500 mr-2"></i>{post?.status}
+                                                                        </td>  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
                                                                             <Link to={`/admin/blog/manage/${post?._id}`}>View details</Link>
-                                                                        </td>    
+                                                                        </td>                  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
                                                                             <TableDropdown />
                                                                         </td>
                                                                     </tr>               
                                                                 );
                                                             } else if (post?.status === "scheduled") {
-                                                                return (
+                                                                return (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                                                                     <tr key={userIndex}>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
                                                                             #{userIndex+1}
                                                                         </td>
-                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap text-left flex items-center">
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight whitespace-nowrap flex justify-center items-center">                                                                         
                                                                             {   
                                                                                 post?.images?.map((item, itemIndex) => {
                                                                                     if (item?.featured === true) {
                                                                                         return (
                                                                                             <div key={itemIndex} className="">
-                                                                                                <img src={item?.url} className="h-12 w-12 bg-white rounded-full border" alt={item?.alt} />{" "}
+                                                                                                <img src={item?.url} className="h-20 max-w-24 bg-white rounded-lg border" alt={item?.alt} />{" "}
                                                                                             </div>
                                                                                         );
                                                                                     }
                                                                                 })
-                                                                            }
+                                                                            }    
+                                                             
+                                                                        </td>
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">   
                                                                             <span
                                                                                 className={
                                                                                     "ml-3 font-bold " +
                                                                                     + (color === "light" ? "text-blueGray-600" : "text-white")
                                                                                 }>
-                                                                                {post?.title?.substring(0,10)+"..."}
+                                                                                {post?.title?.substring(0,50)+"..."}
                                                                             </span>
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
                                                                             {convertDate(post?.createdAt)}                        
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">
-                                                                            <i className="fas fa-circle text-red-500 mr-2"></i>{post?.status}
-                                                                        </td> 
+                                                                            <i className="fas fa-circle text-yellow-500 mr-2"></i>{post?.status}
+                                                                        </td>  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
                                                                             <Link to={`/admin/blog/manage/${post?._id}`}>View details</Link>
-                                                                        </td>                   
+                                                                        </td>                  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
                                                                             <TableDropdown />
                                                                         </td>

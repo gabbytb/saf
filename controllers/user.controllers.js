@@ -342,16 +342,28 @@ exports.verifySignUpWithGet = async (req, res) => {
   
     try {
         // parse token as ==> request parameters
-        const { token } = req.query;
-
+        // const { token } = req.query || '';
+        const AuthHeader = req.headers.authorization;
+        if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
+            const responseData = { 
+                success: false, 
+                message: "Unauthorized",
+            };
+            console.log("Token was not authorized by a User: ", responseData);
+            return res.status(401).json(responseData);
+        };
         
+        const token = AuthHeader.split(" ")[1];
+
+        if (!token) {
+            return res.status(400).json({ message: 'Token is required', success: false  });
+        };
+
         const decoded = await verifyToken(token);
         // res.send(`Token is valid. User ID: ${decoded.id}`);
 
-
         const _id = decoded.id;
         const userExists = await User.findById(_id);
-
 
         if (!(userExists)) {
             const responseData = { 
@@ -388,31 +400,29 @@ exports.verifySignUpWithGet = async (req, res) => {
             "\nVerification Status: ", responseData,
             "\n*********************************************************\n\n");
         res.status(200).json(responseData); // Send a success response       
-
+    
     } catch (error) {
-        if (error.name === 'TokenExpiredError') {
-            // console.error("Token has expired");
+        if (error.name === 'TokenExpiredError') {           
             const responseData = { 
                 success: false, 
                 message: "Token has expired",
+                error: error.message,
             };
             console.error("Token verification status: ", responseData);
             return res.status(500).json(responseData);
-        } else if (error.name === 'JsonWebTokenError') {
-            // console.error("Token does not exist");
+        } else if (error.name === 'JsonWebTokenError') {         
             const responseData = { 
                 success: false, 
                 message: "Token does not exist",
-                error,
+                error: error.message,
             };
             console.error("Token verification status: ", responseData);
             return res.status(500).json(responseData);
-        } else if (error.name === 'MongoServerError') {
-            // console.error("Mulitple user entry");
+        } else if (error.name === 'MongoServerError') {           
             const responseData = { 
                 success: false, 
                 message: "Mulitple User entry",
-                error,
+                error: error.message,
             };
             console.error("Mulitple User entry: ", responseData);
             return res.status(500).json(responseData);
@@ -420,9 +430,9 @@ exports.verifySignUpWithGet = async (req, res) => {
             const responseData = { 
                 success: false, 
                 message: "Internal Server Error",
-                error,
+                error: error.message,
             };
-            console.error("Internal Server Error during account verification: ", error.message);
+            console.error("Error occurred during Account Activation: ", responseData);
             return res.status(500).json(responseData);
         };
     };

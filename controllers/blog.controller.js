@@ -1,5 +1,5 @@
-const assignOneDayToken = require("../middlewares/AssignOneDayToken");
-const verifyToken = require("../middlewares/VerifyToken");
+// const assignOneDayToken = require("../middlewares/AssignOneDayToken");
+// const verifyToken = require("../middlewares/VerifyToken");
 
 const db = require("../models");
 const Blog = db.blogs;
@@ -142,13 +142,13 @@ exports.findAllBlogPosts = async (req, res) => {
     const status = req.query.status || "";               
     const page = parseInt(req.query.page, 10) || 1;        
     const limit = parseInt(req.query.limit, 10) || 10;
-    const skip = (page - 1) * limit;
-    const sort = "recent";
+    const skip = (page - 1) * limit,
+          sort = "recent";
 
     try {
+
         // Set for DB Query
         let query = { };
-
         if (status) {
             query.status = status;
         };
@@ -161,11 +161,12 @@ exports.findAllBlogPosts = async (req, res) => {
             sortOrder.createdAt = 1; // Default sorting (ascending)
         };
 
+
         const allBlogPosts = await Blog.find(query)
                                 .sort(sortOrder)
                                 .skip(parseInt(skip))
                                 .limit(parseInt(limit)); 
-        console.log("BLOG POSTS BY MOST RECENT: ", allBlogPosts);
+        console.log("ALL BLOG POSTS ARRANGED ACCORDING TO MOST-RECENT: ", allBlogPosts);
 
         
         const totalBlogPosts = await Blog.countDocuments(query); // Total number of users with the given status
@@ -199,17 +200,20 @@ exports.findAllBlogPosts = async (req, res) => {
 // Our FIND All BLOG POSTS Logic starts here
 exports.totalPublishedPosts = async (req, res) => { 
 
-    // Get Pagination Parameters from the request query        
+    // Get Pagination Parameters from the request query     
     const status = req.query.status || "";               
     const page = parseInt(req.query.page, 10) || 1;        
-    const limit = parseInt(req.query.limit, 10) || 10;
-    const sort = "recent";
+    const limit = parseInt(req.query.limit, 10) || 20;                        
+    const skip = (page - 1) * limit,
+          sort = "recent";
 
     try {
+
         // Set for DB Query
-        let query = { };
-        
-        if (status === 'published') {
+        let query = { 
+            "status": "published",
+        };        
+        if (status) {
             query.status = status;
         };
 
@@ -224,12 +228,10 @@ exports.totalPublishedPosts = async (req, res) => {
 
         const allPublishedPosts = await Blog.find(query)
                                 .sort(sortOrder)
-                                .skip((page - 1) * parseInt(limit))
-                                .limit(parseInt(limit));    
-        console.log("ALL PUBLISHED BLOG POSTS BY MOST RECENT: ", allPublishedPosts);
-
-
+                                .skip(parseInt(skip))
+                                .limit(parseInt(limit));   
         
+                                
         const responseData = {
             success: true,
             data: allPublishedPosts.length,
@@ -246,13 +248,20 @@ exports.totalPublishedPosts = async (req, res) => {
 // Our FIND All BLOG POSTS Logic starts here
 exports.totalDraftPosts = async (req, res) => { 
 
-    const { page = 1, limit = 10, status, sort } = req.query; // Destructure query parameters   
-    
+     // Get Pagination Parameters from the request query     
+     const status = req.query.status || "";               
+     const page = parseInt(req.query.page, 10) || 1;        
+     const limit = parseInt(req.query.limit, 10) || 20;                        
+     const skip = (page - 1) * limit,
+           sort = "recent";
+
     try {
+
         // Set for DB Query
-        let query = { };
-        
-        if (status === 'draft') {
+        let query = {
+            "status": "draft",
+        };        
+        if (status) {
             query.status = status;
         };
 
@@ -267,10 +276,8 @@ exports.totalDraftPosts = async (req, res) => {
 
         const allDraftPosts = await Blog.find(query)
                                 .sort(sortOrder)
-                                .skip((page - 1) * parseInt(limit))
-                                .limit(parseInt(limit));    
-        console.log("ALL PUBLISHED BLOG POSTS BY MOST RECENT: ", allDraftPosts);
-
+                                .skip(parseInt(skip))
+                                .limit(parseInt(limit));   
 
 
         const responseData = {
@@ -285,6 +292,7 @@ exports.totalDraftPosts = async (req, res) => {
         return res.status(500).send(`Internal Server Error: ${error.message}`);
     };
 };  // THOROUGHLY Tested === Working
+
 
 
 
@@ -324,9 +332,8 @@ exports.findAllPublishedPosts = async (req, res) => {
     };
 };  // THOROUGHLY Tested === Working
 
-
 // Our FIND All PUBLISHED BLOG POSTS Logic starts here
-exports.findAllDraftPostsDONTuseUSEfindAllBlogPostsFORPUBLISHEDDRAFTSCHEDULED = async (req, res) => {
+exports.findAllDraftPostsBUTDONTuseUSEfindAllBlogPostsMethod = async (req, res) => {
 
     //  res.setHeader('Content-Type', 'application/json');
     //  NOTE:  To filter a search results, specify a search condition using a "key-value" pair within curly braces, within the find method!
@@ -360,6 +367,9 @@ exports.findAllDraftPostsDONTuseUSEfindAllBlogPostsFORPUBLISHEDDRAFTSCHEDULED = 
 };  // THOROUGHLY Tested === Working
 
 
+
+
+
 // Our FIND SINGLE USER by TITLE Logic starts here
 exports.findBlogPostByUrl = async (req, res) => {
     
@@ -376,9 +386,8 @@ exports.findBlogPostByUrl = async (req, res) => {
                 success: false,
                 message: "Post not found",
             };
-            console.log("Searching for Post with Title: ", responseData);
-            return res.json(responseData);
-            // return res.status(404).json(responseData);
+            console.log("Find Blog Post by URL: ", responseData);
+            return res.status(404).json(responseData);
         };
         
         const responseData = {
@@ -386,7 +395,7 @@ exports.findBlogPostByUrl = async (req, res) => {
             data: blog,
             message: "Successful",
         };
-        console.log("FOUND POST TITLE: ", responseData);
+        console.log("FOUND BLOG POST BY URL: ", responseData);
         return res.status(200).json(responseData);
 
     } catch (error) {

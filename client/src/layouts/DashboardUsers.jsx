@@ -34,7 +34,7 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
     useEffect(() => {
-        window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
+        window.scrollTo({ top: 0, left: 0, });
         const pageTitle = "Users Dashboard", 
               siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
@@ -47,7 +47,7 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
 
 
     // ***************************************************************************
-    // CURRENT ACTIVE USER:-
+    // CURRENT LOGGED-IN USER:-
     // ***************************************************************************
     isLoggedIn = JSON.parse(localStorage.getItem("user"));
     // ***************************************************************************
@@ -73,33 +73,48 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
 
 
     // ****************************************************************************
-    // MANAGE STATE:-  TO FIND ALL STAFFS
-    // ****************************************************************************
-    // ****************************************************************************
     // MANAGE STATE:-  TO FIND ALL USERS
     // ****************************************************************************
     const [allUserss, setAllUserss] = useState([]);
     // console.log("ALL USERS: ", allUserss);
-        const [totalApprovedUsers, setTotalApprovedUsers] = useState();
-        const [totalPendingUsers, setTotalPendingUsers] = useState();
-        const [totalRejectedUsers, setTotalRejectedUsers] = useState();
-
-    // eslint-disable-next-line
-    const [totalUsers, setTotalUsers] = useState(null);
-    // console.log("TOTAL USERS: ", totalUsers);
     
+        const [totalApprovedUsers, setTotalApprovedUsers] = useState();
+        // console.log("TOTAL APPROVED USERS: ", totalApprovedStaffs);
+        const [totalPendingUsers, setTotalPendingUsers] = useState();
+        // console.log("TOTAL PENDING USERS: ", totalPendingStaffs);
+        const [totalRejectedUsers, setTotalRejectedUsers] = useState();
+        // console.log("TOTAL REJECTED USERS: ", totalRejectedStaffs);
+    
+            const [totalUsers, setTotalUsers] = useState(null);
+            // console.log("TOTAL USERS: ", totalUsers);   
+
     const [totalPages, setTotalPages] = useState(0);
     const [pageLimit, setPageLimit] = useState(undefined); // Number of items to display per page
     const [currentPage, setCurrentPage] = useState(1);  
 
 
-    
-    
+
     // ****************************************************************************
     // Works for Search
     // ****************************************************************************
     const [query, setQuery] = useState('');
-    const search_parameters = Object.keys(Object.assign({}, ...allUserss));
+    const search_parameters = Object.keys(Object.assign({}, ...allUserss));   
+
+    useEffect(() => {
+
+        // Assuming the token is passed as a query parameter
+        const { search } = window.location;
+        console.log("CURRENT LOCATION OF URL.Search: ", search);
+
+        const queryParams = new URLSearchParams(search);
+        const searchedTerm = queryParams.get('search');
+        console.log("Searched TERM: ", searchedTerm);
+ 
+        if (searchedTerm !== null) {           
+            setQuery(searchedTerm);
+        };
+
+    }, [window.location]);
 
     function search(allUserss) {
         return allUserss?.filter((item) =>
@@ -463,7 +478,7 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
                                     
                                 <input
                                     type="search"
-                                    name="q"
+                                    name="search"
                                     id="search-form"
                                     className="search-input border-0 px-3 py-3 indent-8 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"       
                                     onChange={(e) => setQuery(e.target.value)}

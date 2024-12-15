@@ -12,9 +12,9 @@ module.exports = app => {
     router.get("/api/v1/admin/posts/manage/publishedPosts", blogs.totalPublishedPosts);
     router.get("/api/v1/admin/posts/manage/draftPosts", blogs.totalDraftPosts);
 
-    router.get("/api/v1/admin/blogs/manage/isPublished", blogs.findAllPublishedPosts); 
+    router.get("/api/v1/admin/blogs/manage/:isPublished", blogs.findAllPublishedPosts); 
     
-    router.get("/api/v1/admin/blogs/manage/unPublished", blogs.findAllDraftPostsDONTuseUSEfindAllBlogPostsFORPUBLISHEDDRAFTSCHEDULED); 
+    router.get("/api/v1/admin/blogs/manage/draft-posts", blogs.findAllDraftPostsBUTDONTuseUSEfindAllBlogPostsMethod); 
     
     // router.get("/api/v1/admin/blogs/manage/:isPublished", blogs.findAllPublishedPosts); 
     

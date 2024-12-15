@@ -62,7 +62,8 @@ import CardAllApprovedStaffs from "./Cards/staffs/CardAllApprovedStaffs";
 import CardAllPendingStaffs from "./Cards/staffs/CardAllPendingStaffs";
 import CardAllRejectedStaffs from "./Cards/staffs/CardAllRejectedStaffs";
 
-import CardAllAccountDetails from "./Cards/CardAllAccountDetails";
+import CardAccountDetails from "./Cards/CardAccountDetails";
+import CardCreateAccount from "./Cards/CardCreateAccount";
 import NewBlogPost from "./Forms/NewBlogPost";
 import PostUploader from "./Forms/PostUploader";
 
@@ -113,7 +114,8 @@ export {
     CardAllPendingStaffs,
     CardAllRejectedStaffs,
 
-    CardAllAccountDetails,
+    CardAccountDetails,
+    CardCreateAccount,
     NewBlogPost,
     PostUploader,
     // IMPORTED COMPONENTS //

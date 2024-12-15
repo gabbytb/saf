@@ -8,7 +8,7 @@ import "../../assets/styles/tailwind.css";
 
 
 
-export default function CardAllAccountDetails() {
+export default function CardAccountDetails() {
   
 
     

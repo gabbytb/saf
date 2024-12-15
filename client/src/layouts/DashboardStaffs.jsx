@@ -78,15 +78,17 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
     // MANAGE STATE:-  TO FIND ALL STAFFS
     // ****************************************************************************
     const [data, setData] = useState([]);
-    console.log("ALL ADMIN USERS:", data);
+    // console.log("ALL ADMIN USERS:", data);
+    
+        const [totalApprovedStaffs, setTotalApprovedStaffs] = useState(null);
+        // console.log("TOTAL APPROVED ADMIN USERS: ", totalApprovedStaffs);
+        const [totalPendingStaffs, setTotalPendingStaffs] = useState(null);
+        // console.log("TOTAL PENDING ADMIN USERS: ", totalPendingStaffs);
+        const [totalRejectedStaffs, setTotalRejectedStaffs] = useState(null);
+        // console.log("TOTAL REJECTED ADMIN USERS: ", totalRejectedStaffs);
+            
             const [totalAdminUsers, setTotalAdminUsers] = useState(null);
             // console.log("TOTAL ADMIN USERS: ", totalAdminUsers);
-            const [totalApprovedStaffs, setTotalApprovedStaffs] = useState(null);
-            // console.log("TOTAL APPROVED ADMIN USERS: ", totalApprovedStaffs);
-            const [totalPendingStaffs, setTotalPendingStaffs] = useState(null);
-            // console.log("TOTAL PENDING ADMIN USERS: ", totalPendingStaffs);
-            const [totalRejectedStaffs, setTotalRejectedStaffs] = useState(null);
-            // console.log("TOTAL REJECTED ADMIN USERS: ", totalRejectedStaffs);
 
     const [totalPages, setTotalPages] = useState(0);
     const [pageLimit, setPageLimit] = useState(undefined); // Number of items to display per page
@@ -94,13 +96,27 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
    
 
 
-
-
     // ****************************************************************************
     // Works for Search
     // ****************************************************************************
     const [query, setQuery] = useState('');
     const search_parameters = Object.keys(Object.assign({}, ...data));
+
+    useEffect(() => {
+
+        // Assuming the token is passed as a query parameter
+        const { search } = window.location;
+        console.log("CURRENT LOCATION OF URL.Search: ", search);
+
+        const queryParams = new URLSearchParams(search);
+        const searchedTerm = queryParams.get('search');
+        console.log("Searched TERM: ", searchedTerm);
+            
+        if (searchedTerm !== null) {
+            setQuery(searchedTerm);
+        };
+
+    }, [window.location]);
 
     function search(data) {
         return data?.filter((item) =>
@@ -148,8 +164,8 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
             const { allAdminRole, pagination } = data;
 
             if (!success && message === "No staff found") {
-                        console.log("Success: ", success);
-                        console.log("Message: ", message);
+                console.log("Success: ", success);
+                console.log("Message: ", message);
             };
 
             setData(allAdminRole);
@@ -463,7 +479,7 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
                                     
                                 <input
                                     type="search"
-                                    name="q"
+                                    name="search"
                                     id="search-form"
                                     className="search-input border-0 px-3 py-3 indent-8 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"       
                                     onChange={(e) => setQuery(e.target.value)}
@@ -538,7 +554,7 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
                                                 All Staffs
                                             </h3>
 
-                                            <Link to={'/admin/staffs/manage/create'} alt='create new article'>
+                                            <Link className="relative -top-2" to={'/admin/staffs/manage/create'} alt='create new user'>
                                                 <button className="bg-blue-500 text-white active:bg-lightBlue-500 font-bold uppercase text-lg tracking-tightener px-7 py-3 rounded-lg shadow hover:bg-blue-600 hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-300">
                                                     add new
                                                 </button>

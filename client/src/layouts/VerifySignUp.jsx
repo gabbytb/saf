@@ -1,5 +1,5 @@
 import { useState, useEffect, } from 'react';
-import { Link, } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import api from '../api';
 import { brandOfficialLogoDark, signUpIcon } from '../assets/images';
 
@@ -14,6 +14,8 @@ import { brandOfficialLogoDark, signUpIcon } from '../assets/images';
 
 const VerifySignUp = () => {  
 
+
+    const navigate = useNavigate();
 
     // console.clear();
     
@@ -178,25 +180,26 @@ const VerifySignUp = () => {
     // ******************************** //
     // **** VERIFY REGISTERED USER **** //
     // ******************************** //
-    useEffect(() => {        
+    useEffect(() => {   
+
         // Assuming the token is passed as a query parameter
-        // console.log("CURRENT LOCATION OF URL: ", window.location);
-
-        const search = window.location.search;
-        // OR 
-        // const { search } = window.location;
+        console.log("CURRENT LOCATION OF URL: ", window.location);
+       
+        const { search } = window.location;
         const queryParams = new URLSearchParams(search);        
+        
         const token = queryParams.get('token'); 
-        console.log("Token: ", token);
+        console.log("Token: ", token);            
 
-        function verifyToken() {          
+        async function verifyToken() {
+
             const uri = "/user/verify";
-            api.get(uri, { 
-                // headers: { 
-                //     Authorization: `Bearer ${token}`,
-                // }, 
+            await api.get(uri, { 
+                headers: { 
+                    Authorization: `Bearer ${token}`,
+                }, 
                 params: { 
-                    token 
+                   token 
                 }, 
             })
             .then((response) => {
@@ -306,6 +309,8 @@ const VerifySignUp = () => {
                     setRegisteredUser(data);
                     setVerificationMessage(message);
 
+                    navigate('/user/login');
+
                     // Scroll to Bottom
                     window.scrollTo({ left: 0, top: 300, behavior: 'smooth', });
 
@@ -341,7 +346,7 @@ const VerifySignUp = () => {
         verifyToken();
         
         // Dependency array includes location.search to re-run effect if URL changes
-    }, []);
+    }, [window.location.search]);
     // ******************************** //
     // ****** SET PAGE TITLE(SEO) ***** //
     // ******************************** //

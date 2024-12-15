@@ -24,6 +24,7 @@ import {
 
     Dashboard,
     DashboardBlogPosts,
+    DashboardCreateAccount,
     DashboardCreateBlog,
     DashboardUsers, 
     DashboardUsersDetails,
@@ -69,7 +70,7 @@ export default function App() {
           {/* <Route path="/landing" exact component={Landing} /> */}
           {/* <Route path="/profile" exact component={Profile} /> */}
           <Route path="/user/signup" element={<SignUp />} />
-          <Route path="/user/verify" element={<VerifySignUp />} />          
+          <Route path="/user/verify" element={<VerifySignUp />} />    
           <Route path="/user/login" element={<SignIn />} />        
           <Route path="/donations" element={<DonateNow />} />
           <Route path="/blog" element={<BlogPosts />} />  
@@ -82,16 +83,22 @@ export default function App() {
           <Route path="/" element={<Home />} />          
 
 
-
           {/* add routes with layouts */}
           <Route path="/admin/dashboard" element={<Dashboard />} />
+
+
           <Route path="/admin/blog/manage" element={<DashboardBlogPosts />} />
           <Route path="/admin/blog/create" element={<DashboardCreateBlog />} />
+
+
           <Route path="/admin/users" element={<DashboardUsers />} />
           <Route path="/admin/users/:id" element={<DashboardUsersDetails />} />
           <Route path="/admin/staffs" element={<DashboardStaffs />} />  
           <Route path="/admin/staffs/:id" element={<DashboardStaffsDetails />}></Route>
-        
+
+
+          <Route path="/admin/staffs/manage/create" element={<DashboardCreateAccount />} />
+
 
           {/* add redirect for first page */}
           {/* <Redirect from="*" to="/" /> */}

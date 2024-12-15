@@ -1,7 +1,7 @@
 import { useEffect, } from "react";
 import { googleLogout } from "@react-oauth/google";
 import { useNavigate, } from "react-router-dom";
-import { Sidebar, AdminNavbar, CardAllAccountDetails, } from "../components";
+import { Sidebar, AdminNavbar, CardAccountDetails, } from "../components";
 
 
 
@@ -93,7 +93,7 @@ const DashboardUsersDetails = ({ isLoggedIn }) => {
                             <div className="w-full px-4">
                                 
                                 {/* Users Details */}
-                                <CardAllAccountDetails />
+                                <CardAccountDetails />
                                 {/* Users Details */}
 
                             </div>

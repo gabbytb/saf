@@ -1,7 +1,7 @@
 import { useEffect, } from "react";
 import { useNavigate, } from "react-router-dom";
 import { googleLogout } from "@react-oauth/google";
-import { Sidebar, AdminNavbar, CardAccountDetails, } from "../components";
+import { Sidebar, AdminNavbar, CardCreateAccount, } from "../components";
 
 
 
@@ -9,24 +9,12 @@ import { Sidebar, AdminNavbar, CardAccountDetails, } from "../components";
 
 
 
-const DashboardStaffsDetails = ({ isLoggedIn }) => {
+const DashboardCreateAccount = ({ isLoggedIn }) => {
 
     // console.clear();
 
     const navigate = useNavigate();
     
-
-    // *************************** //
-    // *** SET PAGE TITLE(SEO) *** //
-    // *************************** //
-    useEffect(() => {
-        window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "Admin Dashboard - VIEW USER", siteTitle = "Samuel Akinola Foundation";
-        document.title = `${pageTitle} | ${siteTitle}`;
-    }, []);
-    // *************************** //
-    // *** SET PAGE TITLE(SEO) *** //
-    // *************************** //
 
     
     // ***************************************************************************
@@ -50,13 +38,28 @@ const DashboardStaffsDetails = ({ isLoggedIn }) => {
     // ***************************************************************************
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
     // ***************************************************************************
-    const lastName = isLoggedIn?.lastName ? isLoggedIn?.lastName : logOut();
+    const firstName = isLoggedIn?.firstName ? isLoggedIn?.firstName : logOut();
+    // console.log("Logged-In User First Name: ", firstName);
+    const lastName = isLoggedIn?.lastName ? isLoggedIn?.lastName : logOut();            
     // console.log("Logged-In User Last Name: ", lastName);
     // const email = isLoggedIn?.email ? isLoggedIn?.email : logOut();
     // console.log("Logged-In User E-mail: ", email);
     // ***************************************************************************
     // ***************************************************************************
 
+
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
+    useEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
+        const pageTitle = `${firstName} ${lastName} init - New Account`,
+              siteTitle = "Samuel Akinola Foundation";
+        document.title = `${pageTitle} | ${siteTitle}`;
+    }, [firstName, lastName]);
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
 
 
 
@@ -90,9 +93,9 @@ const DashboardStaffsDetails = ({ isLoggedIn }) => {
                         <div className="flex flex-wrap">
                             <div className="w-full px-4">
                                 
-                                {/* Users Details */}
-                                <CardAccountDetails />
-                                {/* Users Details */}
+                                {/* NEW User Details */}
+                                <CardCreateAccount />
+                                {/* NEW User Details */}
 
                             </div>
                         </div>
@@ -104,4 +107,4 @@ const DashboardStaffsDetails = ({ isLoggedIn }) => {
 };
 
 
-export default DashboardStaffsDetails;
+export default DashboardCreateAccount;
