@@ -44,6 +44,15 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
     // *************************** //
 
 
+    
+    // ****************************************************************************
+    // MANAGE STATE:-  SPECIAL FEATURES
+    // ****************************************************************************
+    const [isLoading, setIsLoading] = useState(true);
+    const [activeDisplay, setActiveDisplay] = useState("allUsers");
+    const leftArrow = "<", 
+          rightArrow = ">";
+
 
 
     // ***************************************************************************
@@ -68,7 +77,6 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
     const lastName = isLoggedIn?.lastName ? isLoggedIn?.lastName : logOut();
     // ***************************************************************************
     // ***************************************************************************
-
 
 
 
@@ -114,7 +122,7 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
             setQuery(searchedTerm);
         };
 
-    }, [window.location]);
+    }, [activeDisplay, window.location]);
 
     function search(allUserss) {
         return allUserss?.filter((item) =>
@@ -126,15 +134,6 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
     // ****************************************************************************
 
 
-
-    
-    // ****************************************************************************
-    // MANAGE STATE:-  SPECIAL FEATURES
-    // ****************************************************************************
-    const [isLoading, setIsLoading] = useState(true);
-    const [activeDisplay, setActiveDisplay] = useState("allUsers");
-    const leftArrow = "<", 
-          rightArrow = ">";
 
 
 

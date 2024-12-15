@@ -46,6 +46,17 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
 
 
 
+    // ****************************************************************************
+    // MANAGE STATE:-  SPECIAL FEATURES
+    // ****************************************************************************
+    const [isLoading, setIsLoading] = useState(true);
+    const [activeDisplay, setActiveDisplay] = useState("allStaffs");
+    const leftArrow = "<", 
+          rightArrow = ">";
+    // ****************************************************************************
+    // ****************************************************************************  
+
+
 
     // ***************************************************************************
     // CURRENT ACTIVE USER:-
@@ -69,8 +80,6 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
     const lastName = isLoggedIn?.lastName ? isLoggedIn?.lastName : logOut();
     // ***************************************************************************
     // ***************************************************************************
-
-
 
 
 
@@ -116,7 +125,7 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
             setQuery(searchedTerm);
         };
 
-    }, [window.location]);
+    }, [activeDisplay, window.location]);
 
     function search(data) {
         return data?.filter((item) =>
@@ -130,19 +139,6 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
 
 
 
-    // ****************************************************************************
-    // MANAGE STATE:-  SPECIAL FEATURES
-    // ****************************************************************************
-    const [isLoading, setIsLoading] = useState(true);
-    const [activeDisplay, setActiveDisplay] = useState("allStaffs");
-    const leftArrow = "<", 
-          rightArrow = ">";
-    // ****************************************************************************
-    // ****************************************************************************  
-
-
-
-          
     // ****************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL STAFFS
     // ****************************************************************************             
