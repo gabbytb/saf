@@ -152,6 +152,7 @@ app.get(['*', '/'], (req, res) => {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // const db = require("./models");
 // db.mongoose.connect(db.url)
 // .then(() => {
@@ -162,7 +163,6 @@ app.get(['*', '/'], (req, res) => {
 //     console.log(`Cannot connect to the database: ${err}`);
 //     process.exit();
 // });
-
 
 // let server = app.listen(PORT, () => {
 //     const port = server.address().port;
