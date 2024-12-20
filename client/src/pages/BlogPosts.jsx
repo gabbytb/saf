@@ -70,7 +70,6 @@ const BlogPosts = ({ isLoggedIn, }) => {
 
 
 
-
    
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
