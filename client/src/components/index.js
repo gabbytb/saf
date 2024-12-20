@@ -52,6 +52,10 @@ import TableDropdown from  "./Dropdowns/TableDropdown";
 import UserDropdown from "./Dropdowns/UserDropdown";
 import UserDropdownPro from "./Dropdowns/UserDropdownPro";
 
+// POSTS COMPONENTS
+import CardAllPublishedPosts from "./Cards/posts/CardAllPublishedPosts";
+import CardAllDraftPosts from "./Cards/posts/CardAllDraftPosts";
+
 // USERS COMPONENTS
 import CardAllApprovedUsers from "./Cards/users/CardAllApprovedUsers";
 import CardAllPendingUsers from "./Cards/users/CardAllPendingUsers";
@@ -105,6 +109,9 @@ export {
     CardLineChart,
     CardPageVisits,
     CardSocialTraffic,
+
+    CardAllPublishedPosts,
+    CardAllDraftPosts,
 
     CardAllApprovedUsers,
     CardAllPendingUsers,

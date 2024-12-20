@@ -1,4 +1,4 @@
-import { useState, useEffect, } from "react";
+import { useState, useEffect, Suspense, } from "react";
 import { Link } from "react-router-dom";
 import { googleLogout } from "@react-oauth/google";
 import PropTypes from "prop-types";
@@ -9,6 +9,8 @@ import "../assets/styles/tailwind.css";
 
 // components
 import { 
+    CardAllDraftPosts,
+    CardAllPublishedPosts,
     Sidebar, 
     // CardAllPublishedPosts, CardAllDraftPosts, CardAllScheduledPosts, 
     TableDropdown, 
@@ -321,15 +323,14 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                     className={
                                     "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded " +
                                     (color === "dark" ? "bg-white" : "bg-lightBlue-900 text-white")
-                                    }
-                                >
+                                    }>
         
-                                    {/* Staffs Navigation */}
+                                    {/* Blog Navigation */}
                                     <div id="postsLinkID" className="flex flex-row flex-wrap gap-3 mt-8 mb-10 px-7">
                                         <Link className="blogPosts activePostView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("blogPosts")}>All <span className="off_white"> ({ totalBlogPosts })</span> </Link>
                                         <Link className="publishedPosts pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("publishedPosts")}>Published  <span className="off_white"> ({ totalBlogPosts })</span></Link>
                                         <Link className="draftPosts pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("draftPosts")}>Draft  <span className="off_white"> ({ totalBlogPosts })</span></Link>
-                                        <Link className="scheduledPosts pt-3 pb-2 px-10 rounded-lg border text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("scheduledPosts")}>Scheduled  <span className="off_white"> ({ totalBlogPosts })</span></Link>
+                                        {/* <Link className="scheduledPosts pt-3 pb-2 px-10 rounded-lg border text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("scheduledPosts")}>Scheduled  <span className="off_white"> ({ totalBlogPosts })</span></Link> */}
                                     </div>
                                     {/* Users Navigation */}
         
@@ -529,8 +530,8 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                     <Link className="blogPosts activePostView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("blogPosts")}>All <span className="off_white"> ({ totalBlogPosts })</span></Link>
                                     <Link className="publishedPosts pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("publishedPosts")}>Published  <span className="off_white"> ({ totalPublishedPosts })</span></Link>
                                     <Link className="draftPosts pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("draftPosts")}>Drafts  <span className="off_white"> ({ totalDraftPosts })</span></Link>
-                                    <Link className="scheduledPosts pt-3 pb-2 px-10 rounded-lg border text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("scheduledPosts")}>Scheduled  <span className="off_white"> ({ totalBlogPosts })</span></Link>
-                                </div>
+                                    {/* <Link className="scheduledPosts pt-3 pb-2 px-10 rounded-lg border text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("scheduledPosts")}>Scheduled  <span className="off_white"> ({ totalBlogPosts })</span></Link> */}
+                                </div> 
                                 {/* Posts Navigation */}
 
 
@@ -823,13 +824,13 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
                                     </div>
                                     {/* Pagination controls */}
                                 </div>
-                                {/* <Suspense fallback={<div>Loading...</div>}>                
+                                <Suspense fallback={<div>Loading...</div>}>                
                                     <CardAllPublishedPosts color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
                                 </Suspense>       
                                 <Suspense fallback={<div>Loading...</div>}>                            
                                     <CardAllDraftPosts color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
                                 </Suspense>     
-                                <Suspense fallback={<div>Loading...</div>}>
+                                {/* <Suspense fallback={<div>Loading...</div>}>
                                     <CardAllScheduledPosts color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
                                 </Suspense> */}
                                 {/* Views */}
