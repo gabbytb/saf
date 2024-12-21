@@ -12,17 +12,12 @@ import {
 
 
 
-
-
-
-
-const DashboardCreateBlog = ({ color, isLoggedIn }) => {
+const DashboardCreateBlog = ({ isLoggedIn }) => {
 
     // console.clear();
 
     const navigate = useNavigate();
     
-
 
     
     // ***************************************************************************
@@ -83,6 +78,7 @@ const DashboardCreateBlog = ({ color, isLoggedIn }) => {
                 
                 {/***** RIGHT-PANEL *****/}
                 <div className="relative md:ml-64 bg-blueGray-100">
+
                     <AdminNavbar />
                     
                     {/* Header */}
@@ -107,7 +103,8 @@ const DashboardCreateBlog = ({ color, isLoggedIn }) => {
                                 {/* </> */}
                             </div>                            
                         </div>
-                    </div>                         
+                    </div>           
+
                 </div>
                 {/***** RIGHT-PANEL *****/}
             </>

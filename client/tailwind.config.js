@@ -518,7 +518,7 @@ module.exports = {
         '780': '78rem',   
         '781': '68rem',
         '5/8': '25.666667%',        
-        '9/8': '94%',    
+        '9/8': '94%',   // Admin Dashboard search-form nav Wrapper
         
       },
       zIndex: {
