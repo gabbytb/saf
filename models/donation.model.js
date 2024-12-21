@@ -1,13 +1,8 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema;
+module.exports = mongoose => {
+       
+    const { Schema } = mongoose;
 
-
-
-
-
-
-
-const donationSchema = new Schema({
+    const donationSchema = new Schema({
     _id: {
         type: Number
     },
@@ -42,6 +37,9 @@ const donationSchema = new Schema({
     excerpt: {
         type: String,
     },
+    author: {
+        type: String,             
+    },
     donor: [
         {
             contribution: Number,
@@ -67,9 +65,10 @@ const donationSchema = new Schema({
     accessToken: {
         type: String,
     },    
-})
-const donations = new mongoose.Model('donations', donationSchema);
+    });
 
+    const Donations = mongoose.Model('Donations', donationSchema);
+    return Donations;
 
+};
 
-module.exports = donations;
