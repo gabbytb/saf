@@ -66,9 +66,9 @@ module.exports = mongoose => {
         accessToken: {
             type: String,
         },
-        scheduledFor: {
-            type: Date,
-        },
+        // scheduledFor: {
+        //     type: Date,
+        // },
     }, { 
         versionKey: false, 
         timestamps: true,  
