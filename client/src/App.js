@@ -4,7 +4,7 @@ import { Routes, Route, } from "react-router-dom";
 // import { googleAnalytics } from "./constants";
 import {   
     Home,
-    DonateNow,
+    Donations,
     BlogPosts,
     BlogSinglePost,
     OurProgress,     
@@ -72,7 +72,7 @@ export default function App() {
           <Route path="/user/signup" element={<SignUp />} />
           <Route path="/user/verify" element={<VerifySignUp />} />    
           <Route path="/user/login" element={<SignIn />} />        
-          <Route path="/donations" element={<DonateNow />} />
+          <Route path="/donations" element={<Donations />} />
           <Route path="/blog" element={<BlogPosts />} />  
           <Route path="/blog/page/:id" element={<BlogPosts />} />  
           <Route path="/blog/:slug" element={<BlogSinglePost />} />      
