@@ -9,18 +9,15 @@ import "../assets/styles/tailwind.css";
 
 // components
 import { 
-    CardAllDraftPosts,
+    Sidebar,
     CardAllPublishedPosts,
-    Sidebar, 
-    // CardAllPublishedPosts, CardAllDraftPosts, CardAllScheduledPosts, 
+    CardAllDraftPosts,
     TableDropdown, 
     UserDropdown, 
 } from "../components";
 
 // views
 // import { StaffsTable } from "../views";
-
-
 
 
 

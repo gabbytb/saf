@@ -2,7 +2,6 @@ const db = require("../models");
 const User = db.users;
 const Role = db.roles;
 const bcrypt = require("bcrypt");
-const axios = require("axios");
 // const crypto = require('crypto');
 
 
@@ -104,10 +103,12 @@ exports.signUp = async (req, res) => {
         // ***************************************************************//
         // PICK A SINGLE ROLE
         // ***************************************************************//        
-        const roleAdmin = await Role.findOne({ role: ROLES.ADMIN });
-        const roleEditor = await Role.findOne({ role: ROLES.EDITOR });
-        const roleStaff = await Role.findOne({ role: ROLES.STAFF });
+        // const roleAdmin = await Role.findOne({ role: ROLES.ADMIN });
+        // const roleEditor = await Role.findOne({ role: ROLES.EDITOR });
+        // const roleStaff = await Role.findOne({ role: ROLES.STAFF });
         const roleUsers = await Role.findOne({ role: ROLES.USERS });
+
+
         // ***************************************************************//
         // PICK ALL ADMIN ROLES
         // ***************************************************************//
@@ -257,6 +258,203 @@ exports.signUp = async (req, res) => {
 
 
 
+// Our CREATE ACCOUNT Logic starts here
+exports.adminCreateUser = async (req, res) => {
+
+    // Gets a unique number based on the current time
+    const uniqueId = Date.now();
+
+    // Payload
+    const { id = 23401, firstName, lastName, phone, email, password, address, address2, city, state, country, zipCode, aboutMe } = req.body;
+    
+    try {
+
+        // FORM VALIDATION:  "Compulsory Payload"
+        if (!(firstName && lastName && email && password)) {
+            const responseData = {
+                success: false,
+                message: "Fill all the required inputs"
+            };
+            console.log("*************************************",
+                "\n*********  SIGNUP  ATTEMPT  *********",
+                "\n*************************************",
+                "\nSignup Error: ", responseData.message + "\n\n");
+            return res.status(200).json(responseData);
+        };
+
+        
+        // CHECK IF E-MAIL EXISTS IN USER REPOSITORY
+        const emailExists = await User.findOne({ email: email.toLowerCase() });
+        if (emailExists) {
+            const responseData = {
+                success: false,
+                message: "E-mail exists. Sign In"
+            };
+            console.log("**************************",
+                        "\n***   SIGN-UP FAILED   ***",
+                        "\n**************************",
+                        "\nUser ID: ", emailExists._id,
+                        "\nUser Name: ", emailExists.firstName + " " + emailExists.lastName,
+                        "\nE-mail: ", emailExists.email, " exists\n\n");
+            return res.status(200).json(responseData);
+        };
+    
+        
+        // ***************************************************************//
+        // PICK ALL ADMIN ROLES
+        // ***************************************************************//
+        const roleSelector = await Role.findOne({ role: ROLES.SELECTOR });
+        // ***************************************************************//
+        // ***************************************************************//
+            
+
+        // ***************************************************************//
+        // Hash/Encrypt Password
+        // ***************************************************************//
+        const encryptedPassword = await encryptPassword(password);
+       
+
+        // ************************************ //
+        // ***  FE: CREATE "USER" INSTANCE  *** //
+        // ************************************ //      
+        const user = new User({
+            _id: uniqueId % id,
+            // userName: username.toLowerCase(),           // sanitize: convert username to lowercase. NOTE: You must sanitize your data before forwarding to backend.
+            firstName,
+            lastName,
+            phone,
+            email,
+            password: encryptedPassword,   
+            address,
+            address2,
+            city,
+            state,
+            country,
+            zipCode,
+            aboutMe,
+            // expirationInMs: encrypt(expiresIn),        // Encode: token lifespan
+            roles: [{ ...roleSelector }],               
+            status: "approved",
+            approvesTandC: true,
+            isVerified: true,
+        });
+        // ******************************************************************************************************//
+        // ***  FE: USE MIDDLEWARE: (JWT) TO ASSIGN "TOKEN" TO USER FOR AUTHENTICATION AND AUTHORIZATION  ***//
+        // ******************************************************************************************************//
+        const token = await assignTwoDaysToken(user._id);
+        // ****************************************************
+        // ***  FE: USE MIDDLEWARE: (JWT) TO VERIFY "TOKEN"
+        // ****************************************************
+        const tokenDecoded = await verifyToken(token);
+        
+        // RESULT:-  Token Details:  { id: 31825360, iat: 1722812853, exp: 1722816453 }
+        // NOTE:-
+        //      1) Token id (id): This is a custom payload claim, likely representing the user's unique identifier (e.g., user ID in the database).
+        //      2) Issued At (iat): This is a standard JWT claim representing the time at which the token was issued. It's typically expressed as a Unix timestamp, which counts the number of seconds since January 1, 1970 (UTC).
+        //      3) Expiration Time (exp): This is another standard JWT claim, indicating the time at which the token will expire. It's also expressed as a Unix timestamp.
+        // NEXT:- 
+        //      Format token expiry date using:-  new Date(tokenDecoded.exp * 1000) 
+        // To Get Current Date Setting for Token Expiration Time to start counting from!       
+        const tokenExpiryDate = new Date(tokenDecoded.exp * 1000);
+
+
+        user.tokenExpires = tokenExpiryDate;
+        user.accessToken = token;
+        // user.tokenExpires = encrypt(tokenExpiryDate);
+
+
+        // ***************************************************************//
+        // E-mail Service Config
+        // ***************************************************************//
+        // await mailSenderPostSignUp(token, newUser);
+        await mailSenderForGetSignUp(token, user);     
+
+
+        const newUser = await user.save();
+        // **************************************** //
+        // ***    FE: SAVE USER INFORMATION     *** //
+        // **************************************** //
+
+
+
+        // // **************************************** //
+        // // ***    BE: SAVE USER INFORMATION     *** //
+        // // **************************************** //
+        // const user = new User({ 
+        //     _id: 666, 
+        //     username: "admin", 
+        //     firstName: "Oyebanji", 
+        //     lastName: "Gabriel", 
+        //     phone: 2347038662402, 
+        //     address: '11a, Chidison str', 
+        //     address2: '14, Lekan Muritala str, Aboru, Lagos', 
+        //     city: 'Iba', 
+        //     state: 'Oyo', 
+        //     country: 'Nigeria', 
+        //     zipCode: 23401, 
+        //     email: "try-email@example.com", 
+        //     password: encryptPassword("Administrativerightsonly"),
+        //     roles: [{ ...roleEditor }],
+        //     approvesTandC: true,
+        //     status: 'rejected',
+        //     isVerified: true, 
+        // });
+        // // ******************************************************************************************************//
+        // // ***  BE: USE MIDDLEWARE: (JWT) TO CREATE "ACCESS-TOKEN" FOR USER AUTHENTICATION AND AUTHORIZATION  ***//
+        // // ******************************************************************************************************//
+        // const token = await assignOneDayToken(user._id);
+        // // ****************************************************
+        // // ***  BE: USE MIDDLEWARE: (JWT) TO VERIFY "TOKEN"
+        // // ****************************************************
+        // const decodedData = await verifyToken(token);
+        // // console.log("Token Details: ", decodedData);
+        // // RESULT:-  Token Details:  { id: 31825360, iat: 1722812853, exp: 1722816453 }
+        // // NOTE:-
+        // //     1) Token id (id): This is a custom payload claim, likely representing the user's unique identifier (e.g., user ID in the database).
+        // //     2) Issued At (iat): This is a standard JWT claim representing the time at which the token was issued. It's typically expressed as a Unix timestamp, which counts the number of seconds since January 1, 1970 (UTC).
+        // //     3) Expiration Time (exp): This is another standard JWT claim, indicating the time at which the token will expire. It's also expressed as a Unix timestamp.
+        // // ******************************************************************************************************//
+        // // ***  Add Generated TOKEN & TIME OF EXPIRY, to New User before Saving to DB ***//
+        // // ******************************************************************************************************//
+        // user.accessToken = token;
+        // user.tokenExpires = new Date(decodedData.exp * 1000);
+        // // **************************************** //
+        // // ***    BE: SAVE USER INFORMATION     *** //
+        // // **************************************** //
+        // const newUser = await user.save();
+        // // **************************************** //
+
+
+        // let valueOfEncodedText = decrypt(newUser.expirationInMs);
+        // console.log("Encrypted token lifespan: ", valueOfEncodedText);
+        
+        // **************************************** //
+
+        console.log("\n*********************************************************",
+            "\n*****          NEW USER ACCOUNT DETAILS             *****",
+            "\n*********************************************************",
+            `\nRegistration Status: ${newUser}`,
+            "\n******************************************************************************************\n");
+                
+        const responseData = {
+            success: true,
+            data: newUser,
+            message: "Successful",
+        };
+        return res.status(201).json(responseData);
+    } catch (error) {
+        // return res.status(409).json({ message: error.message});
+        const responseData = { 
+            success: false, 
+            message: "Internal Server Error",
+        };
+        console.error("Unexpected error during account verification: ", error);
+        return res.status(500).json(responseData);  
+    };
+};  // THOROUGHLY Tested === Working
+
+
+
 // Our ACCOUNT Re-ACTIVATION Logic starts here
 exports.reValidateSignUp = async (req, res) => {
 
@@ -341,67 +539,69 @@ exports.reValidateSignUp = async (req, res) => {
 // Our ACCOUNT VERIFICATION Logic USING GET request starts here
 exports.verifySignUpWithGet = async (req, res) => {        
   
-    try {
-        // parse token as ==> request parameters
-        // const { token } = req.query || '';
-        const AuthHeader = req.headers.authorization;
-        if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
-            const responseData = { 
-                success: false, 
-                message: "Unauthorized",
-            };
-            console.log("Token was not authorized by a User: ", responseData);
-            return res.status(401).json(responseData);
-        };
-        
-        const token = AuthHeader.split(" ")[1];
+    const token = req.query.token;
 
-        if (!token) {
-            return res.status(400).json({ message: 'Token is required', success: false  });
-        };
+    try {
 
         const decoded = await verifyToken(token);
-        // res.send(`Token is valid. User ID: ${decoded.id}`);
+        // console.log(`Token is valid. User ID: ${decoded.id}`);
 
         const _id = decoded.id;
         const userExists = await User.findById(_id);
 
-        if (!(userExists)) {
+        try {   
+
+            // Step 1: If user exists, find User by Email 
+            // const email = userExists.email;   
+            // Change Existing User status to "approved".
+            // Assign the generated token to Existing User, as their accessToken..
+            // Set isVerified as True for Existing User
+            const dataToUpdate = {           
+                accessToken: token,
+                status: "approved",
+                isVerified: true,
+            };
+
+            // Step 2: If user exists, find User by Email
+            const updatedUser = await User.findOneAndUpdate({ email: userExists.email }, dataToUpdate, { new: true });               
+            const user = {
+                id: updatedUser._id,
+                firstname: updatedUser.firstName,
+                lastname: updatedUser.lastName,
+                email: updatedUser.email,
+                password: updatedUser.password,
+                status: updatedUser.status,
+                approvestandc: updatedUser.approvesTandC,
+                isverified: updatedUser.isVerified,
+                roles: [updatedUser.roles],
+                accessToken: updatedUser.accessToken,
+                tokenExpires: updatedUser.tokenExpires,
+                createdAt: updatedUser.createdAt,
+                updatedAt: updatedUser.updatedAt,                  
+            };
+
+            const responseData = {
+                success: true,
+                data: user,
+                message: "Successful"
+            };
+            console.log("*********************************************************",
+                "\n*****           NEW ACCOUNT VERIFICATION             ****",
+                "\n*********************************************************",
+                "\nVerification Status: ", responseData,
+                "\n*********************************************************\n\n");
+            return res.status(200).json(responseData); // Send a success response       
+        
+        } catch (error) {
             const responseData = { 
                 success: false, 
                 message: "Invalid account",
+                error: error.message,
             };
-            console.log("VERIFIED USER: ", responseData);
-            return res.json(responseData);
-        };
+            console.error("Error occurred during Account Activation: ", responseData, "\n");
+            return res.status(500).json(responseData);
+        };   
 
-
-        // Step 6: If user exists, find User by Email 
-        // const email = userExists.email;   
-        // Change Existing User status to "approved".
-        // Assign the generated token to Existing User, as their accessToken..
-        // Set isVerified as True for Existing User
-        const dataToUpdate = {           
-            accessToken: token,
-            status: "approved",
-            isVerified: true,
-        };
-        // Step 6: If user exists, find User by Email
-        const updatedUser = await User.findOneAndUpdate({ email: userExists.email }, dataToUpdate, { new: true });               
-    
-
-        const responseData = {
-            success: true,
-            data: updatedUser,
-            message: "Successful"
-        };
-        console.log("*********************************************************",
-            "\n*****           NEW ACCOUNT VERIFICATION             ****",
-            "\n*********************************************************",
-            "\nVerification Status: ", responseData,
-            "\n*********************************************************\n\n");
-        res.status(200).json(responseData); // Send a success response       
-    
     } catch (error) {
         if (error.name === 'TokenExpiredError') {           
             const responseData = { 
@@ -409,7 +609,7 @@ exports.verifySignUpWithGet = async (req, res) => {
                 message: "Token has expired",
                 error: error.message,
             };
-            console.error("Token verification status: ", responseData);
+            console.error("Token verification status: ", responseData, "\n");
             return res.status(500).json(responseData);
         } else if (error.name === 'JsonWebTokenError') {         
             const responseData = { 
@@ -417,7 +617,7 @@ exports.verifySignUpWithGet = async (req, res) => {
                 message: "Token does not exist",
                 error: error.message,
             };
-            console.error("Token verification status: ", responseData);
+            console.error("Token verification status: ", responseData, "\n");
             return res.status(500).json(responseData);
         } else if (error.name === 'MongoServerError') {           
             const responseData = { 
@@ -425,18 +625,19 @@ exports.verifySignUpWithGet = async (req, res) => {
                 message: "Mulitple User entry",
                 error: error.message,
             };
-            console.error("Mulitple User entry: ", responseData);
+            console.error("Mulitple User entry: ", responseData, "\n");
             return res.status(500).json(responseData);
         } else {
             const responseData = { 
                 success: false, 
-                message: "Internal Server Error",
+                message: "Invalid token",
                 error: error.message,
             };
-            console.error("Error occurred during Account Activation: ", responseData);
+            console.error("Error occurred during Account Activation: ", responseData, "\n");
             return res.status(500).json(responseData);
         };
     };
+
     // try {
 
     //     const token = req.query.token;

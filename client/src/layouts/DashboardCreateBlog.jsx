@@ -23,18 +23,6 @@ const DashboardCreateBlog = ({ color, isLoggedIn }) => {
     const navigate = useNavigate();
     
 
-    // *************************** //
-    // *** SET PAGE TITLE(SEO) *** //
-    // *************************** //
-    useEffect(() => {
-        window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "Admin Dashboard - CREATE NEW POST", 
-              siteTitle = "Samuel Akinola Foundation";
-        document.title = `${pageTitle} | ${siteTitle}`;
-    }, []);
-    // *************************** //
-    // *** SET PAGE TITLE(SEO) *** //
-    // *************************** //
 
     
     // ***************************************************************************
@@ -58,12 +46,28 @@ const DashboardCreateBlog = ({ color, isLoggedIn }) => {
     // ***************************************************************************
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
     // ***************************************************************************
+    const firstName = isLoggedIn?.firstName ? isLoggedIn?.firstName : logOut();
     const lastName = isLoggedIn?.lastName ? isLoggedIn?.lastName : logOut();
     // console.log("Logged-In User Last Name: ", lastName);
     // const email = isLoggedIn?.email ? isLoggedIn?.email : logOut();
     // console.log("Logged-In User E-mail: ", email);
     // ***************************************************************************
     // ***************************************************************************
+
+
+
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
+    useEffect(() => {
+        window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
+        const pageTitle = `NEW POST - by ${lastName} ${firstName}`, 
+              siteTitle = "Samuel Akinola Foundation";
+        document.title = `${pageTitle} | ${siteTitle}`;
+    }, []);
+    // *************************** //
+    // *** SET PAGE TITLE(SEO) *** //
+    // *************************** //
 
 
 

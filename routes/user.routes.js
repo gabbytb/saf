@@ -1,12 +1,13 @@
 module.exports = app => {        
 
     const router = require('express').Router();
-    const cors = require("cors");
-    const corsOptions = {        
-        origin: ["http://127.0.0.1:3000"],
-        methods: ["GET", "POST", "PUT", "DELETE"],
-        credentials: true,
-    };
+    // const cors = require("cors");
+    // const corsOptions = {        
+    //     // origin: ["http://127.0.0.1:3000"],
+    //     origin: ["http://localhost:8000"],
+    //     methods: ["GET", "POST", "PUT", "DELETE"],
+    //     credentials: true,
+    // };
     const requireAUTHORIZATION = require("../middlewares/RequireAuthorization.js");   
     // Middleware to check for valid token
     // const authenticateToken = (req, res, next) => {
@@ -25,12 +26,19 @@ module.exports = app => {
 
 
     // Create a new "User" DATA using this API
-    router.post("/api/v1/admin/users/manage/create", cors(corsOptions), users.signUp);
+    router.post("/api/v1/admin/users/manage/create", users.signUp);
+    //  router.post("/api/v1/admin/users/manage/create", cors(corsOptions), users.signUp);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/create") for the frontend to access.
     
 
+    // Create a new "User" DATA using this
+    router.post("/api/v1/auth/admin/manage/create", users.adminCreateUser);
+    // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/create") for the frontend to access.
+        
+    
     // Verify Unverified Existing "User" Accounts using this API
-    router.post("/api/v1/admin/users/manage/account/verify", cors(corsOptions), users.reValidateSignUp);
+    router.post("/api/v1/admin/users/manage/account/verify", users.reValidateSignUp);
+    // router.post("/api/v1/admin/users/manage/account/verify", cors(corsOptions), users.reValidateSignUp);
     // Expose this endpoint(i.e "http://127.0.0.1:3000/api/v1/admin/users/manage/account-revalidation") for the frontend to access.
 
 
@@ -40,7 +48,8 @@ module.exports = app => {
     
 
     // Verify All "User" Accounts using this API
-    router.post("/user/verify/:token", cors(corsOptions), users.verifySignUpWithPost); 
+    router.post("/user/verify/:token", users.verifySignUpWithPost);
+    // router.post("/user/verify/:token", cors(corsOptions), users.verifySignUpWithPost); 
     // Expose this endpoint(i.e "http://127.0.0.1:8000/user/verify/:token") for the frontend to access.
 
 
