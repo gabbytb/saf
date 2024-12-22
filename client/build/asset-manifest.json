@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/static/css/main.1794549a.css",
-    "main.js": "/static/js/main.81b6f998.js",
+    "main.js": "/static/js/main.8595c132.js",
     "static/js/453.258b012d.chunk.js": "/static/js/453.258b012d.chunk.js",
     "static/media/team-4-470x470.png": "/static/media/team-4-470x470.4ef82ef45a9598d24c4c.png",
     "static/media/BRFirmaCW-SemiBold.svg": "/static/media/BRFirmaCW-SemiBold.e669f8e5b93c979edfda.svg",
@@ -57,11 +57,11 @@
     "static/media/home-device-section.svg": "/static/media/home-device-section.6ddb14caf3451e07ab9e.svg",
     "static/media/return-pattern.svg": "/static/media/return-pattern.9a7b0eff4bbaef39673d.svg",
     "main.1794549a.css.map": "/static/css/main.1794549a.css.map",
-    "main.81b6f998.js.map": "/static/js/main.81b6f998.js.map",
+    "main.8595c132.js.map": "/static/js/main.8595c132.js.map",
     "453.258b012d.chunk.js.map": "/static/js/453.258b012d.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.1794549a.css",
-    "static/js/main.81b6f998.js"
+    "static/js/main.8595c132.js"
   ]
 }

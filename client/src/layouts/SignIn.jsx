@@ -15,7 +15,9 @@ import { brandOfficialLogoDark, signUpIcon } from '../assets/images';
 function SignIn() {
 
 
-    // console.clear();   
+    console.clear();   
+
+
     const navigate = useNavigate();
 
 
@@ -309,7 +311,6 @@ function SignIn() {
             .catch((error) => {
                 console.log("Error encountered: ", error);
             });
-
         };
     };
 

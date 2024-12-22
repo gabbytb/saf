@@ -74,7 +74,7 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
     // ***************************************************************************
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
     // ***************************************************************************
-    const lastName = isLoggedIn?.lastName ? isLoggedIn?.lastName : logOut();
+    const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();
     // ***************************************************************************
     // ***************************************************************************
 

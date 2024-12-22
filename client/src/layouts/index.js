@@ -4,7 +4,7 @@ import VerifySignUp from "./VerifySignUp";
 import SignIn from "./SignIn";
 
 import Dashboard from "./Dashboard";
-import DashboardBlogPosts from "./DashboardBlogPosts";
+import DashboardBlog from "./DashboardBlog";
 import DashboardCreateAccount from "./DashboardCreateAccount";
 import DashboardCreateBlog from "./DashboardCreateBlog";
 import DashboardUsers from "./DashboardUsers";
@@ -24,7 +24,7 @@ export {
     SignIn,
 
     Dashboard,  
-    DashboardBlogPosts,
+    DashboardBlog,
     DashboardCreateAccount,
     DashboardCreateBlog,
     DashboardUsers,

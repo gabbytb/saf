@@ -1,5 +1,6 @@
 import { useEffect } from "react";
 import { googleLogout } from "@react-oauth/google";
+import PropTypes from "prop-types";
 import "../assets/styles/tailwind.css";
 
 // components
@@ -7,7 +8,6 @@ import { Sidebar, AdminNavbar, HeaderStats, } from "../components";
 
 // views
 import { DashboardTable, } from "../views";
-
 
 
 
@@ -55,7 +55,7 @@ const Dashboard = ({ isLoggedIn }) => {
     // ***************************************************************************
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
     // ***************************************************************************
-    const lastName = isLoggedIn?.lastName ? isLoggedIn?.lastName : logOut();
+    const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();
     // ***************************************************************************
     // ***************************************************************************
 
@@ -105,3 +105,12 @@ const Dashboard = ({ isLoggedIn }) => {
 };
 
 export default Dashboard;
+
+
+Dashboard.defaultProps = {
+    color: "dark",
+};
+  
+Dashboard.propTypes = {
+    color: PropTypes.oneOf(["light", "dark"]),
+};

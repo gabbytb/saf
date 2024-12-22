@@ -44,7 +44,7 @@ const convertDate = (dateString) => {
 
 
 
-const DashboardBlogPosts = ({ color, isLoggedIn }) => {
+const DashboardBlog = ({ color, isLoggedIn }) => {
 
    
     // *************************** //
@@ -82,7 +82,7 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
     // ***************************************************************************
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
     // ***************************************************************************
-    const lastName = isLoggedIn?.lastName ? isLoggedIn?.lastName : logOut();
+    const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();
     // ***************************************************************************
     // ***************************************************************************
 
@@ -844,14 +844,14 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
     );
 };
 
-export default DashboardBlogPosts;
+export default DashboardBlog;
 
 
 
-DashboardBlogPosts.defaultProps = {
+DashboardBlog.defaultProps = {
     color: "dark",
 };
   
-DashboardBlogPosts.propTypes = {
+DashboardBlog.propTypes = {
     color: PropTypes.oneOf(["light", "dark"]),
 };

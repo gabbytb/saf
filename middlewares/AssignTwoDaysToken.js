@@ -3,6 +3,11 @@ const jwt = require("jsonwebtoken");
 const secretKey =  process.env.secretKey || '!wasinvincibleallalongtheydunno!';   // 32 bytes for AES-256;
 const expiresInTwoDays =  process.env.expiresInTwoDays || 'UthoughtyouwasinvincibleallalongIkn!';   // 32 bytes for AES-256;
 
+
+
+
+
+
 // Generate a JWT Using HS256:
 const assignTwoDaysToken = (userId) => {
     

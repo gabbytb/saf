@@ -41,10 +41,15 @@ const DashboardCreateBlog = ({ isLoggedIn }) => {
     // ***************************************************************************
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
     // *************************************************************************** 
-    const id = isLoggedIn?.id ? isLoggedIn?.id : logOut();
+    const userId = isLoggedIn?.id ? isLoggedIn?.id : logOut();
     // console.log("Logged-In UserID: ", id);
-    const lastName = isLoggedIn?.lastName ? isLoggedIn?.lastName : logOut();
+    const firstName = isLoggedIn?.first_name ? isLoggedIn?.first_name : logOut();
+    // console.log("Logged-In User First Name: ", firstName);
+    const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();
     // console.log("Logged-In User Last Name: ", lastName);
+    const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
+    const displayImg = isLoggedIn?.displayImg ? isLoggedIn?.displayImg : '';
+    const userBio = isLoggedIn?.aboutMe ? isLoggedIn?.aboutMe : '';
     // ***************************************************************************
     // ***************************************************************************
 
@@ -98,7 +103,8 @@ const DashboardCreateBlog = ({ isLoggedIn }) => {
                     <div className="px-4 md:px-10 mx-auto w-full -m-24">                    
                         <div className="flex flex-wrap">
                             <div className="w-full px-4">            
-                                <NewBlogPost />
+                                <NewBlogPost firstName={firstName} lastName={lastName} userEmail={userEmail}
+                                     displayImg={displayImg} userBio={userBio} />
                             </div>                            
                         </div>
                     </div>           
