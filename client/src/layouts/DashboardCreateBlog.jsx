@@ -40,12 +40,11 @@ const DashboardCreateBlog = ({ isLoggedIn }) => {
     };
     // ***************************************************************************
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
-    // ***************************************************************************
-    const firstName = isLoggedIn?.firstName ? isLoggedIn?.firstName : logOut();
+    // *************************************************************************** 
+    const id = isLoggedIn?.id ? isLoggedIn?.id : logOut();
+    // console.log("Logged-In UserID: ", id);
     const lastName = isLoggedIn?.lastName ? isLoggedIn?.lastName : logOut();
     // console.log("Logged-In User Last Name: ", lastName);
-    // const email = isLoggedIn?.email ? isLoggedIn?.email : logOut();
-    // console.log("Logged-In User E-mail: ", email);
     // ***************************************************************************
     // ***************************************************************************
 
@@ -56,7 +55,7 @@ const DashboardCreateBlog = ({ isLoggedIn }) => {
     // *************************** //
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = `NEW POST - by ${lastName} ${firstName}`, 
+        const pageTitle = "Create Article", 
               siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
     }, []);
@@ -78,7 +77,8 @@ const DashboardCreateBlog = ({ isLoggedIn }) => {
                 
                 {/***** RIGHT-PANEL *****/}
                 <div className="relative md:ml-64 bg-blueGray-100">
-
+    
+                    {/* Admin NavBar */}
                     <AdminNavbar />
                     
                     {/* Header */}
@@ -97,10 +97,8 @@ const DashboardCreateBlog = ({ isLoggedIn }) => {
                     {/* Create Blog Post */}
                     <div className="px-4 md:px-10 mx-auto w-full -m-24">                    
                         <div className="flex flex-wrap">
-                            <div className="w-full px-4">
-                                {/* <> */}
+                            <div className="w-full px-4">            
                                 <NewBlogPost />
-                                {/* </> */}
                             </div>                            
                         </div>
                     </div>           
@@ -111,4 +109,4 @@ const DashboardCreateBlog = ({ isLoggedIn }) => {
     );
 };
 
-export default DashboardCreateBlog
+export default DashboardCreateBlog;

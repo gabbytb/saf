@@ -24,7 +24,7 @@ module.exports = mongoose => {
                     type: Date,
                 },
             },
-        ], // Reference to Image model
+        ],
         title: {
             type: String,
         },
@@ -38,21 +38,42 @@ module.exports = mongoose => {
             type: String,
         },
         comments: [
-            {
-                contribution: String,
-                firstName: { 
-                    type: String, 
-                    default: 'anonymous',
+            {     
+                _id: { 
+                    type: Number,                   
                 },
-                lastName: String,        
-                email: String,
+                comment: { 
+                    type: String,
+                }, 
+                firstName: {                    
+                    type: String,
+                    default: 'anonymous',
+                }, 
+                lastName: { 
+                    type: String,
+                }, 
+                email: { 
+                    type: String,
+                },  
             },
         ],
-        author: {
-            img: String,
-            name: String,
-            bio: String,
-        },
+        author: [
+            { 
+                _id: { 
+                    type: Number,                   
+                },
+                name: {                    
+                    type: String,
+                    default: 'anonymous',
+                }, 
+                email: { 
+                    type: String,
+                }, 
+                bio: { 
+                    type: String,
+                },             
+            },
+        ],
         tags: [],
         categories: [],
         status: { 

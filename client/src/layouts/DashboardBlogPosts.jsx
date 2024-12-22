@@ -52,7 +52,8 @@ const DashboardBlogPosts = ({ color, isLoggedIn }) => {
     // *************************** //
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "Blog Posts", siteTitle = "Samuel Akinola Foundation";
+        const pageTitle = "Blog Dashboard", 
+              siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
     }, []);
     // *************************** //

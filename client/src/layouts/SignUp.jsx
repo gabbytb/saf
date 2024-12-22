@@ -34,14 +34,40 @@ function SignUp() {
 
 
 
+
+
     // ******************************** //
     // *** USER PAYLOAD FOR SIGN UP *** //
     // ******************************** //
     const [user, setUser] = useState({ firstName: "", lastName: "", email: "", password: "", approvesTandC: false, });
-    console.log("*** ACCOUNT CREATION ***\nUser: ", user);
+    const newUser =  {
+        id: user?._id,
+        firstname: user?.firstName,
+        lastname: user?.lastName,
+        phone: user?.phone,
+        email: user?.email,
+        pswd: user?.password,
+        address: user?.address,
+        address2: user?.address2,
+        city: user?.city,
+        state: user?.state,
+        country: user?.country,
+        zipCode: user?.zipCode,
+        accessToken: user?.accessToken,
+        expiresInMs: user?.tokenExpires,
+        status: user?.status,
+        roles: [user?.roles],
+        approvesTandC: user?.approvesTandC,
+        userBio: user?.aboutMe,
+        createdAt: user?.createdAt,
+        updatedAt: user?.updatedAt                   
+    };    
+    console.log("*** NEW SIGN-UP ***\nUser: ", newUser);
     // ******************************** //
     // *** USER PAYLOAD FOR SIGN UP *** //
     // ******************************** //
+
+
 
 
 
@@ -145,14 +171,7 @@ function SignUp() {
             } else {             
                 // Perform These Actions
                 setFormSubmitted(success);     
-                setFormMessage(message);        
-                // console.log("Data: ", data);
-
-                // Retrieve Registered User ID
-                // console.log("Registered User ID: ", data?.userId); 
-                
-                // Retrieve token to store in LocalStorage
-                // setAccessToken(data?.token);         
+                setFormMessage(message);                     
                                 
                 // RESET FORM AFTER SUBMISSION
                 document.getElementById("signUpForm").reset();
@@ -219,8 +238,11 @@ function SignUp() {
 
     return (
         <div id="signUpId" className="block h-screen w-full bg-skin-signup-signin-bg">
+            
+
             {/* ADD to Below:  right-pane */}
             <div className="flex flex-col justify-center gap-4 relative bg-skin-signup-signin-bg"> 
+
 
                 {/* PAGE NAV */}
                 <div className="flex flex-col justify-center items-center w-full h-30 bg-white px-8">
@@ -230,7 +252,10 @@ function SignUp() {
                 </div>
                 {/* PAGE NAV */}
 
+
                 <div class="flex justify-center items-center w-full px-8">
+
+                    {/* SIGN-UP FORM */}
                     <form id="signUpForm" className='max-w-[400px] border flex flex-col bg-white w-full mx-auto mt-14 mb-12 rounded-3xl bg-skin-signup-signin-bg pt-2 pb-10 px-10' onSubmit={handleFormSubmission}>
 
                                             
@@ -324,8 +349,12 @@ function SignUp() {
                     {/* Success Message */}
 
                     </form>
+                    {/* SIGN-UP FORM */}
+
                 </div>
             </div>
+            
+
         </div>
     );
 };

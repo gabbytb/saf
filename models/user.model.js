@@ -9,6 +9,9 @@ module.exports = mongoose => {
         //     type: String,
         //     // unique: true,
         // },
+        displayImage: { 
+            type: String,
+        },
         firstName: {
             type: String,
         },

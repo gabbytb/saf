@@ -1,19 +1,52 @@
 import { useEffect, useState } from 'react';
+import { googleLogout } from "@react-oauth/google";
 import { Editor, } from '@tinymce/tinymce-react';
 import api from "../../api";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
 
 
 
-const NewBlogPost = () => {
+
+
+
+const NewBlogPost = ({ isLoggedIn }) => {
 
 
     // console.clear();
-
     // localStorage.clear();
+
+    const navigate = useNavigate();
+
+
+    // ***************************************************************************
+    // CURRENT ACTIVE USER:-
+    // ***************************************************************************
+    isLoggedIn = JSON.parse(localStorage.getItem("user"));
+    // ***************************************************************************
+    // FUNCTION TO LOG-OUT CURRENT ACTIVE USER
+    // ***************************************************************************
+    function logOut() {
+        // Clear User Details from Local Storage
+        localStorage.removeItem("user");
+        localStorage.clear();
+        // log out function to log the user out of google and set the profile array to null
+        googleLogout();
+        // redirect to Login Page
+        // const redirToLOGIN = "/user/login";
+        // window.location.replace(redirToLOGIN);
+        navigate("/user/login");
+    };
+    // ***************************************************************************
+    // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
+    // ***************************************************************************   
+    const firstName = isLoggedIn?.firstName ? isLoggedIn?.firstName : logOut();
+    const lastName = isLoggedIn?.lastName ? isLoggedIn?.lastName : logOut();
+    const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
+    const displayImg = isLoggedIn?.displayImage ? isLoggedIn?.displayImage : '';
+    const userBio = isLoggedIn?.aboutMe ? isLoggedIn?.aboutMe : '';
 
 
 
@@ -46,11 +79,9 @@ const NewBlogPost = () => {
             { url: '', alt: '', featured: true },  // The first image is featured
             { url: '', alt: '', featured: false }  // The second image is not featured
         ],  // Initialize with one image
-        // author: {
-        //     img: '',
-        //     name: '',
-        //     bio: '',
-        // },
+        author: [
+            { img: '', name: '', email: '', bio: '' },
+        ],
         uri: '',
         isPublished: true,
         status: '',
@@ -146,6 +177,7 @@ const NewBlogPost = () => {
 
 
 
+
     // Function to handle form submission
     const handlePostFormSubmission = async (e) => {
         e.preventDefault();         
@@ -156,11 +188,14 @@ const NewBlogPost = () => {
             description: post.description,
             excerpt: post.excerpt,
             uri: post.uri === '' ? formatUrl(post.title.toLowerCase()) : formatUrl(post.uri.toLowerCase()),
-            // author: {
-            //     img: '',
-            //     name: '',
-            //     bio: '',
-            // }
+            author: [
+                {
+                    img: displayImg,
+                    name: firstName + lastName,
+                    email: userEmail,
+                    bio: userBio,
+                }
+            ],
             isPublished: post.isPublished,
             status: post.status,
             tags: post.tags,
@@ -249,7 +284,6 @@ const NewBlogPost = () => {
 
 
 
-
     useEffect(() => {
         function autoInitiate() {
             var pImg = document.querySelectorAll(".post_img");
@@ -261,6 +295,7 @@ const NewBlogPost = () => {
         };
         autoInitiate();
     }, []);
+
 
 
 
