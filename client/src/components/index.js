@@ -38,7 +38,6 @@ import DashboardMenuCard from "./DashboardMenuCard";
 
 // IMPORTED TEST COMPONENTS
 import Sidebar from "./Sidebar/Sidebar";
-import AdminNavbar from "./Navbars/AdminNavbar";
 import HeaderStats from "./Headers/HeaderStats";
 import CardStats from "./Cards/CardStats";
 import CardBarChart from "./Cards/CardBarChart";
@@ -101,8 +100,7 @@ export {
     NotificationDropdown,
     // DROPDOWNS
 
-    Sidebar,       
-    AdminNavbar,
+    Sidebar,
     HeaderStats,
     CardStats,
     CardBarChart,

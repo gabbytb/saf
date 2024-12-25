@@ -454,7 +454,7 @@ const DashboardBlog = ({ color, isLoggedIn }) => {
 
             {/***** RIGHT-PANEL *****/}
             <div className="relative md:ml-64 bg-blueGray-100">
-                {/* Navbar */}
+                {/* Admin Navbar */}
                 <nav className="absolute top-0 left-0 w-full z-1 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
                     <div className="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">                            
                         
@@ -495,7 +495,7 @@ const DashboardBlog = ({ color, isLoggedIn }) => {
 
                     </div>
                 </nav>
-                {/* Navbar */}
+                {/* Admin Navbar */}
 
 
                 {/* Header */}

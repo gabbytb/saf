@@ -153,9 +153,9 @@ function SignIn() {
                         successMsg?.classList.add('success');
                     }, 2500);
 
-                    // setTimeout(() => {
-                    //     navigate("/admin/dashboard");
-                    // }, 2800);
+                    setTimeout(() => {
+                        navigate("/admin/dashboard");
+                    }, 2800);
                     // Perform These Actions
                 };
             })
@@ -308,9 +308,9 @@ function SignIn() {
                         successMsg?.classList.add('success');
                     }, 2500);
                 
-                    // setTimeout(() => {
-                    //     navigate("/admin/dashboard");
-                    // }, 2800);
+                    setTimeout(() => {
+                        navigate("/admin/dashboard");
+                    }, 2800);
                     // Perform These Actions
                 };
             })
