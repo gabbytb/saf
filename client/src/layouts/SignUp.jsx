@@ -273,7 +273,7 @@ function SignUp() {
 
                     
                     {/* Error Message */}
-                    <div className="mx-auto signup_error">
+                    <div className="mx-auto signup_error w-full">
                         {formMessage}
                     </div>
                     {/* Error Message */}
