@@ -11,6 +11,7 @@ import {
 
 
 
+
 const UserDropdown = ({ userEmail, userRoles, logOut }) => {
 
 
@@ -19,6 +20,8 @@ const UserDropdown = ({ userEmail, userRoles, logOut }) => {
     const btnDropdownRef = React.createRef();
     const popoverDropdownRef = React.createRef();
         
+
+
     const openDropdownPopover = () => {
         createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
           placement: "bottom-end",
@@ -29,8 +32,6 @@ const UserDropdown = ({ userEmail, userRoles, logOut }) => {
     const closeDropdownPopover = () => {
         setDropdownPopoverShow(false);
     };
-
-
 
 
 
@@ -48,35 +49,38 @@ const UserDropdown = ({ userEmail, userRoles, logOut }) => {
                         <span className="font-bold text-2xl tracking-supertight text-white">
                             {userEmail}
                         </span>
-
                         {
-                             userRoles?.length !==  0 ?
-                                userRoles?.map((name, index) => {
-                                    
-                                    var adminRole = 'admin', 
-                                        editorRole = 'editor', 
-                                        staffRole = 'staff', 
-                                        userRole = 'user';
+                             userRoles?.length !==  0 
+                                ?
+                                userRoles?.map((item) => {  
+                                    return (                                  
+                                        item?.map((name, index) => {
 
+                                            const adminRole = 'admin', 
+                                                editorRole = 'editor', 
+                                                staffRole = 'staff', 
+                                                userRole = 'user';
 
-                                    if (name?.role === "ROLE_ADMIN")  {
-                                        return (
-                                            <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{adminRole}</span>
-                                        );
-                                    } else if (name?.role === "ROLE_EDITOR")  {
-                                        return (
-                                            <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{editorRole}</span>
-                                        );
-                                    } else if (name?.role === "ROLE_STAFF")  {
-                                        return (
-                                            <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{staffRole}</span>
-                                        );
-                                    } else {
-                                        return (
-                                            <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{userRole}</span>
-                                        );
-                                    };
-                                }) 
+                                            if (name?.role === "ROLE_ADMIN") {
+                                                return (
+                                                    <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{adminRole}</span>
+                                                );
+                                            } else if (name?.role === "ROLE_EDITOR")  {
+                                                return (
+                                                    <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{editorRole}</span>
+                                                );
+                                            } else if (name?.role === "ROLE_STAFF")  {
+                                                return (
+                                                    <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{staffRole}</span>
+                                                );
+                                            } else {
+                                                return (
+                                                    <span key={index} className="text-lg tracking-supertight font-bold text-white capitalize">{userRole}</span>
+                                                );
+                                            };
+                                        })                                       
+                                    );   
+                                })
                                 : 
                                 <span className="text-lg tracking-supertight font-bold text-white capitalize">unassigned role</span>
                         }
@@ -114,6 +118,7 @@ const UserDropdown = ({ userEmail, userRoles, logOut }) => {
             </div>
         </>
     );
+
 };
 
 export default UserDropdown;
