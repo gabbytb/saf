@@ -426,7 +426,7 @@ export default function CardAccountDetails() {
                             <hr className="mt-6 border-b-1 border-blueGray-300" />
 
                             <h6 className="text-gray-500 text-xl mt-10 mb-8 px-4 font-bold uppercase">
-                                Optional
+                                additional information
                             </h6>
                             <div className="flex flex-wrap">
                                 <div className="w-full lg:w-12/12 px-4">
@@ -435,7 +435,7 @@ export default function CardAccountDetails() {
                                             className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="grid-password"
                                         >
-                                            about user
+                                            bio
                                         </label>
                                         <textarea
                                             type="text"
@@ -695,11 +695,11 @@ export default function CardAccountDetails() {
                             <hr className="mt-6 border-b-1 border-blueGray-300" />
 
                             <h6 className="text-gray-500 text-lg mt-10 mb-8 px-4 font-bold uppercase">
-                                about user
+                                additional information
                             </h6>
                             <div className="flex flex-wrap">
                                 
-                                {/* OPTIONAL: ABOUT ME */}
+                                {/* OPTIONAL: BIO */}
                                 <div className="w-full lg:w-12/12 px-4">
 
                                     {/* About Me */}
@@ -707,7 +707,7 @@ export default function CardAccountDetails() {
                                         <label
                                             className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                             htmlFor="aboutMe">
-                                            About me
+                                            bio
                                     
                                             <textarea
                                                 type="text"

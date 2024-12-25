@@ -411,7 +411,7 @@ const CardCreateAccount = () => {
                         <hr className="mt-6 border-b-1 border-blueGray-300" />
 
                         <h6 className="text-gray-500 text-lg mt-10 mb-8 px-4 font-bold uppercase">
-                            about user
+                            additional information
                         </h6>
                         <div className="flex flex-wrap">
                             
@@ -423,7 +423,7 @@ const CardCreateAccount = () => {
                                     <label
                                         className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                         htmlFor="aboutMe">
-                                        About me
+                                        bio
                                 
                                         <textarea
                                             type="text"
