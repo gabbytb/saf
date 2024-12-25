@@ -106,9 +106,11 @@ const Nav = () => {
                                     </div>
                                 </li> */}
                                 <li className="menu-item my-4 relative">
-                                    <Link to={'/blog'}>
-                                        <p className="has-dropdown">Blog</p>                                    
-                                    </Link>
+                                    
+                                    <p className="has-dropdown">
+                                        <Link to={'/blog'}>Blog </Link>
+                                    </p>                                    
+                                 
                                 </li>
                                 <li className="menu-item my-4 relative">
                                     <p className="has-dropdown">Developer</p>

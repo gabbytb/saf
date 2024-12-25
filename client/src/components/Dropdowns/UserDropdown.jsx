@@ -1,6 +1,5 @@
 import React from "react";
-import { googleLogout } from "@react-oauth/google";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, } from "react-router-dom";
 import { createPopper } from "@popperjs/core";
 import {
   adminDashboardIcon,  
@@ -12,54 +11,25 @@ import {
 
 
 
-const UserDropdown = ({ isLoggedIn }) => {
+const UserDropdown = ({ userEmail, userRoles, logOut }) => {
 
 
-      const navigate = useNavigate();
-
-
-      // dropdown props
-      const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
-      const btnDropdownRef = React.createRef();
-      const popoverDropdownRef = React.createRef();
+    // dropdown props
+    const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
+    const btnDropdownRef = React.createRef();
+    const popoverDropdownRef = React.createRef();
         
-      const openDropdownPopover = () => {
+    const openDropdownPopover = () => {
         createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
           placement: "bottom-end",
         });
         setDropdownPopoverShow(true);
-      };
+    };
       
-      const closeDropdownPopover = () => {
+    const closeDropdownPopover = () => {
         setDropdownPopoverShow(false);
-      };
+    };
 
-
-
-
-      // ***************************************************************************
-      // CURRENT ACTIVE USER:-
-      // ***************************************************************************
-      isLoggedIn = JSON.parse(localStorage.getItem("user"));
-      // ***************************************************************************
-      // FUNCTION TO LOG-OUT CURRENT ACTIVE USER
-      // ***************************************************************************
-      function logOut() {
-          // Clear User Details from Local Storage
-          localStorage.removeItem('user');
-          // localStorage.clear();
-          // log out function to log the user out of google and set the profile array to null
-          googleLogout();
-          // redirect to Login Page
-          navigate("/user/login");
-      };
-      // ***************************************************************************
-      // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
-      // ***************************************************************************
-      const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
-      const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();    
-      // ***************************************************************************
-      // ***************************************************************************
 
 
 
@@ -71,18 +41,23 @@ const UserDropdown = ({ isLoggedIn }) => {
                     e.preventDefault();
                     dropdownPopoverShow ? closeDropdownPopover() : openDropdownPopover(); 
                 }}>
+
+
                 <div className="flex flex-row space-x-6">
                     <div className="hidden md:flex md:flex-col">
                         <span className="font-bold text-2xl tracking-supertight text-white">
                             {userEmail}
                         </span>
+
                         {
                              userRoles?.length !==  0 ?
                                 userRoles?.map((name, index) => {
+                                    
                                     var adminRole = 'admin', 
                                         editorRole = 'editor', 
                                         staffRole = 'staff', 
-                                        userRole = 'user';                     
+                                        userRole = 'user';
+
 
                                     if (name?.role === "ROLE_ADMIN")  {
                                         return (
@@ -115,7 +90,6 @@ const UserDropdown = ({ isLoggedIn }) => {
                     </div>
                 </div>
             </Link>
-
 
             <div ref={popoverDropdownRef} className={(dropdownPopoverShow ? "block " : "hidden ") 
                 + "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"}>

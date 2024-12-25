@@ -7,6 +7,7 @@ import api from "../../api";
 
 
 
+// { data }
 
 function Search() {
 
@@ -86,5 +87,4 @@ function Search() {
         </div>
     );
 };
-
 export default Search;

@@ -12,14 +12,14 @@ import UserDropdown from "../Dropdowns/UserDropdown.jsx";
 
 
 
-export default function AdminNavbar() {
+export default function AdminNavbar({ userEmail, userRoles, logOut }) {
 
 
     const [data, setData] = useState([]);
-    console.log("ALL ADMIN USERS:", data);
+    // console.log("ALL ADMIN USERS:", data);
+
     const [totalAdminUsers, setTotalAdminUsers] = useState(null);
     // console.log("TOTAL ADMIN USERS: ", totalAdminUsers);            
-
     
     const [totalPages, setTotalPages] = useState(0);
     const [pageLimit, setPageLimit] = useState(undefined); // Number of items to display per page
@@ -53,8 +53,8 @@ export default function AdminNavbar() {
             const { allAdminRole, pagination } = data;
 
             if (!success && message === "No staff found") {
-                        console.log("Success: ", success);
-                        console.log("Message: ", message);
+                console.log("Success: ", success);
+                console.log("Message: ", message);
             };
 
             setData(allAdminRole);
@@ -69,8 +69,6 @@ export default function AdminNavbar() {
         // .finally(() => {
         //    setIsLoading(false);
         // });
-
-
     };
     
 
@@ -98,9 +96,9 @@ export default function AdminNavbar() {
                                             
                             <input
                                 type="search"
-                                name="q"
+                                name="search"
                                 id="search-form"
-                                className="search-input border-0 px-3 py-3 indent-8 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"       
+                                className="search-input border-0 px-3 py-3 indent-8 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"       
                                 onChange={(e) => setQuery(e.target.value)}
                                 placeholder="Search user"
                             />
@@ -112,9 +110,8 @@ export default function AdminNavbar() {
 
                     {/* User */}
                     <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
-                        <UserDropdown />
+                        <UserDropdown userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
                     </ul>
-
                 </div>
             </nav>
             {/* End Navbar */}

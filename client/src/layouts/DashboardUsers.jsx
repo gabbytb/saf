@@ -10,10 +10,10 @@ import "../assets/styles/tailwind.css";
 
 // components
 import { 
-    Sidebar,      
+    Sidebar,          
+    UserDropdown,
     CardAllApprovedUsers, CardAllPendingUsers, CardAllRejectedUsers,
     TableDropdown,
-    UserDropdown,
 } from "../components";
 
 // views
@@ -75,6 +75,8 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
     // ***************************************************************************
     const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();
+    const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
+    const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
     // ***************************************************************************
     // ***************************************************************************
 
@@ -261,15 +263,13 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
                 
                     <nav className="absolute top-0 left-0 w-full z-1 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
                         <div className="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">
-                            
+                                               
                             {/* Brand */}
-                            <Link
-                            className="text-white text-sm uppercase hidden lg:inline-block font-semibold"
-                            to="/admin/dashboard"
-                            onClick={(e) => e.preventDefault()}
-                            >
-                                Dashboard
+                            <Link className="text-white text-sm uppercase hidden lg:inline-block font-semibold"
+                                to={"/admin/dashboard"} onClick={(e) => e.preventDefault()}>Dashboard 
                             </Link>
+                            {/* Brand */}
+
 
                             {/* Form*/}
                             <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-12 lg:mr-28 w-98 h-178">
@@ -280,7 +280,7 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
                                         
                                     <input
                                         type="search"
-                                            name="q"
+                                            name="search"
                                             id="search-form"
                                             className="search-input border-0 px-3 py-3 indent-8 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"       
                                             onChange={(e) => setQuery(e.target.value)}
@@ -290,11 +290,14 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
                                     <button type="submit" onSubmit={fetchAllUsers}></button>
                                 </div>                                             
                             </form>
-                
+                            {/* Form */}
+
+
                             {/* User */}
                             <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
-                                <UserDropdown />
+                                <UserDropdown userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
                             </ul>
+                            {/* User */}
 
                         </div>
                     </nav>
@@ -444,6 +447,8 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
     };
 
 
+
+
     return (
         <>
             {/***** LEFT-PANEL *****/}
@@ -491,7 +496,7 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
 
                         {/* User */}
                         <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
-                            <UserDropdown />
+                            <UserDropdown userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
                         </ul>
                         {/* User */}
 

@@ -54,8 +54,10 @@ const DashboardUsersDetails = ({ isLoggedIn }) => {
     // ***************************************************************************
     const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();
     // console.log("Logged-In User Last Name: ", lastName);
-    // const email = isLoggedIn?.email ? isLoggedIn?.email : logOut();
-    // console.log("Logged-In User E-mail: ", email);
+    // const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut(); 
+    // console.log("Logged-In User E-mail: ", userEmail);
+    // const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
+    // console.log("Logged-In User E-mail: ", userRoles);
     // ***************************************************************************
     // ***************************************************************************
 

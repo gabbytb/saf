@@ -1,5 +1,5 @@
 {
-  "name": "SAF [BACKEND + FRONTEND]",
+  "name": "SAF [BACKEND + FRONTEND] ",
   "description": "Reaching Out To Great Minds",
   "version": "1.0.0",
   "main": "app.js",
@@ -7,22 +7,25 @@
     "server": "bin/AuthMiddlewareCookiesToken.js"
   },
   "scripts": {
-    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "concur": "concurrently \"npm run server\" \"npm run client\"",
+
+    "start": "nodemon app.js",
     "server": "nodemon app.js",
     "client": "npm run start --prefix client",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "bcrypt",
-    "concurrently",
+    "bcrypt",    
     "cors",
     "dotenv",
     "express",
-    "google-auth-library",
     "jsonwebtoken",
     "mongoose",
     "nodemailer",
-    "nodemon"
+    "nodemon",    
+    
+    "concurrently",
+    "google-auth-library"
   ],
   "author": "",
   "license": "ISC",
@@ -36,7 +39,6 @@
     "nodemailer": "^6.9.8"
   },
   "devDependencies": {
-    "concurrently": "^9.1.0",
     "nodemon": "^3.1.7"
   }
 }

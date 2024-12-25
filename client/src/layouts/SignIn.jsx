@@ -28,6 +28,8 @@ function SignIn() {
 
 
 
+
+
     // ***************************************************************************
     // FUNCTION:-  AUTO-REDIRECT lOGGED-IN USERS to DASHBOARD
     // ***************************************************************************
@@ -48,6 +50,8 @@ function SignIn() {
 
 
 
+
+
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
@@ -63,18 +67,19 @@ function SignIn() {
 
 
 
+
+
     
     // *************************************** //
     // *********   GOOGLE: SIGN-IN   ********* //
     // *************************************** //
     // new Date(verifiedToken.exp * 1000);
-    const [ googleUser, setGoogleUser ] = useState([]);
+    const [googleUser, setGoogleUser] = useState([]);
     console.log("Gmail Account attempting to Login: ", googleUser);
     
-    const [ profile, setProfile ] = useState([]);
+    const [profile, setProfile] = useState([]);
     console.log("Google Profile: ", profile);
     
-    // eslint-disable-next-line
     const [isLoggedInWithGmail, setIsLoggedInWithGmail] = useState(false);
     console.log("Gmail Login Successful: ", isLoggedInWithGmail);
 
@@ -136,6 +141,8 @@ function SignIn() {
                         roles: [data?.roles],
                         approves_T_and_C: data?.approvesTandC,                  
                     };
+                    console.log("Logged-In User: ", loggedInUser);
+
                     localStorage.setItem("user", JSON.stringify(loggedInUser));
 
                     successMsg?.classList.remove('success');
@@ -146,9 +153,9 @@ function SignIn() {
                         successMsg?.classList.add('success');
                     }, 2500);
 
-                    setTimeout(() => {
-                        navigate("/admin/dashboard");
-                    }, 2800);
+                    // setTimeout(() => {
+                    //     navigate("/admin/dashboard");
+                    // }, 2800);
                     // Perform These Actions
                 };
             })
@@ -167,6 +174,7 @@ function SignIn() {
 
 
 
+
     
     // *************************************** //
     // *** USER PAYLOAD FOR NORMAL SIGN IN *** //
@@ -174,10 +182,9 @@ function SignIn() {
     const [user, setUser] = useState({ email: "", password: "", });
     console.log("Login Attempt By: ", user.email);
 
-    const [ userProfile, setUserProfile ] = useState([]);
+    const [userProfile, setUserProfile] = useState(undefined);
     console.log("LoggedIn User Profile: ", userProfile);
 
-    // eslint-disable-next-line
     const [isLoggedIn, setIsLoggedIn] = useState(false);
     console.log("Login Successful: ", isLoggedIn);
 
@@ -287,7 +294,6 @@ function SignIn() {
                         roles: [data?.roles],
                         approves_T_and_C: data?.approvesTandC,                
                     };                   
-
                     setUserProfile(loggedInUser);
                     localStorage.setItem("user", JSON.stringify(loggedInUser));
                 
@@ -302,9 +308,9 @@ function SignIn() {
                         successMsg?.classList.add('success');
                     }, 2500);
                 
-                    setTimeout(() => {
-                        navigate("/admin/dashboard");
-                    }, 2800);
+                    // setTimeout(() => {
+                    //     navigate("/admin/dashboard");
+                    // }, 2800);
                     // Perform These Actions
                 };
             })
@@ -315,6 +321,7 @@ function SignIn() {
     };
 
    
+
 
 
 
@@ -343,7 +350,7 @@ function SignIn() {
         };
     };
 
-    // async function handleOnChange(e) {
+    // async function handleOnChangclse(e) {
     //     const name = e.target.name;
     //     const value = e.target.value;
 
@@ -402,6 +409,10 @@ function SignIn() {
     };
 
 
+
+
+
+    
 
     
     return (

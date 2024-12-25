@@ -10,10 +10,10 @@ import "../assets/styles/tailwind.css";
 // components
 import { 
     Sidebar,
+    UserDropdown,
     CardAllPublishedPosts,
     CardAllDraftPosts,
-    TableDropdown, 
-    UserDropdown, 
+    TableDropdown,    
 } from "../components";
 
 // views
@@ -83,6 +83,8 @@ const DashboardBlog = ({ color, isLoggedIn }) => {
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
     // ***************************************************************************
     const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();
+    const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
+    const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
     // ***************************************************************************
     // ***************************************************************************
 
@@ -292,7 +294,7 @@ const DashboardBlog = ({ color, isLoggedIn }) => {
 
                             {/* User */}
                             <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
-                                <UserDropdown />
+                                <UserDropdown userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
                             </ul>
                         </div>
                     </nav>
@@ -487,7 +489,7 @@ const DashboardBlog = ({ color, isLoggedIn }) => {
 
                         {/* User */}
                         <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
-                            <UserDropdown />
+                            <UserDropdown userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
                         </ul>
                         {/* User */}
 
