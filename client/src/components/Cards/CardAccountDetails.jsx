@@ -83,12 +83,11 @@ export default function CardAccountDetails() {
     // FUNCTION TO RE-DIRECT TO PREVIOUS PAGE BASED ON USER'S ROLE
     // **************************************************************************************************
     const [redirToUserPage, setRedirToUserPage] = useState(true);
-
     useEffect(() => {      
         function handleRedirectBackTo() {
             for (var i = 0; i < user?.roles?.length; i++) {
                 if (user?.roles[i]?.role === 'ROLE_USERS') {
-                    setRedirToUserPage(true);
+                    setRedirToUserPage(true);                    
                 } else {
                     setRedirToUserPage(false);
                 };
@@ -109,11 +108,15 @@ export default function CardAccountDetails() {
         setActiveForm('update-form');
     };
 
+
+
+
+
     // ON-CLICK:- BACK BUTTON on THE UPDATE PAGE
-    // RETURN:- TO USER DETAILS PAGE / STAFF DETAILS PAGE
-    function showUserInfo() {
+    // RETURN:- TO USER DETAILS PAGE / STAFF DETAILS PAGE 
+    async function showUserInfo() {
         if (id !== null) {    
-            window.scrollTo({ left: 0, top: 0, behavior: 'smooth' });
+            window.scrollBy({ left: 0, top: 0, behavior: 'smooth' });
 
             for (var i = 0; i < user?.roles?.length; i++) {
                 if (user?.roles[i]?.role === 'ROLE_USERS') {
@@ -124,7 +127,7 @@ export default function CardAccountDetails() {
             };       
         };
     }; 
- 
+    
     const [submitUpdate, setSubmitUpdate ] = useState(false);
   
     async function handleChangeUserInfo(e) {
@@ -210,10 +213,20 @@ export default function CardAccountDetails() {
                         <div className="text-center flex justify-start items-center gap-14">
                             <Link to={redirToUserPage ? '/admin/users' : '/admin/staffs'}>
                                 <button
-                                className="bg-blue-500 text-white active:bg-lightBlue-500 font-bold uppercase text-3xl tracking-tightener px-7 py-1 rounded-lg shadow hover:bg-blue-600 hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-300"
-                                type="button">{String.fromCharCode(8592)}</button>
+                                        className="bg-blue-500 text-white active:bg-lightBlue-500 font-bold uppercase text-3xl tracking-tightener px-7 py-1 rounded-lg shadow hover:bg-blue-600 hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-300"
+                                        type="button">{String.fromCharCode(8592)}
+                                </button>
                             </Link>
-                            <h6 className="text-blueGray-700 text-42xl tracking-tightener font-black capitalize">user Information</h6>             
+                            {                 
+                                user?.roles?.map((item) => {                                
+                                    return (
+                                        item?.role === 'ROLE_USERS' ?
+                                            <h6 className="text-blueGray-700 text-42xl tracking-tightener font-black capitalize">user Information</h6>  
+                                            :
+                                            <h6 className="text-blueGray-700 text-42xl tracking-tightener font-black capitalize">staff Information</h6>                                            
+                                    );
+                                })
+                            }
                         </div>
                     </div>
 
@@ -455,12 +468,13 @@ export default function CardAccountDetails() {
                 <div className={`activeDisplay ${activeForm === 'update-form' ? 'block' : 'hidden'}`}>
                     <div className="rounded-t bg-white mb-0 p-6">
                         <div className="text-center flex justify-start items-center gap-14">                           
-                            <Link to={redirToUserPage ? `/admin/users/${id}` : `/admin/staffs/${id}`}>
+                            <Link to={redirToUserPage ? showUserInfo : showUserInfo}>
                                 <button onClick={showUserInfo}
                                     className="bg-blue-500 text-white active:bg-lightBlue-500 font-bold uppercase text-3xl tracking-tightener px-7 py-1 rounded-lg shadow hover:bg-blue-600 hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-300"
                                     type="button">{String.fromCharCode(8592)}
                                 </button>   
-                            </Link>                       
+                            </Link>
+                            
                             <h6 className="text-blueGray-700 text-42xl tracking-tightener font-bold capitalize">update information</h6>                                            
                         </div>
                     </div>

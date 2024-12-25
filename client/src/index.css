@@ -161,9 +161,9 @@
     border-radius: 5px;
     padding: 10px 15px;
     outline: none;
-    /* font-size: 15px; 
-    letter-spacing: 0.13em; */
+    /* font-size: 15px; */
     word-spacing: 0.05em;
+    letter-spacing: .12rem;
     appearance: auto;
     border: 0.3px solid lightgray;
   }
