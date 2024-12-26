@@ -44,7 +44,7 @@ const convertDate = (dateString) => {
 
 
 
-const DashboardBlog = ({ color, isLoggedIn }) => {
+const DashboardArticles = ({ color, isLoggedIn }) => {
 
    
     // *************************** //
@@ -848,14 +848,14 @@ const DashboardBlog = ({ color, isLoggedIn }) => {
     );
 };
 
-export default DashboardBlog;
+export default DashboardArticles;
 
 
 
-DashboardBlog.defaultProps = {
+DashboardArticles.defaultProps = {
     color: "dark",
 };
   
-DashboardBlog.propTypes = {
+DashboardArticles.propTypes = {
     color: PropTypes.oneOf(["light", "dark"]),
 };

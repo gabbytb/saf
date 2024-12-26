@@ -1,11 +1,11 @@
 import { useState, useEffect, } from "react";
-import { googleLogout } from "@react-oauth/google";
 import { Link, useNavigate, } from "react-router-dom";
+import { googleLogout } from "@react-oauth/google";
 import api from "../api";
 import { 
     Sidebar, 
     UserDropdown, 
-    NewBlogPost, 
+    CardCreateAccount,
 } from "../components";
 
 
@@ -13,9 +13,9 @@ import {
 
 
 
-const DashboardCreateBlog = ({ isLoggedIn }) => {
 
-    // console.clear();
+const DashboardCreateUser = ({ isLoggedIn }) => {
+
 
     const navigate = useNavigate();
     
@@ -41,19 +41,19 @@ const DashboardCreateBlog = ({ isLoggedIn }) => {
     };
     // ***************************************************************************
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
-    // *************************************************************************** 
-    // const userId = isLoggedIn?.id ? isLoggedIn?.id : logOut();
-    // console.log("Logged-In UserID: ", id);
+    // ***************************************************************************
     const firstName = isLoggedIn?.first_name ? isLoggedIn?.first_name : logOut();
     // console.log("Logged-In User First Name: ", firstName);
-    const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();
+    const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();            
     // console.log("Logged-In User Last Name: ", lastName);
-    const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
+    const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut(); 
+    // console.log("Logged-In User E-mail: ", userEmail);
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
-    const displayImg = isLoggedIn?.displayImg ? isLoggedIn?.displayImg : '';
-    const userBio = isLoggedIn?.aboutMe ? isLoggedIn?.aboutMe : '';
+    // console.log("Logged-In User E-mail: ", userRoles);    
     // ***************************************************************************
     // ***************************************************************************
+
+
 
 
 
@@ -62,10 +62,10 @@ const DashboardCreateBlog = ({ isLoggedIn }) => {
     // *************************** //
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "Create Article", 
+        const pageTitle = `${firstName} ${lastName} init - New Account`,
               siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
-    }, []);
+    }, [firstName, lastName]);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
@@ -84,6 +84,8 @@ const DashboardCreateBlog = ({ isLoggedIn }) => {
     const [pageLimit, setPageLimit] = useState(undefined); // Number of items to display per page
     const [currentPage, setCurrentPage] = useState(1);  
    
+
+
 
 
     // ****************************************************************************
@@ -130,6 +132,7 @@ const DashboardCreateBlog = ({ isLoggedIn }) => {
 
 
 
+
     return (
             <>
                 {/***** LEFT-PANEL *****/}
@@ -140,48 +143,47 @@ const DashboardCreateBlog = ({ isLoggedIn }) => {
                 
                 {/***** RIGHT-PANEL *****/}
                 <div className="relative md:ml-64 bg-blueGray-100">
-    
                     {/* Admin NavBar */}                    
                     <nav className="absolute top-0 left-0 w-full z-1 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
-                        <div className="w-full mx-auto items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">
-                        
-                            {/* Brand */}
-                            <Link className="text-white text-sm uppercase hidden lg:inline-block font-semibold"
-                                to={"/admin/dashboard"} onClick={(e) => e.preventDefault()}>Dashboard 
-                            </Link>
-                            {/* Brand */}
-
-
-                            {/* Form*/}
-                            <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-12 lg:mr-28  w-98 h-178">
-                                <div className="relative flex w-full flex-wrap items-stretch">                      
-                                    <span className="z-10 h-full leading-snug font-normal text-center text-blueGray-300 absolute bg-transparent rounded text-2xl flex items-center justify-center w-12 pl-3 py-3">
-                                        <i className="fas fa-search"></i>
-                                    </span>
-                                                    
-                                    <input
-                                        type="search"
-                                        name="search"
-                                        id="search-form"
-                                        className="search-input border-0 px-3 py-3 indent-8 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"       
-                                        onChange={(e) => setQuery(e.target.value)}
-                                        placeholder="Search user"
-                                    />
-
-                                    <button type="submit" onSubmit={fetchData}></button>
-                                </div>                                            
-                            </form>
+                            <div className="w-full mx-auto items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">
                             
+                                {/* Brand */}
+                                <Link className="text-white text-sm uppercase hidden lg:inline-block font-semibold"
+                                    to={"/admin/dashboard"} onClick={(e) => e.preventDefault()}>Dashboard 
+                                </Link>
+                                {/* Brand */}
 
-                            {/* User */}
-                            <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
-                                <UserDropdown userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
-                            </ul>
-                        </div>
+
+                                {/* Form*/}
+                                <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-12 lg:mr-28  w-98 h-178">
+                                    <div className="relative flex w-full flex-wrap items-stretch">                      
+                                        <span className="z-10 h-full leading-snug font-normal text-center text-blueGray-300 absolute bg-transparent rounded text-2xl flex items-center justify-center w-12 pl-3 py-3">
+                                            <i className="fas fa-search"></i>
+                                        </span>
+                                                        
+                                        <input
+                                            type="search"
+                                            name="search"
+                                            id="search-form"
+                                            className="search-input border-0 px-3 py-3 indent-8 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"       
+                                            onChange={(e) => setQuery(e.target.value)}
+                                            placeholder="Search user"
+                                        />
+
+                                        <button type="submit" onSubmit={fetchData}></button>
+                                    </div>                                            
+                                </form>
+                                
+
+                                {/* User */}
+                                <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
+                                    <UserDropdown userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
+                                </ul>
+                            </div>
                     </nav>
                     {/* Admin NavBar */}
 
-
+                    
                     {/* Header */}
                     <div className="relative bg-blue-900 md:pt-32 pb-32 pt-12">
                 
@@ -194,24 +196,24 @@ const DashboardCreateBlog = ({ isLoggedIn }) => {
                         {/* <HeaderStats /> */}
 
                     </div>
-                    {/* Header */}
 
 
-                    {/* Create Blog Post */}
+                    {/* View User Details*/}
                     <div className="px-4 md:px-10 mx-auto w-full -m-24">                    
                         <div className="flex flex-wrap">
-                            <div className="w-full px-4">            
-                                <NewBlogPost firstName={firstName} lastName={lastName} userEmail={userEmail}
-                                     displayImg={displayImg} userBio={userBio} />
-                            </div>                            
-                        </div>
-                    </div>           
-                    {/* Create Blog Post */}
+                            <div className="w-full px-4">
+                                
+                                {/* NEW User Details */}
+                                <CardCreateAccount />
+                                {/* NEW User Details */}
 
+                            </div>
+                        </div>
+                    </div>                         
                 </div>
                 {/***** RIGHT-PANEL *****/}
             </>
     );
 };
 
-export default DashboardCreateBlog;
+export default DashboardCreateUser;

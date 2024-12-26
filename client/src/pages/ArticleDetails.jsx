@@ -1,9 +1,8 @@
 import { useEffect, useState, } from "react";
 import { Link, useParams, } from "react-router-dom";
-import { googleLogout } from "@react-oauth/google";
-import api from "../api";
+import api from "../api.js";
 import PostDetailsSlider from "../components/Slider/PostDetailsSlider.js";
-import { NavSlider, HomeFooter, AdminNavSlider, } from "../components";
+import { NavSlider, HomeFooter, AdminNavSlider, } from "../components/index.js";
 
 
 
@@ -37,7 +36,7 @@ const convertDate = (dateString) => {
 
 
 
-const BlogSinglePost = ({ isLoggedIn }) => {
+const ArticleDetails = ({ isLoggedIn }) => {
 
 
 
@@ -52,22 +51,6 @@ const BlogSinglePost = ({ isLoggedIn }) => {
     // CURRENT ACTIVE USER:-
     // ***************************************************************************
     isLoggedIn = JSON.parse(localStorage.getItem("user"));
-    // ***************************************************************************
-    // FUNCTION TO LOG-OUT CURRENT ACTIVE USER
-    // ***************************************************************************
-    function logOut() {
-        // Clear User Details from Local Storage
-        localStorage.clear();
-        // log out function to log the user out of google and set the profile array to null
-        googleLogout();
-        // redirect to Login Page
-        const redirToLOGIN = "/user/login";
-        window.location.replace(redirToLOGIN);
-    };
-    // ***************************************************************************
-    // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
-    // ***************************************************************************
-    const verifiedUser = isLoggedIn?.is_verified ? isLoggedIn?.is_verified : logOut();   
 
 
 
@@ -216,7 +199,7 @@ const BlogSinglePost = ({ isLoggedIn }) => {
         <div id="singlePostWrapper">
 
             {/* NAV HEADER */}    
-            { verifiedUser ? <AdminNavSlider /> : <NavSlider /> }
+            { isLoggedIn?.is_verified ? <AdminNavSlider /> : <NavSlider /> }
             {/* NAV HEADER */}    
                
             <main id="blogSinglePost" className="container mx-auto">                                       
@@ -347,7 +330,7 @@ const BlogSinglePost = ({ isLoggedIn }) => {
 
 };
 
-export default BlogSinglePost;
+export default ArticleDetails;
 
 
 

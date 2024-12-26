@@ -214,5 +214,4 @@ const DashboardStaffsDetails = ({ isLoggedIn }) => {
     );
 };
 
-
 export default DashboardStaffsDetails;

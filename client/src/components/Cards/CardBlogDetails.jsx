@@ -9,7 +9,7 @@ const CardBlogDetails = () => {
 
     return (
         <div>CardBlogDetails</div>
-    )
+    );
 
 };
 

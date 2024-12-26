@@ -4384,14 +4384,6 @@ textarea#comments{
   width: 100vw;
 }
 
-.w-0{
-  width: 0px;
-}
-
-.w-0\.5{
-  width: 0.125rem;
-}
-
 .min-w-0{
   min-width: 0px;
 }

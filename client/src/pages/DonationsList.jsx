@@ -37,7 +37,7 @@ const convertDate = (dateString) => {
 
 
 
-const Donations = ({ isLoggedIn }) => { 
+const DonationsList = ({ isLoggedIn }) => { 
 
 
     isLoggedIn = JSON.parse(localStorage.getItem('user'));
@@ -165,7 +165,7 @@ const Donations = ({ isLoggedIn }) => {
 
                 
                 {/* NAV HEADER */}    
-                { isLoggedIn?.isVerified ? <AdminNavSlider /> : <NavSlider /> }
+                { isLoggedIn?.is_verified ? <AdminNavSlider /> : <NavSlider /> }
                 {/* NAV HEADER */}    
 
 
@@ -305,4 +305,4 @@ const Donations = ({ isLoggedIn }) => {
     );
 };
 
-export default Donations;
+export default DonationsList;

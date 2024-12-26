@@ -4,9 +4,12 @@ import { Routes, Route, } from "react-router-dom";
 // import { googleAnalytics } from "./constants";
 import {   
     Home,
-    Donations,
-    BlogPosts,
-    BlogSinglePost,
+    
+    ArticlesList,
+    ArticleDetails,
+
+    DonationsList,
+
     OurProgress,     
     // DonationPage,
     // SignUp,
@@ -22,14 +25,22 @@ import {
     VerifySignUp,
     SignIn,
 
+
+
     Dashboard,
-    DashboardBlog,
-    DashboardCreateAccount,
-    DashboardCreateBlog,
+
+    DashboardArticles, 
+    DashboardCreateArticle,
+   
+    DashboardDonations,
+
     DashboardUsers, 
     DashboardUsersDetails,
     DashboardStaffs,
     DashboardStaffsDetails,
+    DashboardCreateUser,
+
+
 } from "./layouts";
 import { 
     Posts, 
@@ -72,23 +83,34 @@ export default function App() {
           <Route path="/user/signup" element={<SignUp />} />
           <Route path="/user/verify" element={<VerifySignUp />} />    
           <Route path="/user/login" element={<SignIn />} />        
-          <Route path="/donations" element={<Donations />} />
-          <Route path="/blog" element={<BlogPosts />} />  
-          <Route path="/blog/page/:id" element={<BlogPosts />} />  
-          <Route path="/blog/:slug" element={<BlogSinglePost />} />      
+        
+          <Route path="/blog" element={<ArticlesList />} />  
+          <Route path="/blog/page/:id" element={<ArticleDetails />} />  
+          <Route path="/blog/:slug" element={<ArticleDetails />} />        
+          
+          <Route path="/donations" element={<DonationsList />} />
+
           {/* <Route path="/blog/page/:id" element={<BlogPostPages />} />   */}  
-          {/* <Route path="/blog/page/:id" element={<BlogPostPages />} children=[] /> */}   
-          <Route path="/blog/post" element={<Posts />} />      
+          {/* <Route path="/blog/page/:id" element={<BlogPostPages //>} children=[] /> */}   
+
+          <Route path="/blog/post" element={<Posts />} />   
+
           <Route path="/home" element={<OurProgress />} />
+
           <Route path="/" element={<Home />} />          
+
 
 
           {/* add routes with layouts */}
           <Route path="/admin/dashboard" element={<Dashboard />} />
 
 
-          <Route path="/admin/blog/manage" element={<DashboardBlog />} />
-          <Route path="/admin/blog/create" element={<DashboardCreateBlog />} />
+          <Route path="/admin/blog/manage" element={<DashboardArticles />} />
+          <Route path="/admin/blog/create" element={<DashboardCreateArticle />} />
+
+
+          <Route path="/admin/donations/manage" element={<DashboardDonations />} />
+          {/*  <Route path="/admin/donations/create" element={<DashboardCreateDonation />} />  */}
 
 
           <Route path="/admin/users" element={<DashboardUsers />} />
@@ -97,7 +119,7 @@ export default function App() {
           <Route path="/admin/staffs/:id" element={<DashboardStaffsDetails />}></Route>
 
 
-          <Route path="/admin/staffs/manage/create" element={<DashboardCreateAccount />} />
+          <Route path="/admin/staffs/manage/create" element={<DashboardCreateUser />} />
 
 
           {/* add redirect for first page */}

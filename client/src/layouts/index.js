@@ -4,14 +4,17 @@ import VerifySignUp from "./VerifySignUp";
 import SignIn from "./SignIn";
 
 import Dashboard from "./Dashboard";
-import DashboardBlog from "./DashboardBlog";
-import DashboardCreateAccount from "./DashboardCreateAccount";
-import DashboardCreateBlog from "./DashboardCreateBlog";
+
+import DashboardArticles from "./DashboardBlog";
+import DashboardCreateArticle from "./DashboardCreateArticle";
+
+import DashboardDonations from "./DashboardDonations";
+
 import DashboardUsers from "./DashboardUsers";
 import DashboardUsersDetails from "./DashboardUsersDetails";
 import DashboardStaffs from "./DashboardStaffs";
 import DashboardStaffsDetails from "./DashboardStaffsDetails";
-
+import DashboardCreateUser from "./DashboardCreateUser";
 
 
 
@@ -24,11 +27,14 @@ export {
     SignIn,
 
     Dashboard,  
-    DashboardBlog,
-    DashboardCreateAccount,
-    DashboardCreateBlog,
+    DashboardArticles,
+
+    DashboardDonations,  
+
+    DashboardCreateArticle,
     DashboardUsers,
     DashboardUsersDetails,
     DashboardStaffs,
     DashboardStaffsDetails,
+    DashboardCreateUser,
 };

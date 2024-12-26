@@ -37,23 +37,60 @@ module.exports = mongoose => {
         excerpt: {
             type: String,
         },
-        author: {
-            type: String,             
-        },
-        donor: [
-            {
-                contribution: Number,
-                userName: { 
-                    type: String, 
-                    default: 'anonymous',
-                },         
-                company: String,        
-                email: String,
-                Phone: Number,
-            },
-        ],
         tags: [],
         categories: [],
+        amountToRaise: { 
+            type: String,
+        },
+        amountRaised: { 
+            type: String,
+        },    
+        author: [
+            { 
+                _id: { 
+                    type: Number,                   
+                },
+                name: {                    
+                    type: String,
+                    default: 'anonymous',
+                }, 
+                email: { 
+                    type: String,
+                }, 
+                bio: { 
+                    type: String,
+                },             
+            },
+        ],
+        donor: [
+            { 
+                _id: { 
+                    type: Number,                   
+                },
+                firstName: {                    
+                    type: String,
+                    default: 'anonymous',
+                }, 
+                lastName: {                    
+                    type: String,                    
+                }, 
+                email: { 
+                    type: String,
+                },
+                phone: { 
+                    type: Number,
+                }, 
+                company: { 
+                    type: String,
+                },
+                amount: { 
+                    type: String,
+                },
+                comments: { 
+                    type: String,
+                },       
+            },
+        ],
         status: { 
             type: String, 
             default: 'draft',
@@ -62,13 +99,10 @@ module.exports = mongoose => {
             type: Boolean, 
             default: false,
         },
-        accessToken: {
-            type: String,
-        },
     });
 
-    const Donations = mongoose.model('Donations', donationSchema);
+    const Donations = mongoose.model("Donation", donationSchema);
+
     return Donations;
 
 };
-

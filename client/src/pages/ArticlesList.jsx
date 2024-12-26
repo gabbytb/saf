@@ -1,10 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, } from "react-router-dom";
-import { googleLogout } from "@react-oauth/google";
 import api from "../api";
 import { blogBg } from "../constants";
 import BlogSlider from "../components/Slider/BlogSlider";
 import { NavSlider, HomeFooter, AdminNavSlider, } from "../components";
+
 
 
 
@@ -37,29 +37,13 @@ const convertDate = (dateString) => {
 
 
 
-const BlogPosts = ({ isLoggedIn, }) => {
+const ArticlesList = ({ isLoggedIn, }) => {
 
 
     // ***************************************************************************
     // CURRENT ACTIVE USER:-
     // ***************************************************************************
     isLoggedIn = JSON.parse(localStorage.getItem("user"));
-    // ***************************************************************************
-    // FUNCTION TO LOG-OUT CURRENT ACTIVE USER
-    // ***************************************************************************
-    function logOut() {
-        // Clear User Details from Local Storage
-        localStorage.clear();
-        // log out function to log the user out of google and set the profile array to null
-        googleLogout();
-        // redirect to Login Page
-        const redirToLOGIN = "/user/login";
-        window.location.replace(redirToLOGIN);
-    };
-    // ***************************************************************************
-    // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
-    // ***************************************************************************
-    const verifiedUser = isLoggedIn?.is_verified ? isLoggedIn?.is_verified : logOut();   
 
 
 
@@ -193,7 +177,7 @@ const BlogPosts = ({ isLoggedIn, }) => {
 
                 
                 {/* NAV HEADER */}    
-                { verifiedUser ? <AdminNavSlider /> : <NavSlider /> }
+                { isLoggedIn?.is_verified ? <AdminNavSlider /> : <NavSlider /> }
                 {/* NAV HEADER */}    
 
 
@@ -334,7 +318,7 @@ const BlogPosts = ({ isLoggedIn, }) => {
 };
 
 
-export default BlogPosts;
+export default ArticlesList;
 
 
 
