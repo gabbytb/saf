@@ -144,6 +144,21 @@ const DashboardBlog = ({ color, isLoggedIn }) => {
     // ****************************************************************************
     // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL STAFFS
     // ****************************************************************************             
+
+
+    useEffect(() => {                                 
+        if (activeDisplay === "blogPosts") {
+                        
+            setIsLoading(true);           
+
+            var timer = setTimeout(fetchAllBlogPosts, 300);   // Delay execution of findAllStaffs by 1800ms
+            return () => {
+                    clearTimeout(timer);                  // Clean up timer if component unmounts or token changes
+            };
+
+        };
+    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
+    
     async function fetchAllBlogPosts() {               
         await api.get(`/api/v1/admin/posts/manage?page=${currentPage}&limit=${pageLimit}`)
         .then((response) => {
@@ -156,7 +171,7 @@ const DashboardBlog = ({ color, isLoggedIn }) => {
                     };
 
                     setBlogPosts(allBlogPosts);
-                    setPageLimit(pagination?.recordLimit);
+                    setPageLimit(pagination?.postLimit);
 
                     setTotalBlogPosts(pagination?.postsRecord);
                     setTotalPages(pagination?.lastPage);
@@ -198,19 +213,6 @@ const DashboardBlog = ({ color, isLoggedIn }) => {
             console.log("Error fetching data: ", error);
         });
     };
-
-    useEffect(() => {                                 
-        if (activeDisplay === "blogPosts") {
-                        
-            setIsLoading(true);           
-
-            var timer = setTimeout(fetchAllBlogPosts, 300);   // Delay execution of findAllStaffs by 1800ms
-            return () => {
-                    clearTimeout(timer);                  // Clean up timer if component unmounts or token changes
-            };
-
-        };
-    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -513,7 +515,7 @@ const DashboardBlog = ({ color, isLoggedIn }) => {
                 {/* Header */}
 
                 
-                {/* Users Table */}
+                {/* Post Table */}
                 <div className="px-4 md:px-10 mx-auto w-full -m-24">               
                     <div className="flex flex-wrap mt-4">
                         <div className="w-full mb-12 px-4">         
@@ -825,10 +827,10 @@ const DashboardBlog = ({ color, isLoggedIn }) => {
                                     {/* Pagination controls */}
                                 </div>
                                 <Suspense fallback={<div>Loading...</div>}>                
-                                    <CardAllPublishedPosts color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
+                                    <CardAllPublishedPosts color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} leftArrow={leftArrow} rightArrow={rightArrow} />
                                 </Suspense>       
                                 <Suspense fallback={<div>Loading...</div>}>                            
-                                    <CardAllDraftPosts color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
+                                    <CardAllDraftPosts color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} leftArrow={leftArrow} rightArrow={rightArrow} />
                                 </Suspense>     
                                 {/* <Suspense fallback={<div>Loading...</div>}>
                                     <CardAllScheduledPosts color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />

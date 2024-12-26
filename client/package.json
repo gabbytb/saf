@@ -3,7 +3,7 @@
   "description": "REACHING OUT TO GREAT MINDS",
   "version": "1.0.0",
   "private": true,
-  "proxy": "http://192.168.220.113:8000",  
+  "proxy": "http://192.168.180.113:8000",  
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
     "@popperjs/core": "^2.11.8",

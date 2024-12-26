@@ -141,8 +141,8 @@ exports.findAllBlogPosts = async (req, res) => {
     // Get Pagination Parameters from the request query        
     const status = req.query.status || "";               
     const page = parseInt(req.query.page, 10) || 1;        
-    const limit = parseInt(req.query.limit, 10) || 10;
-    const skip = (page - 1) * limit,
+    const postLimit = parseInt(req.query.limit, 10) || 10;
+    const skip = (page - 1) * postLimit,
           sort = "recent";
 
     try {
@@ -165,16 +165,16 @@ exports.findAllBlogPosts = async (req, res) => {
         const allBlogPosts = await Blog.find(query)
                                 .sort(sortOrder)
                                 .skip(parseInt(skip))
-                                .limit(parseInt(limit)); 
+                                .limit(parseInt(postLimit)); 
         console.log("ALL BLOG POSTS ARRANGED ACCORDING TO MOST-RECENT: ", allBlogPosts);
 
         
         const totalBlogPosts = await Blog.countDocuments(query); // Total number of users with the given status
-        const totalPages = Math.ceil(totalBlogPosts / limit); // Calculate total pages
+        const totalPages = Math.ceil(totalBlogPosts / postLimit); // Calculate total pages
         const pagination = {
             postsRecord: totalBlogPosts,
             page,
-            limit,
+            postLimit,
             lastPage: totalPages,
         };
         console.log("PAGINATION: ", pagination, "\n\n");
