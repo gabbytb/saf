@@ -95,7 +95,7 @@ module.exports = mongoose => {
             type: String, 
             default: 'draft',
         },
-        isPublished: { 
+        isActive: { 
             type: Boolean, 
             default: false,
         },

@@ -14,15 +14,15 @@ exports.createDonation = async (req, res) => {
     const uniqueId = Date.now();
 
     // Payload
-    const { id = 23401, title, description, uri, excerpt, images, tags, author, categories, isActive } = req.body;
+    const { id = 23401, images, title, description, uri, excerpt, categories, tags, amountToRaise, amountRaised, author, isActive } = req.body;
     
     try {
 
         // FORM VALIDATION:  "Compulsory Payload"
-        if (!(title)) {
+        if (!(title && description && amountToRaise)) {
             const responseData = {
                 success: false,
-                message: "Donation title missing"
+                message: "Fill required inputs"
             };
             console.log("*************************************",
                         "\n***  ATTEMPT: CREATE NEW DONATION ***",
@@ -52,16 +52,18 @@ exports.createDonation = async (req, res) => {
         // ***  FE: CREATE "DONATION"  *** //
         // ************************************ //      
         const newDonation = new Donation({
-            _id: uniqueId % id,
+            _id: uniqueId % id,            
             title,          
             uri: uri.toLowerCase(),     // sanitize: convert title to lowercase. NOTE: You must sanitize your data before forwarding to backend.                                 
             description,     
-            excerpt,
-            author,
+            excerpt,            
             tags,
             categories,  
+            amountToRaise,
+            amountRaised,
+            author,
             isActive,
-            status: isActive === true ? 'isActive' : 'inActive' ,        
+            status: isActive === true ? 'published' : 'draft' ,        
             // expirationInMs: encrypt(expiresIn),        // Encode: token lifespan  
         });
         // **************************************** //
@@ -98,6 +100,7 @@ exports.createDonation = async (req, res) => {
         // Save New Post
         const savedDonation = await newDonation.save(); // Update the post with the image references
             
+
         console.log(          
             "\n*********************************************************",
             "\n*****          NEW BLOG ARTICLE DETAILS             *****",
