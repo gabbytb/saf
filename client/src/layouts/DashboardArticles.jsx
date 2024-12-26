@@ -11,8 +11,7 @@ import "../assets/styles/tailwind.css";
 import { 
     Sidebar,
     UserDropdown,
-    CardAllPublishedPosts,
-    CardAllDraftPosts,
+    CardAllPublishedPosts, CardAllDraftPosts,
     TableDropdown,    
 } from "../components";
 
