@@ -5,7 +5,7 @@ import SignIn from "./SignIn";
 
 import Dashboard from "./Dashboard";
 
-import DashboardArticles from "./DashboardBlog";
+import DashboardArticles from "./DashboardArticles";
 import DashboardCreateArticle from "./DashboardCreateArticle";
 
 import DashboardDonations from "./DashboardDonations";
