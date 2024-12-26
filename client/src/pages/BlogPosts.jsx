@@ -1,11 +1,10 @@
 import { useState, useEffect } from "react";
 import { Link, } from "react-router-dom";
+import { googleLogout } from "@react-oauth/google";
 import api from "../api";
-import { NavSlider, HomeFooter, AdminNavSlider, } from "../components";
-// import { blogbg } from "../assets/images";
 import { blogBg } from "../constants";
 import BlogSlider from "../components/Slider/BlogSlider";
-
+import { NavSlider, HomeFooter, AdminNavSlider, } from "../components";
 
 
 
@@ -35,10 +34,35 @@ const convertDate = (dateString) => {
 
 
 
+
+
+
 const BlogPosts = ({ isLoggedIn, }) => {
 
-    isLoggedIn = JSON.parse(localStorage.getItem('user'));
-    // console.log('IS LOGGED IN = ', isLoggedIn?.isVerified);
+
+    // ***************************************************************************
+    // CURRENT ACTIVE USER:-
+    // ***************************************************************************
+    isLoggedIn = JSON.parse(localStorage.getItem("user"));
+    // ***************************************************************************
+    // FUNCTION TO LOG-OUT CURRENT ACTIVE USER
+    // ***************************************************************************
+    function logOut() {
+        // Clear User Details from Local Storage
+        localStorage.clear();
+        // log out function to log the user out of google and set the profile array to null
+        googleLogout();
+        // redirect to Login Page
+        const redirToLOGIN = "/user/login";
+        window.location.replace(redirToLOGIN);
+    };
+    // ***************************************************************************
+    // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
+    // ***************************************************************************
+    const verifiedUser = isLoggedIn?.is_verified ? isLoggedIn?.is_verified : logOut();   
+
+
+
 
     // { color }
     // console.log('WINDOW LOCATION = ', window.location);
@@ -67,6 +91,7 @@ const BlogPosts = ({ isLoggedIn, }) => {
 
     const [currentPage, setCurrentPage] = useState(1);
     // const limit = 10; // Number of items per page   
+
 
 
 
@@ -168,7 +193,7 @@ const BlogPosts = ({ isLoggedIn, }) => {
 
                 
                 {/* NAV HEADER */}    
-                { isLoggedIn?.isVerified ? <AdminNavSlider /> : <NavSlider /> }
+                { verifiedUser ? <AdminNavSlider /> : <NavSlider /> }
                 {/* NAV HEADER */}    
 
 

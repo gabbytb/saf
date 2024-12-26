@@ -1,8 +1,9 @@
 import { useEffect, useState, } from "react";
 import { Link, useParams, } from "react-router-dom";
-import { HomeFooter, AdminNavSlider, } from "../components";
+import { googleLogout } from "@react-oauth/google";
 import api from "../api";
 import PostDetailsSlider from "../components/Slider/PostDetailsSlider.js";
+import { NavSlider, HomeFooter, AdminNavSlider, } from "../components";
 
 
 
@@ -11,7 +12,9 @@ import PostDetailsSlider from "../components/Slider/PostDetailsSlider.js";
 
 
 
-
+// ********************************** //
+// *** CONVERT DATE STRING PARAMS *** // 
+// ********************************** //
 const convertDate = (dateString) => {
     
     const date = new Date(dateString);
@@ -26,16 +29,15 @@ const convertDate = (dateString) => {
 
     return date.toLocaleString('en-GB', options);
 };
+// ********************************* //
+// ********************************* //
 
 
 
 
-const BlogSinglePost = () => {
-
-    
-    const { slug } = useParams();
 
 
+const BlogSinglePost = ({ isLoggedIn }) => {
 
 
 
@@ -43,25 +45,50 @@ const BlogSinglePost = () => {
     const [isLoading, setIsLoading] = useState(true);
     // console.log("IS LOADING: ", isLoading);
 
+
+
+
+    // ***************************************************************************
+    // CURRENT ACTIVE USER:-
+    // ***************************************************************************
+    isLoggedIn = JSON.parse(localStorage.getItem("user"));
+    // ***************************************************************************
+    // FUNCTION TO LOG-OUT CURRENT ACTIVE USER
+    // ***************************************************************************
+    function logOut() {
+        // Clear User Details from Local Storage
+        localStorage.clear();
+        // log out function to log the user out of google and set the profile array to null
+        googleLogout();
+        // redirect to Login Page
+        const redirToLOGIN = "/user/login";
+        window.location.replace(redirToLOGIN);
+    };
+    // ***************************************************************************
+    // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
+    // ***************************************************************************
+    const verifiedUser = isLoggedIn?.is_verified ? isLoggedIn?.is_verified : logOut();   
+
+
+
+
+    const { slug } = useParams();
+
+
+
+
     const [blogSinglePost, setBlogSinglePost] = useState(null);
-    // console.log("Single Post: ", blogSinglePost);        
+    // console.log("Single Post: ", blogSinglePost);
 
-    // const formattedTagsTotal = blogSinglePost?.tags;
-    // console.log("All Formatted Tags: ", formattedTagsTotal);
-
-    // const formattedTagsLength = blogSinglePost?.tags?.length;
-    // console.log("Formatted Tags Length: ", formattedTagsLength);
-
-
-    
-
-
-    // If more than One Category, seperate them with a Comma. Otherwise, show Category is Empty.
-    const formattedCategories = blogSinglePost?.categories?.length ? blogSinglePost.categories.join(", ") : "Empty categories";  // Fallback if no categories are present  
+    // If more than One Category or Tag, seperate them with a Comma. Otherwise, show Category is Empty.
+    const formattedCategories = blogSinglePost?.categories?.length 
+                                    ? blogSinglePost.categories.join(", ") 
+                                    : "Empty categories";  // Fallback if no categories are present  
     // console.log("Formatted Categories: ", formattedCategories);
 
-    // If more than One Tag, seperate them with a Comma. Otherwise, show Tag is Empty.
-    const formattedTags = blogSinglePost?.tags?.length ? blogSinglePost.tags.join(", ") : "Empty tags";  // Fallback if no tags are present  
+    const formattedTags = blogSinglePost?.tags?.length 
+                            ? blogSinglePost.tags.join(", ") 
+                            : "Empty tags";  // Fallback if no tags are present  
     // console.log("Formatted Tags: ", formattedTags);
 
 
@@ -105,6 +132,8 @@ const BlogSinglePost = () => {
     // ************************ //
 
 
+
+
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
@@ -133,10 +162,9 @@ const BlogSinglePost = () => {
 
 
 
-
     const [sidebarPosts, setSidebarPosts] = useState([]);
     // console.log("Sidebar Post: ", sidebarPosts);
-  
+
     const pageLimit = 3; // Number of items per page
     var status = 'published';
     var sort = 'recent';
@@ -186,8 +214,11 @@ const BlogSinglePost = () => {
 
     return (
         <div id="singlePostWrapper">
-            <AdminNavSlider />
 
+            {/* NAV HEADER */}    
+            { verifiedUser ? <AdminNavSlider /> : <NavSlider /> }
+            {/* NAV HEADER */}    
+               
             <main id="blogSinglePost" className="container mx-auto">                                       
                
                 <div className="mx-12 lg:mx-16 mb-28 mt-16 flex sm:grid">                     

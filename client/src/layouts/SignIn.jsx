@@ -139,7 +139,8 @@ function SignIn() {
                         expires_at: data?.tokenExpires,
                         status: data?.status,
                         roles: [data?.roles],
-                        approves_T_and_C: data?.approvesTandC,                  
+                        approves_T_and_C: data?.approvesTandC,     
+                        is_verified: data?.isVerified,                    
                     };
                     console.log("Logged-In User: ", loggedInUser);
 
@@ -292,7 +293,8 @@ function SignIn() {
                         expires_at: data?.tokenExpires,
                         status: data?.status,
                         roles: [data?.roles],
-                        approves_T_and_C: data?.approvesTandC,                
+                        approves_T_and_C: data?.approvesTandC,    
+                        is_verified: data?.isVerified,       
                     };                   
                     setUserProfile(loggedInUser);
                     localStorage.setItem("user", JSON.stringify(loggedInUser));
