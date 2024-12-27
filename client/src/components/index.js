@@ -65,6 +65,7 @@ import CardAllRejectedStaffs from "./Cards/staffs/CardAllRejectedStaffs";
 
 // VIEWS
 import CardAccountDetails from "./Cards/CardAccountDetails";
+import CardArticleDetails from "./Cards/CardArticleDetails";
 
 // CREATIVE COMPONENTS
 import NewArticle from "./Forms/NewArticle";
@@ -117,7 +118,8 @@ export {
     CardAllRejectedStaffs,
 
     CardAccountDetails,
-    
+    CardArticleDetails,
+
     NewArticle,
     NewDonation,
     NewUser,
