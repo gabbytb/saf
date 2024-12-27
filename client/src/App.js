@@ -32,6 +32,7 @@ import {
     DashboardCreateArticle,
    
     DashboardDonations,
+    DashboardCreateDonation,
 
     DashboardUsers, 
     DashboardUsersDetails,
@@ -109,7 +110,7 @@ export default function App() {
 
 
           <Route path="/admin/donations/manage" element={<DashboardDonations />} />
-          {/*  <Route path="/admin/donations/create" element={<DashboardCreateDonation />} />  */}
+          <Route path="/admin/donations/create" element={<DashboardCreateDonation />} />
 
 
           <Route path="/admin/users" element={<DashboardUsers />} />

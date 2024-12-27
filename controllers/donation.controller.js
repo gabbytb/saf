@@ -19,7 +19,7 @@ exports.createDonation = async (req, res) => {
     try {
 
         // FORM VALIDATION:  "Compulsory Payload"
-        if (!(title && description && amountToRaise)) {
+        if (!(title && amountToRaise)) {
             const responseData = {
                 success: false,
                 message: "Fill required inputs"
@@ -27,7 +27,7 @@ exports.createDonation = async (req, res) => {
             console.log("*************************************",
                         "\n***  ATTEMPT: CREATE NEW DONATION ***",
                         "\n*************************************",
-                        "\nCreate Donation Error: ", responseData.message + "\n\n");
+                        "\nCreate Donation, Error: ", responseData.message + "\n\n");
             return res.status(200).json(responseData);
         };
 
@@ -37,7 +37,7 @@ exports.createDonation = async (req, res) => {
         if (titleExists) {
             const responseData = {
                 success: false,
-                message: "Donation Title Exists"
+                message: "Donation Title exists"
             };
             console.log("********************************",
                         "\n*** CREATE NEW POST FAILED   ***",
@@ -126,6 +126,170 @@ exports.createDonation = async (req, res) => {
         console.error("Unexpected error during account verification: ", error);
         return res.status(500).json(responseData);  
     }
-};  // THOROUGHLY Tested === Working
+};
 
 
+
+
+
+// Our FIND All BLOG POSTS Logic starts here
+exports.findAllDonations = async (req, res) => { 
+
+    // Get Pagination Parameters from the request query        
+    const status = req.query.status || "";               
+    const page = parseInt(req.query.page, 10) || 1;        
+    const donationsLimit = parseInt(req.query.limit, 10) || 10;
+    const skip = (page - 1) * donationsLimit,
+          sort = "recent";
+
+    try {
+
+        // Set for DB Query
+        let query = { };
+        if (status) {
+            query.status = status;
+        };
+
+        // Set the sorting order
+        let sortOrder = { };
+        if (sort === 'recent') {
+            sortOrder.createdAt = -1; // Sort by createdAt in descending order
+        } else {
+            sortOrder.createdAt = 1; // Default sorting (ascending)
+        };
+
+
+        const allDonations = await Donation.find(query)
+                                .sort(sortOrder)
+                                .skip(parseInt(skip))
+                                .limit(parseInt(donationsLimit)); 
+        console.log("ALL DONATIONS ARRANGED ACCORDING TO MOST-RECENT: ", allDonations);
+
+        
+        const totalDonations = await Donation.countDocuments(query); // Total number of users with the given status
+        const totalPages = Math.ceil(totalDonations / donationsLimit); // Calculate total pages
+        const pagination = {
+            donationsRecord: totalDonations,
+            page,
+            donationsLimit,
+            lastPage: totalPages,
+        };
+        console.log("PAGINATION: ", pagination, "\n\n");
+    
+        const responseData = {
+            success: true,
+            data: {
+                allDonations,
+                pagination
+            },
+            message: "Items retrieved successfully",
+        };
+        res.status(200).json(responseData);
+
+    } catch (error) {
+        console.error("Internal Server Error:", error);
+        return res.status(500).send(`Internal Server Error: ${error.message}`);
+    };
+};  
+
+// Our FIND All PUBLISHED DONATIONS Logic starts here
+exports.totalPublishedDonations = async (req, res) => { 
+
+    // Get Pagination Parameters from the request query     
+    const status = req.query.status || "";               
+    const page = parseInt(req.query.page, 10) || 1;        
+    const limit = parseInt(req.query.limit, 10) || 20;                        
+    const skip = (page - 1) * limit,
+          sort = "recent";
+
+    try {
+
+        // Set for DB Query
+        let query = { 
+            "status": "published",
+        };        
+        if (status) {
+            query.status = status;
+        };
+
+        // Set the sorting order
+        let sortOrder = { };
+        if (sort === 'recent') {
+            sortOrder.createdAt = -1; // Sort by createdAt in descending order
+        } else {
+            sortOrder.createdAt = 1; // Default sorting (ascending)
+        };
+
+
+        const allPublishedDonations = await Blog.find(query)
+                                .sort(sortOrder)
+                                .skip(parseInt(skip))
+                                .limit(parseInt(limit));   
+        
+                                
+        const responseData = {
+            success: true,
+            data: allPublishedDonations.length,
+            message: "Items retrieved successfully",
+        };
+        res.status(200).json(responseData);
+
+    } catch (error) {
+        console.error("Internal Server Error:", error);
+        return res.status(500).send(`Internal Server Error: ${error.message}`);
+    };
+}; 
+
+// Our FIND All DRAFT DONATIONS Logic starts here
+exports.totalDraftDonations= async (req, res) => { 
+
+     // Get Pagination Parameters from the request query     
+     const status = req.query.status || "";               
+     const page = parseInt(req.query.page, 10) || 1;        
+     const limit = parseInt(req.query.limit, 10) || 20;                        
+     const skip = (page - 1) * limit,
+           sort = "recent";
+
+    try {
+
+        // Set for DB Query
+        let query = {
+            "status": "draft",
+        };        
+        if (status) {
+            query.status = status;
+        };
+
+        // Set the sorting order
+        let sortOrder = { };
+        if (sort === 'recent') {
+            sortOrder.createdAt = -1; // Sort by createdAt in descending order
+        } else {
+            sortOrder.createdAt = 1; // Default sorting (ascending)
+        };
+
+
+        const allDraftDonations = await Blog.find(query)
+                                .sort(sortOrder)
+                                .skip(parseInt(skip))
+                                .limit(parseInt(limit));   
+
+
+        const responseData = {
+            success: true,
+            data: allDraftDonations.length,
+            message: "Items retrieved successfully",
+        };
+        res.status(200).json(responseData);
+
+    } catch (error) {
+        console.error("Internal Server Error:", error);
+        return res.status(500).send(`Internal Server Error: ${error.message}`);
+    };
+};
+
+
+
+
+
+// THOROUGHLY Tested === Working

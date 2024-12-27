@@ -53,7 +53,7 @@ import TableDropdown from  "./Dropdowns/TableDropdown";
 import UserDropdown from "./Dropdowns/UserDropdown";
 import UserDropdownPro from "./Dropdowns/UserDropdownPro";
 
-// POSTS COMPONENTS
+// ARTICLES COMPONENTS
 import CardAllPublishedPosts from "./Cards/posts/CardAllPublishedPosts";
 import CardAllDraftPosts from "./Cards/posts/CardAllDraftPosts";
 
@@ -66,9 +66,12 @@ import CardAllRejectedUsers from "./Cards/users/CardAllRejectedUsers";
 import CardAllApprovedStaffs from "./Cards/staffs/CardAllApprovedStaffs";
 import CardAllPendingStaffs from "./Cards/staffs/CardAllPendingStaffs";
 import CardAllRejectedStaffs from "./Cards/staffs/CardAllRejectedStaffs";
-
 import CardAccountDetails from "./Cards/CardAccountDetails";
 import CardCreateAccount from "./Cards/CardCreateAccount";
+
+// DONATIONS COMPONENTS
+import CardCreateDonation from "./Cards/CardCreateDonation";
+
 import NewBlogPost from "./Forms/NewBlogPost";
 // import PostUploader from "./Forms/PostUploader";
 
@@ -122,6 +125,9 @@ export {
 
     CardAccountDetails,
     CardCreateAccount,
+
+    CardCreateDonation,
+
     NewBlogPost,
     // PostUploader,
     // IMPORTED COMPONENTS //

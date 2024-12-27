@@ -42,7 +42,7 @@ const DonationsList = ({ isLoggedIn }) => {
 
 
     const [isLoading, setIsLoading] = useState(true);
-    
+    const nairaSymbol = '₦';
 
     
     isLoggedIn = JSON.parse(localStorage.getItem('user'));
@@ -117,7 +117,7 @@ const DonationsList = ({ isLoggedIn }) => {
       async function fetchAllDonations() {                  
           var status = 'published';   // Status is Published
             
-          await api.get(`/api/v1/admin/donations/manage?page=${currentPage}&limit=${pageLimit}&status=${status}`)
+          await api.get(`/api/v3/admin/donations/manage?page=${currentPage}&limit=${pageLimit}&status=${status}`)
           .then((response) => {
               const { success, data, message } = response?.data;
               const { allActiveDonations, pagination } = data;
@@ -242,9 +242,7 @@ const DonationsList = ({ isLoggedIn }) => {
                             <div className="mx-auto flex flex-col items-center sm:px-20">  
 
 
-
-                                <h1 className="text-4xl font-black mb-32 mt-2">SUPPORT OUR CAUSE</h1>   
-                
+                                {/* <h1 className="text-4xl font-black mb-32 mt-2">SUPPORT OUR CAUSE</h1> */}               
 
                 
                                 {/* DONATIONS LISTING */}    
@@ -277,17 +275,23 @@ const DonationsList = ({ isLoggedIn }) => {
                                                                     </Link>
                                                                     <div className="px-6 pt-7 pb-12">
                                                                         <div className="font-black text-lg mb-1.5">
-                                                                            <Link className="text-slate-900 hover:text-slate-700 text-14xl/tighter" to={`/blog/${post?.uri}`}>
+                                                                            <Link className="text-slate-900 hover:text-slate-700 text-14xl/tighter" to={`/donations/${post?.uri}`}>
                                                                                 {post?.title}
                                                                             </Link>
                                                                         </div>
                                                                         <p className="text-slate-700 text-xl font-medium mb-5" title="Published date">{convertDate(post?.createdAt)}</p>
-                                                                        <p className="text-slate-800 text-xl/9 mb-5">            
-                                                                            {post?.excerpt}                
-                                                                        </p>
+                                                                        <div className="flex justify-center w-full">
+                                                                            <p className="text-slate-800 text-xl/9 mb-5">            
+                                                                                {nairaSymbol} {post?.amountToRaise}                
+                                                                            </p>
+
+                                                                            <p className="text-slate-800 text-xl/9 mb-5">            
+                                                                                {nairaSymbol} {post?.amountRaised}                
+                                                                            </p>
+                                                                        </div>
                                                                         <br />
-                                                                        <Link to={`/blog/${post?.uri}`} className="bg-green-500 text-white hover:text-gray-300 px-8 py-3 rounded-full">
-                                                                            <button type="button">Read More</button>
+                                                                        <Link to={`/donations/${post?.uri}`} className="bg-green-500 text-white hover:text-gray-300 px-8 py-3 rounded-full">
+                                                                            <button type="button">Donate</button>
                                                                         </Link>
                                                                     </div>
                                                                 </div>

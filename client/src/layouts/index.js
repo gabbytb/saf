@@ -9,6 +9,7 @@ import DashboardArticles from "./DashboardArticles";
 import DashboardCreateArticle from "./DashboardCreateArticle";
 
 import DashboardDonations from "./DashboardDonations";
+import DashboardCreateDonation from "./DashboardCreateDonation";
 
 import DashboardUsers from "./DashboardUsers";
 import DashboardUsersDetails from "./DashboardUsersDetails";
@@ -21,17 +22,19 @@ import DashboardCreateUser from "./DashboardCreateUser";
 
 
 export {    
-    SignUp,
+    SignUp,   
+    VerifySignUp, 
     RedirectVerification,
-    VerifySignUp,
     SignIn,
 
-    Dashboard,  
+    Dashboard,
+
     DashboardArticles,
-
-    DashboardDonations,  
-
     DashboardCreateArticle,
+
+    DashboardDonations,
+    DashboardCreateDonation,
+  
     DashboardUsers,
     DashboardUsersDetails,
     DashboardStaffs,

@@ -8,9 +8,9 @@ module.exports = app => {
 
     router.post("/api/v1/admin/donations/manage/create", donations.createDonation);
 
-    // router.get("/api/v1/admin/donations/manage", donations.findAllDonations);
-    // router.get("/api/v1/admin/donations/manage/activeDonations", donations.totalActiveDonations);
-    // router.get("/api/v1/admin/donations/manage/inActiveDonations", donations.totalInactiveDonations);
+    router.get("/api/v3/admin/donations/manage", donations.findAllDonations);
+    router.get("/api/v3/admin/donations/manage/activeDonations", donations.totalPublishedDonations);
+    router.get("/api/v3/admin/donations/manage/inActiveDonations", donations.totalDraftDonations);
 
     //// router.get("/api/v1/admin/donations/manage/:isActive", donations.findAllActiveDonations); 
     
