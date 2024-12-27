@@ -5614,6 +5614,10 @@ textarea#comments{
   letter-spacing: 0.1rem;
 }
 
+.tracking-veryytight{
+  letter-spacing: 0.12rem;
+}
+
 .text-black{
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));

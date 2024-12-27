@@ -2,8 +2,7 @@
   "name": "client",
   "description": "REACHING OUT TO GREAT MINDS",
   "version": "1.0.0",
-  "private": true,
-  "proxy": "http://192.168.0.113:8000",  
+  "private": true,   
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
     "@popperjs/core": "^2.11.8",

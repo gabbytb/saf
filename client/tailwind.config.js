@@ -64,6 +64,7 @@ module.exports = {
     letterSpacing: {
       supertight: '0.015em',
       verytight: '0.1rem',
+      veryytight: '0.12rem',
       subtight: '0.18rem',
       tightest: '0.3rem',
       tighten: '0.25rem',

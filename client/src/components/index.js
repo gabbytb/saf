@@ -1,11 +1,13 @@
 // HEADER
 import HomeNav from "./HomeNav";
-import Search from "./Search/Search";
 import Nav from "./Navbars/Nav";
 import NavSlider from "./Navbars/NavSlider";
 import NavNoTopBar from "./NavNoTopBar";
-import Preloader from "./Preloader";
 // HEADER
+
+// PRELOADER
+import Preloader from "./Preloader";
+// PRELOADER
 
 // OUR PROGRESS MAIN: BODY !
 import OurProgressBody from "./OurProgressBody";
@@ -78,7 +80,6 @@ export {
 
     // PRELOADER
     Preloader,
-    Search,
     // PRELOADER
        
     // HEADER

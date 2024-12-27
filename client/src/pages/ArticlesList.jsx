@@ -84,15 +84,17 @@ const ArticlesList = ({ isLoggedIn, }) => {
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
     useEffect(() => {
+        
+        setIsLoading(true);
 
         // *************************************************************************************************************
         // Function:-  CONDITIONAL LOGIC TO HANDLE PAGE URL RE-DIRECT, and SET PAGE TITLE FOR EACH INDIVIDUAL PAGE
         // *************************************************************************************************************            
         if (currentPage > 1 ) {               
-            
             const pageTitle = `Blog News - Page ${currentPage}`, 
                   siteTitle = "Samuel Akinola Foundation";
-            document.title = `${pageTitle} | ${siteTitle}`;                 
+            document.title = `${pageTitle} | ${siteTitle}`;          
+
             window.scrollTo({ top: 170, left: 0, behavior: 'smooth' });
 
             const new_URL = window.location.origin + `/blog/page/${currentPage}`;
@@ -103,7 +105,7 @@ const ArticlesList = ({ isLoggedIn, }) => {
                 nextBtn.classList.add('hidden')
             };
 
-        } else {    
+        } else {
 
             const pageTitle = 'Blog News', 
                   siteTitle = "Samuel Akinola Foundation";
@@ -114,12 +116,12 @@ const ArticlesList = ({ isLoggedIn, }) => {
             window.history.replaceState({}, document.title, new_URL );     
         };                                                
      
-
-
         async function fetchAllBlogPosts() {                                    
             const pageLimit = 10;   // Number of items per page  
             var status = 'published';   // Status is Published
               
+            setIsLoading(true);
+
             await api.get(`/api/v1/admin/posts/manage?page=${currentPage}&limit=${pageLimit}&status=${status}`)
             .then((response) => {
                 const { success, data, message } = response?.data;
@@ -167,6 +169,62 @@ const ArticlesList = ({ isLoggedIn, }) => {
 
 
 
+   
+
+    
+
+
+
+    if (isLoading) {
+
+        return (
+            <>
+            {/* PAGE ID - OPENING TAG */} 
+            <div id="blogPostsWrapper">
+
+                
+                {/* NAV HEADER */}    
+                { isLoggedIn?.is_verified ? <AdminNavSlider /> : <NavSlider /> }
+                {/* NAV HEADER */}    
+
+
+                {/* BODY */}    
+                <main id="blogPostsID" className="mx-auto">  
+                    {/* <div className="w-full h-122 h-123">                        
+                        <img src={blogbg} alt="blog background" className="w-full h-full" />  
+                    </div> */}                                                                        
+                 
+                    <BlogSlider sliderCards={blogBg} />                    
+
+                    <div className="container">
+                        <div className="px-6 mt-28 mb-28 grid">                     
+                            <div className="mx-auto flex flex-col items-center sm:px-20">  
+
+                                <h1 className="text-4xl font-black mb-32 mt-2">RECENT POSTS</h1>
+
+                                <div className="flex justify-center mb-32"> 
+                                    <p className="text-2xl font-medium">Loading...</p>
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </main>
+                {/* BODY */}
+
+
+                {/* FOOTER */} 
+                <HomeFooter />
+                {/* FOOTER */} 
+
+
+            </div>
+            {/* PAGE ID - CLOSING TAG */}
+        </>
+
+        );
+    };
 
 
 

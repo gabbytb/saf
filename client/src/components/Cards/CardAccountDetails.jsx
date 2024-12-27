@@ -439,7 +439,7 @@ export default function CardAccountDetails() {
                                         </label>
                                         <textarea
                                             type="text"
-                                            className="border-0 py-6 indent-4 mt-1.5 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-slate-800 rounded text-xl font-bold shadow focus:outline-none w-full ease-linear transition-all duration-150"
+                                            className="border-0 py-6 indent-4 mt-1.5 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-slate-800 rounded text-xl font-bold shadow focus:outline-none w-full ease-linear transition-all duration-150 tracking-veryytight text-black"
                                             // defaultValue="A beautiful UI Kit and Admin for React & Tailwind CSS. It is Free and Open Source."
                                             value={user?.aboutMe}
                                             disabled
