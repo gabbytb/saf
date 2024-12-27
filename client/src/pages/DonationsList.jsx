@@ -84,7 +84,7 @@ const DonationsList = ({ isLoggedIn }) => {
     useEffect(() => {
 
         setIsLoading(true);
-        
+
         // *************************************************************************************************************
         // Function:-  CONDITIONAL LOGIC TO HANDLE PAGE URL RE-DIRECT, and SET PAGE TITLE FOR EACH INDIVIDUAL PAGE
         // *************************************************************************************************************            
@@ -286,18 +286,20 @@ const DonationsList = ({ isLoggedIn }) => {
                                                                             </Link>
                                                                         </div>
                                                                         <p className="text-slate-700 text-xl font-medium mb-5" title="Published date">{convertDate(post?.createdAt)}</p>
-                                                                        <div className="flex justify-center w-full">
-                                                                            <p className="text-slate-800 text-xl/9 mb-5">            
-                                                                                {nairaSymbol} {post?.amountToRaise}                
+                                                                        <div className="flex justify-between w-full">
+                                                                            <p className="text-slate-800 text-2xl/9 mb-5 font-bold flex flex-col">            
+                                                                                <span className="">Target {nairaSymbol}</span>
+                                                                                <span>{post?.amountToRaise}</span>                
                                                                             </p>
 
-                                                                            <p className="text-slate-800 text-xl/9 mb-5">            
-                                                                                {nairaSymbol} {post?.amountRaised}                
+                                                                            <p className="text-slate-800 text-2xl/9 mb-5 font-bold flex flex-col">            
+                                                                                <span className="">Funds Raised {nairaSymbol}</span>
+                                                                                <span>{post?.amountRaised}</span>                
                                                                             </p>
                                                                         </div>
                                                                         <br />
-                                                                        <Link to={`/donations/${post?.uri}`} className="bg-green-500 text-white hover:text-gray-300 px-8 py-3 rounded-full">
-                                                                            <button type="button">Donate</button>
+                                                                        <Link to={`/donations/${post?.uri}`} className="bg-red-500 text-white hover:text-gray-300 px-8 py-3 rounded-full">
+                                                                            <button type="button">Donate now</button>
                                                                         </Link>
                                                                     </div>
                                                                 </div>

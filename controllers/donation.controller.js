@@ -163,7 +163,7 @@ exports.findAllDonations = async (req, res) => {
                                 .sort(sortOrder)
                                 .skip(parseInt(skip))
                                 .limit(parseInt(donationsLimit)); 
-        console.log("ALL DONATIONS ARRANGED ACCORDING TO MOST-RECENT: ", allDonations);
+        console.log("ALL DONATIONS ARRANGED ACCORDING TO MOST-RECENT: ", donations);
 
         
         const totalDonations = await Donation.countDocuments(query); // Total number of users with the given status

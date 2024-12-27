@@ -5522,6 +5522,11 @@ textarea#comments{
   font-size: .75rem;
 }
 
+.text-2xl\/9{
+  font-size: 1.5rem;
+  line-height: 2.25rem;
+}
+
 .font-black{
   font-weight: 900;
 }

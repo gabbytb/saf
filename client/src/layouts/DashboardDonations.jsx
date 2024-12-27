@@ -14,7 +14,6 @@ import {
     // CardAllPublishedPosts, CardAllDraftPosts,
     TableDropdown,    
 } from "../components";
-import { all } from "axios";
 
 // views
 // import { DonationsTable } from "../views";
@@ -157,18 +156,20 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
         };
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
     
-    async function fetchAllDonations() {               
-        await api.get(`/api/v1/admin/donations/manage?page=${currentPage}&limit=${pageLimit}`)
+    async function fetchAllDonations() {     
+        var limit = 10;   // Number of items per page
+
+        await api.get(`/api/v3/admin/donations/manage?page=${currentPage}&limit=${limit}`)
         .then((response) => {
                     const { success, data, message } = response.data;
-                    const { allDonations, pagination } = data;
+                    const { donations, pagination } = data;
 
                     if (!success && message === "No donation found") {
                         console.log("Success: ", success);
                         console.log("Message: ", message);
                     };
 
-                    setAllDonations(allDonations);
+                    setAllDonations(donations);
                     setPageLimit(pagination?.donationsLimit);
 
                     setTotalDonations(pagination?.donationsRecord);
@@ -686,7 +687,7 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
                                                                             <i className="fas fa-circle text-orange-500 mr-2"></i>{post?.status}
                                                                         </td>  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
-                                                                            <Link to={`/admin/blog/manage/${post?._id}`}>View details</Link>
+                                                                            <Link to={`/admin/donations/manage/${post?._id}`}>View details</Link>
                                                                         </td>                  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
                                                                             <TableDropdown />
@@ -729,7 +730,7 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
                                                                             <i className="fas fa-circle text-yellow-500 mr-2"></i>{post?.status}
                                                                         </td>  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
-                                                                            <Link to={`/admin/blog/manage/${post?._id}`}>View details</Link>
+                                                                            <Link to={`/admin/donations/manage/${post?._id}`}>View details</Link>
                                                                         </td>                  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
                                                                             <TableDropdown />
@@ -772,7 +773,7 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
                                                                             <i className="fas fa-circle text-green-500 mr-2"></i>{post?.status}
                                                                         </td>  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
-                                                                            <Link to={`/admin/blog/manage/${post?._id}`}>View details</Link>
+                                                                            <Link to={`/admin/donations/manage/${post?._id}`}>View details</Link>
                                                                         </td>                  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
                                                                             <TableDropdown />
