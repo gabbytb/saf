@@ -13,17 +13,15 @@ const Posts = () => {
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
-    const navigate = useNavigate();
     useEffect(() => {       
-        if (window.location.pathname === '/blog/post') {        
+        if (window.location.pathname === '/blog/page' || window.location.pathname === '/blog/page/') {        
             navigate('/blog');
         };    
-    }, [navigate]);
+    }, [window.location.pathname]);    
+    const navigate = useNavigate();
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
-    
-    
     
     
     return (

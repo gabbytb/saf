@@ -4,6 +4,7 @@ import api from "../api";
 import { NavSlider, HomeFooter, AdminNavSlider, } from "../components";
 import { blogBg } from "../constants";
 import BlogSlider from "../components/Slider/BlogSlider";
+import { spinner } from "../assets/images";
 
 
 
@@ -40,6 +41,10 @@ const convertDate = (dateString) => {
 const DonationsList = ({ isLoggedIn }) => { 
 
 
+    const [isLoading, setIsLoading] = useState(true);
+    
+
+    
     isLoggedIn = JSON.parse(localStorage.getItem('user'));
     // console.log('IS LOGGED IN = ', isLoggedIn?.isVerified);
 
@@ -47,10 +52,6 @@ const DonationsList = ({ isLoggedIn }) => {
     // console.log('WINDOW LOCATION PATHNAME = ', window.location.pathname);
     // console.log('WINDOW LOCATION SEARCH = ', window.location.search);
 
-    // eslint-disable-next-line
-    const [isLoading, setIsLoading] = useState(true);
-    
-    
 
 
 
@@ -60,15 +61,21 @@ const DonationsList = ({ isLoggedIn }) => {
     const [allDonations, setAllDonations] = useState([]);
     // console.log("ALL BLOG POSTS: ", allBlogPosts);
         
-    // eslint-disable-next-line
-    const [totalDonations, setTotalDonations] = useState(null);
-    // console.log("TOTAL BLOG POSTS: ", totalBlogPosts);
+        // eslint-disable-next-line
+        const [totalDonations, setTotalDonations] = useState(null);
+        // console.log("TOTAL BLOG POSTS: ", totalBlogPosts);
 
-    const [totalPages, setTotalPages] = useState(0);
-    // console.log("TOTAL BLOG PAGES: ", totalPages);
+            const [pageLimit, setPageLimit] = useState(10); // Number of items per page  
+            // console.log("BLOG PAGE LIMIT: ", pageLimit);
 
-    const [currentPage, setCurrentPage] = useState(1);
-    // const limit = 10; // Number of items per page   
+            const [totalPages, setTotalPages] = useState(0);
+            // console.log("TOTAL BLOG PAGES: ", totalPages);
+
+            const [currentPage, setCurrentPage] = useState(1);
+            // console.log("CURRENT BLOG PAGE: ", currentPage);
+
+
+    
 
 
     // *************************** //
@@ -107,8 +114,7 @@ const DonationsList = ({ isLoggedIn }) => {
    
 
 
-      async function fetchAllDonations() {                                    
-          const pageLimit = 10;   // Number of items per page  
+      async function fetchAllDonations() {                  
           var status = 'published';   // Status is Published
             
           await api.get(`/api/v1/admin/donations/manage?page=${currentPage}&limit=${pageLimit}&status=${status}`)
@@ -156,6 +162,60 @@ const DonationsList = ({ isLoggedIn }) => {
     // ****************************************************************************
     // ****************************************************************************  
 
+
+
+
+    
+
+
+    if (isLoading) {
+        return (
+            <>
+                {/* PAGE ID - OPENING TAG */} 
+                <div id="donationsListWrapper">
+
+                    
+                    {/* NAV HEADER */}    
+                    { isLoggedIn?.is_verified ? <AdminNavSlider /> : <NavSlider /> }
+                    {/* NAV HEADER */}    
+
+
+                    {/* BODY */}    
+                    <main id="donationsListID" className="mx-auto">  
+                        {/* <div className="w-full h-122 h-123">                        
+                            <img src={blogbg} alt="blog background" className="w-full h-full" />  
+                        </div> */}                                                                        
+                    
+                        <BlogSlider sliderCards={blogBg} />                    
+
+                        <div className="container">
+                            <div className="px-6 mt-28 mb-28 grid">                     
+                                <div className="mx-auto flex flex-col items-center sm:px-20">
+                                    <h1 className="text-4xl font-black mb-32 mt-2">SUPPORT OUR CAUSE</h1>   
+                    
+                                    <div className="flex justify-center mb-32">                                   
+                                        <div className="w-36 h-36">                                       
+                                            <img src={spinner} alt="Spinning" className="ml-80 mx-auto" />                                                              
+                                            <p className="text-xl tracking-extratight font-semibold">Loading...</p>                           
+                                        </div>                                  
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </main>
+                    {/* BODY */}
+
+
+                    {/* FOOTER */} 
+                    <HomeFooter />
+                    {/* FOOTER */} 
+
+
+                </div>
+                {/* PAGE ID - CLOSING TAG */}
+            </>
+        );
+    };
 
 
     return (

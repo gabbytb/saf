@@ -4,6 +4,7 @@ import api from "../api";
 import { blogBg } from "../constants";
 import BlogSlider from "../components/Slider/BlogSlider";
 import { NavSlider, HomeFooter, AdminNavSlider, } from "../components";
+import { spinner } from "../assets/images";
 
 
 
@@ -202,8 +203,11 @@ const ArticlesList = ({ isLoggedIn, }) => {
 
                                 <h1 className="text-4xl font-black mb-32 mt-2">RECENT POSTS</h1>
 
-                                <div className="flex justify-center mb-32"> 
-                                    <p className="text-2xl font-medium">Loading...</p>
+                                <div className="flex justify-center mb-32">                                   
+                                    <div className="w-36 h-36">                                       
+                                            <img src={spinner} alt="Spinning" className="ml-80 mx-auto" />                                                              
+                                            <p className="text-xl tracking-extratight font-semibold">Loading...</p>                           
+                                    </div>                                  
                                 </div>
 
                             </div>

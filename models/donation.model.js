@@ -44,24 +44,7 @@ module.exports = mongoose => {
         },
         amountRaised: { 
             type: String,
-        },    
-        author: [
-            { 
-                _id: { 
-                    type: Number,                   
-                },
-                name: {                    
-                    type: String,
-                    default: 'anonymous',
-                }, 
-                email: { 
-                    type: String,
-                }, 
-                bio: { 
-                    type: String,
-                },             
-            },
-        ],
+        },
         donor: [
             { 
                 _id: { 
@@ -81,14 +64,17 @@ module.exports = mongoose => {
                     type: Number,
                 }, 
                 company: { 
-                    type: String,
+                    type: String,                    
                 },
-                amount: { 
-                    type: String,
+                amountDonated: { 
+                    type: Number, // The donation amount                   
                 },
                 comments: { 
-                    type: String,
-                },       
+                    type: String,                    
+                },      
+                donationMethod: {
+                    type: String, // How the donation was made (credit card, PayPal, etc.)     
+                }
             },
         ],
         status: { 

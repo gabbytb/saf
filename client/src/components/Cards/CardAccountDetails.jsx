@@ -498,7 +498,7 @@ export default function CardAccountDetails() {
                                            
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
                                                 placeholder={user?.firstName}
                                                 name="firstName"
                                                 onChange={handleChangeUserInfo}                                      
@@ -517,7 +517,7 @@ export default function CardAccountDetails() {
 
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
                                                 placeholder={user?.lastName}
                                                 name="lastName"
                                                 onChange={handleChangeUserInfo}                                            
@@ -536,7 +536,7 @@ export default function CardAccountDetails() {
                                         
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150 hover:cursor-not-allowed"                                              
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150 hover:cursor-not-allowed"                                              
                                                 placeholder={user?.email} 
                                                 name="email"
                                                 onChange={handleChangeUserInfo} 
@@ -556,7 +556,7 @@ export default function CardAccountDetails() {
                                         <input
                                             type="number"
                                             min={0}
-                                            className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 bg-white rounded-lg text-xl tracking-verytight shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150 h-168 indent-3 appearance-none"
+                                            className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 rounded-lg text-xl tracking-verytight shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150 h-168 indent-3 appearance-none"
                                             placeholder={user?.phone}
                                             name="phone"
                                             onChange={handleChangeUserInfo}                                            
@@ -573,7 +573,7 @@ export default function CardAccountDetails() {
                             </h6>
                             <div className="flex flex-wrap">
 
-                                {/* ADDRESS 1 AND 2 */}
+                                {/* ADDRESS AND ADDRESS 2 */}
                                 <div className="w-full lg:w-12/12 px-4 flex gap-8">
 
                                     {/* Address */}
@@ -585,7 +585,7 @@ export default function CardAccountDetails() {
 
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                                
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                                
                                                 placeholder={user?.address}
                                                 name="address"
                                                 onChange={handleChangeUserInfo}                                              
@@ -602,7 +602,7 @@ export default function CardAccountDetails() {
                                        
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
                                                 placeholder={user?.address2}
                                                 name="address2"
                                                 onChange={handleChangeUserInfo}                                        
@@ -624,7 +624,7 @@ export default function CardAccountDetails() {
                                         
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                            
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                            
                                                 placeholder={user?.city}
                                                 name="city"
                                                 onChange={handleChangeUserInfo}                                                
@@ -641,7 +641,7 @@ export default function CardAccountDetails() {
                                        
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                              
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                              
                                                 placeholder={user?.state}
                                                 name="state"
                                                 onChange={handleChangeUserInfo}                                               
@@ -663,7 +663,7 @@ export default function CardAccountDetails() {
                                        
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                              
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                              
                                                 placeholder={user?.country}
                                                 name="country"
                                                 onChange={handleChangeUserInfo}                                                
@@ -680,7 +680,7 @@ export default function CardAccountDetails() {
                                      
                                             <input
                                                 type="text"
-                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
+                                                className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 rounded-xl text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
                                                 placeholder={user?.postalCode}
                                                 name="postalCode"
                                                 onChange={handleChangeUserInfo}                                               
@@ -699,10 +699,10 @@ export default function CardAccountDetails() {
                             </h6>
                             <div className="flex flex-wrap">
                                 
-                                {/* OPTIONAL: BIO */}
+                                {/* OPTIONALS: */}
                                 <div className="w-full lg:w-12/12 px-4">
 
-                                    {/* About Me */}
+                                    {/* BIO */}
                                     <div className="relative w-full mb-3">
                                         <label
                                             className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
@@ -711,7 +711,7 @@ export default function CardAccountDetails() {
                                     
                                             <textarea
                                                 type="text"
-                                                className="border-0 py-6 indent-4 mt-1.5 mb-6 placeholder-gray-600 text-blueGray-600 bg-gray-900 rounded text-xl shadow hover:bg-white focus:bg-white focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                                
+                                                className="border-0 py-6 indent-4 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 bg-gray-900 rounded text-xl shadow hover:bg-white focus:bg-white focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"                                                
                                                 placeholder={user?.aboutMe}
                                                 name="aboutMe"
                                                 onChange={handleChangeUserInfo}                                              

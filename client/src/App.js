@@ -84,15 +84,15 @@ export default function App() {
           <Route path="/user/login" element={<SignIn />} />        
         
           <Route path="/blog" element={<ArticlesList />} />  
-          <Route path="/blog/page/:id" element={<ArticleDetails />} />  
+          <Route path="/blog/page/:id" element={<ArticleDetails />} />         
+          <Route path="/blog/page" element={<Posts />} />
+
           <Route path="/blog/:slug" element={<ArticleDetails />} />        
           
           <Route path="/donations" element={<DonationsList />} />
 
           {/* <Route path="/blog/page/:id" element={<BlogPostPages />} />   */}  
           {/* <Route path="/blog/page/:id" element={<BlogPostPages //>} children=[] /> */}   
-
-          <Route path="/blog/post" element={<Posts />} />   
 
           <Route path="/home" element={<OurProgress />} />
 
