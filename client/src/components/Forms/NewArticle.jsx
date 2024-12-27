@@ -252,7 +252,7 @@ const NewBlogPost = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
 
 
 
-
+    // SET FEATURED IMAGE TITLE
     useEffect(() => {
         function autoInitiate() {
             var pImg = document.querySelectorAll(".post_img");

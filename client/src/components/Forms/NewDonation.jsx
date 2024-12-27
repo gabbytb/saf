@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, } from "react";
 import { useNavigate } from "react-router-dom";
 import api from "../../api";
 import { Editor } from "@tinymce/tinymce-react";
@@ -52,18 +52,24 @@ const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
     // ************************************
     // MANAGE STATE:-  TO FIND USER BY ID
     // ************************************
-    const [ donation, setDonation ] = useState({ 
-        images: [], 
+    const [ donation, setDonation ] = useState({     
         title: '', 
         description: '', 
         uri: '',
         excerpt: '', 
-        categories: [],
-        tags: [], 
+        images: [
+            { url: '', alt: '', featured: true },  // The first image is featured
+            { url: '', alt: '', featured: false }  // The second image is not featured
+        ],  // Initialize with one image
+        author: [
+            { img: '', name: '', email: '', bio: '' },
+        ],
+        tags: [],
+        categories: [],        
         amountToRaise: null, 
-        amountRaised: 0, 
+        amountRaised: 0,
         author: [],
-        isActive: false,
+        isActive: true,
         status: '',
     });
 
@@ -146,7 +152,6 @@ const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
     const formatUrl = (data) => {
         return data.replace(/[^A-Z0-9]+/ig, "-");
     };
-
 
 
 
@@ -256,6 +261,20 @@ const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
         });
     };
 
+
+
+    // SET FEATURED IMAGE TITLE
+    useEffect(() => {
+        function autoInitiate() {
+            var pImg = document.querySelectorAll(".post_img");
+            for (var n = 0; n < pImg?.length; n++) {
+                if (n === 0) {
+                   pImg[n].innerHTML='Featured Image: '; 
+                };
+            };   
+        };
+        autoInitiate();
+    }, []);
 
 
 
@@ -435,7 +454,7 @@ const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
                                                 {/* Donation Images: Dynamic image inputs */}
                                                 <div id="donationImgID" className="w-full lg:w-12/12 px-4 image_wrap">                   
                                                     {
-                                                        donation?.images.map((image, index) => (
+                                                        donation?.images?.map((image, index) => (
                                                             <div key={index} className="relative w-full mb-3">                                                                              
                                                                 <label className="flex flex-col uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-3 post_img" htmlFor="url">
                                                                     Image URL:   
