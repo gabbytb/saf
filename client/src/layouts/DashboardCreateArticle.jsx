@@ -5,7 +5,7 @@ import api from "../api";
 import { 
     Sidebar, 
     UserDropdown, 
-    NewBlogPost, 
+    NewArticle, 
 } from "../components";
 
 
@@ -201,7 +201,7 @@ const DashboardCreateArticle = ({ isLoggedIn }) => {
                     <div className="px-4 md:px-10 mx-auto w-full -m-24">                    
                         <div className="flex flex-wrap">
                             <div className="w-full px-4">            
-                                <NewBlogPost firstName={firstName} lastName={lastName} userEmail={userEmail}
+                                <NewArticle firstName={firstName} lastName={lastName} userEmail={userEmail}
                                      displayImg={displayImg} userBio={userBio} />
                             </div>                            
                         </div>

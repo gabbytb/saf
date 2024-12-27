@@ -5,7 +5,7 @@ import api from "../api";
 import { 
     Sidebar, 
     UserDropdown, 
-    CardCreateAccount,
+    NewUser,
 } from "../components";
 
 
@@ -204,7 +204,7 @@ const DashboardCreateUser = ({ isLoggedIn }) => {
                             <div className="w-full px-4">
                                 
                                 {/* NEW User Details */}
-                                <CardCreateAccount />
+                                <NewUser  />
                                 {/* NEW User Details */}
 
                             </div>

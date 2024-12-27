@@ -1,13 +1,13 @@
-// HEADER
+// PRELOADER
+import Preloader from "./Preloader";
+// PRELOADER
+
+// // HEADER
 import HomeNav from "./HomeNav";
 import Nav from "./Navbars/Nav";
 import NavSlider from "./Navbars/NavSlider";
 import NavNoTopBar from "./NavNoTopBar";
 // HEADER
-
-// PRELOADER
-import Preloader from "./Preloader";
-// PRELOADER
 
 // OUR PROGRESS MAIN: BODY !
 import OurProgressBody from "./OurProgressBody";
@@ -33,10 +33,6 @@ import FooterSocialCard from "./FooterSocialCard";
 import AdminNavSlider from "./Navbars/AdminNavSlider";
 import DashboardMenuCard from "./DashboardMenuCard";
 // ADMIN DASHBOARD
-
-
-
-
 
 // IMPORTED TEST COMPONENTS
 import Sidebar from "./Sidebar/Sidebar";
@@ -66,13 +62,14 @@ import CardAllRejectedUsers from "./Cards/users/CardAllRejectedUsers";
 import CardAllApprovedStaffs from "./Cards/staffs/CardAllApprovedStaffs";
 import CardAllPendingStaffs from "./Cards/staffs/CardAllPendingStaffs";
 import CardAllRejectedStaffs from "./Cards/staffs/CardAllRejectedStaffs";
+
+// VIEWS
 import CardAccountDetails from "./Cards/CardAccountDetails";
-import CardCreateAccount from "./Cards/CardCreateAccount";
 
-// DONATIONS COMPONENTS
-import CardCreateDonation from "./Cards/CardCreateDonation";
-
-import NewBlogPost from "./Forms/NewBlogPost";
+// CREATIVE COMPONENTS
+import NewArticle from "./Forms/NewArticle";
+import NewDonation from "./Forms/NewDonation";
+import NewUser from "./Forms/NewUser";
 // import PostUploader from "./Forms/PostUploader";
 
 
@@ -92,11 +89,6 @@ export {
     NavNoTopBar,
     // HEADER
 
-
-
-
-    
-    // IMPORTED COMPONENTS //
     // DROPDOWNS
     UserDropdown,
     UserDropdownPro,
@@ -105,6 +97,7 @@ export {
     // DROPDOWNS
 
     Sidebar,
+
     HeaderStats,
     CardStats,
     CardBarChart,
@@ -124,18 +117,12 @@ export {
     CardAllRejectedStaffs,
 
     CardAccountDetails,
-    CardCreateAccount,
-
-    CardCreateDonation,
-
-    NewBlogPost,
-    // PostUploader,
-    // IMPORTED COMPONENTS //
     
-
-
-
-
+    NewArticle,
+    NewDonation,
+    NewUser,
+    // PostUploader,
+    
     // OUR PROGRESS MAIN: BODY !
     OurProgressBody,
     SingleCustomerTestimonialQuote,
@@ -159,4 +146,5 @@ export {
     AdminNavSlider,
     DashboardMenuCard,
     // ADMIN DASHBOARD
+    
 };

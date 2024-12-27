@@ -11,7 +11,7 @@ import { Editor } from "@tinymce/tinymce-react";
 
 
 
-const CardCreateDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) => {
+const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) => {
 
     // console.clear();
 
@@ -260,7 +260,7 @@ const CardCreateDonation = ({ firstName, lastName, userEmail, displayImg, userBi
 
 
 
-    
+
 
     return (
         <div id="createDonationID" className="relative flex flex-col min-w-0 break-words xs:w-full lg:w-781 mb-16 shadow-lg rounded-lg bg-blueGray-100 border-0">
@@ -309,7 +309,7 @@ const CardCreateDonation = ({ firstName, lastName, userEmail, displayImg, userBi
                                 <label
                                     className="flex flex-col uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                                             htmlFor="title">
-                                    Donation Title
+                                    Title
                                                         
                                     <input
                                         type="text"
@@ -330,7 +330,7 @@ const CardCreateDonation = ({ firstName, lastName, userEmail, displayImg, userBi
                                                         <label
                                                             className="flex flex-col uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
                                                             htmlFor="uri">
-                                                            Link URL 
+                                                            URL 
                                                         
                                                             <input
                                                                 type="text"
@@ -568,4 +568,4 @@ const CardCreateDonation = ({ firstName, lastName, userEmail, displayImg, userBi
     );
 };
 
-export default CardCreateDonation;
+export default NewDonation;
