@@ -1,6 +1,6 @@
 const db = require('../models');
 const Donation = db.donations;
-
+const Image = db.images;
 
 
 
@@ -19,7 +19,7 @@ exports.createDonation = async (req, res) => {
     try {
 
         // FORM VALIDATION:  "Compulsory Payload"
-        if (!(title && amountToRaise)) {
+        if (!(title)) {
             const responseData = {
                 success: false,
                 message: "Fill required inputs"
@@ -103,7 +103,7 @@ exports.createDonation = async (req, res) => {
 
         console.log(          
             "\n*********************************************************",
-            "\n*****          NEW BLOG ARTICLE DETAILS             *****",
+            "\n*****            NEW DONATION DETAILS               *****",
             "\n*********************************************************",
             `\nDONATION Status: ${savedDonation}`,
             "\n******************************************************************************************\n");
@@ -123,7 +123,7 @@ exports.createDonation = async (req, res) => {
             success: false, 
             message: "Internal Server Error",
         };
-        console.error("Unexpected error during account verification: ", error);
+        console.error("Unexpected error occurred while Creating Donation: ", error);
         return res.status(500).json(responseData);  
     }
 };
@@ -159,7 +159,7 @@ exports.findAllDonations = async (req, res) => {
         };
 
 
-        const allDonations = await Donation.find(query)
+        const donations = await Donation.find(query)
                                 .sort(sortOrder)
                                 .skip(parseInt(skip))
                                 .limit(parseInt(donationsLimit)); 
@@ -179,7 +179,7 @@ exports.findAllDonations = async (req, res) => {
         const responseData = {
             success: true,
             data: {
-                allDonations,
+                donations,
                 pagination
             },
             message: "Items retrieved successfully",

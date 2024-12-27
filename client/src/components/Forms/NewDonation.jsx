@@ -16,7 +16,7 @@ const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
     // console.clear();
 
     const navigate = useNavigate();
-    
+    const nairaSymbol = '₦';
 
 
 
@@ -66,18 +66,26 @@ const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
         ],
         tags: [],
         categories: [],        
-        amountToRaise: null, 
+        amountToRaise: 0, 
         amountRaised: 0,
         author: [],
-        isActive: true,
-        status: '',
+        isActive: true,     
     });
+    console.log("NEW DONATION: ", donation);
 
     const [formMessage, setFormMessage] = useState(null);
-    // console.log("FORM MESSAGE: ", formMessage);
+    console.log("FORM MESSAGE: ", formMessage);
 
     const [formSubmitted, setFormSubmitted] = useState(false);
-    // console.log("FORM SUBMISSION Successful: ", formSubmitted);
+    console.log("FORM SUBMISSION Successful: ", formSubmitted);
+  
+
+
+
+
+
+
+
 
     async function handleDonationInfo(e) {
         let name = e.target.name;
@@ -90,7 +98,7 @@ const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
     };
 
     // Handle changes to image data
-     const handleImageChange = (index, e) => {
+    const handleImageChange = (index, e) => {
         const { name, value, type, checked } = e.target;
         const newImages = [...donation.images];
         
@@ -149,40 +157,42 @@ const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
     };
 
     // Function to format url appropriately
-    const formatUrl = (data) => {
-        return data.replace(/[^A-Z0-9]+/ig, "-");
+    const formatUrl = (x) => {
+        return x.replace(/[^A-Z0-9]+/ig, "-");
     };
 
-
+    const numberWithCommas = (x) => {
+        // return data.toLocaleString('en-US', { style: 'currency', currency: 'NGN', minimumFractionDigits: 3});
+        return x.toLocaleString(undefined, {maximumFractionDigits:2});
+    };
 
     // Function to handle form submission
     const handleSubmit = async (e) => {
         e.preventDefault();         
 
         var payload = {
-            images: donation?.images,
-            title: donation?.title,
-            description: donation?.description,
-            excerpt: donation?.excerpt,
-            uri: donation?.uri === '' ? formatUrl(donation?.title.toLowerCase()) : formatUrl(donation?.uri.toLowerCase()),
+            images: donation.images,
+            title: donation.title,
+            description: donation.description,
+            excerpt: donation.excerpt,
+            uri: donation.uri === '' ? formatUrl(donation.title.toLowerCase()) : formatUrl(donation.uri.toLowerCase()),
             author: [
                 {
                     img: displayImg,
-                    name: firstName + lastName,
+                    name: firstName + ' ' + lastName,
                     email: userEmail,
                     bio: userBio,
                 }
             ],
-            amountToRaise: donation?.amountToRaise,
-            amountRaised: donation?.amountRaised,
-            isActive: donation?.isActive,
-            status: donation?.status,
-            tags: donation?.tags,
-            categories: donation?.categories, 
+            amountToRaise: numberWithCommas(donation.amountToRaise),
+            amountRaised: numberWithCommas(donation.amountRaised),
+            isActive: donation.isActive,        
+            tags: donation.tags,
+            categories: donation.categories, 
         };
- 
+        console.log('DONATION PAYLOAD', payload)
 
-        await api.post('/api/v1/admin/donations/manage/create', payload) // Update the URL to your API endpoint
+        await api.post("/api/v1/admin/donations/manage/create", payload) // Update the URL to your API endpoint
         .then((response) => {
             const { success, message, data } = response.data;
             var errMsg = document.querySelector('#newDonationFormID .create_error'); 
@@ -263,6 +273,8 @@ const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
 
 
 
+
+
     // SET FEATURED IMAGE TITLE
     useEffect(() => {
         function autoInitiate() {
@@ -275,6 +287,7 @@ const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
         };
         autoInitiate();
     }, []);
+
 
 
 
@@ -357,7 +370,7 @@ const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
                                                                 placeholder=""   
                                                                 id="uri"   
                                                                 name="uri"   
-                                                                value={donation?.uri === '' ? formatUrl(donation?.title.toLowerCase()) : formatUrl(donation?.uri.toLowerCase())}                                      
+                                                                value={donation?.uri === '' ? formatUrl(donation?.title?.toLowerCase()) : formatUrl(donation?.uri?.toLowerCase())}                                      
                                                                 onChange={handleDonationInfo}                                           
                                                             />
                                                         </label>
@@ -451,6 +464,52 @@ const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
                                                 </div>                            
                     
 
+                                                {/* Donation Target and Amount Raised */}
+                                                <div className="flex flex-wrap">
+                    
+                                                    {/* TARGET and FUNDS RAISED */}
+                                                    <div className="w-full lg:w-12/12 px-4 flex gap-8">
+
+                                                        {/* Target */}
+                                                        <div className="relative w-3/6 mb-3">
+                                                            <label
+                                                                className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2"
+                                                                htmlFor="amountToRaise">
+                                                                Target ({nairaSymbol})
+
+                                                                <input
+                                                                    type="number"
+                                                                    className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-xl font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                                
+                                                                    id="amountToRaise"
+                                                                    name="amountToRaise"
+                                                                    placeholder="0"
+                                                                    onChange={handleDonationInfo}            
+                                                                />
+                                                            </label>
+                                                        </div>
+
+                                                        {/* Funds Raised */}
+                                                        <div className="relative w-3/6 mb-3">
+                                                            <label
+                                                                className="flex flex-col uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2"
+                                                                htmlFor="amountRaised">
+                                                                Amount Raised ({nairaSymbol})
+                                                            
+                                                                <input
+                                                                    type="number"
+                                                                    className="border-0 px-3 py-3 mt-0 mb-6 placeholder-gray-600 text-blueGray-600 bg-white rounded text-xl font-semibold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"                                        
+                                                                    id="amountRaised"
+                                                                    name="amountRaised"
+                                                                    placeholder="0"                                                                   
+                                                                    onChange={handleDonationInfo}     
+                                                                />
+                                                            </label>
+                                                        </div>
+                                                        
+                                                    </div>
+                                                </div> 
+
+
                                                 {/* Donation Images: Dynamic image inputs */}
                                                 <div id="donationImgID" className="w-full lg:w-12/12 px-4 image_wrap">                   
                                                     {
@@ -488,11 +547,11 @@ const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
                     
                                             </div>
                     
-                                            <hr className="mt-6 border-b-1 border-blueGray-300" />
-                    
+                                            {/* <hr className="mt-6 border-b-1 border-blueGray-300" />                    
                                             <h6 className="text-slate-700 text-xl tracking-verytight mt-10 mb-8 px-4 font-bold uppercase">
                                                 Donations Attributes
-                                            </h6>
+                                            </h6> */}
+
                                             <div className="flex flex-wrap">
                     
                                                 {/* TAGS AND CATEGORIES WRAPPER */}
@@ -556,8 +615,7 @@ const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
                                                     </label>                                                                                      
                                                 </div>
                     
-                                            </div>    
-                                        
+                                            </div>                                        
                     
                     
                                             {/* SUBMIT BUTTON */}

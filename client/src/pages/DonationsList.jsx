@@ -59,13 +59,13 @@ const DonationsList = ({ isLoggedIn }) => {
     // MANAGE STATE:-  TO FIND ALL BLOG POSTS
     // ****************************************************************************
     const [allDonations, setAllDonations] = useState([]);
-    // console.log("ALL BLOG POSTS: ", allBlogPosts);
+    console.log("ALL DONATIONS: ", allDonations);
         
         // eslint-disable-next-line
         const [totalDonations, setTotalDonations] = useState(null);
         // console.log("TOTAL BLOG POSTS: ", totalBlogPosts);
 
-            const [pageLimit, setPageLimit] = useState(10); // Number of items per page  
+            // const [pageLimit, setPageLimit] = useState(10); // Number of items per page  
             // console.log("BLOG PAGE LIMIT: ", pageLimit);
 
             const [totalPages, setTotalPages] = useState(0);
@@ -83,67 +83,70 @@ const DonationsList = ({ isLoggedIn }) => {
     // *************************** //
     useEffect(() => {
 
-      // *************************************************************************************************************
-      // Function:-  CONDITIONAL LOGIC TO HANDLE PAGE URL RE-DIRECT, and SET PAGE TITLE FOR EACH INDIVIDUAL PAGE
-      // *************************************************************************************************************            
-      if (currentPage > 1 ) {               
-          
-          const pageTitle = `Donate Now - Page ${currentPage}`, 
-                siteTitle = "Samuel Akinola Foundation";
-          document.title = `${pageTitle} | ${siteTitle}`;                 
-          window.scrollTo({ top: 170, left: 0, behavior: 'smooth' });
-
-          const new_URL = window.location.origin + `/donations/page/${currentPage}`;
-          window.history.replaceState({}, document.title, new_URL );
-
-          var nextBtn = document.querySelector('.next-pg');
-          if (nextBtn.classList.contains('cursor-not-allowed')) {
-              nextBtn.classList.add('hidden')
-          };
-
-      } else {    
-
-          const pageTitle = 'Donate Now', 
-                siteTitle = "Samuel Akinola Foundation";
-          document.title = `${pageTitle} | ${siteTitle}`;                 
-          window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
-
-          const new_URL = window.location.origin + '/donations';                                               
-          window.history.replaceState({}, document.title, new_URL );     
-      };                                                
-   
-
-
-      async function fetchAllDonations() {                  
-          var status = 'published';   // Status is Published
+        setIsLoading(true);
+        
+        // *************************************************************************************************************
+        // Function:-  CONDITIONAL LOGIC TO HANDLE PAGE URL RE-DIRECT, and SET PAGE TITLE FOR EACH INDIVIDUAL PAGE
+        // *************************************************************************************************************            
+        if (currentPage > 1 ) {               
             
-          await api.get(`/api/v3/admin/donations/manage?page=${currentPage}&limit=${pageLimit}&status=${status}`)
-          .then((response) => {
-              const { success, data, message } = response?.data;
-              const { allActiveDonations, pagination } = data;
-      
-              if (!success && message === "No donations found") {
-                  console.log("Success: ", success);
-                  console.log("Message: ", message);
-              };
-      
-              setAllDonations(allActiveDonations);
+            const pageTitle = `Donate Now - Page ${currentPage}`, 
+                    siteTitle = "Samuel Akinola Foundation";
+            document.title = `${pageTitle} | ${siteTitle}`;                 
+            window.scrollTo({ top: 170, left: 0, behavior: 'smooth' });
 
-              setTotalDonations(pagination?.donationsRecord);
-              setTotalPages(pagination?.lastPage);                           
-          })
-          .catch((error) => {
-              console.log("Error fetching data: ", error);
-          })
-          .finally(() => {
-              setIsLoading(false);
-          });           
-      };      
+            const new_URL = window.location.origin + `/donations/page/${currentPage}`;
+            window.history.replaceState({}, document.title, new_URL );
 
-      var timerID = setTimeout(fetchAllDonations, 400);   // Delay execution by 400ms
-      return () => {
-          clearTimeout(timerID);     // Clean up timer if component unmounts or token changes
-      };
+            var nextBtn = document.querySelector('.next-pg');
+            if (nextBtn.classList.contains('cursor-not-allowed')) {
+                nextBtn.classList.add('hidden')
+            };
+
+        } else {    
+
+            const pageTitle = 'Donate Now', 
+                    siteTitle = "Samuel Akinola Foundation";
+            document.title = `${pageTitle} | ${siteTitle}`;                 
+            window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
+
+            const new_URL = window.location.origin + '/donations';                                               
+            window.history.replaceState({}, document.title, new_URL );     
+        };                                                
+    
+
+
+        async function fetchAllDonations() {  
+            var pageLimit = 10;   // Number of items per page       
+            var status = 'published';   // Status is Published
+                
+            await api.get(`/api/v3/admin/donations/manage?page=${currentPage}&limit=${pageLimit}&status=${status}`)
+            .then((response) => {
+                const { success, data, message } = response?.data;
+                const { donations, pagination } = data;
+        
+                if (!success && message === "No donations found") {
+                    console.log("Success: ", success);
+                    console.log("Message: ", message);
+                };
+        
+                setAllDonations(donations);
+
+                setTotalDonations(pagination?.donationsRecord);
+                setTotalPages(pagination?.lastPage);                           
+            })
+            .catch((error) => {
+                console.log("Error fetching data: ", error);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });           
+        };
+
+        var timerID = setTimeout(fetchAllDonations, 400);   // Delay execution by 400ms
+        return () => {
+            clearTimeout(timerID);     // Clean up timer if component unmounts or token changes
+        };
 
     }, [currentPage]); 
     // Fetch data when currentPage changes and update URL with /page/currentPage value    
@@ -161,6 +164,7 @@ const DonationsList = ({ isLoggedIn }) => {
     };
     // ****************************************************************************
     // ****************************************************************************  
+
 
 
 
@@ -218,6 +222,8 @@ const DonationsList = ({ isLoggedIn }) => {
     };
 
 
+
+
     return (
         <>
             {/* PAGE ID - OPENING TAG */} 
@@ -253,8 +259,7 @@ const DonationsList = ({ isLoggedIn }) => {
                                                 allDonations?.map((post, index) => {                
                                                     return (                                        
                                                             <div key={index} className="self-stretch mb-12">
-                                                                <div className="rounded shadow-md h-full">
-                                                                    {/* <Link to={`/blog/${formatUrl(post.url)}`}> */}
+                                                                <div className="rounded shadow-md h-full">                                                                  
                                                                     <Link to={`/donations/${post?.uri}`}>
                                                                         {
                                                                             post?.images?.map((item) => {
@@ -273,6 +278,7 @@ const DonationsList = ({ isLoggedIn }) => {
                                                                             })
                                                                         }                                                                
                                                                     </Link>
+
                                                                     <div className="px-6 pt-7 pb-12">
                                                                         <div className="font-black text-lg mb-1.5">
                                                                             <Link className="text-slate-900 hover:text-slate-700 text-14xl/tighter" to={`/donations/${post?.uri}`}>

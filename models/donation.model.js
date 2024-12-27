@@ -40,10 +40,10 @@ module.exports = mongoose => {
         tags: [],
         categories: [],
         amountToRaise: { 
-            type: String,
+            type: Number,
         },
         amountRaised: { 
-            type: String,
+            type: Number,
         },
         donor: [
             { 
@@ -52,7 +52,7 @@ module.exports = mongoose => {
                 },
                 firstName: {                    
                     type: String,
-                    default: 'anonymous',
+                    // default: 'anonymous',
                 }, 
                 lastName: {                    
                     type: String,                    
@@ -85,10 +85,13 @@ module.exports = mongoose => {
             type: Boolean, 
             default: false,
         },
-    });
+    }, { 
+        versionKey: false, 
+        timestamps: true,  
+    }); 
 
-    const Donations = mongoose.model("Donation", donationSchema);
+    const Donation = mongoose.model("Donation", donationSchema);
 
-    return Donations;
+    return Donation;
 
 };
