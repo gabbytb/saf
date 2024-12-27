@@ -45,14 +45,18 @@ const DashboardCreateDonation = ({ isLoggedIn }) => {
     // ***************************************************************************
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
     // ***************************************************************************
+    // const userId = isLoggedIn?.id ? isLoggedIn?.id : logOut();
+    // console.log("Logged-In UserID: ", id);
     const firstName = isLoggedIn?.first_name ? isLoggedIn?.first_name : logOut();
     // console.log("Logged-In User First Name: ", firstName);
-    const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();            
+    const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();
     // console.log("Logged-In User Last Name: ", lastName);
-    const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut(); 
-    // console.log("Logged-In User E-mail: ", userEmail);
+    const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
-    // console.log("Logged-In User E-mail: ", userRoles);    
+    const displayImg = isLoggedIn?.displayImg ? isLoggedIn?.displayImg : '';
+    const userBio = isLoggedIn?.aboutMe ? isLoggedIn?.aboutMe : '';
+    // ***************************************************************************
+    // ***************************************************************************
     // ***************************************************************************
     // ***************************************************************************
 
@@ -208,7 +212,7 @@ const DashboardCreateDonation = ({ isLoggedIn }) => {
                             <div className="w-full px-4">
                                 
                                 {/* NEW User Details */}
-                                <CardCreateDonation />
+                                <CardCreateDonation firstName={firstName} lastName={lastName} userEmail={userEmail} displayImg={displayImg} userBio={userBio} />
                                 {/* NEW User Details */}
 
                             </div>

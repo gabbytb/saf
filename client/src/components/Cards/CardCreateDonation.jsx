@@ -1,5 +1,4 @@
 import { useState } from "react";
-import { googleLogout } from "@react-oauth/google";
 import { useNavigate } from "react-router-dom";
 import api from "../../api";
 import { Editor } from "@tinymce/tinymce-react";
@@ -12,48 +11,12 @@ import { Editor } from "@tinymce/tinymce-react";
 
 
 
-const CardCreateDonation = ({ isLoggedIn }) => {
+const CardCreateDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) => {
 
     // console.clear();
 
     const navigate = useNavigate();
     
-
-
-        
-    // ***************************************************************************
-    // CURRENT ACTIVE USER:-
-    // ***************************************************************************
-    isLoggedIn = JSON.parse(localStorage.getItem("user"));
-    // ***************************************************************************
-    // FUNCTION TO LOG-OUT CURRENT ACTIVE USER
-    // ***************************************************************************
-    function logOut() {
-        // Clear User Details from Local Storage
-        localStorage.removeItem("user");
-        localStorage.clear();
-        // log out function to log the user out of google and set the profile array to null
-        googleLogout();
-        // redirect to Login Page
-        // const redirToLOGIN = "/user/login";
-        // window.location.replace(redirToLOGIN);
-        navigate("/user/login");
-    };
-    // ***************************************************************************
-    // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
-    // *************************************************************************** 
-    // const userId = isLoggedIn?.id ? isLoggedIn?.id : logOut();
-    // console.log("Logged-In UserID: ", id);
-    const firstName = isLoggedIn?.first_name ? isLoggedIn?.first_name : logOut();
-    // console.log("Logged-In User First Name: ", firstName);
-    const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();
-    // console.log("Logged-In User Last Name: ", lastName);
-    const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
-    // const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
-    const displayImg = isLoggedIn?.displayImg ? isLoggedIn?.displayImg : '';
-    const userBio = isLoggedIn?.aboutMe ? isLoggedIn?.aboutMe : '';
-    // ***************************************************************************
-    // ***************************************************************************
 
 
 
@@ -90,7 +53,7 @@ const CardCreateDonation = ({ isLoggedIn }) => {
     // MANAGE STATE:-  TO FIND USER BY ID
     // ************************************
     const [ donation, setDonation ] = useState({ 
-        images: '', 
+        images: [], 
         title: '', 
         description: '', 
         uri: '',
@@ -192,11 +155,11 @@ const CardCreateDonation = ({ isLoggedIn }) => {
         e.preventDefault();         
 
         var payload = {
-            images: donation.images,
-            title: donation.title,
-            description: donation.description,
-            excerpt: donation.excerpt,
-            uri: donation.uri === '' ? formatUrl(donation.title.toLowerCase()) : formatUrl(donation.uri.toLowerCase()),
+            images: donation?.images,
+            title: donation?.title,
+            description: donation?.description,
+            excerpt: donation?.excerpt,
+            uri: donation?.uri === '' ? formatUrl(donation?.title.toLowerCase()) : formatUrl(donation?.uri.toLowerCase()),
             author: [
                 {
                     img: displayImg,
@@ -205,12 +168,12 @@ const CardCreateDonation = ({ isLoggedIn }) => {
                     bio: userBio,
                 }
             ],
-            amountToRaise: donation.amountToRaise,
-            amountRaised: donation.amountRaised,
-            isActive: donation.isActive,
-            status: donation.status,
-            tags: donation.tags,
-            categories: donation.categories, 
+            amountToRaise: donation?.amountToRaise,
+            amountRaised: donation?.amountRaised,
+            isActive: donation?.isActive,
+            status: donation?.status,
+            tags: donation?.tags,
+            categories: donation?.categories, 
         };
  
 
@@ -297,13 +260,7 @@ const CardCreateDonation = ({ isLoggedIn }) => {
 
 
 
-
-
-
-
     
-
-
 
     return (
         <div id="createDonationID" className="relative flex flex-col min-w-0 break-words xs:w-full lg:w-781 mb-16 shadow-lg rounded-lg bg-blueGray-100 border-0">
@@ -333,7 +290,7 @@ const CardCreateDonation = ({ isLoggedIn }) => {
 
                         {/* Error Message */}
                         <div className="mx-auto mt-8 mb-6 create_error">
-                                                {formMessage}
+                            {formMessage}
                         </div>
                         {/* Error Message */}
 
@@ -381,7 +338,7 @@ const CardCreateDonation = ({ isLoggedIn }) => {
                                                                 placeholder=""   
                                                                 id="uri"   
                                                                 name="uri"   
-                                                                value={donation.uri === '' ? formatUrl(donation.title.toLowerCase()) : formatUrl(donation.uri.toLowerCase())}                                      
+                                                                value={donation?.uri === '' ? formatUrl(donation?.title.toLowerCase()) : formatUrl(donation?.uri.toLowerCase())}                                      
                                                                 onChange={handleDonationInfo}                                           
                                                             />
                                                         </label>
@@ -478,7 +435,7 @@ const CardCreateDonation = ({ isLoggedIn }) => {
                                                 {/* Donation Images: Dynamic image inputs */}
                                                 <div id="donationImgID" className="w-full lg:w-12/12 px-4 image_wrap">                   
                                                     {
-                                                        donation.images.map((image, index) => (
+                                                        donation?.images.map((image, index) => (
                                                             <div key={index} className="relative w-full mb-3">                                                                              
                                                                 <label className="flex flex-col uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-3 post_img" htmlFor="url">
                                                                     Image URL:   
@@ -486,7 +443,7 @@ const CardCreateDonation = ({ isLoggedIn }) => {
                                                                 <input
                                                                     type="text"
                                                                     name="url"
-                                                                    value={image.url}
+                                                                    value={image?.url}
                                                                     className="border-0 px-3 py-3 mt-0 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl tracking-verytight font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 mb-3.5"
                                                                     onChange={(e) => handleImageChange(index, e)}
                                                                 />
@@ -498,7 +455,7 @@ const CardCreateDonation = ({ isLoggedIn }) => {
                                                                 <input
                                                                     type="text"
                                                                     name="alt"
-                                                                    value={image.alt}
+                                                                    value={image?.alt}
                                                                     className="border-0 px-3 py-3 mt-0 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-lg tracking-verytight font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150 mb-6 h-11"
                                                                     onChange={(e) => handleImageChange(index, e)}
                                                                 />                                                                                                
@@ -563,17 +520,17 @@ const CardCreateDonation = ({ isLoggedIn }) => {
                                             </div>    
                                             <div className="flex flex-wrap">                           
                                  
-                                                 {/* IS PUBLISHED */}               
+                                                 {/* IS ACTIVE */}               
                                                 <div className="relative mb-3 px-4">
                                                     <label
                                                             className="flex flex-row gap-3 items-end uppercase text-blueGray-600 text-lg font-extrabold tracking-moretight mb-2"
-                                                            htmlFor="isPublished">
+                                                            htmlFor="isActive">
                     
                                                             <input
                                                                 type="checkbox"
                                                                 className="border-0 px-3 py-3 mt-0 placeholder-gray-600 text-blueGray-600 bg-white rounded text-sm shadow focus:outline-none focus:ring w-8 h-8 ease-linear transition-all duration-150"                                        
-                                                                id="isPublished"    
-                                                                name="isPublished"                                                                                  
+                                                                id="isActive"    
+                                                                name="isActive"                                                                                  
                                                                 onChange={handleDonationInfo}                                                                                  
                                                             /> Save as Draft
                     
