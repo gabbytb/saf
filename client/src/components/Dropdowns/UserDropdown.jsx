@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import { useState, createRef, } from "react";
 import { Link, } from "react-router-dom";
 import { createPopper } from "@popperjs/core";
 import {
-  adminDashboardIcon,  
+    adminDashboardIcon,  
 } from "../../assets/images";
 
 
@@ -16,16 +16,19 @@ const UserDropdown = ({ userId, userEmail, displayImg, userRoles, logOut }) => {
 
 
     // dropdown props
-    const [dropdownPopoverShow, setDropdownPopoverShow] = React.useState(false);
-    const btnDropdownRef = React.createRef();
-    const popoverDropdownRef = React.createRef();
+    const [dropdownPopoverShow, setDropdownPopoverShow] = useState(false);
+    const btnDropdownRef = createRef();
+    const popoverDropdownRef = createRef();
         
 
 
     const openDropdownPopover = () => {
-        createPopper(btnDropdownRef.current, popoverDropdownRef.current, {
-          placement: "bottom-end",
-        });
+        createPopper(
+            btnDropdownRef.current, 
+            popoverDropdownRef.current, {
+                placement: "bottom-end",
+            },
+        );        
         setDropdownPopoverShow(true);
     };
       
@@ -33,9 +36,8 @@ const UserDropdown = ({ userId, userEmail, displayImg, userRoles, logOut }) => {
         setDropdownPopoverShow(false);
     };
 
+ 
 
-    console.log("Logged-In User DP: ", displayImg); 
-    // const [userDp, setUserDp] = useState({ image: displayImg });
 
     return (
         <>
@@ -100,6 +102,8 @@ const UserDropdown = ({ userId, userEmail, displayImg, userRoles, logOut }) => {
                     </div>
                 </div>
             </Link>
+
+
 
             <div ref={popoverDropdownRef} className={(dropdownPopoverShow ? "block " : "hidden ") 
                 + "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"}>

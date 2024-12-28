@@ -186,7 +186,7 @@ const DashboardCreateDonation = ({ isLoggedIn }) => {
 
                                 {/* User */}
                                 <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
-                                    <UserDropdown userId={userId} userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
+                                    <UserDropdown userId={userId} userEmail={userEmail} displayImg={displayImg} userRoles={userRoles} logOut={logOut} />
                                 </ul>
                             </div>
                     </nav>

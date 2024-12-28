@@ -91,7 +91,7 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
     // console.log("Logged-In User E-mail: ", userEmail);
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
     // console.log("Logged-In User E-mail: ", userRoles);    
-    // const displayImg = isLoggedIn?.displayImg ? isLoggedIn?.displayImg : '';
+    const displayImg = isLoggedIn?.displayImg ? isLoggedIn?.displayImg : '';
     // console.log("Logged-In User DP: ", displayImg);    
     // const userBio = isLoggedIn?.aboutMe ? isLoggedIn?.aboutMe : '';
     // console.log("Logged-In User BIO: ", userBio);    
@@ -304,7 +304,7 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
 
                             {/* User */}
                             <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
-                                <UserDropdown userId={userId} userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
+                                <UserDropdown userId={userId} userEmail={userEmail} displayImg={displayImg} userRoles={userRoles} logOut={logOut} />
                             </ul>
                         </div>
                     </nav>
@@ -499,7 +499,7 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
 
                         {/* User */}
                         <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
-                            <UserDropdown userId={userId} userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
+                            <UserDropdown userId={userId} userEmail={userEmail} displayImg={displayImg} userRoles={userRoles} logOut={logOut} />
                         </ul>
                         {/* User */}
 

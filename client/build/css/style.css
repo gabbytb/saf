@@ -6054,6 +6054,10 @@ textarea#comments{
   max-height: 13rem;
 }
 
+.peer\/showLabel:checked ~ .peer-checked\/showLabel\:max-h-64{
+  max-height: 16rem;
+}
+
 .data-\[focus\]\:bg-blue-100[data-focus]{
   --tw-bg-opacity: 1;
   background-color: rgb(219 234 254 / var(--tw-bg-opacity));
