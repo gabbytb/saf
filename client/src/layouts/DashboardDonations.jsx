@@ -80,10 +80,17 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
     };
     // ***************************************************************************
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
-    // ***************************************************************************
-    const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();
-    const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut();
+    // *************************************************************************** 
+    const userId = isLoggedIn?.id ? isLoggedIn?.id : logOut();
+    // console.log("Logged-In User ID: ", userId);
+    // const firstName = isLoggedIn?.first_name ? isLoggedIn?.first_name : logOut();
+    // console.log("Logged-In User First Name: ", firstName);
+    const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();            
+    // console.log("Logged-In User Last Name: ", lastName);
+    const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut(); 
+    // console.log("Logged-In User E-mail: ", userEmail);
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
+    // console.log("Logged-In User E-mail: ", userRoles);    
     // ***************************************************************************
     // ***************************************************************************
 
@@ -245,8 +252,6 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
 
 
 
-
-
     if (isLoading) {
         return (
             <>
@@ -295,7 +300,7 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
 
                             {/* User */}
                             <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
-                                <UserDropdown userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
+                                <UserDropdown userId={userId} userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
                             </ul>
                         </div>
                     </nav>
@@ -502,7 +507,7 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
 
                         {/* User */}
                         <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
-                            <UserDropdown userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
+                            <UserDropdown userId={userId} userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
                         </ul>
                         {/* User */}
 
@@ -562,7 +567,7 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
                                                 All Donations
                                             </h3>
 
-                                            <Link className="relative -top-2" to={'/admin/donations/create'} alt='create new donation'>
+                                            <Link className="relative -top-2" to={'/admin/donations/manage/create'} alt='create new donation'>
                                                 <button className="bg-blue-500 text-white active:bg-lightBlue-500 font-bold uppercase text-lg tracking-tightener px-7 py-3 rounded-lg shadow hover:bg-blue-600 hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-300">add new</button>
                                             </Link>
                                         </div>

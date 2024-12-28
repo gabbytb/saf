@@ -1,4 +1,4 @@
-import { useState, useEffect, Suspense, } from "react";
+import { useState, useEffect, } from "react";
 import { Link } from "react-router-dom";
 import { googleLogout } from "@react-oauth/google";
 import PropTypes from "prop-types";
@@ -11,12 +11,12 @@ import "../assets/styles/tailwind.css";
 import { 
     Sidebar,
     UserDropdown,
-    CardAllPublishedPosts, CardAllDraftPosts,
+    // CardAllSuccessfulDonations, CardAllPendingDonations, CardAllFailedDonations,
     TableDropdown,    
 } from "../components";
 
 // views
-// import { StaffsTable } from "../views";
+// import { DonationsHistoryTable } from "../views";
 
 
 
@@ -43,15 +43,15 @@ const convertDate = (dateString) => {
 
 
 
-const DashboardArticles = ({ color, isLoggedIn }) => {
+const DashboardDonationsHistory = ({ color, isLoggedIn }) => {
 
    
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
     useEffect(() => {
-        window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "Blog Dashboard", 
+        window.scrollBy({ top: 0, left: 0, behaviour: "smooth" });
+        const pageTitle = "Donations History", 
               siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
     }, []);
@@ -91,10 +91,6 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
     // console.log("Logged-In User E-mail: ", userEmail);
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
     // console.log("Logged-In User E-mail: ", userRoles);    
-    // const displayImg = isLoggedIn?.displayImg ? isLoggedIn?.displayImg : '';
-    // console.log("Logged-In User DP: ", displayImg);    
-    // const userBio = isLoggedIn?.aboutMe ? isLoggedIn?.aboutMe : '';
-    // console.log("Logged-In User BIO: ", userBio);    
     // ***************************************************************************
     // ***************************************************************************
 
@@ -102,19 +98,23 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
 
 
     // ****************************************************************************
-    // MANAGE STATE:-  TO FIND ALL STAFFS
+    // MANAGE STATE:-  TO FIND HISTORY OF ALL DONATION ATTEMPTS
     // ****************************************************************************
-    const [blogPosts, setBlogPosts] = useState([]);
-    // console.log("ALL BLOG POSTS: ", blogPosts);
-    const [totalBlogPosts, setTotalBlogPosts] = useState(null);
-    // console.log("TOTAL BLOG POSTS: ", totalBlogPosts);
-        const [totalPublishedPosts, setTotalPublishedPosts] = useState(null);
-        // console.log("TOTAL PUBLISHED POSTS: ", totalPublishedPosts);
-        const [totalDraftPosts, setTotalDraftPosts] = useState(null);
-        // console.log("TOTAL DRAFT POSTS: ", totalDraftPosts);
-        // const [totalScheduledPosts, setTotalScheduledPosts] = useState(null);
-        // console.log("TOTAL SCHEDULED POSTS: ", totalScheduledPosts);
+    const [allDonationsHistory, setAllDonationsHistory] = useState([]);
+    // console.log("ALL DONATIONS: ", allDonationsHistory);
+    
+    const [totalDonationsInHistory, setTotalDonationsInHistory] = useState(null);
+    // console.log("TOTAL DONATIONS: ", totalDonations);
 
+        const [totalSuccessfulDonations, setTotalSuccessfulDonations] = useState(null);
+        // console.log("TOTAL SUCCESSFUL DONATIONS: ", totalPublishedDonations);
+        
+        const [totalPendingDonations, setTotalPendingDonations] = useState(null);
+        // console.log("TOTAL PENDING DONATIONS: ", totalPendingDonations);
+
+        const [totalFailedDonations, setTotalFailedDonations] = useState(null);
+        // console.log("TOTAL FAILED DONATIONS: ", totalFailedDonations);
+      
     const [totalPages, setTotalPages] = useState(0);
     const [currentPage, setCurrentPage] = useState(1);
    
@@ -133,15 +133,15 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
     // MANAGE STATE:-  SPECIAL FEATURES
     // ****************************************************************************
     const [isLoading, setIsLoading] = useState(true);
-    const [activeDisplay, setActiveDisplay] = useState("blogPosts");
+    const [activeDisplay, setActiveDisplay] = useState("donationsHistoryList");
 
     useEffect(() => {
-        var allPostsLink = document.querySelector("#postsLinkID .blogPosts");        
-        if (activeDisplay === "blogPosts") {
+        var allDonationsHistoryLink = document.querySelector("#donationsHistoryLinkID .donationsHistoryList");        
+        if (activeDisplay === "donationsHistoryList") {
             setCurrentPage(1);
-            allPostsLink?.classList?.add("activePostView");          
+            allDonationsHistoryLink?.classList?.add("activeDonationHistoryView");          
         } else {
-            allPostsLink?.classList.remove("activePostView");     
+            allDonationsHistoryLink?.classList.remove("activeDonationHistoryView");     
         };
     }, [activeDisplay]);
     // ****************************************************************************
@@ -152,70 +152,87 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
 
     // ****************************************************************************            
     // ****************************************************************************
-    // CALL TO API:-  TRIGGER FUNCTION TO FIND ALL STAFFS
+    // CALL TO API:-  TRIGGER FUNCTION TO FETCH HISTORY OF ALL DONATIONS
     // ****************************************************************************             
     useEffect(() => {                                 
-        if (activeDisplay === "blogPosts") {
+        if (activeDisplay === "donationsHistoryList") {
                         
             setIsLoading(true);           
 
-            var timer = setTimeout(fetchAllBlogPosts, 300);   // Delay execution of findAllStaffs by 1800ms
+            var timer = setTimeout(fetchAllDonationsHistory, 300);   // Delay execution of findAllStaffs by 1800ms
             return () => {
-                    clearTimeout(timer);                  // Clean up timer if component unmounts or token changes
+                clearTimeout(timer);                  // Clean up timer if component unmounts or token changes
             };
 
         };
     }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
     
-    async function fetchAllBlogPosts() {               
-        await api.get(`/api/v1/admin/posts/manage?page=${currentPage}&limit=${pageLimit}`)
+    async function fetchAllDonationsHistory() {     
+        var pageLimit = 10;   // Number of items per page
+
+        await api.get(`/api/v3/admin/donations/history/manage?page=${currentPage}&limit=${pageLimit}`)
         .then((response) => {
                     const { success, data, message } = response.data;
-                    const { allBlogPosts, pagination } = data;
+                    const { donationsHistory, pagination } = data;
 
-                    if (!success && message === "No post found") {
+                    if (!success && message === "No donation history found") {
                         console.log("Success: ", success);
                         console.log("Message: ", message);
                     };
 
-                    setBlogPosts(allBlogPosts);
-                    setPageLimit(pagination?.postLimit);
+                    setAllDonationsHistory(donationsHistory);
+                    setPageLimit(pagination?.donationsHistoryLimit);
 
-                    setTotalBlogPosts(pagination?.postsRecord);
+                    setTotalDonationsInHistory(pagination?.donationsHistoryRecord);
                     setTotalPages(pagination?.lastPage);
         })
         .catch((error) => {
-                    console.log("Error fetching data: ", error);
+            console.log("Error fetching data: ", error);
         })
         .finally(() => {
             setIsLoading(false);
         });
 
 
-        await api.get(`/api/v1/admin/posts/manage/publishedPosts`)
+        await api.get(`/api/v3/admin/donations/history/manage/successful`)
         .then((response) => {
             const { success, data, message } = response.data;
-            if (!success && message === "No post found") {
+            if (!success && message === "No donation history found") {
                 console.log("Success: ", success);
                 console.log("Message: ", message);
             };
     
-            setTotalPublishedPosts(data);
+            setTotalSuccessfulDonations(data);
         })
         .catch((error) => {
             console.log("Error fetching data: ", error);
         });
 
 
-        await api.get(`/api/v1/admin/posts/manage/draftPosts`)
+        await api.get(`/api/v3/admin/donations/history/manage/pending`)
         .then((response) => {
             const { success, data, message } = response.data;              
-            if (!success && message === "No post found") {
+            if (!success && message === "No donation found") {
                 console.log("Success: ", success);
                 console.log("Message: ", message);
             };
     
-            setTotalDraftPosts(data);
+            setTotalPendingDonations(data);
+        })
+        .catch((error) => {
+            console.log("Error fetching data: ", error);
+        });
+
+
+        await api.get(`/api/v3/admin/donations/history/manage/failed`)
+        .then((response) => {
+            const { success, data, message } = response.data;              
+            if (!success && message === "No donation history found") {
+                console.log("Success: ", success);
+                console.log("Message: ", message);
+            };
+    
+            setTotalFailedDonations(data);
         })
         .catch((error) => {
             console.log("Error fetching data: ", error);
@@ -236,7 +253,7 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
     // Works for Search
     // ****************************************************************************
     const [query, setQuery] = useState('');
-    const search_parameters = Object.keys(Object.assign({}, ...blogPosts));
+    const search_parameters = Object.keys(Object.assign({}, ...allDonationsHistory));
 
     function search(data) {
         return data?.filter((item) =>
@@ -256,7 +273,10 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
 
 
 
+
+
     if (isLoading) {
+
         return (
             <>
                 {/***** LEFT-PANEL *****/}
@@ -268,21 +288,20 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
 
                 {/***** RIGHT-PANEL *****/}
                 <div className="relative md:ml-64 bg-blueGray-100">
-                
+                       
+                    {/* Admin Navbar */}
                     <nav className="absolute top-0 left-0 w-full z-1 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
                         <div className="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">                            
+                            
                             {/* Brand */}
-                            <Link
-                                className="text-white text-sm uppercase hidden lg:inline-block font-semibold"
-                                to="/admin/dashboard"
-                                onClick={(e) => e.preventDefault()}
-                            >
-                                Dashboard
+                            <Link className="text-white text-sm uppercase hidden lg:inline-block font-semibold"
+                                to={"/admin/dashboard"} onClick={(e) => e.preventDefault()}>Dashboard 
                             </Link>
+                            {/* Brand */}
 
 
-                            {/* Form*/}
-                            <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-12 lg:mr-28 w-98 h-178">
+                            {/* Form */}
+                            <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-12 lg:mr-28  w-98 h-178">
                                 <div className="relative flex w-full flex-wrap items-stretch">                      
                                     <span className="z-10 h-full leading-snug font-normal text-center text-blueGray-300 absolute bg-transparent rounded text-2xl flex items-center justify-center w-12 pl-3 py-3">
                                         <i className="fas fa-search"></i>
@@ -294,20 +313,24 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                                         id="search-form"
                                         className="search-input border-0 px-3 py-3 indent-8 placeholder-blueGray-300 text-blueGray-600 relative bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"       
                                         onChange={(e) => setQuery(e.target.value)}
-                                        placeholder="Search user"
+                                        placeholder="Search here "
                                     />
 
-                                    <button type="submit" onSubmit={fetchAllBlogPosts}></button>
+                                    <button type="submit" onSubmit={fetchAllDonationsHistory}></button>
                                 </div>                                             
                             </form>
-                
+                            {/* Form */}
+
 
                             {/* User */}
                             <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
                                 <UserDropdown userId={userId} userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
                             </ul>
+                            {/* User */}
+
                         </div>
                     </nav>
+                    {/* Admin Navbar */}
 
 
                     {/* Header */}
@@ -322,49 +345,58 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                         {/* <HeaderStats /> */}
 
                     </div>
+                    {/* Header */}
 
 
-                    {/* Posts Table */}
-                    <div className="px-4 md:px-10 mx-auto w-full -m-24">   
-            
+                    {/* Donations Table */}
+                    <div className="px-4 md:px-10 mx-auto w-full -m-24">               
                         <div className="flex flex-wrap mt-4">
-                            <div className="w-full mb-12 px-4">
+                            <div className="w-full mb-12 px-4">         
                                 <div
                                     className={
-                                    "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded " +
-                                    (color === "dark" ? "bg-white" : "bg-lightBlue-900 text-white")
+                                        "relative flex flex-col min-w-0 break-words w-full mb-6 shadow-lg rounded " +
+                                        (color === "dark" ? "bg-white" : "bg-lightBlue-900 text-white")
                                     }>
-        
-                                    {/* Blog Navigation */}
-                                    <div id="postsLinkID" className="flex flex-row flex-wrap gap-3 mt-8 mb-10 px-7">
-                                        <Link className="blogPosts activePostView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("blogPosts")}>All <span className="off_white"> ({ totalBlogPosts })</span> </Link>
-                                        <Link className="publishedPosts pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("publishedPosts")}>Published <span className="off_white"> ({ totalPublishedPosts })</span></Link>
-                                        <Link className="draftPosts pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("draftPosts")}>Drafts <span className="off_white"> ({ totalDraftPosts })</span></Link>
-                                        {/* <Link className="scheduledPosts pt-3 pb-2 px-10 rounded-lg border text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("scheduledPosts")}>Scheduled  <span className="off_white"> ({ totalBlogPosts })</span></Link> */}
-                                    </div>
-                                    {/* Users Navigation */}
-        
+
+
+
+                                    {/* Donations Navigation */}
+                                    <div id="donationsHistoryLinkID" className="flex flex-row flex-wrap gap-3 mt-8 mb-10 px-7">
+                                        <Link className="donationsHistoryList activeDonationHistoryView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("donationsHistoryList")}>All <span className="off_white"> ({ totalDonationsInHistory })</span></Link>
+                                        <Link className="successfulDonations pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("successfulDonations")}>Successful  <span className="off_white"> ({ totalSuccessfulDonations })</span></Link>
+                                        <Link className="pendingDonations pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("pendingDonations")}>Pending  <span className="off_white"> ({ totalPendingDonations })</span></Link>
+                                        <Link className="failedDonations pt-3 pb-2 px-10 rounded-lg border text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("failedDonations")}>Failed  <span className="off_white"> ({ totalFailedDonations })</span></Link>
+                                    </div> 
+                                    {/* Donations Navigation */}
+
+
                                     
                                     {/* Page Title */}
                                     <div className="rounded-t mb-0 px-4 py-3 border-0">
                                         <div className="flex flex-wrap items-center">
-                                            <div className="relative w-full px-4 max-w-full flex-grow flex-1">
+                                            <div className="relative w-full px-4 max-w-full flex justify-start items-center flex-grow flex-1">
                                                 <h3
                                                     className={
-                                                    "font-semibold text-lg " +
-                                                    (color === "dark" ? "text-blueGray-700" : "text-white")
+                                                        "font-semibold text-lg " +
+                                                        (color === "dark" ? "text-blueGray-700" : "text-white")
                                                     }
                                                 >
-                                                    All Posts
+                                                    Donations History
                                                 </h3>
+
+                                                {/* <Link className="relative -top-2" to={'/admin/donations/manage/create'} alt='create new donation'>
+                                                    <button className="bg-blue-500 text-white active:bg-lightBlue-500 font-bold uppercase text-lg tracking-tightener px-7 py-3 rounded-lg shadow hover:bg-blue-600 hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-300">add new</button>
+                                                </Link> */}
                                             </div>
                                         </div>
                                     </div>
                                     {/* Page Title */}
+
+
         
-        
-                                    <div className={`w-full overflow-x-auto ${activeDisplay === "blogPosts" ? "block" : "hidden"}`}>
-                                        {/* Blog Posts table */}
+                                    <div className={`w-full overflow-x-auto ${activeDisplay === "donationsHistoryList" ? "block" : "hidden"}`}>
+                                        
+                                        {/* Donations table */}
                                         <table className="items-center w-full bg-transparent border-collapse">
                                             <thead>
                                                 <tr>
@@ -386,7 +418,17 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                                                             : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
                                                         }
                                                     >
-                                                        Title
+                                                        Campaign
+                                                    </th>
+                                                    <th
+                                                        className={
+                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center " +
+                                                            (color === "light"
+                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                        }
+                                                    >
+                                                        Donor Name
                                                     </th>
                                                     <th
                                                         className={
@@ -396,7 +438,7 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                                                             : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
                                                         }
                                                     >
-                                                        Excerpt
+                                                        Amount Paid 
                                                     </th>
                                                     <th
                                                         className={
@@ -446,10 +488,12 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                         </div>
 
                     </div>
+
                 </div>            
             {/***** RIGHT-PANEL *****/}     
             </>
         );
+
     };
 
 
@@ -462,8 +506,10 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
             {/***** LEFT-PANEL *****/}
             
 
+
             {/***** RIGHT-PANEL *****/}
             <div className="relative md:ml-64 bg-blueGray-100">
+
                 {/* Admin Navbar */}
                 <nav className="absolute top-0 left-0 w-full z-1 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
                     <div className="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">                            
@@ -491,7 +537,7 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                                     placeholder="Search here "
                                 />
 
-                                <button type="submit" onSubmit={fetchAllBlogPosts}></button>
+                                <button type="submit" onSubmit={fetchAllDonationsHistory}></button>
                             </div>                                             
                         </form>
                         {/* Form */}
@@ -523,7 +569,7 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                 {/* Header */}
 
                 
-                {/* Post Table */}
+                {/* Donations Table */}
                 <div className="px-4 md:px-10 mx-auto w-full -m-24">               
                     <div className="flex flex-wrap mt-4">
                         <div className="w-full mb-12 px-4">         
@@ -535,33 +581,33 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
 
 
 
-                                {/* Posts Navigation */}
-                                <div id="postsLinkID" className="flex flex-row flex-wrap gap-3 mt-8 mb-10 px-7">
-                                    <Link className="blogPosts activePostView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("blogPosts")}>All <span className="off_white"> ({ totalBlogPosts })</span></Link>
-                                    <Link className="publishedPosts pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("publishedPosts")}>Published  <span className="off_white"> ({ totalPublishedPosts })</span></Link>
-                                    <Link className="draftPosts pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("draftPosts")}>Drafts  <span className="off_white"> ({ totalDraftPosts })</span></Link>
-                                    {/* <Link className="scheduledPosts pt-3 pb-2 px-10 rounded-lg border text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("scheduledPosts")}>Scheduled  <span className="off_white"> ({ totalBlogPosts })</span></Link> */}
+                                {/* Donations Navigation */}
+                                <div id="donationsHistoryLinkID" className="flex flex-row flex-wrap gap-3 mt-8 mb-10 px-7">
+                                    <Link className="donationsHistoryList activeDonationHistoryView pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("donationsHistoryList")}>All <span className="off_white"> ({ totalDonationsInHistory })</span></Link>
+                                    <Link className="successfulDonations pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("successfulDonations")}>Successful  <span className="off_white"> ({ totalSuccessfulDonations })</span></Link>
+                                    <Link className="pendingDonations pt-3 pb-2 px-10 rounded-lg border mr-2 text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("pendingDonations")}>Pending  <span className="off_white"> ({ totalPendingDonations })</span></Link>
+                                    <Link className="failedDonations pt-3 pb-2 px-10 rounded-lg border text-xl flex flex-row gap-1 bg-white" onClick={() => setActiveDisplay("failedDonations")}>Failed  <span className="off_white"> ({ totalFailedDonations })</span></Link>
                                 </div> 
-                                {/* Posts Navigation */}
+                                {/* Donations Navigation */}
 
 
                                 
                                 {/* Page Title */}
                                 <div className="rounded-t mb-0 px-4 py-3 border-0">
                                     <div className="flex flex-wrap items-center">
-                                        <div className="relative w-full px-4 max-w-full flex justify-between items-center flex-grow flex-1">
+                                        <div className="relative w-full px-4 max-w-full flex justify-start items-center flex-grow flex-1">
                                             <h3
                                                 className={
                                                     "font-semibold text-lg " +
                                                     (color === "dark" ? "text-blueGray-700" : "text-white")
                                                 }
                                             >
-                                                All Posts
+                                                Donations History
                                             </h3>
 
-                                            <Link className="relative -top-2" to={'/admin/blog/create'} alt='create new article'>
+                                            {/* <Link className="relative -top-2" to={'/admin/donations/manage/create'} alt='create new donation'>
                                                 <button className="bg-blue-500 text-white active:bg-lightBlue-500 font-bold uppercase text-lg tracking-tightener px-7 py-3 rounded-lg shadow hover:bg-blue-600 hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-300">add new</button>
-                                            </Link>
+                                            </Link> */}
                                         </div>
                                     </div>
                                 </div>
@@ -570,8 +616,10 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
 
 
                                 {/* Views */}
-                                <div className={`w-full overflow-x-auto ${activeDisplay === "blogPosts" ? "block" : "hidden"}`}>
+                                <div className={`w-full overflow-x-auto ${activeDisplay === "donationsHistoryList" ? "block" : "hidden"}`}>
+                                    
                                     {/* Projects table */}
+
                                     <table className="items-center w-full bg-transparent border-collapse">
                                         <thead>
                                                 <tr>
@@ -593,7 +641,7 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                                                             : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
                                                         }
                                                     >
-                                                        Featured Image
+                                                        Campaign
                                                     </th>
                                                     <th
                                                         className={
@@ -603,7 +651,7 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                                                             : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
                                                         }
                                                     >
-                                                        Post Title
+                                                        Donor Name
                                                     </th>
                                                     <th
                                                         className={
@@ -613,7 +661,7 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                                                             : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
                                                         }
                                                     >
-                                                        Date Published
+                                                        Amount Paid 
                                                     </th>
                                                     <th
                                                         className={
@@ -645,10 +693,10 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                                                     ></th>
                                                 </tr>
                                         </thead>
-                                        {search(blogPosts)?.length !== 0 ?
+                                        {search(allDonationsHistory)?.length !== 0 ?
                                                 <tbody>                                                    
-                                                    {search(blogPosts)?.map((post, userIndex) => {
-                                                            if (post?.status === "draft") {
+                                                    {search(allDonationsHistory)?.map((post, userIndex) => {
+                                                            if (post?.status === "pending") {
                                                                 return (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                                                                     <tr key={userIndex}>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
@@ -674,7 +722,7 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                                                                                     "ml-3 font-bold " +
                                                                                     + (color === "light" ? "text-blueGray-600" : "text-white")
                                                                                 }>
-                                                                                {post?.title?.substring(0,50)+"..."}
+                                                                                {post?.firstname} {post?.lastname}
                                                                             </span>
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
@@ -684,14 +732,14 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                                                                             <i className="fas fa-circle text-orange-500 mr-2"></i>{post?.status}
                                                                         </td>  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
-                                                                            <Link to={`/admin/blog/manage/${post?._id}`}>View details</Link>
+                                                                            <Link to={`/admin/donations/history/manage/${post?._id}`}>View details</Link>
                                                                         </td>                  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
                                                                             <TableDropdown />
                                                                         </td>
                                                                     </tr>               
                                                                 );
-                                                            } else if (post?.status === "scheduled") {
+                                                            } else if (post?.status === "failed") {
                                                                 return (                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    
                                                                     <tr key={userIndex}>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap">
@@ -717,7 +765,7 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                                                                                     "ml-3 font-bold " +
                                                                                     + (color === "light" ? "text-blueGray-600" : "text-white")
                                                                                 }>
-                                                                                {post?.title?.substring(0,50)+"..."}
+                                                                                {post?.firstname} {post?.lastname}
                                                                             </span>
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
@@ -727,7 +775,7 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                                                                             <i className="fas fa-circle text-yellow-500 mr-2"></i>{post?.status}
                                                                         </td>  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
-                                                                            <Link to={`/admin/blog/manage/${post?._id}`}>View details</Link>
+                                                                            <Link to={`/admin/donations/history/manage/${post?._id}`}>View details</Link>
                                                                         </td>                  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
                                                                             <TableDropdown />
@@ -759,8 +807,8 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                                                                                 className={
                                                                                     "ml-3 font-bold " +
                                                                                     + (color === "light" ? "text-blueGray-600" : "text-white")
-                                                                                }>
-                                                                                {post?.title?.substring(0,50)+"..."}
+                                                                                }>                                                                               
+                                                                                {post?.firstname} {post?.lastname}
                                                                             </span>
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
@@ -770,7 +818,7 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                                                                             <i className="fas fa-circle text-green-500 mr-2"></i>{post?.status}
                                                                         </td>  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
-                                                                            <Link to={`/admin/blog/manage/${post?._id}`}>View details</Link>
+                                                                            <Link to={`/admin/donations/manage/${post?._id}`}>View details</Link>
                                                                         </td>                  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
                                                                             <TableDropdown />
@@ -785,7 +833,7 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                                                     <tr>
                                                         <td className=""></td>
                                                         <td className=""></td>
-                                                        <td className="text-left max-w-60 pl-6 h-60 flex justify-start items-center">No post found</td>
+                                                        <td className="text-left max-w-60 pl-6 h-60 flex justify-start items-center">No donation found</td>
                                                         <td className=""></td>
                                                         <td className=""></td>
                                                         <td className=""></td>
@@ -834,12 +882,12 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                                     </div>
                                     {/* Pagination controls */}
                                 </div>
-                                <Suspense fallback={<div>Loading...</div>}>                
+                                {/* <Suspense fallback={<div>Loading...</div>}>                
                                     <CardAllPublishedPosts color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} leftArrow={leftArrow} rightArrow={rightArrow} />
                                 </Suspense>       
                                 <Suspense fallback={<div>Loading...</div>}>                            
                                     <CardAllDraftPosts color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} leftArrow={leftArrow} rightArrow={rightArrow} />
-                                </Suspense>     
+                                </Suspense>      */}
                                 {/* <Suspense fallback={<div>Loading...</div>}>
                                     <CardAllScheduledPosts color={color} activeDisplay={activeDisplay} search={search} pageLimit={pageLimit} />
                                 </Suspense> */}
@@ -849,21 +897,24 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
                         </div>
                     </div>                  
                 </div>
-                {/* Users Table */}
+                {/* Donations Table */}
+
             </div>            
             {/***** RIGHT-PANEL *****/}            
         </>
     );
 };
 
-export default DashboardArticles;
+
+export default DashboardDonationsHistory;
 
 
 
-DashboardArticles.defaultProps = {
+
+DashboardDonationsHistory.defaultProps = {
     color: "dark",
 };
   
-DashboardArticles.propTypes = {
+DashboardDonationsHistory.propTypes = {
     color: PropTypes.oneOf(["light", "dark"]),
 };

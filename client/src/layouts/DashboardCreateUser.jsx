@@ -42,6 +42,8 @@ const DashboardCreateUser = ({ isLoggedIn }) => {
     // ***************************************************************************
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
     // ***************************************************************************
+    const userId = isLoggedIn?.id ? isLoggedIn?.id : logOut();
+    // console.log("Logged-In User ID: ", userId);
     const firstName = isLoggedIn?.first_name ? isLoggedIn?.first_name : logOut();
     // console.log("Logged-In User First Name: ", firstName);
     const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();            
@@ -177,7 +179,7 @@ const DashboardCreateUser = ({ isLoggedIn }) => {
 
                                 {/* User */}
                                 <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
-                                    <UserDropdown userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
+                                    <UserDropdown userId={userId} userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
                                 </ul>
                             </div>
                     </nav>

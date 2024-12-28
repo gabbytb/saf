@@ -30,19 +30,7 @@ const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
     // ************************************
     // const { id } = useParams();
 
-    function showUserInfo() {
-        //     if (id !== null) {    
-        //         window.scrollBy({ left: 0, top: 0, behavior: 'smooth' });
-
-        //         for (var i = 0; i < user?.roles?.length; i++) {
-        //             if (user?.roles[i]?.role === 'ROLE_USERS') {
-        //                 window.location = `/admin/users/${id}`;
-        //             } else {
-        //                 window.location = `/admin/staffs/${id}`;
-        //             };
-        //         };       
-        //     };
-
+    function goBack() {
         navigate(-1);
     };
 
@@ -299,9 +287,8 @@ const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
 
             <div className={`activeDisplay ${activeForm === 'create-donation-form' ? 'block' : 'hidden'}`}>
                 <div className="rounded-t bg-white mb-0 p-6">
-                    <div className="text-center flex justify-start items-center gap-14">                           
-                        {/* <Link to={redirToUserPage ? `/admin/users/${id}` : `/admin/staffs/${id}`}> */}
-                        <button onClick={showUserInfo}
+                    <div className="text-center flex justify-start items-center gap-10">                           
+                        <button onClick={goBack}
                             className="bg-blue-500 text-white active:bg-lightBlue-500 font-bold uppercase text-3xl tracking-tightener px-7 py-1 rounded-lg shadow hover:bg-blue-600 hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-300"
                             type="button">{String.fromCharCode(8592)}
                         </button>

@@ -10,7 +10,7 @@ import DashboardCreateArticle from "./DashboardCreateArticle";
 
 import DashboardDonations from "./DashboardDonations";
 import DashboardCreateDonation from "./DashboardCreateDonation";
-
+import DashboardDonationsHistory from "./DashboardDonationsHistory";
 import DashboardUsers from "./DashboardUsers";
 import DashboardUsersDetails from "./DashboardUsersDetails";
 import DashboardStaffs from "./DashboardStaffs";
@@ -34,7 +34,8 @@ export {
 
     DashboardDonations,
     DashboardCreateDonation,
-  
+    DashboardDonationsHistory,
+    
     DashboardUsers,
     DashboardUsersDetails,
     DashboardStaffs,

@@ -44,12 +44,20 @@ const DashboardUsersDetails = ({ isLoggedIn }) => {
     // ***************************************************************************
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
     // ***************************************************************************
-    const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();
+    const userId = isLoggedIn?.id ? isLoggedIn?.id : logOut();
+    // console.log("Logged-In User ID: ", userId);
+    // const firstName = isLoggedIn?.first_name ? isLoggedIn?.first_name : logOut();
+    // console.log("Logged-In User First Name: ", firstName);
+    const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();            
     // console.log("Logged-In User Last Name: ", lastName);
     const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut(); 
     // console.log("Logged-In User E-mail: ", userEmail);
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
-    // console.log("Logged-In User E-mail: ", userRoles);
+    // console.log("Logged-In User E-mail: ", userRoles);    
+    // const displayImg = isLoggedIn?.displayImg ? isLoggedIn?.displayImg : '';
+    // console.log("Logged-In User DP: ", displayImg);    
+    // const userBio = isLoggedIn?.aboutMe ? isLoggedIn?.aboutMe : '';
+    // console.log("Logged-In User BIO: ", userBio);    
     // ***************************************************************************
     // ***************************************************************************
 
@@ -126,6 +134,10 @@ const DashboardUsersDetails = ({ isLoggedIn }) => {
         //    setIsLoading(false);
         // });
     };
+
+
+
+    
     
 
 
@@ -175,7 +187,7 @@ const DashboardUsersDetails = ({ isLoggedIn }) => {
 
                                 {/* User */}
                                 <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
-                                    <UserDropdown userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
+                                    <UserDropdown userId={userId} userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
                                 </ul>
                             </div>
                     </nav>
@@ -212,6 +224,7 @@ const DashboardUsersDetails = ({ isLoggedIn }) => {
                 {/***** RIGHT-PANEL *****/}
             </>
     );
+
 };
 
 export default DashboardUsersDetails;

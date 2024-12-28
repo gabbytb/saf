@@ -153,7 +153,7 @@ export default function Sidebar() {
                                         <span className="block max-h-14 max-w-xl overflow-hidden rounded-lg p-0 text-cyan-800 transition-all duration-300 peer-checked/showLabel:max-h-52">
                                             <p className={"uppercase flex flex-row items-center pt-1 pb-3 text-xl font-bold " + (window.location.href.indexOf("/admin/donations/") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")}>                                
                                                 <div className={"mr-2 " + (window.location.href.indexOf("/admin/donations/") !== -1 ? "border-2 border-orange-500 h-8" : "hidden")}></div>
-                                                <i className={"fas fa-handshake ml-1 mr-4 h-14 text-2xl flex items-center " + (window.location.href.indexOf("/admin/donations/") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Donations
+                                                <i className={"fas fa-solid fa-hand-holding-heart ml-1 mr-4 h-14 text-2xl flex items-center " + (window.location.href.indexOf("/admin/donations/") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Donations
                                                 <svg
                                                     className="ml-auto mr-1 h-5 w-5"
                                                     xmlns="http://www.w3.org/2000/svg"
@@ -175,13 +175,13 @@ export default function Sidebar() {
                                             <ul className="mb-2">
                                                 <li className="items-center">
                                                     <Link className={"uppercase py-3 text-xl font-bold block " + (window.location.href.indexOf("/admin/donations/manage") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to={"/admin/donations/manage"}>
-                                                        <i className={"fas fa-donate ml-6 mr-4 text-2xl " + (window.location.href.indexOf("/admin/donations/manage") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}All Donations
+                                                        <i className={"fas fa-gear ml-6 mr-4 text-2xl " + (window.location.href.indexOf("/admin/donations/manage") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Manage Donations
                                                     </Link>
                                                 </li>
 
                                                 <li className="items-center">
-                                                    <Link className={"uppercase py-3 text-xl font-bold block " + (window.location.href.indexOf("/admin/donations/create") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to={"/admin/donations/create"}>
-                                                        <i className={"fas fa-add ml-6 mr-4 text-2xl " + (window.location.href.indexOf("/admin/donations/create") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}New Donation
+                                                    <Link className={"uppercase py-3 text-xl font-bold block " + (window.location.href.indexOf("/admin/donations/history") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")} to={"/admin/donations/history"}>
+                                                        <i className={"fas fa-solid fa-credit-card ml-6 mr-4 text-2xl " + (window.location.href.indexOf("/admin/donations/history") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}History
                                                     </Link>
                                                 </li>
                                             </ul>                                                               

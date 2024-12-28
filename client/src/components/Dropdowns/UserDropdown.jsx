@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { Link, } from "react-router-dom";
 import { createPopper } from "@popperjs/core";
 import {
@@ -12,7 +12,7 @@ import {
 
 
 
-const UserDropdown = ({ userEmail, userRoles, logOut }) => {
+const UserDropdown = ({ userId, userEmail, displayImg, userRoles, logOut }) => {
 
 
     // dropdown props
@@ -34,6 +34,8 @@ const UserDropdown = ({ userEmail, userRoles, logOut }) => {
     };
 
 
+    console.log("Logged-In User DP: ", displayImg); 
+    // const [userDp, setUserDp] = useState({ image: displayImg });
 
     return (
         <>
@@ -56,10 +58,7 @@ const UserDropdown = ({ userEmail, userRoles, logOut }) => {
                                     return (                                  
                                         item?.map((name, index) => {
 
-                                            const adminRole = 'admin', 
-                                                editorRole = 'editor', 
-                                                staffRole = 'staff', 
-                                                userRole = 'user';
+                                            const adminRole = 'admin', editorRole = 'editor', staffRole = 'staff', userRole = 'user';
 
                                             if (name?.role === "ROLE_ADMIN") {
                                                 return (
@@ -85,11 +84,18 @@ const UserDropdown = ({ userEmail, userRoles, logOut }) => {
                                 <span className="text-lg tracking-supertight font-bold text-white capitalize">unassigned role</span>
                         }
                     </div>
+
+
                     <div className="items-center flex">
                         <span className="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
-                          <img src={adminDashboardIcon} alt="..." className="w-full rounded-full align-middle border-none shadow-lg" 
-                          // src={require("../../assets/img/team-1-800x800.jpg").default} 
-                          />
+                            { 
+                                displayImg ?                                  
+                                    <img src={`${displayImg}`} alt="google profile pic" className="w-full rounded-full align-middle border-none shadow-lg"
+                                        // src={require("../../assets/img/team-1-800x800.jpg").default} 
+                                    />
+                                    :
+                                    <img src={adminDashboardIcon} alt="..." className="w-full rounded-full align-middle border-none shadow-lg" />
+                            }
                         </span>
                     </div>
                 </div>
@@ -98,10 +104,34 @@ const UserDropdown = ({ userEmail, userRoles, logOut }) => {
             <div ref={popoverDropdownRef} className={(dropdownPopoverShow ? "block " : "hidden ") 
                 + "bg-white text-base z-50 float-left py-2 list-none text-left rounded shadow-lg min-w-48"}>
 
-                <Link to="#pablo" onClick={(e) => e.preventDefault()} className={"text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"}>
-                    Action
-                </Link>
-                
+                {
+                    userRoles?.length !==  0 
+                        ?
+                        userRoles?.map((item) => {  
+                            return (                                  
+                                item?.map((name, index) => {                                   
+                                    if (name?.role === "ROLE_ADMIN" || name?.role === "ROLE_EDITOR" || name?.role === "ROLE_STAFF") {
+                                        return (
+                                            <Link key={index} to={`/admin/staffs/${userId}`} className={"text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700 capitalize"}>
+                                                view profile
+                                            </Link>
+                                        );
+                                    } else {
+                                        return (
+                                            <Link key={index} to={`/admin/users/${userId}`} className={"text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700 capitalize"}>
+                                                view profile
+                                            </Link>
+                                        );
+                                    };
+                                })                                       
+                            );   
+                        })
+                    :   
+                    <Link to="#" onClick={(e) => e.preventDefault()} className={"text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700 capitalize"}>
+                        empty task
+                    </Link>
+                }
+               
                 <Link to="#pablo" onClick={(e) => e.preventDefault()} className={"text-sm py-2 px-4 font-normal block w-full whitespace-nowrap bg-transparent text-blueGray-700"}>
                     Another action
                 </Link>

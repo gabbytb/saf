@@ -5448,6 +5448,11 @@ textarea#comments{
   line-height: 1.5rem;
 }
 
+.text-2xl\/9{
+  font-size: 1.5rem;
+  line-height: 2.25rem;
+}
+
 .text-2xl\/normal{
   font-size: 1.5rem;
   line-height: 1.5;
@@ -5520,11 +5525,6 @@ textarea#comments{
 
 .text-xs{
   font-size: .75rem;
-}
-
-.text-2xl\/9{
-  font-size: 1.5rem;
-  line-height: 2.25rem;
 }
 
 .font-black{

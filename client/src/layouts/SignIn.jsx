@@ -15,7 +15,7 @@ import { brandOfficialLogoDark, signUpIcon } from '../assets/images';
 function SignIn() {
 
 
-    console.clear();   
+    // console.clear();   
 
 
     const navigate = useNavigate();
@@ -75,13 +75,13 @@ function SignIn() {
     // *************************************** //
     // new Date(verifiedToken.exp * 1000);
     const [googleUser, setGoogleUser] = useState([]);
-    console.log("Gmail Account attempting to Login: ", googleUser);
+    // console.log("Gmail Account attempting to Login: ", googleUser);
     
     const [profile, setProfile] = useState([]);
-    console.log("Google Profile: ", profile);
+    // console.log("Google Profile: ", profile);
     
     const [isLoggedInWithGmail, setIsLoggedInWithGmail] = useState(false);
-    console.log("Gmail Login Successful: ", isLoggedInWithGmail);
+    // console.log("Gmail Login Successful: ", isLoggedInWithGmail);
 
     useEffect(() => {      
         if (googleUser.length !== 0) {
@@ -140,9 +140,9 @@ function SignIn() {
                         status: data?.status,
                         roles: [data?.roles],
                         approves_T_and_C: data?.approvesTandC,     
-                        is_verified: data?.isVerified,                    
-                    };
-                    console.log("Logged-In User: ", loggedInUser);
+                        is_verified: data?.isVerified,    
+                        displayImg: profile?.picture
+                    };                   
 
                     localStorage.setItem("user", JSON.stringify(loggedInUser));
 
@@ -181,13 +181,13 @@ function SignIn() {
     // *** USER PAYLOAD FOR NORMAL SIGN IN *** //
     // *************************************** //   
     const [user, setUser] = useState({ email: "", password: "", });
-    console.log("Login Attempt By: ", user.email);
+    // console.log("Login Attempt By: ", user.email);
 
     const [userProfile, setUserProfile] = useState(undefined);
-    console.log("LoggedIn User Profile: ", userProfile);
+    // console.log("LoggedIn User Profile: ", userProfile);
 
     const [isLoggedIn, setIsLoggedIn] = useState(false);
-    console.log("Login Successful: ", isLoggedIn);
+    // console.log("Login Successful: ", isLoggedIn);
 
     async function handleKeyUp(e) {
         const name = e.target.name;
