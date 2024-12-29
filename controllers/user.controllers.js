@@ -155,8 +155,12 @@ exports.signUp = async (req, res) => {
         //      3) Expiration Time (exp): This is another standard JWT claim, indicating the time at which the token will expire. It's also expressed as a Unix timestamp.
         // Format using: new Date(tokenDecoded.exp * 1000) 
         // To Get Current Date Setting for Token Expiration Time to start counting from!       
-        const tokenExpiryDate = new Date(tokenDecoded.exp * 1000);
+        const tokenExpiryDate = new Date(tokenDecoded.exp + (3600 * 1000));        
         user.tokenExpires = tokenExpiryDate;
+
+        const timeOfReg = new Date(Date.now() + (3600 * 1000));  // Get Nigerian time        
+        user.createdAt = timeOfReg;
+
         const newUser = await user.save();
         // **************************************** //
         // ***    FE: SAVE USER INFORMATION     *** //
@@ -502,6 +506,10 @@ exports.reValidateSignUp = async (req, res) => {
         // To Get Current Date Setting for Token Expiration Time to start counting from!
         const tokenExpiryDate = new Date(tokenDecoded.exp * 1000);
         existingUser.tokenExpires = tokenExpiryDate;
+        // existingUser.updatedAt = new Date(Date.now() + ( 3600 * 1000 * 25 ));
+        
+        const timeOfUpdate = new Date(Date.now() + (3600 * 1000));  // Get Nigerian time        
+        existingUser.updatedAt = timeOfUpdate;
 
         console.log("\n*********************************************************",
                     "\n*****    NEW TOKEN GENERATED FOR EXISTING USER      *****",

@@ -3,7 +3,7 @@
   "description": "REACHING OUT TO GREAT MINDS",
   "version": "1.0.0",
   "proxy": "http://localhost:8000",
-  "private": true,   
+  "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
     "@popperjs/core": "^2.11.8",
@@ -20,7 +20,7 @@
     "react-dom": "^18.3.1",
     "react-ga": "^3.3.1",
     "react-in-viewport": "^1.0.0-beta.2",
-    "react-lazy-load-image-component": "^1.6.2",
+    "react-lazy-load-image-component": "^1.6.3",
     "react-paystack": "^6.0.0",
     "react-popper": "^2.3.0",
     "react-router-dom": "^6.23.0",
