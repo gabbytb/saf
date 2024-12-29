@@ -40,29 +40,9 @@ function SignUp() {
     // *** USER PAYLOAD FOR SIGN UP *** //
     // ******************************** //
     const [user, setUser] = useState({ firstName: "", lastName: "", email: "", password: "", approvesTandC: false, });
-    const newUser =  {
-        id: user?._id,
-        firstname: user?.firstName,
-        lastname: user?.lastName,
-        phone: user?.phone,
-        email: user?.email,
-        pswd: user?.password,
-        address: user?.address,
-        address2: user?.address2,
-        city: user?.city,
-        state: user?.state,
-        country: user?.country,
-        zipCode: user?.zipCode,
-        accessToken: user?.accessToken,
-        expiresInMs: user?.tokenExpires,
-        status: user?.status,
-        roles: [user?.roles],
-        approvesTandC: user?.approvesTandC,
-        userBio: user?.aboutMe,
-        createdAt: user?.createdAt,
-        updatedAt: user?.updatedAt                   
-    };    
-    console.log("*** NEW SIGN-UP ***\nUser: ", newUser);
+    
+    const [accountCreated, setAccountCreated] = useState(null);    
+    console.log("*** NEW ACCOUNT CREATED ***\nUser: ", accountCreated);
     // ******************************** //
     // *** USER PAYLOAD FOR SIGN UP *** //
     // ******************************** //
@@ -109,7 +89,7 @@ function SignUp() {
 
         await api.post("/api/v1/admin/users/manage/create", user)
         .then((response) => {
-            const { success, message } = response.data;
+            const { success, message, data } = response.data;
             var errMsg = document.querySelector('#signUpForm .signup_error'); 
             var successMsg = document.querySelector('#signUpForm .signup_success');
             var reduceSpaceBtwForgotPasswordAndSuccessMsg = document.querySelector('#signUpForm .login__register');
@@ -172,7 +152,8 @@ function SignUp() {
                 // Perform These Actions
                 setFormSubmitted(success);     
                 setFormMessage(message);                     
-                                
+                setAccountCreated(data);
+                
                 // RESET FORM AFTER SUBMISSION
                 document.getElementById("signUpForm").reset();
                 

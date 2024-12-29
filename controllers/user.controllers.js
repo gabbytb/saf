@@ -146,20 +146,22 @@ exports.signUp = async (req, res) => {
         // ****************************************************
         // ***  FE: USE MIDDLEWARE: (JWT) TO VERIFY "TOKEN"
         // ****************************************************
-        const tokenDecoded = await verifyToken(token);
-        
+        const tokenDecoded = await verifyToken(token);        
         // RESULT:-  Token Details:  { id: 31825360, iat: 1722812853, exp: 1722816453 }
         // NOTE:-
         //      1) Token id (id): This is a custom payload claim, likely representing the user's unique identifier (e.g., user ID in the database).
         //      2) Issued At (iat): This is a standard JWT claim representing the time at which the token was issued. It's typically expressed as a Unix timestamp, which counts the number of seconds since January 1, 1970 (UTC).
-        //      3) Expiration Time (exp): This is another standard JWT claim, indicating the time at which the token will expire. It's also expressed as a Unix timestamp.
-        // Format using: new Date(tokenDecoded.exp * 1000) 
-        // To Get Current Date Setting for Token Expiration Time to start counting from!       
-        const tokenExpiryDate = new Date(tokenDecoded.exp + (3600 * 1000));        
-        user.tokenExpires = tokenExpiryDate;
+        //      3) Expiration Time (exp): This is another standard JWT claim, indicating the time at which the token will expire. It's also expressed as a Unix timestamp.               
+        
 
-        const timeOfReg = new Date(Date.now() + (3600 * 1000));  // Get Nigerian time        
-        user.createdAt = timeOfReg;
+        // Step 1: Convert the token expiration (in seconds) to a Date object
+        const tokenExpiryDate = new Date(tokenDecoded.exp * 1000);
+        // Step 2: Adjust for Nigerian time (UTC+1)
+        const nigeriaTimeMillis = tokenExpiryDate.getTime() + (3600); // Add 1 hour in milliseconds
+        // Step 3: Convert the adjusted time to a new Date object to get Current Nigerian Time        
+        const nigeriaTime = new Date(nigeriaTimeMillis);
+        user.tokenExpires = nigeriaTime;
+
 
         const newUser = await user.save();
         // **************************************** //
@@ -224,9 +226,23 @@ exports.signUp = async (req, res) => {
         await mailSenderForGetSignUp(token, newUser);
 
         // let valueOfEncodedText = decrypt(newUser.expirationInMs);
-        // console.log("Encrypted token lifespan: ", valueOfEncodedText);
-        
+        // console.log("Encrypted token lifespan: ", valueOfEncodedText);        
         // **************************************** //
+
+        var newSignUp = {
+            id: newUser._id,
+            first_name: newUser.firstName,
+            last_name: newUser.lastName,                  
+            email: newUser.email,    
+            password: newUser.password,     
+            status: newUser.status,
+            // roles: [newUser.roles],
+            approves_T_and_C: newUser.approvesTandC,     
+            is_verified: newUser.isVerified,            
+            token_expires: newUser.tokenExpires, 
+            time_created: newUser.createdAt, 
+            time_updated: newUser.updatedAt, 
+        };      
 
         console.log("\n*********************************************************",
             "\n*****        TOKEN GENERATED FOR NEW USER           *****",
@@ -245,7 +261,7 @@ exports.signUp = async (req, res) => {
             //     userId: newUser,
             //     token: token,
             // },
-            data: newUser,
+            data: newSignUp,
             message: "Successful",
         };
         return res.status(201).json(responseData);
@@ -503,11 +519,20 @@ exports.reValidateSignUp = async (req, res) => {
         //      2) Issued At (iat): This is a standard JWT claim representing the time at which the token was issued. It's typically expressed as a Unix timestamp, which counts the number of seconds since January 1, 1970 (UTC).
         //      3) Expiration Time (exp): This is another standard JWT claim, indicating the time at which the token will expire. It's also expressed as a Unix timestamp.
         // Format using: new Date(tokenDecoded.exp * 1000) 
-        // To Get Current Date Setting for Token Expiration Time to start counting from!
+        // To Get Current Date Setting for Token Expiration Time to start counting from!       
+        // const tokenExpiryDate = new Date(tokenDecoded.exp * 1000);
+        // existingUser.tokenExpires = tokenExpiryDate;
+
+
+        // Step 1: Convert the token expiration (in seconds) to a Date object
         const tokenExpiryDate = new Date(tokenDecoded.exp * 1000);
-        existingUser.tokenExpires = tokenExpiryDate;
-        // existingUser.updatedAt = new Date(Date.now() + ( 3600 * 1000 * 25 ));
-        
+        // Step 2: Adjust for Nigerian time (UTC+1)
+        const nigeriaTimeMillis = tokenExpiryDate.getTime() + (3600 * 1000); // Add 1 hour in milliseconds
+        // Step 3: Convert the adjusted time to a new Date object       
+        const nigeriaTime = new Date(nigeriaTimeMillis);
+        existingUser.tokenExpires = nigeriaTime;
+
+
         const timeOfUpdate = new Date(Date.now() + (3600 * 1000));  // Get Nigerian time        
         existingUser.updatedAt = timeOfUpdate;
 
