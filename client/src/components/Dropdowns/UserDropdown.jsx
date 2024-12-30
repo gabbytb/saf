@@ -103,17 +103,16 @@ const UserDropdown = ({ userId, userEmail, displayImg, userRoles, logOut }) => {
                             { 
                                 displayImg ?
                                     // !== '' ?
-                                    <img src={`${displayImg}`}  
-                                        srcset={`${displayImg} 1200w, ${displayImg} 800w, ${displayImg} 400w `}
-                                        alt="gmail pic"          
-                                        loading="eager"                           
+                                    <img loading="lazy"
+                                        src={`${displayImg}`}  
+                                        alt="gmail pic"                                                                   
                                         className="w-full rounded-full align-middle border-none shadow-lg"                                    
                                     />
                                     :
-                                    <img src={`${adminDashboardIcon}`}   
+                                    <img loading="lazy" 
+                                        src={`${adminDashboardIcon}`}   
                                         srcset={`${adminDashboardIcon} 1200w, ${adminDashboardIcon} 800w, ${adminDashboardIcon} 400w `}
-                                        alt="display pic"      
-                                        loading="lazy"                                   
+                                        alt="display pic"                                                                          
                                         className="w-full rounded-full align-middle border-none shadow-lg"                                    
                                     />
                             }
