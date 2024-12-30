@@ -147,6 +147,36 @@ export default function App() {
 
 
 
+// import React, { Suspense } from 'react';
+// import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+
+// // Use React.lazy to load the About component only when needed
+// const About = React.lazy(() => import('./About'));
+// const Home = React.lazy(() => import('./Home'));
+
+// function App() {
+//   return (
+//     <Router>
+//       <div>
+//         <h1>My React App</h1>
+//         <Switch>
+//           {/* Route for Home */}
+//           <Route exact path="/" component={Home} />
+
+//           {/* Route for About, which will be lazily loaded */}
+//           <Route path="/about">
+//             {/* Suspense is needed to show a loading indicator while the About component is loading */}
+//             <Suspense fallback={<div>Loading...</div>}>
+//               <About />
+//             </Suspense>
+//           </Route>
+//         </Switch>
+//       </div>
+//     </Router>
+//   );
+// }
+
+// export default App;
 
 
 
