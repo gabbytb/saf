@@ -90,8 +90,7 @@ const UserDropdown = ({ userId, userEmail, displayImg, userRoles, logOut }) => {
                         <span className="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
                             { 
                                 displayImg ?                                  
-                                    <LazyLoadImage 
-                                        // loading="lazy" 
+                                    <LazyLoadImage
                                         wrapperProps={{
                                             // If you need to, you can tweak the effect transition using the wrapper style.
                                             style: {transitionDelay: "1s"},
@@ -102,8 +101,7 @@ const UserDropdown = ({ userId, userEmail, displayImg, userRoles, logOut }) => {
                                         // src={require("../../assets/img/team-1-800x800.jpg").default} 
                                     />
                                     :
-                                    <LazyLoadImage 
-                                        loading="eager" 
+                                    <LazyLoadImage
                                         wrapperProps={{
                                             // If you need to, you can tweak the effect transition using the wrapper style.
                                             style: {transitionDelay: "1s"},
