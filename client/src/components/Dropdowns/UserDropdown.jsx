@@ -1,12 +1,11 @@
 import React from "react";
 import { Link, } from "react-router-dom";
 import { createPopper } from "@popperjs/core";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
 import {
     adminDashboardIcon,  
 } from "../../assets/images";
-
+import { LazyLoadImage } from 'react-lazy-load-image-component';
+import 'react-lazy-load-image-component/src/effects/blur.css';
 
 
 
@@ -91,12 +90,20 @@ const UserDropdown = ({ userId, userEmail, displayImg, userRoles, logOut }) => {
                         <span className="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
                             { 
                                 displayImg ?                                  
-                                    <LazyLoadImage loading="lazy" src={`${displayImg}`} alt="google profile pic" className="w-full rounded-full align-middle border-none shadow-lg"
+                                    <LazyLoadImage 
+                                        // loading="lazy" 
+                                        wrapperProps={{
+                                            // If you need to, you can tweak the effect transition using the wrapper style.
+                                            style: {transitionDelay: "1s"},
+                                        }}
+                                        src={`${displayImg}`} 
+                                        alt="google profile pic" 
+                                        className="w-full rounded-full align-middle border-none shadow-lg"
                                         // src={require("../../assets/img/team-1-800x800.jpg").default} 
                                     />
                                     :
                                     <LazyLoadImage 
-                                        loading="lazy"   
+                                        loading="eager" 
                                         wrapperProps={{
                                             // If you need to, you can tweak the effect transition using the wrapper style.
                                             style: {transitionDelay: "1s"},
