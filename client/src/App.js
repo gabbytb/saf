@@ -2,6 +2,13 @@
 // import ReactGA from 'react-ga';
 import { Routes, Route, } from "react-router-dom";
 // import { googleAnalytics } from "./constants";
+
+
+// Use React.lazy to load the About component only when needed
+// const About = React.lazy(() => import('./About'));
+// const Home = React.lazy(() => import('./Home'));
+
+
 import {   
     Home,
     
@@ -46,7 +53,6 @@ import {
 import { 
     Posts, 
 } from "./redirects";
-
 
 
 
@@ -180,7 +186,21 @@ export default function App() {
 
 
 
+// Explanation:
+// React.lazy(() => import('./About')): This tells React to load the About component only when the user navigates to the /about route.
 
+// Suspense: This is a wrapper component from React that shows something while the lazily loaded component is being fetched. In our case, we’re using a simple "Loading..." text to indicate that the About component is being loaded.
+
+// fallback={<div>Loading...</div>}: This is the UI that will be shown while the component is loading.
+
+// Step-by-Step Process:
+// Create Components: Define the Home and About components as you normally would.
+// Wrap the Routes with React.lazy(): Use React.lazy() for components that you want to load lazily (like About).
+// Wrap Lazily Loaded Components with Suspense: Use Suspense to handle the loading state when the component is being fetched.
+// 4. Final Result:
+// Now, when you visit the /about page, the About component will only load at that moment, instead of loading it right when the app starts. This helps make the initial load faster!
+
+// And that's it! You've just set up lazy loading in React using React.lazy() and Suspense. It’s super simple, right?
 
 
 
