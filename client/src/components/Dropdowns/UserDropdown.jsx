@@ -4,9 +4,21 @@ import { createPopper } from "@popperjs/core";
 import {
     adminDashboardIcon,  
 } from "../../assets/images";
-import { LazyLoadImage } from 'react-lazy-load-image-component';
-import 'react-lazy-load-image-component/src/effects/blur.css';
 
+
+
+
+
+
+
+
+
+
+
+
+// const LazyImage = ({ src, alt }) => {
+//     return <img src={src} alt={alt} loading="lazy" style={{ width: '100%', height: 'auto' }} />;
+// };
 
 
 
@@ -89,26 +101,20 @@ const UserDropdown = ({ userId, userEmail, displayImg, userRoles, logOut }) => {
                     <div className="items-center flex">
                         <span className="w-12 h-12 text-sm text-white bg-blueGray-200 inline-flex items-center justify-center rounded-full">
                             { 
-                                displayImg ?                                  
-                                    <LazyLoadImage
-                                        wrapperProps={{
-                                            // If you need to, you can tweak the effect transition using the wrapper style.
-                                            style: {transitionDelay: "1s"},
-                                        }}
-                                        src={`${displayImg}`} 
-                                        alt="google profile pic" 
-                                        className="w-full rounded-full align-middle border-none shadow-lg"
-                                        // src={require("../../assets/img/team-1-800x800.jpg").default} 
+                                displayImg ?
+                                    // !== '' ?
+                                    <img src={`${displayImg}`}  
+                                        srcset={`${displayImg} 1200w, ${displayImg} 800w, ${displayImg} 400w `}
+                                        alt="gmail pic"          
+                                        loading="eager"                           
+                                        className="w-full rounded-full align-middle border-none shadow-lg"                                    
                                     />
                                     :
-                                    <LazyLoadImage
-                                        wrapperProps={{
-                                            // If you need to, you can tweak the effect transition using the wrapper style.
-                                            style: {transitionDelay: "1s"},
-                                        }} 
-                                        src={adminDashboardIcon} 
-                                        alt="..." 
-                                        className="w-full rounded-full align-middle border-none shadow-lg" 
+                                    <img src={`${adminDashboardIcon}`}   
+                                        srcset={`${adminDashboardIcon} 1200w, ${adminDashboardIcon} 800w, ${adminDashboardIcon} 400w `}
+                                        alt="display pic"      
+                                        loading="lazy"                                   
+                                        className="w-full rounded-full align-middle border-none shadow-lg"                                    
                                     />
                             }
                         </span>
