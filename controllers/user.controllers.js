@@ -48,6 +48,7 @@ const assignTwoDaysToken = require("../middlewares/AssignTwoDaysToken");    // F
 // const assignThreeDaysToken = require("../middlewares/AssignThreeDaysToken");    // For Sign Up
 const verifyToken = require("../middlewares/VerifyToken");
 const mailSenderForGetSignUp = require("../middlewares/MailSenderForGetSignUp");
+const { data } = require("autoprefixer");
 // const mailSenderForPostSignUp = require("../middlewares/MailSenderForPostSignUp");
 // const mailSenderForVerifiedAccount = require("../middlewares/MailSenderForVerifiedAccount");
 // *****************************************************************
@@ -278,47 +279,32 @@ exports.signUp = async (req, res) => {
 };  // THOROUGHLY Tested === Working
 
 
-exports.logEntry = async (req, res) => {
+exports.logActivity = async (req, res) => {
 
     // Gets a unique number based on the current time
     const uniqueId = Date.now(),
           id = 23401;
+    var randNum = uniqueId % id
 
     // Payload
-    const { message, level, timestamp } = req.body;
+    const { message, mode, timestamp } = req.body;
    
-    if (message === 'You are Logged out') {
-        const recordActivity = new Activity({ 
-            _id: uniqueId % id,
-            trigger: level,
-            log: message,
-            createdAt: timestamp,
-        });
-        recordActivity.save();
-
-        const responseData = {
-            success: true,
-            servermessage: message,
-        };        
-        return res.status(200).json(responseData);        
-    };
-    
     // Store logs in a file or database
     // console.log(`[${timestamp}] ${level}: ${message}`);
 
     const recordActivity = new Activity({ 
-        _id: uniqueId % id,
-        trigger: level,
+        _id: randNum++,
+        trigger: mode.toLowerCase(),
         log: message,
         createdAt: timestamp,
     });
     recordActivity.save();
 
     const responseData = {
-        success: true,
-        servermessage: `[${timestamp}] ${level}: ${message}`,
+        servermessage: message,
     };
-    return res.status(200).json(responseData);
+    console.log('USER ACTIVITY: ', responseData.servermessage);
+    return res.status(200).json(responseData); 
 };
 
 

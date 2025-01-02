@@ -2,7 +2,6 @@ import { useState, useEffect } from "react";
 import { googleLogout } from "@react-oauth/google";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
-// import log from 'loglevel';
 import api from "../api";
 import "../assets/styles/tailwind.css";
 
@@ -31,11 +30,11 @@ import {
 
 
 
-function logEvent(message, level = 'TRACKER') {
+function logEvent(message, mode = 'TRACKER') {
     // Send the log to a backend server
     api.post('/api/logs', {
         message,
-        level,
+        mode,
         timestamp: new Date().toISOString(),
     });
 };
@@ -55,32 +54,32 @@ const Dashboard = ({ isLoggedIn }) => {
     // ***************************************************************************
     // FUNCTION TO LOG-OUT CURRENT ACTIVE USER
     // ***************************************************************************
-    // Send the log to a backend server     
-    function logLogout(message = 'You are Logged out', level = 'TRACKER') {
-        api.post('/api/logs', {
-                message,
-                level,
-                timestamp: new Date().toISOString(),
+    // Send log to backend server     
+    function logLogout(message = "You are Logged out", mode = "TRACKER") {
+        api.post("/api/logs", {
+            message,
+            mode,
+            timestamp: new Date().toISOString(),
         })
         .then((response) => {
-            const { servermessage } = response.data;            
-            // console.log('USER SESSION = ', servermessage);            
+            const { servermessage } = response.data;              
             localStorage.setItem('sessionend', servermessage);
         }) 
         .catch((error) => {
             console.log('Error encountered during logging of MAIN DASHBOARD', error.message);
         });
     };
-    function logOut() {        
+    function logOut() {      
+        // log out function to log the user out of google and set the profile array to null    
+        googleLogout();      
         // Clear User Details from Local Storage
         localStorage.clear();
-        // log out function to log the user out of google and set the profile array to null
-        googleLogout();
+        // Record Activity
         logLogout();
-        // redirect to Login Page
-        const redirToLOGIN = "/user/login";
-        window.location.replace(redirToLOGIN);        
-    };    
+        // redirect to Login Page    
+        const redirToLogin = "/user/login";
+        window.location.replace(redirToLogin);      
+    }; 
     // ***************************************************************************
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
     // ***************************************************************************
@@ -114,7 +113,7 @@ const Dashboard = ({ isLoggedIn }) => {
               siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
 
-        logEvent(`${firstName} ${lastName} is currently viewing ${pageTitle}`);
+        logEvent(`${firstName} ${lastName}[${userEmail}] visited ${pageTitle}`);
     }, []);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //

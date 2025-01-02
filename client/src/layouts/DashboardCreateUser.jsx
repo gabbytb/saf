@@ -79,11 +79,11 @@ const DashboardCreateUser = ({ isLoggedIn }) => {
     // *************************** //
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "New User",
+        const pageTitle = "Create User",
               siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
 
-        logEvent(`${firstName} ${lastName} is currently viewing ${pageTitle}`);
+        logEvent(`${firstName} ${lastName}[${userEmail}] visited ${pageTitle} page`);
     }, []);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //

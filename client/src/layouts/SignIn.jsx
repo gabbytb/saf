@@ -1,6 +1,9 @@
 import { useState, useEffect, } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { useGoogleLogin } from '@react-oauth/google';
+import { 
+    useGoogleLogin, 
+    // googleLogout, 
+} from '@react-oauth/google';
 import api from '../api';
 import googleApi from '../googleApi';
 import { Preloader } from '../components';
@@ -12,8 +15,19 @@ import { brandOfficialLogoDark, signUpIcon } from '../assets/images';
 
 
 
-function SignIn() {
+function logEvent(message, mode = 'TRACKER') {
+    // Send the log to a backend server
+    api.post('/api/logs', {
+        message,
+        mode,
+        timestamp: new Date().toISOString(),
+    });
+};
 
+
+
+const SignIn = () => {
+    
 
     // console.clear();   
 
@@ -25,11 +39,6 @@ function SignIn() {
     // console.log("Login Attempt: ", loginFormMessage);
 
     
-
-
-
-
-
     // ***************************************************************************
     // FUNCTION:-  AUTO-REDIRECT lOGGED-IN USERS to DASHBOARD
     // ***************************************************************************
@@ -47,26 +56,21 @@ function SignIn() {
     // ***************************************************************************
 
      
-
-
-
-
-
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "Sign In", siteTitle = "Samuel Akinola Foundation";
+        const pageTitle = "Sign In", 
+              siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
+       
+        logEvent('User visited Log-In page');             
     }, []);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
     
-
-
-
 
 
     
@@ -297,6 +301,7 @@ function SignIn() {
                         is_verified: data?.isVerified,       
                     };                   
                     setUserProfile(loggedInUser);
+
                     localStorage.setItem("user", JSON.stringify(loggedInUser));
                 
                     ssoLinks?.classList.add("hidden");

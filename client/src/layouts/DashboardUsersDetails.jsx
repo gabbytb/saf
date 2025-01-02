@@ -83,10 +83,11 @@ const DashboardUsersDetails = ({ isLoggedIn }) => {
     // *************************** //
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "Admin Dashboard - VIEW USER", siteTitle = "Samuel Akinola Foundation";
+        const pageTitle = "Dashboard - User Details", 
+              siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
 
-        logEvent(`${firstName} ${lastName} is currently viewing ${pageTitle}`);
+        logEvent(`${firstName} ${lastName}[${userEmail}] visited ${pageTitle}`);
     }, []);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //

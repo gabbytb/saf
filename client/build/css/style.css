@@ -827,7 +827,7 @@ tbody tr{
   }
   /* Firefox */
   &::-moz-progress-bar {
-    background-color: red;
+    background-color: lime;
     border-top-left-radius: 100px;
     border-bottom-left-radius: 100px;
   }

@@ -25,28 +25,41 @@ const DashboardCreateArticle = ({ isLoggedIn }) => {
 
     // console.clear();
 
-    const navigate = useNavigate();
-    
 
     
     // ***************************************************************************
     // CURRENT ACTIVE USER:-
     // ***************************************************************************
     isLoggedIn = JSON.parse(localStorage.getItem("user"));
-    // ***************************************************************************
+   // ***************************************************************************
     // FUNCTION TO LOG-OUT CURRENT ACTIVE USER
     // ***************************************************************************
-    function logOut() {
-        // Clear User Details from Local Storage
-        localStorage.removeItem("user");
-        localStorage.clear();
-        // log out function to log the user out of google and set the profile array to null
-        googleLogout();
-        // redirect to Login Page
-        // const redirToLOGIN = "/user/login";
-        // window.location.replace(redirToLOGIN);
-        navigate("/user/login");
+    // Send log to backend server     
+    function logLogout(message = "You are Logged out", mode = "TRACKER") {
+        api.post("/api/logs", {
+            message,
+            mode,
+            timestamp: new Date().toISOString(),
+        })
+        .then((response) => {
+            const { servermessage } = response.data;              
+            localStorage.setItem('sessionend', servermessage);
+        }) 
+        .catch((error) => {
+            console.log('Error encountered during logging of MAIN DASHBOARD', error.message);
+        });
     };
+    function logOut() {      
+        // log out function to log the user out of google and set the profile array to null    
+        googleLogout();      
+        // Clear User Details from Local Storage
+        localStorage.clear();
+        // Record Activity
+        logLogout();
+        // redirect to Login Page    
+        const redirToLogin = "/user/login";
+        window.location.replace(redirToLogin);      
+    }; 
     // ***************************************************************************
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
     // *************************************************************************** 
@@ -79,7 +92,7 @@ const DashboardCreateArticle = ({ isLoggedIn }) => {
               siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
 
-        logEvent(`${firstName} ${lastName} is currently viewing ${pageTitle}`);
+        logEvent(`${firstName} ${lastName}[${userEmail}] visited ${pageTitle} page`);
     }, []);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //

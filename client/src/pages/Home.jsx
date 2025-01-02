@@ -1,36 +1,33 @@
 import { useRef, useEffect, } from "react";
+import { googleLogout } from "@react-oauth/google";
 import { Link } from "react-router-dom";
 import { HomeNav, HomeFooter, } from "../components"
 import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 import { homebg, hero1, hero2, hero3, hero4, } from "../assets/images";
 // import '../assets/styles/tailwindcss.css';
-// import log from 'loglevel';
-import axios from "axios";
+import api from "../api";
 
 
 
 
 
 
-function logEvent(message, level = 'info') {
+function logEvent(message, mode = 'TRACKER') {
     // Send the log to a backend server
-    axios.post('/api/logs', {
+    api.post('/api/logs', {
         message,
-        level,
+        mode,
         timestamp: new Date().toISOString(),
     });
 };
 
 
 const Home = () => {
+    
 
 
     const tawkMessengerRef = useRef();
-    
-
-    useEffect(() => {
-        logEvent('App loaded');
-    }, []);
+      
 
     // console.log('WINDOW LOCATION = ', window.location);
     // console.log('WINDOW LOCATION PATHNAME = ', window.location.pathname);
@@ -42,12 +39,16 @@ const Home = () => {
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
     useEffect(() => {
-        const pageTitle = "Reaching out to Great Minds", siteTitle = "Samuel Akinola Foundation";
-        document.title = `${pageTitle} | ${siteTitle}`;
+      const pageTitle = "Reaching out to Great Minds", 
+            siteTitle = "Samuel Akinola Foundation";
+      document.title = `${pageTitle} | ${siteTitle}`;
+
+      logEvent('User visited Homepage');  
     }, []);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
+
 
     
 

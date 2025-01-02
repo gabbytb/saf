@@ -12,6 +12,14 @@ import { spinner } from "../assets/images";
 
 
 
+function logEvent(message, mode = 'TRACKER') {
+    // Send the log to a backend server
+    api.post('/api/logs', {
+        message,
+        mode,
+        timestamp: new Date().toISOString(),
+    });
+};
 
 // ********************************** //
 // *** CONVERT DATE STRING PARAMS *** // 
@@ -92,10 +100,11 @@ const ArticlesList = ({ isLoggedIn, }) => {
         // Function:-  CONDITIONAL LOGIC TO HANDLE PAGE URL RE-DIRECT, and SET PAGE TITLE FOR EACH INDIVIDUAL PAGE
         // *************************************************************************************************************            
         if (currentPage > 1 ) {               
-            const pageTitle = `Blog News - Page ${currentPage}`, 
+            const pageTitle = `Blog - Page ${currentPage}`, 
                   siteTitle = "Samuel Akinola Foundation";
             document.title = `${pageTitle} | ${siteTitle}`;          
 
+            logEvent(`User visited ${pageTitle}`);
             window.scrollTo({ top: 170, left: 0, behavior: 'smooth' });
 
             const new_URL = window.location.origin + `/blog/page/${currentPage}`;
@@ -108,9 +117,11 @@ const ArticlesList = ({ isLoggedIn, }) => {
 
         } else {
 
-            const pageTitle = 'Blog News', 
+            const pageTitle = 'Blog', 
                   siteTitle = "Samuel Akinola Foundation";
-            document.title = `${pageTitle} | ${siteTitle}`;                 
+            document.title = `${pageTitle} | ${siteTitle}`;          
+            logEvent(`User visited ${pageTitle} page`);
+            
             window.scrollTo({ top: 0, left: 0, behavior: 'smooth' });
 
             const new_URL = window.location.origin + '/blog';                                               

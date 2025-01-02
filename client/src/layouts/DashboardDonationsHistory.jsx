@@ -59,11 +59,11 @@ const DashboardDonationsHistory = ({ color, isLoggedIn }) => {
     // *************************** //
     useEffect(() => {
         window.scrollBy({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "Donations History", 
+        const pageTitle = "Dashboard - Donations History", 
               siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
 
-        logEvent(`${firstName} ${lastName} is currently viewing ${pageTitle}`);
+        logEvent(`${firstName} ${lastName}[${userEmail}] visited ${pageTitle}`);
     }, []);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //

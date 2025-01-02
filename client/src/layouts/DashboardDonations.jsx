@@ -55,11 +55,11 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
     // *************************** //
     useEffect(() => {
         window.scrollBy({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "Donations Dashboard", 
+        const pageTitle = "Dashboard - Manage Donations",
               siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
 
-        logEvent(`${firstName} ${lastName} is currently viewing ${pageTitle}`);
+        logEvent(`${firstName} ${lastName}[${userEmail}] visited ${pageTitle}`);
     }, []);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
