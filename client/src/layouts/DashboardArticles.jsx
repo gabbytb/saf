@@ -1,13 +1,14 @@
 import { useState, useEffect, Suspense, } from "react";
-import { Link } from "react-router-dom";
 import { googleLogout } from "@react-oauth/google";
 import PropTypes from "prop-types";
-
+import { Link } from "react-router-dom";
 import api from "../api";
-import { spinner } from "../assets/images";
 import "../assets/styles/tailwind.css";
 
 // components
+import { 
+    spinner 
+} from "../assets/images";
 import { 
     Sidebar,
     UserDropdown,
@@ -38,11 +39,11 @@ const convertDate = (dateString) => {
     return date.toLocaleString('en-GB', options);
 };
 
-const logEvent = (message, level = 'TRACKER') => {
+const logEvent = (message, mode = 'TRACKER') => {
     // Send the log to a backend server
     api.post('/api/logs', {
         message,
-        level,
+        mode,
         timestamp: new Date().toISOString(),
     });
 };
@@ -58,11 +59,11 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
     // *************************** //
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "Blog Dashboard", 
+        const pageTitle = "Dashboard - Blog Articles", 
               siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
 
-        logEvent(`${firstName} ${lastName} is currently viewing ${pageTitle}`);
+        logEvent(`${firstName} ${lastName}[${userEmail}] visited ${pageTitle}`);
     }, []);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
@@ -75,18 +76,35 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
     // CURRENT ACTIVE USER:-
     // ***************************************************************************
     isLoggedIn = JSON.parse(localStorage.getItem("user"));
-    // ***************************************************************************
+   // ***************************************************************************
     // FUNCTION TO LOG-OUT CURRENT ACTIVE USER
     // ***************************************************************************
-    function logOut() {
+    // Send log to backend server     
+    function logLogout(message = "You are Logged out", mode = "TRACKER") {
+        api.post("/api/logs", {
+            message,
+            mode,
+            timestamp: new Date().toISOString(),
+        })
+        .then((response) => {
+            const { servermessage } = response.data;              
+            localStorage.setItem('sessionend', servermessage);
+        }) 
+        .catch((error) => {
+            console.log('Error encountered during logging of MAIN DASHBOARD', error.message);
+        });
+    };
+    function logOut() {      
+        // log out function to log the user out of google and set the profile array to null    
+        googleLogout();      
         // Clear User Details from Local Storage
         localStorage.clear();
-        // log out function to log the user out of google and set the profile array to null
-        googleLogout();
-        // redirect to Login Page
-        const redirToLOGIN = "/user/login";
-        window.location.replace(redirToLOGIN);
-    };
+        // Record Activity
+        logLogout();
+        // redirect to Login Page    
+        const redirToLogin = "/user/login";
+        window.location.replace(redirToLogin);      
+    }; 
     // ***************************************************************************
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
     // ***************************************************************************
