@@ -282,9 +282,10 @@ exports.signUp = async (req, res) => {
 exports.logActivity = async (req, res) => {
 
     // Gets a unique number based on the current time
-    const uniqueId = Date.now(),
-          id = 23401;
-    var randNum = uniqueId % id
+    var uniqueId = Date.now(),
+          id = 9999999999;
+    let randNum = uniqueId % id;
+    let randomNumber = uniqueId % randNum;
 
     // Payload
     const { message, mode, timestamp } = req.body;
@@ -292,8 +293,8 @@ exports.logActivity = async (req, res) => {
     // Store logs in a file or database
     // console.log(`[${timestamp}] ${level}: ${message}`);
 
-    const recordActivity = new Activity({ 
-        _id: randNum % id,
+    var recordActivity = new Activity({ 
+        _id: randNum + randomNumber++,
         trigger: mode,
         log: message,
         createdAt: timestamp,
@@ -1200,7 +1201,8 @@ exports.findAllUsers = async (req, res) => {
             } else if (status === 'rejected') {
                 console.log("REJECTED USERS/DONORS/CUSTOMERS:: ", allUsers);
             } else {
-                console.log("ALL USERS/DONORS/CUSTOMERS: ", allUsers);
+                allUsers;
+                // console.log("ALL USERS/DONORS/CUSTOMERS: ", allUsers);
             };
         };
         
@@ -1212,7 +1214,7 @@ exports.findAllUsers = async (req, res) => {
             limit,
             lastPage: totalPages,
         };
-        console.log("PAGINATION: ", pagination, "\n\n");
+        // console.log("PAGINATION: ", pagination, "\n\n");
         
 
         const responseData = {
@@ -1362,7 +1364,8 @@ exports.findAllAdmins = async (req, res) => {
             } else if (status === 'rejected') {
                 console.log("REJECTED ADMIN USERS: ", allAdminRole);
             } else {
-                console.log("ALL ADMIN USERS: ", allAdminRole);
+                allAdminRole;
+                // console.log("ALL ADMIN USERS: ", allAdminRole);
             };
         };
         
@@ -1375,7 +1378,7 @@ exports.findAllAdmins = async (req, res) => {
             recordLimit: limit,
             lastPage: totalPages,
         };
-        console.log("PAGINATION: ", pagination, "\n\n");        
+        // console.log("PAGINATION: ", pagination, "\n\n");        
 
 
         const responseData = {

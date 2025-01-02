@@ -97,7 +97,7 @@ exports.createDonation = async (req, res) => {
 
         // Save all images
         const savedImages = await Promise.all(imagePromises);
-        console.log('Saved Images: ', savedImages);
+        // console.log('Saved Images: ', savedImages);
          
 
         // Save all images to Donation Object
@@ -170,7 +170,7 @@ exports.findAllDonations = async (req, res) => {
                                 .sort(sortOrder)
                                 .skip(parseInt(skip))
                                 .limit(parseInt(donationsLimit)); 
-        console.log("ALL DONATIONS ARRANGED ACCORDING TO MOST-RECENT: ", donations);
+        // console.log("ALL DONATIONS ARRANGED ACCORDING TO MOST-RECENT: ", donations);
 
         
         const totalDonations = await Donation.countDocuments(query); // Total number of users with the given status
@@ -181,7 +181,7 @@ exports.findAllDonations = async (req, res) => {
             donationsLimit,
             lastPage: totalPages,
         };
-        console.log("PAGINATION: ", pagination, "\n\n");
+        // console.log("PAGINATION: ", pagination, "\n\n");
     
         const responseData = {
             success: true,

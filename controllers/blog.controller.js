@@ -166,7 +166,7 @@ exports.findAllBlogPosts = async (req, res) => {
                                 .sort(sortOrder)
                                 .skip(parseInt(skip))
                                 .limit(parseInt(postLimit)); 
-        console.log("ALL BLOG POSTS ARRANGED ACCORDING TO MOST-RECENT: ", allBlogPosts);
+        // console.log("ALL BLOG POSTS ARRANGED ACCORDING TO MOST-RECENT: ", allBlogPosts);
 
         
         const totalBlogPosts = await Blog.countDocuments(query); // Total number of users with the given status
@@ -177,7 +177,7 @@ exports.findAllBlogPosts = async (req, res) => {
             postLimit,
             lastPage: totalPages,
         };
-        console.log("PAGINATION: ", pagination, "\n\n");
+        // console.log("PAGINATION: ", pagination, "\n\n");
         
 
 

@@ -4,6 +4,7 @@ module.exports = mongoose => {
     var activitySchema = new Schema({
         _id : {
             type: Number,
+            unique: true,
         },
         trigger: {
             type: String,
