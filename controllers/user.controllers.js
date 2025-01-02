@@ -293,12 +293,12 @@ exports.logActivity = async (req, res) => {
     // console.log(`[${timestamp}] ${level}: ${message}`);
 
     const recordActivity = new Activity({ 
-        _id: randNum++,
-        trigger: mode.toLowerCase(),
+        _id: randNum % id,
+        trigger: mode,
         log: message,
         createdAt: timestamp,
     });
-    recordActivity.save();
+    await recordActivity.save();
 
     const responseData = {
         servermessage: message,

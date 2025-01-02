@@ -59,7 +59,7 @@ const DashboardArticles = ({ color, isLoggedIn }) => {
     // *************************** //
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = "Dashboard - Blog Articles", 
+        const pageTitle = "Dashboard - Manage Blog", 
               siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
 
