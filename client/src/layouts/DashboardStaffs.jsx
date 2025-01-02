@@ -24,7 +24,14 @@ import {
 
 
 
-
+const logEvent = (message, level = 'TRACKER') => {
+    // Send the log to a backend server
+    api.post('/api/logs', {
+        message,
+        level,
+        timestamp: new Date().toISOString(),
+    });
+};
 
 
 const DashboardStaffs = ({ color, isLoggedIn }) => {
@@ -37,6 +44,8 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
         const pageTitle = "Staffs Dashboard", siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
+
+        logEvent(`${firstName} ${lastName} is currently viewing ${pageTitle}`);
     }, []);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
@@ -78,7 +87,7 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
     // ***************************************************************************
     const userId = isLoggedIn?.id ? isLoggedIn?.id : logOut();
     // console.log("Logged-In User ID: ", userId);
-    // const firstName = isLoggedIn?.first_name ? isLoggedIn?.first_name : logOut();
+    const firstName = isLoggedIn?.first_name ? isLoggedIn?.first_name : logOut();
     // console.log("Logged-In User First Name: ", firstName);
     const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();            
     // console.log("Logged-In User Last Name: ", lastName);

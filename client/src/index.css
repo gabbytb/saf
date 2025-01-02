@@ -217,6 +217,30 @@
 
 
 
+  .progressBar {
+    appearance: none;
+    height: 8px;
+    border-radius: 100px;
+      
+    /* Chrome and Safari */
+    &::-webkit-progress-bar {
+      background: red;
+      border-radius: 100px;
+    }
+  
+    &::-webkit-progress-value {
+      background-color: lime;
+      border-top-left-radius: 100px;
+      border-bottom-left-radius: 100px;
+    }
+  
+    /* Firefox */
+    &::-moz-progress-bar {
+      background-color: red;
+      border-top-left-radius: 100px;
+      border-bottom-left-radius: 100px;
+    }
+  }
 
   /* ********************  LOGIN  ******************** */
   /* .widget-visible {
@@ -553,13 +577,14 @@
 
   #homeHeader .container,
   #header .container,
-  #blogPostsID .container {
+  #blogPostsID .container,
+  #donationsListID .container { 
     @apply h-full w-full my-0 mx-auto px-12 sm:px-24
   }
 
-  #blogPostsID .container {
+  /* #blogPostsID .container {
     @apply h-full w-full my-0 mx-auto px-12 sm:px-24
-  }
+  } */
 
   #header .cta-menu a {
     @apply 

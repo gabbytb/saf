@@ -52,11 +52,11 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 // 3. DATABASE CONNECTION  ===============================================================================//
 // =======================================================================================================//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// const LaunchCloudDBConnection = require("./config/dbServerConfig");
-// LaunchCloudDBConnection(app, ip, port);
+const LaunchCloudDBConnection = require("./config/dbServerConfig");
+LaunchCloudDBConnection(app, ip, port);
 
-const LaunchLocalDBConnection = require("./config/dbLocalConfig");
-LaunchLocalDBConnection(app, ip, port);
+// const LaunchLocalDBConnection = require("./config/dbLocalConfig");
+// LaunchLocalDBConnection(app, ip, port);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

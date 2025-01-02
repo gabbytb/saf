@@ -11,6 +11,14 @@ import {
 
 
 
+const logEvent = (message, level = 'TRACKER') => {
+    // Send the log to a backend server
+    api.post('/api/logs', {
+        message,
+        level,
+        timestamp: new Date().toISOString(),
+    });
+};
 
 
 const DashboardCreateArticle = ({ isLoggedIn }) => {
@@ -70,6 +78,8 @@ const DashboardCreateArticle = ({ isLoggedIn }) => {
         const pageTitle = "Create Article", 
               siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
+
+        logEvent(`${firstName} ${lastName} is currently viewing ${pageTitle}`);
     }, []);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //

@@ -14,7 +14,8 @@ const DB_Server_Connection = async (app, ip, port) => {
     // Environment variables
     const username = process.env.MONGO_DB_USERNAME || "userName";
     const authbinder = process.env.MONGO_DB_PLANNER || "serverAuthBinder";
-    const pswd = process.env.MONGO_DB_PASSWORD || "usersPass";
+    const password = "usersPass";
+    const pswd = process.env.MONGO_DB_PASSWORD || password;
     const host = process.env.MONGO_DB_HOST || "serverHost";
     
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////

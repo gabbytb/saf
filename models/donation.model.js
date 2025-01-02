@@ -44,7 +44,47 @@ module.exports = mongoose => {
         },
         amountRaised: { 
             type: Number,
-        },
+        },        
+        author: [
+            { 
+                _id: { 
+                    type: Number,                   
+                },
+                img: { 
+                    type: String,
+                },
+                name: {                    
+                    type: String,
+                    default: 'anonymous',
+                }, 
+                email: { 
+                    type: String,
+                }, 
+                bio: { 
+                    type: String,
+                },             
+            },
+        ],        
+        contributors: [
+            {     
+                _id: { 
+                    type: Number,                   
+                },
+                comment: { 
+                    type: String,
+                }, 
+                firstName: {                    
+                    type: String,
+                    default: 'anonymous',
+                }, 
+                lastName: { 
+                    type: String,
+                }, 
+                email: { 
+                    type: String,
+                },  
+            },
+        ],
         donor: [
             { 
                 _id: { 

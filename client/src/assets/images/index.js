@@ -1,5 +1,9 @@
 import homebg from "./hmobg.jpeg";
 import blogbg from "./blogbgg.jpg";
+
+import donationbg2 from "./donationbg2.jpg";
+import donationbg3 from "./donationbg3.webp";
+
 import spinner from "./spinning.gif";
 
 import brandOfficialLogo from "./logo.jpg";
@@ -29,6 +33,9 @@ import hero4 from "./team-4-470x470.png";
 export {
     homebg,
     blogbg,
+    donationbg2,
+    donationbg3,
+    
     spinner,
 
     brandOfficialLogo,

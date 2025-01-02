@@ -1,6 +1,7 @@
 const db = require("../models");
 const User = db.users;
 const Role = db.roles;
+const Activity = db.activities;
 const bcrypt = require("bcrypt");
 // const crypto = require('crypto');
 
@@ -276,6 +277,49 @@ exports.signUp = async (req, res) => {
     }
 };  // THOROUGHLY Tested === Working
 
+
+exports.logEntry = async (req, res) => {
+
+    // Gets a unique number based on the current time
+    const uniqueId = Date.now(),
+          id = 23401;
+
+    // Payload
+    const { message, level, timestamp } = req.body;
+   
+    if (message === 'You are Logged out') {
+        const recordActivity = new Activity({ 
+            _id: uniqueId % id,
+            trigger: level,
+            log: message,
+            createdAt: timestamp,
+        });
+        recordActivity.save();
+
+        const responseData = {
+            success: true,
+            servermessage: message,
+        };        
+        return res.status(200).json(responseData);        
+    };
+    
+    // Store logs in a file or database
+    // console.log(`[${timestamp}] ${level}: ${message}`);
+
+    const recordActivity = new Activity({ 
+        _id: uniqueId % id,
+        trigger: level,
+        log: message,
+        createdAt: timestamp,
+    });
+    recordActivity.save();
+
+    const responseData = {
+        success: true,
+        servermessage: `[${timestamp}] ${level}: ${message}`,
+    };
+    return res.status(200).json(responseData);
+};
 
 
 // Our CREATE ACCOUNT Logic starts here

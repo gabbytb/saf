@@ -25,17 +25,21 @@ import {
 
 
 
-const convertDate = (dateString) => {
-    
-    const date = new Date(dateString);
-    const options = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',        
-        hour12: true
-    };
 
-    return date.toLocaleString('en-GB', options);
+
+const numberWithComma = (x) => {
+    // return data.toLocaleString('en-US', { style: 'currency', currency: 'NGN', minimumFractionDigits: 3});
+    return x.toLocaleString(undefined, {maximumFractionDigits:2});
+};
+
+
+const logEvent = (message, level = 'TRACKER') => {
+    // Send the log to a backend server
+    api.post('/api/logs', {
+        message,
+        level,
+        timestamp: new Date().toISOString(),
+    });
 };
 
 
@@ -54,6 +58,8 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
         const pageTitle = "Donations Dashboard", 
               siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
+
+        logEvent(`${firstName} ${lastName} is currently viewing ${pageTitle}`);
     }, []);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
@@ -83,7 +89,7 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
     // *************************************************************************** 
     const userId = isLoggedIn?.id ? isLoggedIn?.id : logOut();
     // console.log("Logged-In User ID: ", userId);
-    // const firstName = isLoggedIn?.first_name ? isLoggedIn?.first_name : logOut();
+    const firstName = isLoggedIn?.first_name ? isLoggedIn?.first_name : logOut();
     // console.log("Logged-In User First Name: ", firstName);
     const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();            
     // console.log("Logged-In User Last Name: ", lastName);
@@ -119,14 +125,15 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
     const [currentPage, setCurrentPage] = useState(1);
    
     const leftArrow = "<", 
-          rightArrow = ">";
+          rightArrow = ">",
+          nairaSymbol = '₦';
 
     // Number of items per page
     const [pageLimit, setPageLimit] = useState(undefined);
     // console.log("PAGE LIMIT: ", pageLimit);
     
 
-
+    
 
 
     // ****************************************************************************
@@ -376,66 +383,76 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
                                         {/* Donations table */}
                                         <table className="items-center w-full bg-transparent border-collapse">
                                             <thead>
-                                                <tr>
-                                                    <th
-                                                        className={
-                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                                                            (color === "light"
-                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                                                        }
-                                                    >
-                                                        S/N
-                                                    </th>
-                                                    <th
-                                                        className={
-                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                                                            (color === "light"
-                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                                                        }
-                                                    >
-                                                        Title
-                                                    </th>
-                                                    <th
-                                                        className={
-                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                                                            (color === "light"
-                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                                                        }
-                                                    >
-                                                        Excerpt
-                                                    </th>
-                                                    <th
-                                                        className={
-                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                                                            (color === "light"
-                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                                                        }
-                                                    >
-                                                        Status
-                                                    </th> 
-                                                    <th
-                                                        className={
-                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                                                            (color === "light"
-                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                                                        }
-                                                    >
-                                                    Action
-                                                    </th>              
-                                                    <th
-                                                        className={
-                                                            "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
-                                                            (color === "light"
-                                                            ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
-                                                            : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
-                                                        }
-                                                    ></th>
-                                                </tr>
+                                                    <tr>
+                                                        <th
+                                                            className={
+                                                                "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                                (color === "light"
+                                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                                : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                            }
+                                                        >
+                                                            S/N
+                                                        </th>
+                                                        <th
+                                                            className={
+                                                                "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                                (color === "light"
+                                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                                : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                            }
+                                                        >
+                                                            Featured Image
+                                                        </th>
+                                                        <th
+                                                            className={
+                                                                "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-center " +
+                                                                (color === "light"
+                                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                                : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                            }
+                                                        >
+                                                            Post Title
+                                                        </th>
+                                                        <th
+                                                            className={
+                                                                "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                                (color === "light"
+                                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                                : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                            }
+                                                        >
+                                                            Amount Raised
+                                                        </th>
+                                                        <th
+                                                            className={
+                                                                "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                                (color === "light"
+                                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                                : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                            }
+                                                        >
+                                                            Status
+                                                        </th> 
+                                                        <th
+                                                            className={
+                                                                "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                                (color === "light"
+                                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                                : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                            }
+                                                        >
+                                                        Action
+                                                        </th>              
+                                                        <th
+                                                            className={
+                                                                "px-6 align-middle border border-solid py-3 text-sm uppercase border-l-0 border-r-0 whitespace-nowrap font-semibold text-left " +
+                                                                (color === "light"
+                                                                ? "bg-blueGray-50 text-blueGray-500 border-blueGray-100"
+                                                                : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
+                                                            }
+                                                        ></th>
+                                                    </tr>
                                             </thead>
                                             <tbody className='w-16 h-16'>
                                                 <tr>
@@ -625,7 +642,7 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
                                                             : "bg-blueGray-50 text-gray-500 border-lightBlue-300")
                                                         }
                                                     >
-                                                        Date Published
+                                                        Amount Raised
                                                     </th>
                                                     <th
                                                         className={
@@ -690,10 +707,10 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
                                                                             </span>
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
-                                                                            {convertDate(post?.createdAt)}                        
+                                                                            {nairaSymbol}{numberWithComma(post?.amountRaised)}                        
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">
-                                                                            <i className="fas fa-circle text-orange-500 mr-2"></i>{post?.status}
+                                                                            <i className="fas fa-circle text-orange-500 mr-2"></i>{post?.status === 'draft' ? 'inactive' : post?.status}
                                                                         </td>  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
                                                                             <Link to={`/admin/donations/manage/${post?._id}`}>View details</Link>
@@ -733,10 +750,10 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
                                                                             </span>
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
-                                                                            {convertDate(post?.createdAt)}                        
+                                                                            {nairaSymbol}{numberWithComma(post?.amountRaised)}                      
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">
-                                                                            <i className="fas fa-circle text-yellow-500 mr-2"></i>{post?.status}
+                                                                            <i className="fas fa-circle text-yellow-500 mr-2"></i>{post?.status === 'scheduled' ? 'active' : post?.status}
                                                                         </td>  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
                                                                             <Link to={`/admin/donations/manage/${post?._id}`}>View details</Link>
@@ -775,17 +792,17 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
                                                                                 {post?.title?.substring(0,50)+"..."}
                                                                             </span>
                                                                         </td>
-                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-bold whitespace-nowrap">
-                                                                            {convertDate(post?.createdAt)}                        
+                                                                        <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif tracking-supertight font-black whitespace-nowrap text-red-500">
+                                                                            {nairaSymbol}{numberWithComma(post?.amountRaised)}                        
                                                                         </td>
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-xl font-serif font-bold whitespace-nowrap capitalize">
-                                                                            <i className="fas fa-circle text-green-500 mr-2"></i>{post?.status}
+                                                                            <i className="fas fa-circle text-green-500 mr-2"></i>{post?.status === 'published' ? 'active' : post?.status}
                                                                         </td>  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-lg font-semibold whitespace-nowrap capitalize">
                                                                             <Link to={`/admin/donations/manage/${post?._id}`}>View details</Link>
                                                                         </td>                  
                                                                         <td className="border-t-0 p-6 align-middle border-l-0 border-r-0 text-md whitespace-nowrap text-right">
-                                                                            <TableDropdown />
+                                                                            <TableDropdown post={post} />
                                                                         </td>
                                                                     </tr>               
                                                                 );

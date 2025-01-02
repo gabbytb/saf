@@ -2,6 +2,7 @@ import { useState, useEffect } from "react";
 import { googleLogout } from "@react-oauth/google";
 import PropTypes from "prop-types";
 import { Link } from "react-router-dom";
+// import log from 'loglevel';
 import api from "../api";
 import "../assets/styles/tailwind.css";
 
@@ -25,9 +26,28 @@ import {
 
 
 
-const Dashboard = ({ isLoggedIn }) => {
 
+
+
+
+
+function logEvent(message, level = 'TRACKER') {
+    // Send the log to a backend server
+    api.post('/api/logs', {
+        message,
+        level,
+        timestamp: new Date().toISOString(),
+    });
+};
+
+
+
+
+
+const Dashboard = ({ isLoggedIn }) => {
     
+
+
     // ***************************************************************************
     // CURRENT ACTIVE USER:-
     // ***************************************************************************
@@ -35,21 +55,38 @@ const Dashboard = ({ isLoggedIn }) => {
     // ***************************************************************************
     // FUNCTION TO LOG-OUT CURRENT ACTIVE USER
     // ***************************************************************************
-    function logOut() {
+    // Send the log to a backend server     
+    function logLogout(message = 'You are Logged out', level = 'TRACKER') {
+        api.post('/api/logs', {
+                message,
+                level,
+                timestamp: new Date().toISOString(),
+        })
+        .then((response) => {
+            const { servermessage } = response.data;            
+            // console.log('USER SESSION = ', servermessage);            
+            localStorage.setItem('sessionend', servermessage);
+        }) 
+        .catch((error) => {
+            console.log('Error encountered during logging of MAIN DASHBOARD', error.message);
+        });
+    };
+    function logOut() {        
         // Clear User Details from Local Storage
         localStorage.clear();
         // log out function to log the user out of google and set the profile array to null
         googleLogout();
+        logLogout();
         // redirect to Login Page
         const redirToLOGIN = "/user/login";
-        window.location.replace(redirToLOGIN);
-    };
+        window.location.replace(redirToLOGIN);        
+    };    
     // ***************************************************************************
     // DESTRUCTURE CURRENT ACTIVE USER PROPS:-
     // ***************************************************************************
     const userId = isLoggedIn?.id ? isLoggedIn?.id : logOut();
     // console.log("Logged-In User ID: ", userId);
-    // const firstName = isLoggedIn?.first_name ? isLoggedIn?.first_name : logOut();
+    const firstName = isLoggedIn?.first_name ? isLoggedIn?.first_name : logOut();
     // console.log("Logged-In User First Name: ", firstName);
     const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();            
     // console.log("Logged-In User Last Name: ", lastName);
@@ -76,11 +113,12 @@ const Dashboard = ({ isLoggedIn }) => {
         const pageTitle = "Admin Dashboard", 
               siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
+
+        logEvent(`${firstName} ${lastName} is currently viewing ${pageTitle}`);
     }, []);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //
-
 
 
 

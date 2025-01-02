@@ -184,8 +184,13 @@ const ArticleDetails = ({ isLoggedIn }) => {
 
 
 
-    async function updateComments() {
+    const shorten = (excerpt) => {
+        return excerpt?.substring(0,90);
+    };
 
+
+    const updateComments = async () => {
+        
     };
 
 
@@ -205,11 +210,11 @@ const ArticleDetails = ({ isLoggedIn }) => {
             <main id="blogSinglePost" className="container mx-auto">                                       
                
                 <div className="mx-12 lg:mx-16 mb-28 mt-16 flex sm:grid">                     
-                    <div className="mx-auto w-full flex flex-col items-center xs:px-0 sm:px-32">                
+                    <div className="mx-auto w-full flex flex-col items-center xs:px-0 sm:px-8">                
                                         
                         <PostDetailsSlider sliderCards={blogSinglePost} /> 
 
-                        <div className="w-full sm:mx-24 lg:mx-8 mt-0 lg:grid lg:grid-cols-28 gap-28">                                             
+                        <div className="w-full sm:mx-24 lg:mx-8 mt-0 lg:grid lg:grid-cols-28 gap-20">                                          
 
                             <section className="p-0 mb-24">   
                                 <div className="max-w-full mx-auto flex flex-col items-center p-0">  
@@ -218,14 +223,14 @@ const ArticleDetails = ({ isLoggedIn }) => {
                                     <div className="block w-full">
                                                     
                                         <div className="self-stretch p-0 mb-0">
-                                                    <div className="rounded shadow-md h-full">                                                                                                                                                 
-                                                        <div className="px-8 pt-10 pb-20 flex flex-col gap-8">
+                                                    <div className="rounded h-full">                                                                                                                                                 
+                                                        <div className="pr-8 pl-10 pt-8 pb-20 flex flex-col gap-8">
                                                             <div className="font-semibold text-lg mb-2 border-gray-500 border-b-2 pb-2">
                                                                 <p className="text-slate-900 text-14xl/tight sm:text-4xl/tight font-black capitalize">{blogSinglePost?.title}</p>
                                                                 <div className="mt-3 pb-1 text-lg/tight sm:text-10xl italic font-bold">{convertDate(blogSinglePost?.createdAt)}</div>
                                                             </div>
                                                             {/* <p class="text-slate-700 mb-1" title="Post Author">{blogSinglePost?.author?.name}</p> */}                                             
-                                                            
+                                                        
                                                             
                                                             <div className="rendered-output" dangerouslySetInnerHTML={{ __html: blogSinglePost?.description }} // Render HTML content here
                                                             />
@@ -277,7 +282,7 @@ const ArticleDetails = ({ isLoggedIn }) => {
                             <aside className="">
                                 <div className="max-w-full mx-0">                        
                                     <div className="flex flex-wrap mx-auto gap-12 pt-10">                            
-                                        <h2 className="text-4xl capitalize font-black pb-2 tracking-tightened border-b-2 border-b-black w-full ">Recent Posts</h2>
+                                        <h2 className="text-4xl text-slate-900 uppercase font-black pb-2 tracking-tightened border-b-2 border-b-black w-full ">Recent Posts</h2>
                                         {
                                             sidebarPosts?.map((post, index) => {                
                                                 return (                                        
@@ -306,7 +311,7 @@ const ArticleDetails = ({ isLoggedIn }) => {
                                                                         </div>
                                                                         <p className="text-slate-700 mb-3.5" title="Published date">{convertDate(post?.createdAt)}</p>
                                                                         <p className="text-slate-800 text-xl/normal">                                                              
-                                                                            {post?.excerpt?.substring(0,90)+"..."}
+                                                                            {shorten(post?.excerpt)+"..."}
                                                                         </p>
                                                                     </div>
                                                         </div>

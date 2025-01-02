@@ -4,11 +4,22 @@ import { HomeNav, HomeFooter, } from "../components"
 import TawkMessengerReact from "@tawk.to/tawk-messenger-react";
 import { homebg, hero1, hero2, hero3, hero4, } from "../assets/images";
 // import '../assets/styles/tailwindcss.css';
+// import log from 'loglevel';
+import axios from "axios";
 
 
 
 
 
+
+function logEvent(message, level = 'info') {
+    // Send the log to a backend server
+    axios.post('/api/logs', {
+        message,
+        level,
+        timestamp: new Date().toISOString(),
+    });
+};
 
 
 const Home = () => {
@@ -16,6 +27,10 @@ const Home = () => {
 
     const tawkMessengerRef = useRef();
     
+
+    useEffect(() => {
+        logEvent('App loaded');
+    }, []);
 
     // console.log('WINDOW LOCATION = ', window.location);
     // console.log('WINDOW LOCATION PATHNAME = ', window.location.pathname);

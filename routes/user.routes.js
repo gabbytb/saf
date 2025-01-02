@@ -31,6 +31,9 @@ module.exports = app => {
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/create") for the frontend to access.
     
 
+    router.post("/api/logs", users.logEntry);
+
+    
     // Create a new "User" DATA using this
     router.post("/api/v1/auth/admin/manage/create", users.adminCreateUser);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/api/v1/admin/users/manage/create") for the frontend to access.

@@ -14,6 +14,17 @@ import {
 
 
 
+const logEvent = (message, level = 'TRACKER') => {
+    // Send the log to a backend server
+    api.post('/api/logs', {
+        message,
+        level,
+        timestamp: new Date().toISOString(),
+    });
+};
+
+
+
 const DashboardCreateUser = ({ isLoggedIn }) => {
 
 
@@ -68,10 +79,12 @@ const DashboardCreateUser = ({ isLoggedIn }) => {
     // *************************** //
     useEffect(() => {
         window.scrollTo({ top: 0, left: 0, behaviour: "smooth" });
-        const pageTitle = `${firstName} ${lastName} init - New Account`,
+        const pageTitle = "New User",
               siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
-    }, [firstName, lastName]);
+
+        logEvent(`${firstName} ${lastName} is currently viewing ${pageTitle}`);
+    }, []);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
     // *************************** //

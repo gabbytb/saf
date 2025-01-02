@@ -39,29 +39,37 @@ exports.createDonation = async (req, res) => {
                 success: false,
                 message: "Donation Title exists"
             };
-            console.log("********************************",
-                        "\n*** CREATE NEW POST FAILED   ***",
-                        "\n********************************",
-                        "\nPOST ID: ", titleExists._id,
-                        "\nPOST TITLE: ", titleExists.title + "\n\n");
+            console.log("************************************",
+                        "\n*** CREATE NEW DONATION FAILED   ***",
+                        "\n************************************",
+                        "\nDONATION ID: ", titleExists._id,
+                        "\nDONATION TITLE: ", titleExists.title + "\n\n",
+                        "\nERROR MESSAGE: ", responseData.message + "\n\n");
             return res.status(200).json(responseData);
         };
        
 
         // ************************************ //
         // ***  FE: CREATE "DONATION"  *** //
-        // ************************************ //      
+        // ************************************ //    
+        const authorInfo = { 
+            _id: author.id,
+            img: author.img,
+            name: author.name,
+            email: author.email,
+            bio: author.bio,            
+        };
         const newDonation = new Donation({
             _id: uniqueId % id,            
-            title,          
-            uri: uri.toLowerCase(),     // sanitize: convert title to lowercase. NOTE: You must sanitize your data before forwarding to backend.                                 
+            title: title.toLowerCase(),     // sanitize: convert title to lowercase. NOTE: You must sanitize your data before forwarding to backend.                                      
+            uri: uri.toLowerCase(),     // sanitize: convert url to lowercase. NOTE: You must sanitize your data before forwarding to backend.                                 
             description,     
             excerpt,            
             tags,
             categories,  
             amountToRaise,
             amountRaised,
-            author,
+            author: [authorInfo],
             isActive,
             status: isActive === true ? 'published' : 'draft' ,        
             // expirationInMs: encrypt(expiresIn),        // Encode: token lifespan  
@@ -82,8 +90,7 @@ exports.createDonation = async (req, res) => {
                 createdAt: imageData.createdAt,
                 updatedAt: imageData.updatedAt,
             });
-
-            console.log('NEW IMAGE BEING CREATED = ', newImage);
+            // console.log('NEW IMAGE BEING CREATED = ', newImage);
             return await newImage.save();    
         });
 

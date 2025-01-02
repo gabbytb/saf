@@ -1,5 +1,5 @@
 import { FacebookIcon, InstagramIcon, TelegramIcon, TwitterIcon, WhatsappIcon, YoutubeIcon } from "../assets/icons"
-import { blogbg, mayokun, wande, wura } from "../assets/images"
+import { blogbg, donationbg2, donationbg3, mayokun, wande, wura } from "../assets/images"
 
 
 
@@ -38,12 +38,27 @@ export const blogBg = [
         label: "Wuraola F",
     },
     { 
-        url: mayokun, 
+        url: donationbg2, 
         label: "Mayokun A", 
     },
     { 
-        url: wande, 
+        url: donationbg3, 
         label: "Olaitan O", 
+    }
+]
+
+export const donationBg = [
+    { 
+        url: blogbg,
+        label: "donation wallpaper",
+    },
+    { 
+        url: donationbg2, 
+        label: "donation wallpaper 2", 
+    },
+    { 
+        url: donationbg3, 
+        label: "donation wallpaper 3", 
     }
 ]
 

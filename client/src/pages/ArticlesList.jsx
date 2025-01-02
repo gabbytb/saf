@@ -300,8 +300,8 @@ const ArticlesList = ({ isLoggedIn, }) => {
                                                                             {post?.excerpt}                
                                                                         </p>
                                                                         <br />
-                                                                        <Link to={`/blog/${post?.uri}`} className="bg-green-500 text-white hover:text-gray-300 px-8 py-3 rounded-full">
-                                                                            <button type="button">Read More</button>
+                                                                        <Link to={`/blog/${post?.uri}`} className="bg-green-500 font-semibold text-10xl text-gray-200 hover:text-white px-8 py-4 rounded-full outline-none capitalize">
+                                                                            read more
                                                                         </Link>
                                                                     </div>
                                                                 </div>

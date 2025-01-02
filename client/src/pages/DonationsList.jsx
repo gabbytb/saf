@@ -2,10 +2,9 @@ import { useState, useEffect } from "react";
 import { Link, } from "react-router-dom";
 import api from "../api";
 import { NavSlider, HomeFooter, AdminNavSlider, } from "../components";
-import { blogBg } from "../constants";
+import { donationBg } from "../constants";
 import BlogSlider from "../components/Slider/BlogSlider";
 import { spinner } from "../assets/images";
-
 
 
 
@@ -162,6 +161,12 @@ const DonationsList = ({ isLoggedIn }) => {
     const handlePageChange = (page) => {
         setCurrentPage(page);
     };
+    const shorten = (excerpt) => {
+        return excerpt?.substring(0,90);
+    };
+    const numberWithCommas = (x) => {
+       return x.toLocaleString(undefined, {maximumFractionDigits:2});
+    };
     // ****************************************************************************
     // ****************************************************************************  
 
@@ -190,7 +195,7 @@ const DonationsList = ({ isLoggedIn }) => {
                             <img src={blogbg} alt="blog background" className="w-full h-full" />  
                         </div> */}                                                                        
                     
-                        <BlogSlider sliderCards={blogBg} />                    
+                        <BlogSlider sliderCards={donationBg} />                    
 
                         <div className="container">
                             <div className="px-6 mt-28 mb-28 grid">                     
@@ -241,7 +246,7 @@ const DonationsList = ({ isLoggedIn }) => {
                         <img src={blogbg} alt="blog background" className="w-full h-full" />  
                     </div> */}                                                                        
                 
-                    <BlogSlider sliderCards={blogBg} />                    
+                    <BlogSlider sliderCards={donationBg} />                    
 
                     <div className="container">
                         <div className="px-6 mt-28 mb-28 grid">                     
@@ -281,25 +286,27 @@ const DonationsList = ({ isLoggedIn }) => {
 
                                                                     <div className="px-6 pt-7 pb-12">
                                                                         <div className="font-black text-lg mb-1.5">
-                                                                            <Link className="text-slate-900 hover:text-slate-700 text-14xl/tighter" to={`/donations/${post?.uri}`}>
+                                                                            <Link className="text-slate-900 hover:text-slate-700 text-14xl/tighter uppercase" to={`/donations/${post?.uri}`}>
                                                                                 {post?.title}
                                                                             </Link>
                                                                         </div>
-                                                                        <p className="text-slate-700 text-xl font-medium mb-5" title="Published date">{convertDate(post?.createdAt)}</p>
-                                                                        <div className="flex justify-between w-full">
-                                                                            <p className="text-slate-800 text-2xl/9 mb-5 font-bold flex flex-col">            
-                                                                                <span className="">Target {nairaSymbol}</span>
-                                                                                <span>{post?.amountToRaise}</span>                
-                                                                            </p>
-
-                                                                            <p className="text-slate-800 text-2xl/9 mb-5 font-bold flex flex-col">            
-                                                                                <span className="">Funds Raised {nairaSymbol}</span>
-                                                                                <span>{post?.amountRaised}</span>                
-                                                                            </p>
-                                                                        </div>
+                                                                        <small className="text-slate-700 text-xl font-medium" title="Published date">{convertDate(post?.createdAt)}</small>
+                                                                        <p className="text-slate-900 text-xl/normal font-medium mt-4 mb-5">{shorten(post?.excerpt)+"..."}</p>
+                                                                        <hr className="mb-4" />                                                                    
+                                                                        <p className="text-slate-800 flex items-baseline gap-1 my-2">                                                                          
+                                                                            <strong className="text-2xl/9 mb-0 font-bold">{nairaSymbol}{numberWithCommas(post?.amountRaised)}</strong> raised out of <span className="font-black text-2xl">{nairaSymbol}{numberWithCommas(post?.amountToRaise)}</span>               
+                                                                        </p>
+                                                                        <progress 
+                                                                            // className={styles.progressBar}
+                                                                            className="progressBar w-full mb-5"
+                                                                            value={post?.amountRaised}                                                                            
+                                                                            max={post?.amountToRaise}
+                                                                            >
+                                                                                {post?.amountRaised}%
+                                                                        </progress>
                                                                         <br />
-                                                                        <Link to={`/donations/${post?.uri}`} className="bg-red-500 text-white hover:text-gray-300 px-8 py-3 rounded-full">
-                                                                            <button type="button">Donate now</button>
+                                                                        <Link to={`/donations/${post?.uri}`} className="bg-red-500 font-semibold text-10xl text-gray-200 hover:text-white px-8 py-4 rounded-full outline-none capitalize flex justify-center items-center">
+                                                                            contribute
                                                                         </Link>
                                                                     </div>
                                                                 </div>
@@ -310,7 +317,7 @@ const DonationsList = ({ isLoggedIn }) => {
                                         </div>
                                         :                                       
                                         <div className="flex justify-center mb-32"> 
-                                            <p className="text-2xl font-medium">No Article found</p>
+                                            <p className="text-2xl font-medium">No donation found</p>
                                         </div>
 
                                 }

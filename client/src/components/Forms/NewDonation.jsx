@@ -11,7 +11,7 @@ import { Editor } from "@tinymce/tinymce-react";
 
 
 
-const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) => {
+const NewDonation = ({ userId, firstName, lastName, userEmail, displayImg, userBio }) => {
 
     // console.clear();
 
@@ -166,6 +166,7 @@ const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
             uri: donation.uri === '' ? formatUrl(donation.title.toLowerCase()) : formatUrl(donation.uri.toLowerCase()),
             author: [
                 {
+                    id: userId,
                     img: displayImg,
                     name: firstName + ' ' + lastName,
                     email: userEmail,
@@ -178,7 +179,7 @@ const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
             tags: donation.tags,
             categories: donation.categories, 
         };
-        console.log('DONATION PAYLOAD', payload)
+        // console.log('DONATION PAYLOAD', payload)
 
         await api.post("/api/v1/admin/donations/manage/create", payload) // Update the URL to your API endpoint
         .then((response) => {
@@ -223,14 +224,16 @@ const NewDonation = ({ firstName, lastName, userEmail, displayImg, userBio }) =>
                 // Perform These Actions
 
             } else {
-                // Log the response
-                console.log('Donation created successfully:', data);
-    
+
                 // console.log("Success: ", success);
                 // console.log("Data: ", data);
                 // console.log("Message: ", message);
+
                 setFormSubmitted(success);
                 setFormMessage(message);
+
+                // Log the response
+                console.log('Donation created successfully:', data);
 
                 // RESET FORM AFTER SUBMISSION
                 document.getElementById("newDonationFormID").reset();
