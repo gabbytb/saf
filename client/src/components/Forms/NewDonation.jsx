@@ -1,5 +1,5 @@
 import { useState, useEffect, } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import api from "../../api";
 import { Editor } from "@tinymce/tinymce-react";
 
@@ -15,7 +15,6 @@ const NewDonation = ({ userId, firstName, lastName, userEmail, displayImg, userB
 
     // console.clear();
 
-    const navigate = useNavigate();
     const nairaSymbol = '₦';
 
 
@@ -29,10 +28,6 @@ const NewDonation = ({ userId, firstName, lastName, userEmail, displayImg, userB
     // MANAGE STATE:-  TO FIND USER BY ID
     // ************************************
     // const { id } = useParams();
-
-    function goBack() {
-        navigate(-1);
-    };
 
 
 
@@ -291,11 +286,16 @@ const NewDonation = ({ userId, firstName, lastName, userEmail, displayImg, userB
             <div className={`activeDisplay ${activeForm === 'create-donation-form' ? 'block' : 'hidden'}`}>
                 <div className="rounded-t bg-white mb-0 p-6">
                     <div className="text-center flex justify-start items-center gap-10">                           
-                        <button onClick={goBack}
+                        {/* <button onClick={goBack}
                             className="bg-blue-500 text-white active:bg-lightBlue-500 font-bold uppercase text-3xl tracking-tightener px-7 py-1 rounded-lg shadow hover:bg-blue-600 hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-300"
-                            type="button">{String.fromCharCode(8592)}
-                        </button>
-                        {/* </Link> */}
+                            type="button">{String.fromCharCode(8592)} Back
+                        </button>*/}
+                        <Link to={"/admin/donations/manage"} alt="create new article" className='mr-6'>
+                            <button type="button" className="bg-blue-500 text-white active:bg-lightBlue-500 font-bold uppercase text-lg tracking-tightener px-7 py-3 rounded-lg shadow hover:bg-blue-600 hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-300">
+                                {String.fromCharCode(8592)} Back 
+                            </button>
+                        </Link>
+
 
 
                         <h6 className="text-blueGray-700 text-42xl tracking-tightener font-bold capitalize">create donation</h6>                                            

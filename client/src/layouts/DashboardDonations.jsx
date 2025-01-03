@@ -369,7 +369,7 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
                                                     All Donations
                                                 </h3>
 
-                                                <Link className="relative -top-2" to={'/admin/donations/create'} alt='create new donation'>
+                                                <Link className="relative -top-2" to={'/admin/donations/manage/create'} alt='create donation'>
                                                     <button className="bg-blue-500 text-white active:bg-lightBlue-500 font-bold uppercase text-lg tracking-tightener px-7 py-3 rounded-lg shadow hover:bg-blue-600 hover:shadow-md outline-none focus:outline-none mr-1 ease-linear transition-all duration-300">add new</button>
                                                 </Link>
                                             </div>

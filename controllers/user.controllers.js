@@ -48,7 +48,6 @@ const assignTwoDaysToken = require("../middlewares/AssignTwoDaysToken");    // F
 // const assignThreeDaysToken = require("../middlewares/AssignThreeDaysToken");    // For Sign Up
 const verifyToken = require("../middlewares/VerifyToken");
 const mailSenderForGetSignUp = require("../middlewares/MailSenderForGetSignUp");
-const { data } = require("autoprefixer");
 // const mailSenderForPostSignUp = require("../middlewares/MailSenderForPostSignUp");
 // const mailSenderForVerifiedAccount = require("../middlewares/MailSenderForVerifiedAccount");
 // *****************************************************************
@@ -292,7 +291,7 @@ exports.logActivity = async (req, res) => {
    
     // Store logs in a file or database
     // console.log(`[${timestamp}] ${level}: ${message}`);
-
+    // Step 1: Convert the token expiration (in seconds) to a Date object
     var recordActivity = new Activity({ 
         _id: randNum + randomNumber++,
         trigger: mode,
@@ -1195,11 +1194,14 @@ exports.findAllUsers = async (req, res) => {
         
         if (allUsers !== null) {             
             if (status === 'approved') {
-                console.log("APPROVED USERS/DONORS/CUSTOMERS:: ", allUsers);   
+                allUsers;
+                // console.log("APPROVED USERS/DONORS/CUSTOMERS:: ", allUsers);   
             } else if (status === 'pending') {
-                console.log("PENDNG USERS/DONORS/CUSTOMERS:: ", allUsers);    
+                allUsers;
+                // console.log("PENDNG USERS/DONORS/CUSTOMERS:: ", allUsers);    
             } else if (status === 'rejected') {
-                console.log("REJECTED USERS/DONORS/CUSTOMERS:: ", allUsers);
+                allUsers;
+                // console.log("REJECTED USERS/DONORS/CUSTOMERS:: ", allUsers);
             } else {
                 allUsers;
                 // console.log("ALL USERS/DONORS/CUSTOMERS: ", allUsers);
@@ -1216,7 +1218,6 @@ exports.findAllUsers = async (req, res) => {
         };
         // console.log("PAGINATION: ", pagination, "\n\n");
         
-
         const responseData = {
             success: true,
             data: {
@@ -1358,11 +1359,14 @@ exports.findAllAdmins = async (req, res) => {
 
         if (allAdminRole !== null) {             
             if (status === 'approved') {
-                console.log("APPROVED ADMIN USERS: ", allAdminRole);   
+                allAdminRole
+                // console.log("APPROVED ADMIN USERS: ", allAdminRole);   
             } else if (status === 'pending') {
-                console.log("PENDNG ADMIN USERS: ", allAdminRole);    
+                allAdminRole
+                // console.log("PENDNG ADMIN USERS: ", allAdminRole);    
             } else if (status === 'rejected') {
-                console.log("REJECTED ADMIN USERS: ", allAdminRole);
+                allAdminRole;
+                // console.log("REJECTED ADMIN USERS: ", allAdminRole);
             } else {
                 allAdminRole;
                 // console.log("ALL ADMIN USERS: ", allAdminRole);
@@ -1514,12 +1518,27 @@ exports.findSingleUserById = async (req, res) => {
         //     return res.status(404).json(responseData);
         // };
         
+        const foundUserById =  {
+            id: user._id,
+            first_name: user.firstName,
+            last_name: user.lastName,                  
+            email: user.email,
+            phone: user.phone, 
+            address: user.address, 
+            address2: user.address2, 
+            city: user.city, 
+            state: user.state, 
+            country: user.country, 
+            postalCode: user.postalCode, 
+            aboutMe: user.aboutMe,
+        }; 
+
         const responseData = {
             success: true,
-            data: user,
+            data: foundUserById,
             message: "Successful",
         };
-        console.log("Find User by ID: ", responseData);
+        console.log("Found User by ID: ", responseData);
         return res.status(200).json(responseData);
 
     } catch (error) {
@@ -1535,7 +1554,7 @@ exports.updateSingleUserById = async (req, res) => {
     try {
         const _id = req.params.id;
     
-        const { firstName, lastName, email, phone, address, address2, city, state, country, postalCode, aboutMe } = req.body;
+        const { first_name, last_name, email, phone, address, address2, city, state, country, postalCode, aboutMe } = req.body;
 
         // To Add New Roles to Existing User's Account
         // const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
@@ -1544,8 +1563,8 @@ exports.updateSingleUserById = async (req, res) => {
         // const roleUsers = await Role.findOne({ role: "ROLE_USERS" });
         
         const dataToUpdate = {        
-            firstName,
-            lastName,
+            firstName: first_name,
+            lastName: last_name,
             email,
             phone,
             address,

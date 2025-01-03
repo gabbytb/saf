@@ -23,9 +23,9 @@ export default function CardAccountDetails() {
     // ************************************
     const { id } = useParams();
     // console.log("STAFF ID: ", id);
-    const [ user, setUser ] = useState({ 
-        firstName: '',
-        lastName: '',
+    const [ user, setUser ] = useState({
+        first_name: '',
+        last_name: '',
         email: '', 
         phone: '', 
         address: '', 
@@ -250,7 +250,7 @@ export default function CardAccountDetails() {
                                             type="text"
                                             className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                             // defaultValue="Lucky"
-                                            value={user?.firstName}
+                                            value={user?.first_name}
                                             disabled
                                         />
                                     </div>
@@ -268,7 +268,7 @@ export default function CardAccountDetails() {
                                         type="text"
                                         className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
                                         // defaultValue="Jesse"
-                                        value={user?.lastName}
+                                        value={user?.last_name}
                                         disabled
                                     />
                                     </div>
@@ -278,7 +278,7 @@ export default function CardAccountDetails() {
                                     <div className="relative w-full mb-3">
                                     <label
                                         className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
-                                        htmlFor="grid-password"
+                                        htmlFor="email"
                                     >
                                         Email address
                                     </label>
@@ -493,14 +493,14 @@ export default function CardAccountDetails() {
                                     <div className="relative w-full mb-3">
                                         <label
                                             className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
-                                            htmlFor="firstName">
+                                            htmlFor="first_name">
                                             First Name
                                            
                                             <input
                                                 type="text"
                                                 className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
-                                                placeholder={user?.firstName}
-                                                name="firstName"
+                                                placeholder={user?.first_name}
+                                                name="first_name"
                                                 onChange={handleChangeUserInfo}                                      
                                             />
                                         </label>
@@ -512,14 +512,14 @@ export default function CardAccountDetails() {
                                     <div className="relative w-full mb-3">
                                         <label
                                             className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
-                                            htmlFor="lastName">
+                                            htmlFor="last_name">
                                             Last Name     
 
                                             <input
                                                 type="text"
                                                 className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150"
-                                                placeholder={user?.lastName}
-                                                name="lastName"
+                                                placeholder={user?.last_name}
+                                                name="last_name"
                                                 onChange={handleChangeUserInfo}                                            
                                             />
                                         </label>

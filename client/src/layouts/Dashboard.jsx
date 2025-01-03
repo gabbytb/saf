@@ -32,10 +32,25 @@ import {
 
 function logEvent(message, mode = 'TRACKER') {
     // Send the log to a backend server
+    // const payload = new Date().toISOString() + (3600); 
+
+    const payload = new Date(new Date().toISOString() + (3600));
+    console.log("newTime: ", payload);
+
+    // const nigeriaTime = new Date(payload);
+    // console.log("nigeriaTime: ", nigeriaTime);
+
+    // console.log("newTime.getTime(): ", newTime.getTime()); 
+    // console.log("newTime.getTime() + (3600): ", newTime.getTime() + (3600)); 
+    
+    // const nigeriaTimeMillis = newTime.getTime() + (3600); // Add 1 hour in milliseconds
+    // Step 3: Convert the adjusted time to a new Date object to get Current Nigerian Time        
+    // const nigeriaTime = new Date(nigeriaTimeMillis);
     api.post('/api/logs', {
         message,
         mode,
         timestamp: new Date().toISOString(),
+        // timestamp: payload,
     });
 };
 
