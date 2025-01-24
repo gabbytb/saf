@@ -11,7 +11,6 @@
   from = "/*"
   to = "/.netlify/functions/my-function"
   status = 200
-  force = true  # Optional: Forces the redirect even if the destination exists
 
 [[headers]]
   for = "/client/build/*"
