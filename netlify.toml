@@ -25,8 +25,5 @@
   css = { minify = true }
   js = { minify = true, transpile = true }
 
-[build.edge_functions]
-  directory = "netlify/edge-functions"
-
 [[plugins]]
   package = "@netlify/plugin-sitemap"
