@@ -1,5 +1,5 @@
 [build]
-  command = "npm run build"  # Add --prefix to run the build script inside the client folder
+  command = "npm run build --prefix client"  # Add --prefix to run the build script inside the client folder
   publish = "client/build"                   # Make sure this points to the React build folder
 
 [[redirects]]
