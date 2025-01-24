@@ -1,15 +1,10 @@
 [build]
   command = "npm run build --prefix client"
   publish = "client/build"
-  functions = "netlify/functions"
-
-[functions]
-  directory = "netlify/functions"
-  max_duration = 10
-
+  
 [[redirects]]
   from = "/*"
-  to = "/.netlify/functions/my-function"
+  to = "/server"
   status = 200
 
 [[headers]]
