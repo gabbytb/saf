@@ -1,0 +1,40 @@
+{
+  "name": "SAF [BACKEND + FRONTEND] ",
+  "description": "Reaching Out To Great Minds",
+  "version": "1.0.0",
+  "main": "app.js", 
+  "scripts": {
+    "start": "nodemon app.js",
+    "concur": "concurrently \"npm run server\" \"npm run client\"",    
+    "server": "nodemon app.js",
+    "client": "npm run start --prefix client",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "bcrypt",    
+    "cors",
+    "dotenv",
+    "express",
+    "jsonwebtoken",
+    "mongoose",
+    "nodemailer",
+    "nodemon",    
+    
+    "concurrently",
+    "google-auth-library"
+  ],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "bcrypt": "^5.1.1",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.3",
+    "nodemailer": "^6.9.8"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.7"
+  }
+}

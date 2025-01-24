@@ -1,0 +1,65 @@
+@font-face {
+    font-family: 'Test Firma';
+    src: url('BRFirmaCW-Medium.eot');
+    src: url('BRFirmaCW-Medium.eot?#iefix') format('embedded-opentype'),
+        url('BRFirmaCW-Medium.woff2') format('woff2'),
+        url('BRFirmaCW-Medium.woff') format('woff'),
+        url('BRFirmaCW-Medium.ttf') format('truetype'),
+        url('BRFirmaCW-Medium.svg#BRFirmaCW-Medium') format('svg');
+    font-weight: 500;
+    font-style: normal;
+    font-display: fallback;
+}
+
+@font-face {
+    font-family: 'Test Firma';
+    src: url('BRFirmaCW-Regular.eot');
+    src: url('BRFirmaCW-Regular.eot?#iefix') format('embedded-opentype'),
+        url('BRFirmaCW-Regular.woff2') format('woff2'),
+        url('BRFirmaCW-Regular.woff') format('woff'),
+        url('BRFirmaCW-Regular.ttf') format('truetype'),
+        url('BRFirmaCW-Regular.svg#BRFirmaCW-Regular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: fallback;
+}
+
+@font-face {
+    font-family: 'Test Firma';
+    src: url('BRFirmaCW-SemiBold.eot');
+    src: url('BRFirmaCW-SemiBold.eot?#iefix') format('embedded-opentype'),
+        url('BRFirmaCW-SemiBold.woff2') format('woff2'),
+        url('BRFirmaCW-SemiBold.woff') format('woff'),
+        url('BRFirmaCW-SemiBold.ttf') format('truetype'),
+        url('BRFirmaCW-SemiBold.svg#BRFirmaCW-SemiBold') format('svg');
+    font-weight: 600;
+    font-style: normal;
+    font-display: fallback;
+}
+
+@font-face {
+    font-family: 'Test Firma';
+    src: url('BRFirmaCW-Bold.eot');
+    src: url('BRFirmaCW-Bold.eot?#iefix') format('embedded-opentype'),
+        url('BRFirmaCW-Bold.woff2') format('woff2'),
+        url('BRFirmaCW-Bold.woff') format('woff'),
+        url('BRFirmaCW-Bold.ttf') format('truetype'),
+        url('BRFirmaCW-Bold.svg#BRFirmaCW-Bold') format('svg');
+    font-weight: bold;
+    font-style: normal;
+    font-display: fallback;
+}
+
+@font-face {
+    font-family: 'Test Firma';
+    src: url('BRFirmaCW-Light.eot');
+    src: url('BRFirmaCW-Light.eot?#iefix') format('embedded-opentype'),
+        url('BRFirmaCW-Light.woff2') format('woff2'),
+        url('BRFirmaCW-Light.woff') format('woff'),
+        url('BRFirmaCW-Light.ttf') format('truetype'),
+        url('BRFirmaCW-Light.svg#BRFirmaCW-Light') format('svg');
+    font-weight: 300;
+    font-style: normal;
+    font-display: fallback;
+}
+

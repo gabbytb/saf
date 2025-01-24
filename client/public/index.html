@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en" id="scrollbar">
+  <head>        
+      <meta charset="utf-8" />
+
+      <!-- DO NOT REMOVE FROM HERE: Google tag (gtag.js) -->
+      <script async src="https://www.googletagmanager.com/gtag/js?id=G-GX972MDHG8"></script>
+      <script>
+          window.dataLayer = window.dataLayer || [];
+          function gtag() {
+              dataLayer.push(arguments);
+          }
+          gtag('js', new Date());
+          gtag('config', 'G-GX972MDHG8');
+      </script>
+      <!-- Google tag (gtag.js) -->
+            
+      <!-- DO NOT REMOVE FROM HERE: Google Tag Manager -->
+      <script>
+          (function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+              new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+              j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+              'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+          }) (window,document,'script','dataLayer','GTM-MM2Z27G9');
+      </script>
+      <!-- End Google Tag Manager -->
+           
+      <link rel="stylesheet" href="css/style.css">
+      <!-- <link rel="icon" href="%PUBLIC_URL%/logo192.png" /> -->
+      <link rel="icon" href="%PUBLIC_URL%/img/saf-favicon.jpg" />
+      <!-- <link rel="icon" href="%PUBLIC_URL%/mern.ico" /> -->
+      <meta name="viewport" content="width=device-width, initial-scale=1" />
+      <meta name="theme-color" content="#000000" />
+      <meta name="description" content="Website created by Oyebanji Gabriel" />
+      <link rel="apple-touch-icon" href="%PUBLIC_URL%/img/saf-favicon.jpg" />
+      <!--
+        manifest.json provides metadata used when your web app is installed on a
+        user's mobile device or desktop. See https://developers.google.com/web/fundamentals/web-app-manifest/
+      -->
+      <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+      <!--
+        Notice the use of %PUBLIC_URL% in the tags above.
+        It will be replaced with the URL of the `public` folder during the build.
+        Only files inside the `public` folder can be referenced from the HTML.
+
+        Unlike "/favicon.ico" or "favicon.ico", "%PUBLIC_URL%/favicon.ico" will
+        work correctly both with client-side routing and a non-root public URL.
+        Learn how to configure a non-root public URL by running `npm run build`.
+      -->
+        
+      <!--=============== REMIXICONS ===============-->
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/3.5.0/remixicon.css" crossorigin="">
+      <!--============ SLICK SLIDER CSS ============-->
+      <link
+        rel="stylesheet"
+        type="text/css"
+        charset="UTF-8"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick.min.css"
+      />
+      <link
+        rel="stylesheet"
+        type="text/css"
+        href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
+      />
+      <!--============ SLICK SLIDER CSS ============-->
+      <style>
+          .slick-next.slick-disabled:before, .slick-prev.slick-disabled:before {
+              opacity: 1;
+          }
+          .slick-next:before, .slick-prev:before {            
+              color: #c7c7c7 ;
+              font-size: 3.3rem;
+          }
+          .slick-prev {
+              left: -4rem;
+          }
+          .slick-next {
+              right: -2.8rem;
+          }
+      </style>
+      <!--================= TITLE ==================-->
+      <title>Reaching Out to Great Minds | Samuel Akinola Foundation</title>
+      
+      <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.7.1/jquery.min.js" integrity="sha512-v2CJ7UaYy4JwqLDIrZUI/4hqeoQieOmAZNXBeQyjo21dadnwR+8ZaIJVT8EE2iyI61OV8e6M8PP2/4hpQINQ/g==" crossorigin="anonymous" referrerpolicy="no-referrer"></script> --> 
+      <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>      
+  </head>
+  <body onscroll="myFunction()">
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-MM2Z27G9" height="0" width="0" style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+     
+    <noscript>You need to enable JavaScript to run this app.</noscript>
+    <div id="root"></div>
+    
+    <!--    
+      This HTML file is a template.
+      If you open it directly in the browser, you will see an empty page.
+
+      You can add webfonts, meta tags, or analytics to this file.
+      The build step will place the bundled scripts into the <body> tag.
+
+      To begin the development, run `npm start` or `yarn start`.
+      To create a production bundle, use `npm run build` or `yarn build`.
+    -->
+        
+    <!--Start of Change Header type onScroll -->
+    <script>
+        function myFunction() {
+            let scroll = window.scrollY;
+            let foundScrollbar = document.getElementById('scrollbar');
+            let foundHeader = document.getElementById('header');
+            let foundHomeHeader = document.getElementById('#homeHeader');
+            let beforePseudoElement = document.querySelector('.mobile-nav .hamburger span'); 
+                           
+           
+            if (scroll > 5) {
+                foundHeader?.classList.add('sticky-header');
+                foundHomeHeader?.classList.add('sticky-header');
+                foundScrollbar?.classList.add('no-scrollbar');
+                beforePseudoElement?.style.setProperty('--before-bg-color', "white");
+                beforePseudoElement?.style.setProperty('--after-bg-color', "white");                      
+            } else {
+                foundHeader?.classList.remove('sticky-header');
+                foundHomeHeader?.classList.remove('sticky-header');
+                foundScrollbar?.classList.remove('no-scrollbar');
+                beforePseudoElement?.style.setProperty('--before-bg-color', "black");
+                beforePseudoElement?.style.setProperty('--after-bg-color', "black");
+            };
+        }; 
+        myFunction();
+    </script>
+    <!--End of Change Header type onScroll -->
+  </body>
+</html>
