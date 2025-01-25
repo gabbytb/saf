@@ -7,4 +7,3 @@
   from = "/*"
   to = "/.netlify/functions/:splat"  # This tells Netlify to use serverless functions (you'll set this up in the next step)
   status = 200
-  force = true
