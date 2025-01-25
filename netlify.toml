@@ -1,12 +1,9 @@
 [build]
-  command = "npm run build"
-  publish = "client/build"
+  base = "."  # Build from the root directory
+  publish = "client/build"  # Publish the React build folder
+  command = "npm run build --prefix client"  # Build React app
 
-[build.environment]
-  NODE_ENV = "production"
-  MY_API_KEY = "91204-34534"
-  
 [[redirects]]
   from = "/*"
-  to = "/.netlify/functions/my-function"
+  to = "/.netlify/functions/my-function"  # This tells Netlify to use serverless functions (you'll set this up in the next step)
   status = 200
