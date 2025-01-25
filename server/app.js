@@ -37,10 +37,10 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 // Serve static files from the React app (build folder)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // USE IF:-  client directory is inside server directory.
-const buildPath = path.join(__dirname, 'client/build')
+// const buildPath = path.join(__dirname, 'client/build')
 // - OR -
 // USE IF:-  client directory and server directory are seperate.
-// const buildPath = path.join(__dirname, '..', 'client', 'build');
+const buildPath = path.join(__dirname, '..', 'client', 'build');
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.use(express.static(buildPath));
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
