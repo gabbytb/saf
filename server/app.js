@@ -2,17 +2,18 @@ const express = require("express");
 const serverless = require('serverless-http');
 const path = require("path");
 const cors = require("cors");
-const corsOptions ={
-    origin:'http://localhost:3999', 
-    credentials:true,            //access-control-allow-credentials:true
-    optionSuccessStatus:200
-};
 // Load environment variables from .env file.
 const dotenv = require("dotenv");
 dotenv.config();    // or require("dotenv").config();
 // Environment variables
 // const ip = process.env.IP || "0.0.0.0";
-const port = process.env.PORT || 8765;
+const portie = 3000,
+      port = process.env.PORT || portie;
+const corsOptions = {
+    origin:`http://localhost:${portie}`,    // Set origin of client-side IP
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+};
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // =======================================================================================================//
 // 1. SERVER  ======================================================================================//

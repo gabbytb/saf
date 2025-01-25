@@ -5,7 +5,7 @@ import { blogBg } from "../constants";
 import BlogSlider from "../components/Slider/BlogSlider";
 import { NavSlider, HomeFooter, AdminNavSlider, } from "../components";
 import { spinner } from "../assets/images";
-
+import setNigerianTime from "../middlewares/setNigerianTime";
 
 
 
@@ -13,20 +13,12 @@ import { spinner } from "../assets/images";
 
 
 const logEvent = (message, mode = 'TRACKER') => {
-        
-    // Create a new Date object for the current time
-    const date = new Date();
-    // Add 1 hour (60 minutes * 60 seconds * 1000 milliseconds)
-    date.setHours(date.getHours() + 1);
-    // Format the date to ISO 8601 string
-    const newDate = date.toISOString();
-
-
+    
     // Send the log to a backend server
     api.post('/api/logs', {
         message,
         mode: mode.toLowerCase(),
-        timestamp: newDate,
+        timestamp: setNigerianTime(),
     });
     
 
@@ -158,27 +150,27 @@ const ArticlesList = ({ isLoggedIn, }) => {
         // *************************************************************************************************************
         // Function:- FETCH ALL BLOG ARTICLES BY STATUS: Published
         // *************************************************************************************************************                               
-        async function fetchAllBlogPostsByPublished() {                                    
+        function fetchAllBlogPostsByPublished() {                                    
          
             setIsLoading(true);
             
             const pageLimit = 10;   // Number of items per page  
             var status = 'published';   // Status is Published
               
-            await api.get(`/api/v1/admin/posts/manage?page=${currentPage}&limit=${pageLimit}&status=${status}`)
+            api.get(`/api/v1/admin/posts/manage?page=${currentPage}&limit=${pageLimit}&status=${status}`)
             .then((response) => {
                 const { success, data, message } = response?.data;
-                const { allBlogPosts, pagination } = data;
+                // const { allBlogPosts, pagination } = data;
         
                 if (!success && message === "No article found") {
                     console.log("Success: ", success);
                     console.log("Message: ", message);
                 };
         
-                setAllPosts(allBlogPosts);
+                setAllPosts(data?.allBlogPosts);
 
-                setTotalBlogPosts(pagination?.postsRecord);
-                setTotalPages(pagination?.lastPage);                           
+                setTotalBlogPosts(data?.pagination?.postsRecord);
+                setTotalPages(data?.pagination?.lastPage);                           
             })
             .catch((error) => {
                 console.log("Error fetching data: ", error);
