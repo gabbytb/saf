@@ -7,3 +7,6 @@
   from = "/*"
   to = "/.netlify/functions/my-function"  # This tells Netlify to use serverless functions (you'll set this up in the next step)
   status = 200
+
+[functions]
+  directory = "server/functions"
