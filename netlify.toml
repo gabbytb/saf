@@ -4,7 +4,7 @@
   
 [[redirects]]
   from = "/*"
-  to = "/.netlify/functions/my-function"
+  to = "/server"
   status = 200
 
 [build.environment]
