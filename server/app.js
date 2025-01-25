@@ -10,7 +10,8 @@ dotenv.config();    // or require("dotenv").config();
 const portie = 3000,
       port = process.env.PORT || portie;
 const corsOptions = {
-    origin:`http://localhost:${portie}`,    // Set origin of client-side IP
+    // origin:`http://localhost:${portie}`,    // Set origin of client-side IP
+    origin: 'https://superlative-crepe-cc644f.netlify.app',
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 };
