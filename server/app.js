@@ -11,7 +11,7 @@ const portie = 3000,
       port = process.env.PORT || portie;
 const corsOptions = {
     // origin:`http://localhost:${portie}`,    // Set origin of client-side IP
-    origin: 'https://679574dff35d5f62316f5c25--superlative-crepe-cc644f.netlify.app',
+    origin: 'https://679575da81d0c86c13204b91--superlative-crepe-cc644f.netlify.app',
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 };
