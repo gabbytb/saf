@@ -1,6 +1,10 @@
 [build]
   command = "npm run build"
   publish = "client/build"
+
+[build.environment]
+  NODE_ENV = "production"
+  MY_API_KEY = "91204-34534"
   
 [[redirects]]
   from = "/*"

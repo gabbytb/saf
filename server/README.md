@@ -1,3 +1,3 @@
-# live-coding-challenge
- MERN stack app
+# Samuel Akinola Foundation
+ Reaching Out To Great Minds
 
