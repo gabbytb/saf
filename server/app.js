@@ -2,6 +2,11 @@ const express = require("express");
 const serverless = require('serverless-http');
 const path = require("path");
 const cors = require("cors");
+const corsOptions ={
+    origin:'http://localhost:3999', 
+    credentials:true,            //access-control-allow-credentials:true
+    optionSuccessStatus:200
+};
 // Load environment variables from .env file.
 const dotenv = require("dotenv");
 dotenv.config();    // or require("dotenv").config();
@@ -25,7 +30,7 @@ const app = express();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Enable: CORS (CROSS ORIGIN RESOURCE SHARING) for all routes
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-app.use(cors());
+app.use(cors(corsOptions));
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // express.json():-  Will add a body property to the request or req object. 
 // - This includes the request body's parsed JSON data. 
