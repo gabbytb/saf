@@ -33,24 +33,6 @@ const app = express();
 // Enable: CORS (CROSS ORIGIN RESOURCE SHARING) for all routes
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.use(cors());
-app.use((req, res, next) => {
-
-    // let allowedOrigins = ["*", "https://67964cb165d323de7e4df4f4--superlative-crepe-cc644f.netlify.app"]
-    // let origin = req.headers.origin;
-    // if (allowedOrigins.includes(origin)) {
-    //     res.header("Access-Control-Allow-Origin", origin); // restrict it to the required domain
-    // };
-        
-    res.setHeader('Access-Control-Allow-Origin', 'https://67964cb165d323de7e4df4f4--superlative-crepe-cc644f.netlify.app'); // Replace with yor Netlify domain
-    res.setHeader('Access-Control-Allow-Origin', '*');
-     
-    res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
-  
-    res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
-  
-    next();
-  
-});  
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // express.json():-  Will add a body property to the request or req object. 
 // - This includes the request body's parsed JSON data. 
