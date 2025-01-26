@@ -10,7 +10,7 @@ const ip = process.env.IP || "0.0.0.0",
       CSPort = 3000,
       port = process.env.PORT || CSPort;
 const corsOptions = {
-    origin: `http://192.168.70.113:${CSPort}` || "https://67964cb165d323de7e4df4f4--superlative-crepe-cc644f.netlify.app",    // Set origin of client-side IP 
+    origin: `http://192.168.70.113:${CSPort}` && "https://67964cb165d323de7e4df4f4--superlative-crepe-cc644f.netlify.app",    // Set origin of client-side IP 
     credentials: true,            //access-control-allow-credentials:true
     optionSuccessStatus: 200
 };
