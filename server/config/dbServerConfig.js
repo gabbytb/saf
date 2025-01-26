@@ -52,8 +52,7 @@ const DB_Server_Connection = async (app, ip, port) => {
         // ssl: true,
         // tls: true
     };
-
-     
+         
     await mongoose.set("strictQuery", false);
     await mongoose.connect(mongoURI, options)
     .then(() => {  
@@ -68,17 +67,17 @@ const DB_Server_Connection = async (app, ip, port) => {
         // 6. SERVER:-  Port
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Start the server only after a successful DATABASE Connection
-        // let server = app.listen(port, () => {
-        //         let port = server.address().port;
-        //         let family = server.address().family;           
-        //         console.log("************************************************",
-        //                     "\n*********      BACKEND CONNECTION      *********",
-        //                     `\n************************************************`,              
-        //                     `\n\nPORT: ${port}`,
-        //                     `\nINTERNET PROTOCOL: ${family}\n`,
-        //                     "\n************************************************",
-        //                     "\n************************************************\n\n");   
-        // });  
+        let server = app.listen(port, ip, () => {
+                let port = server.address().port;
+                let family = server.address().family;           
+                console.log("************************************************",
+                            "\n*********      BACKEND CONNECTION      *********",
+                            `\n************************************************`,              
+                            `\n\nPORT: http://${ip}:${port}`,
+                            `\nINTERNET PROTOCOL: ${family}\n`,
+                            "\n************************************************",
+                            "\n************************************************\n\n");   
+        });
     })
     .catch((error) =>  {
         console.log('DATABASE ERROR: ', error.message,
