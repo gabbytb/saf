@@ -16,12 +16,18 @@ const TestVerification = () => {
 
     const [error, setError] = useState('');
     console.log("ERROR: ", error);
+    
+    const { search } = useLocation();
+    console.log("Search in Current Location: ", search);
 
 
     // This function is triggered when the component mounts
     useEffect(() => {
         const queryParams = new URLSearchParams(location.search);
+        console.log("Query Params: ", queryParams);
+
         const token = queryParams.get('token');  // Get token from the URL query parameter
+        console.log("Token: ", token);
 
         if (token) {
             // Send a request to verify the token

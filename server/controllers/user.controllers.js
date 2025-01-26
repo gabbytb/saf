@@ -894,7 +894,7 @@ exports.reValidateSignUp = async (req, res) => {
 
 // Our ACCOUNT VERIFICATION Logic USING GET request starts here
 
-exports.verifySignUpGetReq = async (req, res) => {
+exports.verifySignUpWithGetReq = async (req, res) => {
             
     const verified_success = req.user.success;
     const verified_message = req.user.message;
