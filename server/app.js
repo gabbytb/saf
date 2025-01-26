@@ -10,8 +10,8 @@ const ip = process.env.IP || "0.0.0.0",
       CSPort = 3000,
       port = process.env.PORT || CSPort;
 const corsOptions = {
-    // origin:`http://localhost:${CSPort}`,    // Set origin of client-side IP
-    origin: `http://192.168.70.113:${CSPort}`,    // Set origin of client-side IP
+    // origin:`http://localhost:${CSPort}`,    // Set origin of client-side IP 
+    origin: "https://67964cb165d323de7e4df4f4--superlative-crepe-cc644f.netlify.app",
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 };
@@ -64,7 +64,7 @@ app.use(express.static(buildPath));
 // =======================================================================================================//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const LaunchCloudDBConnection = require("./config/dbServerConfig");
-LaunchCloudDBConnection(app, ip, port);
+LaunchCloudDBConnection(app, port);
 
 // const LaunchLocalDBConnection = require("./config/dbLocalConfig");
 // LaunchLocalDBConnection(app, ip, port);
