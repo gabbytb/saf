@@ -910,7 +910,7 @@ exports.verifySignUpGetReq = async (req, res) => {
             isverified: verified_data.isverified,
             acesstoken: verified_data.acesstoken,
         };
-        res.redirect(302, `${ip}/user/signup?token=${verifiedUser.acesstoken}&email=${verifiedUser.email}&verified=${verified_success}&message=${encodeURIComponent(verified_message)}`);
+        res.redirect(302, `https://${ip}/user/signup?token=${verifiedUser.acesstoken}&email=${verifiedUser.email}&verified=${verified_success}&message=${encodeURIComponent(verified_message)}`);
     } else {
         res.redirect(302, '/user/signup');
     };
