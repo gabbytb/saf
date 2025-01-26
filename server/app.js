@@ -94,7 +94,11 @@ require("./routes/donation.route")(app);
 // will serve the index.html file, 
 // allowing React’s client-side router to take over.
 app.get('*', (req, res) => {
-    res.setHeader('Access-Control-Allow-Origin', 'https://67964cb165d323de7e4df4f4--superlative-crepe-cc644f.netlify.app');
+    // res.setHeader('Access-Control-Allow-Origin', 'https://67964cb165d323de7e4df4f4--superlative-crepe-cc644f.netlify.app');
+    res.setHeader("Access-Control-Allow-Origin", "*")   
+    res.setHeader("Access-Control-Allow-Credentials", "true");
+    res.setHeader("Access-Control-Max-Age", "1800");
+    res.setHeader("Access-Control-Allow-Headers", "content-type");
     res.sendFile(buildPath, 'index.html');
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
