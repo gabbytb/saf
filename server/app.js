@@ -64,7 +64,7 @@ app.use(express.static(buildPath));
 // =======================================================================================================//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const LaunchCloudDBConnection = require("./config/dbServerConfig");
-LaunchCloudDBConnection(app, port);
+LaunchCloudDBConnection(app, ip, port);
 
 // const LaunchLocalDBConnection = require("./config/dbLocalConfig");
 // LaunchLocalDBConnection(app, ip, port);
