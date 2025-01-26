@@ -34,8 +34,6 @@ const DB_Server_Connection = async (app, ip, port) => {
     // DATABASE CONNECTION  ==================================================================================//
     // =======================================================================================================//
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-  
-
     //   OPTIONS for Mongoose
     //   &retryWrites=true: Automatically retries write operations if they fail due to temporary network issues or other transient problems.
     //   &w=majority: Ensures that the write operations are confirmed by the majority of the nodes in the database replica set, making sure the data is safely written.
@@ -76,7 +74,7 @@ const DB_Server_Connection = async (app, ip, port) => {
                 console.log("************************************************",
                             "\n*********      BACKEND CONNECTION      *********",
                             `\n************************************************`,              
-                            `\n\nPORT: ${port}`,
+                            `\n\nPORT: http://${ip}:${port}`,
                             `\nINTERNET PROTOCOL: ${family}\n`,
                             "\n************************************************",
                             "\n************************************************\n\n");   
