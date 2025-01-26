@@ -14,7 +14,7 @@
     "deploy": "netlify deploy"
   },
   "keywords": [
-    "Start the Express server",    
+    "Start the Express server",
     "// Empty",
     "Start React in development mode",
     "Build React",
@@ -23,6 +23,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@netlify/functions": "^3.0.0",
     "concurrently": "^9.1.2",
     "express": "^4.21.2"
   }

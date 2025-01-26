@@ -1,4 +1,4 @@
-const DB_Server_Connection = async (app, port) => {
+const DB_Server_Connection = async (app, ip, port) => {
             
     const mongoose = require("mongoose");
        
@@ -68,17 +68,17 @@ const DB_Server_Connection = async (app, port) => {
         // 6. SERVER:-  Port
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Start the server only after a successful DATABASE Connection
-        let server = app.listen(port, () => {
-                let port = server.address().port;
-                let family = server.address().family;           
-                console.log("************************************************",
-                            "\n*********      BACKEND CONNECTION      *********",
-                            `\n************************************************`,              
-                            `\n\nPORT: ${port}`,
-                            `\nINTERNET PROTOCOL: ${family}\n`,
-                            "\n************************************************",
-                            "\n************************************************\n\n");   
-        });  
+        // let server = app.listen(port, () => {
+        //         let port = server.address().port;
+        //         let family = server.address().family;           
+        //         console.log("************************************************",
+        //                     "\n*********      BACKEND CONNECTION      *********",
+        //                     `\n************************************************`,              
+        //                     `\n\nPORT: ${port}`,
+        //                     `\nINTERNET PROTOCOL: ${family}\n`,
+        //                     "\n************************************************",
+        //                     "\n************************************************\n\n");   
+        // });  
     })
     .catch((error) =>  {
         console.log('DATABASE ERROR: ', error.message,
