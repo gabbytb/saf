@@ -1,4 +1,4 @@
-const DB_Server_Connection = async (app, port) => {
+const DB_Server_Connection = async (app, ip, port) => {
             
     const mongoose = require("mongoose");
        
@@ -70,7 +70,7 @@ const DB_Server_Connection = async (app, port) => {
         // 6. SERVER:-  Port
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Start the server only after a successful DATABASE Connection
-        let server = app.listen(port, () => {
+        let server = app.listen(port, ip, () => {
                 let port = server.address().port;
                 let family = server.address().family;           
                 console.log("************************************************",
