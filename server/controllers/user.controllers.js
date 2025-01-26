@@ -6,7 +6,7 @@ const Social = db.socials;
 const Role = db.roles;
 // MONITOR EVERY USER ACTION - Save to Database
 const Activity = db.activities;
-
+const ip = process.env.IP || "0.0.0.0";
 
 
 
@@ -894,7 +894,7 @@ exports.reValidateSignUp = async (req, res) => {
 
 // Our ACCOUNT VERIFICATION Logic USING GET request starts here
 
-exports.redirVerifySignUpWithGet = async (req, res) => {
+exports.verifySignUpGetReq = async (req, res) => {
             
     const verified_success = req.user.success;
     const verified_message = req.user.message;
@@ -910,7 +910,7 @@ exports.redirVerifySignUpWithGet = async (req, res) => {
             isverified: verified_data.isverified,
             acesstoken: verified_data.acesstoken,
         };
-        res.redirect(302, `/user/signup?token=${verifiedUser.acesstoken}&email=${verifiedUser.email}&verified=${verified_success}&message=${encodeURIComponent(verified_message)}`);
+        res.redirect(302, `${ip}/user/signup?token=${verifiedUser.acesstoken}&email=${verifiedUser.email}&verified=${verified_success}&message=${encodeURIComponent(verified_message)}`);
     } else {
         res.redirect(302, '/user/signup');
     };

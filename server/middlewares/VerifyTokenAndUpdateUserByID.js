@@ -1,8 +1,8 @@
 const db = require("../models");
 const User = db.users;
 
-
 const verifyToken = require("./VerifyToken");
+
 
 
 

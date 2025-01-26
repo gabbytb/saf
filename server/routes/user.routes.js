@@ -1,14 +1,14 @@
 module.exports = app => {        
 
     const router = require('express').Router();
-    // const cors = require("cors");
-    // const corsOptions = {        
-    //     origin: ["http://localhost:3000"],
-    //     methods: ["GET", "POST", "PUT", "DELETE"],
-    //     credentials: true,
-    // };
+    const cors = require("cors");
+    const corsOptions = {        
+        origin: ["https://67964cb165d323de7e4df4f4--superlative-crepe-cc644f.netlify.app"],
+        methods: ["GET", "POST", "PUT", "DELETE"],
+        credentials: true,
+    };
     const requireAUTHORIZATION = require("../middlewares/RequireAuthorization.js");   
-    const verifyUserToken = require("../middlewares/VerifyUserToken.js");
+    const VerifyTokenAndUpdateUserByID = require("../middlewares/VerifyTokenAndUpdateUserByID.js");
     const users = require("../controllers/user.controllers.js");
 
 
@@ -45,7 +45,7 @@ module.exports = app => {
 
     
     // Verify "signUp" using this API
-    router.get("/user/verify", verifyUserToken, users.redirVerifySignUpWithGet);
+    router.get("/user/verify", cors(corsOptions), VerifyTokenAndUpdateUserByID, users.verifySignUpGetReq);
     // Expose this endpoint(i.e "http://127.0.0.1:8000/user/verify?token=:token") for the frontend to access.
     
 
