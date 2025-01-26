@@ -67,13 +67,13 @@ const DB_Server_Connection = async (app, ip, port) => {
         // 6. SERVER:-  Port
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Start the server only after a successful DATABASE Connection
-        let server = app.listen(port, ip, () => {
+        let server = app.listen(port, () => {
                 let port = server.address().port;
                 let family = server.address().family;           
                 console.log("************************************************",
                             "\n*********      BACKEND CONNECTION      *********",
                             `\n************************************************`,              
-                            `\n\nPORT: http://${ip}:${port}`,
+                            `\n\nSERVER IS RUNNING ON: ${ip}:${port}`,
                             `\nINTERNET PROTOCOL: ${family}\n`,
                             "\n************************************************",
                             "\n************************************************\n\n");   

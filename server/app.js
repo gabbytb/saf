@@ -6,7 +6,7 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 dotenv.config();    // or require("dotenv").config();
 // Environment variables
-const ip = process.env.IP || "0.0.0.0",
+const ip = process.env.BASE_URL || "0.0.0.0",
       CSPort = 3000,
       port = process.env.PORT || CSPort;
 const corsOptions = {
