@@ -25,7 +25,7 @@ const mailSenderForGetSignUp = (token, user) => {
             pass: mailServicePwd,
         },
     });
-    const serverIP = `http://${IP}:${port}`;
+    const serverIP = `https://${IP}`;
     const siteURL = `<a href="www.samuelakinolafoundation.com" style="text-decoration:none;color:blue;">www.samuelakinolafoundation.com</a>`;
     const verifyActivationLink = `${serverIP}/user/verify?token=${token}`;
     const verificationLink = `<button style="background:limegreen;border:0;padding:15px 20px;border-radius:3px;"><a style="color:white;font-weight:500;text-decoration:none;" href="${verifyActivationLink}" alt="account verification">Verify your email address</a></button>`;
