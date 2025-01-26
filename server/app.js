@@ -35,7 +35,7 @@ const app = express();
 app.use(cors(corsOptions));
 app.use((req, res, next) => {
 
-    res.setHeader('Access-Control-Allow-Origin', 'https://67969fdce4546bee230e6527--superlative-crepe-cc644f.netlify.app'); // Replace with your Netlify domain
+    res.setHeader('Access-Control-Allow-Origin', 'https://67964cb165d323de7e4df4f4--superlative-crepe-cc644f.netlify.app'); // Replace with yor Netlify domain
   
     res.setHeader('Access-Control-Allow-Methods', 'GET, POST, PUT, DELETE');
   
