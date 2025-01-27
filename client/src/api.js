@@ -9,7 +9,7 @@ import axios from 'axios';
 
 // Create an instance of Axios with default settings
 const api = axios.create({    
-    baseURL: "/",   // This is your server’s base URL
+    baseURL: "http://localhost:8000",   // This is your server’s base URL
     // baseURL: "https://6797aeef2b8b49007fd003b1--samuelakinolafoundation.netlify.app",     // This is your server’s base URL
     timeout: 20000, // Optional: Maximum time to wait for a response
     // headers: {
