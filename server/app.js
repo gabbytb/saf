@@ -1,5 +1,5 @@
 const express = require("express");
-// const serverless = require('serverless-http');
+const serverless = require('serverless-http');
 const path = require("path");
 const cors = require("cors");
 // Load environment variables from .env file.
@@ -98,7 +98,12 @@ app.use((req, res, next) => {
     console.log('Request headers:', req.headers);
     next();
 });
-
+app.options("/", (req, res) => {
+    res.setHeader("Access-Control-Allow-Origin", "https://679748336c295d17464a00e7--samuelakinolafoundation.netlify.app");
+    res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+    res.sendStatus(204);
+});
 app.get('*', (req, res) => {
    res.sendFile(buildPath, 'index.html');
 });
@@ -110,7 +115,7 @@ app.get('*', (req, res) => {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // 6. Export Express app as a Netlify function
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// module.exports.handler = serverless(app);
+module.exports.handler = serverless(app);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
