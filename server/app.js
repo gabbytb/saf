@@ -26,7 +26,13 @@ const app = express();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Enable: CORS (CROSS ORIGIN RESOURCE SHARING) for all routes
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-app.use(cors());
+const corsOptions = {
+    origin: "https://6797aeef2b8b49007fd003b1--samuelakinolafoundation.netlify.app",
+    methods: 'GET, POST, PUT, DELETE',  // Specify which methods are allowed
+    allowedHeaders: 'Content-Type,Authorization', // Specify which headers are allowed
+    credentials: true,  // Allows cookies and access-control-allow-credentials to be sent with the request
+};
+app.use(cors(corsOptions));
 // Handle preflight CORS request
 // app.options('*', cors(corsOptions));
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -96,6 +102,12 @@ require("./routes/donation.route")(app);
 app.get('*', (req, res) => {
    res.sendFile(buildPath, 'index.html');
 });
+// app.options("/", (req, res) => {
+//     res.setHeader("Access-Control-Allow-Origin", "https://679748336c295d17464a00e7--samuelakinolafoundation.netlify.app");
+//     res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
+//     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
+//     res.sendStatus(204);
+// });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
