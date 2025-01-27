@@ -12,5 +12,5 @@
 [functions]
   directory = "netlify/functions"  # Express backend functions
 
-[[plugins]]
+
   package = "@netlify/plugin-functions-core"  # Ensure serverless functions work
