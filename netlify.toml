@@ -5,9 +5,9 @@
 
 [[redirects]]
   from = "*"
-  to = "/.netlify/functions/:splat"
+  to = "/index.html"
   status = 200
-  force = true
+  force = false
 
 [functions]
   directory = "netlify/functions"  # Express backend functions
