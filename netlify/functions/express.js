@@ -1,16 +1,4 @@
-const express = require('express');
-const { Handler } = require('@netlify/functions');
-
-
-const app = express();
-
-
-app.get('/', (req, res) => {
-    res.send('Hello from Express on Netlify!');
-});
-
-
-const handler = (event, context) => {
+const handler = async (event, context) => {
     return new Promise((resolve, reject) => {
         app.handle(event, context, (err, response) => {
             if (err) {
@@ -22,4 +10,4 @@ const handler = (event, context) => {
     });
 };
 
-exports.handler = handler;
+module.exports.handler = handler;
