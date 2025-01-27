@@ -27,12 +27,31 @@ const app = express();
 // Enable: CORS (CROSS ORIGIN RESOURCE SHARING) for all routes
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SET THE URL OF THE FRONTEND HERE (i.e Web Browser url = http://localhost:3000)
+// List of allowed origins
+const allowedOrigins = [
+    'https://samuelakinolafoundation.netlify.app', // Production frontend URL
+    'http://localhost:3000', // React app running locally on port 3000
+    'http://192.168.138.113:3000' // Local network access, if needed
+];
 const corsOptions = {
-    origin: 'https://samuelakinolafoundation.netlify.app',
-    methods: 'GET, POST, PUT, DELETE',  // Specify which methods are allowed
-    allowedHeaders: 'Content-Type, Authorization', // Specify which headers are allowed
-    credentials: true,  // Allows cookies and access-control-allow-credentials to be sent with the request
+    origin: (origin, callback) => {
+        // Check if the origin is in the allowedOrigins array
+        if (allowedOrigins.includes(origin) || !origin) { // The second condition `!origin` is to allow non-browser requests (e.g., curl, Postman)
+            callback(null, true);  // Allow the request
+        } else {
+            callback(new Error('Not allowed by CORS'));  // Reject the request
+        };
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
+    allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
+    credentials: true, // If you need to include credentials like cookies
 };
+// const corsOptions = {
+//     origin: 'http://192.168.138.113:3000',
+//     methods: 'GET, POST, PUT, DELETE',  // Specify which methods are allowed
+//     allowedHeaders: 'Content-Type, Authorization', // Specify which headers are allowed
+//     credentials: true,  // Allows cookies and access-control-allow-credentials to be sent with the request
+// };
 app.use(cors(corsOptions));
 // Handle preflight CORS request
 // app.options('*', cors(corsOptions));
