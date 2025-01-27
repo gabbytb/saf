@@ -3,8 +3,12 @@
   publish = "client/build"  # Publish the React build folder
   command = "npm run build --prefix client"  # Build React app
 
+[build]
 [[redirects]]
-  from = "/*"
-  to = "/index.html"
+  from = "/api/*"
+  to = "/.netlify/functions/:splat"
   status = 200
-  force = false
+  force = true
+
+[functions]
+  directory = "netlify/functions"  # Express backend functions
