@@ -4,13 +4,10 @@
   command = "npm run build --prefix client"  # Build React app
 
 [[redirects]]
-  from = "*"
+  from = "/*"
   to = "/index.html"
   status = 200
   force = false
 
 [functions]
   directory = "netlify/functions"  # Express backend functions
-
-[[plugins]]
-  package = "@netlify/plugin-functions-core"  # Ensure serverless functions work
