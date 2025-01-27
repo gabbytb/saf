@@ -46,6 +46,11 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 const buildPath = path.join(__dirname, '..', 'client', 'build');
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.use(express.static(buildPath));
+app.use((req, res, next) => {
+    console.log('Request received:', req.method, req.url);
+    console.log('Request headers:', req.headers);
+    next();
+});
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // =======================================================================================================//
 // END OF MIDDLEWARES ====================================================================================//
@@ -88,17 +93,6 @@ require("./routes/donation.route")(app);
 // (including non-existent paths like /about or /contact) 
 // will serve the index.html file, 
 // allowing React’s client-side router to take over.
-app.use((req, res, next) => {
-    console.log('Request received:', req.method, req.url);
-    console.log('Request headers:', req.headers);
-    next();
-});
-app.options("/", (req, res) => {
-    res.setHeader("Access-Control-Allow-Origin", "https://679748336c295d17464a00e7--samuelakinolafoundation.netlify.app");
-    res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
-    res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-    res.sendStatus(204);
-});
 app.get('*', (req, res) => {
    res.sendFile(buildPath, 'index.html');
 });
