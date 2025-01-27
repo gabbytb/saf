@@ -28,7 +28,7 @@ const app = express();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SET THE URL OF THE FRONTEND HERE (i.e Web Browser url = http://localhost:3000)
 const corsOptions = {
-    origin: 'https://6797db227f3d394fed2a7c6f--samuelakinolafoundation.netlify.app',
+    origin: 'https://samuelakinolafoundation.netlify.app',
     methods: 'GET, POST, PUT, DELETE',  // Specify which methods are allowed
     allowedHeaders: 'Content-Type, Authorization', // Specify which headers are allowed
     credentials: true,  // Allows cookies and access-control-allow-credentials to be sent with the request
