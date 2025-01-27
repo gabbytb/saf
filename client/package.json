@@ -1,6 +1,7 @@
 {
   "name": "client-side",
   "homepage": "https://samuelakinolafoundation.netlify.app",
+  "proxy": "https://samuelakinolafoundation.netlify.app",
   "description": "REACHING OUT TO GREAT MINDS",
   "version": "2.0",
   "private": true,
