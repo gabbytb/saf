@@ -23,6 +23,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@netlify/functions": "^3.0.0",
     "concurrently": "^9.1.2",
     "express": "^4.21.2"
   }
