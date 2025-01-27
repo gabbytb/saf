@@ -3,14 +3,14 @@
   publish = "client/build"  # Publish the React build folder
   command = "npm run build --prefix client"  # Build React app
 
-[build.environment]
-  MY_API_KEY = 39998888
+[[build.environment]]  
+  MY_API_KEY=3999
 
 [[redirects]]
   from = "*"
   to = "/index.html"
   status = 200
-  force = true
+  force = false
 
 [functions]
   directory = "netlify/functions"  # Express backend functions
