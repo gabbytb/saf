@@ -157,7 +157,9 @@ const ArticlesList = ({ isLoggedIn, }) => {
             const pageLimit = 10;   // Number of items per page  
             var status = 'published';   // Status is Published
               
-            api.get(`/api/v1/admin/posts/manage?page=${currentPage}&limit=${pageLimit}&status=${status}`)
+            api.get(`/api/v1/admin/posts/manage?page=${currentPage}&limit=${pageLimit}&status=${status}`, {
+                withCredentials: true,  // Include credentials (cookies)
+            })
             .then((response) => {
                 const { success, data, message } = response?.data;
                 // const { allBlogPosts, pagination } = data;
