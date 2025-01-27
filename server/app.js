@@ -11,7 +11,7 @@ const ip = process.env.BASE_URL || "0.0.0.0",
       port = process.env.PORT || CSPort;
 const corsOptions = {
     origin: "https://67964cb165d323de7e4df4f4--superlative-crepe-cc644f.netlify.app",    // Set origin of client-side IP 
-    credentials: true,            //access-control-allow-credentials:true
+    credentials: true,            // access-control-allow-credentials:true
     optionSuccessStatus: 200
 };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
