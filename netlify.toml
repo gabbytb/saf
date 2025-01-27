@@ -3,10 +3,9 @@
   publish = "client/build"  # Publish the React build folder
   command = "npm run build --prefix client"  # Build React app
 
-[build]
 [[redirects]]
-  from = "/api/*"
-  to = "/.netlify/functions/:splat"
+  from = "*"
+  to = "/index.html"
   status = 200
   force = true
 
