@@ -4,7 +4,7 @@
   command = "npm run build --prefix client"  # Build React app
 
 [[redirects]]
-  from = "https://samuelakinolafoundation.netlify.app"
+  from = "*"
   to = "/index.html"
   status = 200
   force = false
