@@ -52,22 +52,24 @@ const DB_Server_Connection = async (app, ip, port) => {
         // ssl: true,
         // tls: true
     };
-         
+    
+    let _DB;
     await mongoose.set("strictQuery", false);
     await mongoose.connect(mongoURI, options)
-    .then(() => {  
-        let _DB = "*******/";
+    .then((client) => { 
+        _DB = client; 
+        let placard = "*******/";
         // _DB = client; // you can also use this "client.db();"
         console.log("************************************************",
             "\n*********     DATABASE CONNECTION     **********",
             `\n************************************************`,    
-            `\n\nCONNECTED TO DATABASE: ${authSource}${_DB}${defaultauthdb}\n`);
+            `\n\nCONNECTED TO DATABASE: ${authSource}${placard}${defaultauthdb}\n`);
             
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////
         // 6. SERVER:-  Port
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Start the server only after a successful DATABASE Connection
-        let server = app.listen(port, ip, () => {
+        let server = app.listen(port, () => {
                 let port = server.address().port;
                 let family = server.address().family;           
                 console.log("************************************************",
