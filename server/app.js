@@ -9,11 +9,6 @@ dotenv.config();    // or require("dotenv").config();
 const ip = process.env.BASE_URL || "0.0.0.0",
       CSPort = 3000,
       port = process.env.PORT || CSPort;
-const corsOptions = {
-    origin: "https://67964cb165d323de7e4df4f4--superlative-crepe-cc644f.netlify.app/",    // Set origin of client-side IP 
-    credentials: true,            // access-control-allow-credentials:true
-    optionSuccessStatus: 200
-};
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // =======================================================================================================//
 // 1. SERVER  ======================================================================================//
@@ -31,12 +26,18 @@ const app = express();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Enable: CORS (CROSS ORIGIN RESOURCE SHARING) for all routes
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Enable: CORS (CROSS ORIGIN RESOURCE SHARING) for all routes with corsOptions
+const corsOptions = {
+    origin: "https://67964cb165d323de7e4df4f4--superlative-crepe-cc644f.netlify.app/",    // Set origin of client-side IP 
+    credentials: true,            // access-control-allow-credentials:true
+    optionSuccessStatus: 200
+};
 app.use(cors(corsOptions));
+// Handle preflight CORS request
+app.options('*', cors(corsOptions));
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // express.json():-  Will add a body property to the request or req object. 
 // - This includes the request body's parsed JSON data. 
-    app.use(express.json({ limit: "50mb" , extended: true }));      // for parsing application/json
+ app.use(express.json({ limit: "50mb" , extended: true }));      // for parsing application/json
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // NOTE:- req.body in your route handler function will allow you to access this data.
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
@@ -89,11 +90,16 @@ require("./routes/donation.route")(app);
 // 5. Serve the index.html for all API routes
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // The app.get('*') route ensures that any request 
-// (including non-existent paths 
-// like /about or /contact) 
+// (including non-existent paths like /about or /contact) 
 // will serve the index.html file, 
 // allowing React’s client-side router to take over.
-app.get(['*', 'https://67964cb165d323de7e4df4f4--superlative-crepe-cc644f.netlify.app/'], (req, res) => {
+app.use((req, res, next) => {
+    console.log('Request received:', req.method, req.url);
+    console.log('Request headers:', req.headers);
+    next();
+});
+
+app.get('*', (req, res) => {
    res.sendFile(buildPath, 'index.html');
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -104,7 +110,7 @@ app.get(['*', 'https://67964cb165d323de7e4df4f4--superlative-crepe-cc644f.netlif
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // 6. Export Express app as a Netlify function
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.handler = serverless(app);
+exports.handler = serverless(app);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
