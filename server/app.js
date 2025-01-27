@@ -10,7 +10,7 @@ const ip = process.env.BASE_URL || "0.0.0.0",
       CSPort = 3000,
       port = process.env.PORT || CSPort;
 const corsOptions = {
-    origin: "https://67964cb165d323de7e4df4f4--superlative-crepe-cc644f.netlify.app",    // Set origin of client-side IP 
+    origin: "https://67964cb165d323de7e4df4f4--superlative-crepe-cc644f.netlify.app/",    // Set origin of client-side IP 
     credentials: true,            // access-control-allow-credentials:true
     optionSuccessStatus: 200
 };
@@ -31,7 +31,8 @@ const app = express();
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Enable: CORS (CROSS ORIGIN RESOURCE SHARING) for all routes
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-app.use(cors());
+// Enable: CORS (CROSS ORIGIN RESOURCE SHARING) for all routes with corsOptions
+app.use(cors(corsOptions));
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // express.json():-  Will add a body property to the request or req object. 
 // - This includes the request body's parsed JSON data. 
