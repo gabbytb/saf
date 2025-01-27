@@ -4,7 +4,7 @@
   command = "npm run build --prefix client"  # Build React app
 
 [[build.environment]]  
-  MY_API_KEY=3999
+  MY_API_KEY='3999'
 
 [[redirects]]
   from = "*"
