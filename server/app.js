@@ -27,7 +27,7 @@ const app = express();
 // Enable: CORS (CROSS ORIGIN RESOURCE SHARING) for all routes
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const corsOptions = {
-    origin: "http://localhost:8888",
+    origin: ip,
     methods: 'GET, POST, PUT, DELETE',  // Specify which methods are allowed
     allowedHeaders: 'Content-Type,Authorization', // Specify which headers are allowed
     credentials: true,  // Allows cookies and access-control-allow-credentials to be sent with the request
