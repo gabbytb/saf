@@ -3,8 +3,8 @@
   publish = "client/build"  # Publish the React build folder
   command = "npm run build --prefix client"  # Build React app
 
-[[build.environment]]  
-  MY_API_KEY='3999'
+[build.environment]
+  MY_API_KEY="3999 8888 3000 5000 8000"
 
 [[redirects]]
   from = "*"
