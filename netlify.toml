@@ -3,8 +3,3 @@
   publish = "client/build"  # Publish the React build folder
   command = "npm run build --prefix client"  # Build React app
 
-[[redirects]]
-  from = "*"
-  to = "/index.html"  # This tells Netlify to use serverless functions (you'll set this up in the next step)
-  status = 200
-  force = true
