@@ -5,6 +5,6 @@
 
 [[redirects]]
   from = "/*"
-  to = "/index.html"  # This tells Netlify to use serverless functions (you'll set this up in the next step)
+  to = "/.netlify/functions/express"
   status = 200
   force = false
