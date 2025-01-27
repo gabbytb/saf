@@ -27,8 +27,7 @@ const app = express();
 // Enable: CORS (CROSS ORIGIN RESOURCE SHARING) for all routes
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const corsOptions = {
-    origin: ['https://679748336c295d17464a00e7--samuelakinolafoundation.netlify.app', 
-             'https://samuelakinolafoundation.netlify.app'],
+    origin: "https://6797ab6ce1da87aedf337341--samuelakinolafoundation.netlify.app",
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 };
