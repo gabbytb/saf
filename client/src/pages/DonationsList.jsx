@@ -152,9 +152,7 @@ const DonationsList = () => {
             console.log("PAGE LIMIT: ", pageLimit);
             var status = 'active';   // Status is Published
                 
-            await api.get(`/api/v3/admin/donations/manage?page=${currentPage}&limit=${pageLimit}&status=${status}`, {
-                withCredentials: true,  // Include credentials (cookies)
-            })
+            await api.get(`/api/v3/admin/donations/manage?page=${currentPage}&limit=${pageLimit}&status=${status}`)
             .then((response) => {
                 const { success, data, message } = response?.data;
                 const { donations, pagination } = data;
