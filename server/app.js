@@ -27,7 +27,7 @@ const app = express();
 // Enable: CORS (CROSS ORIGIN RESOURCE SHARING) for all routes
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const corsOptions ={
-    origin:'http://localhost:3000', 
+    origin:'https://67964cb165d323de7e4df4f4--superlative-crepe-cc644f.netlify.app', 
     credentials:true,            //access-control-allow-credentials:true
     optionSuccessStatus:200
 };
