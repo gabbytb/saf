@@ -2,3 +2,4 @@
   base = "."  # Build from the root directory
   publish = "client/build"  # Publish the React build folder
   command = "npm run build --prefix client"  # Build React app
+
