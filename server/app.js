@@ -37,7 +37,7 @@ const credentials = { key: privateKey, cert: certificate };
 // SET THE URL OF THE FRONTEND HERE (i.e Web Browser url = http://localhost:3000)
 // List of allowed origins
 const allowedOrigins = [
-    "https://samuelakinolafoundation.netlify.app", // Production frontend URL
+    "https://679896ea941f3e3f98f5af7d--samuelakinolafoundation.netlify.app", // Production frontend URL
     "https://localhost:3000", // React app running locally on port 3000
     "https://192.168.234.113:3000" // Local network access, if neded
 ];
