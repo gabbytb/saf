@@ -6,7 +6,6 @@ import BlogSlider from "../components/Slider/BlogSlider";
 import { NavSlider, HomeFooter, AdminNavSlider, } from "../components";
 import { spinner } from "../assets/images";
 import setNigerianTime from "../middlewares/setNigerianTime";
-import api2 from "../api2";
 
 
 
