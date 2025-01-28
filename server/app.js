@@ -51,7 +51,7 @@ const corsOptions = {
 //     methods: 'GET, POST, PUT, DELETE',  // Specify which methods are allowed
 //     allowedHeaders: 'Content-Type, Authorization', // Specify which headers are allowed
 //     credentials: true,  // Allows cookies and access-control-allow-credentials to be sent with the request
-// };
+13// };
 app.use(cors(corsOptions));
 // Handle preflight CORS request
 // app.options('*', cors(corsOptions));
