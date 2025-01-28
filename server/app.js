@@ -29,18 +29,11 @@ const app = express();
 // const privateKey = fs.readFileSync('./cert/localhost-key.pem', 'utf8');
 // const credentials = { key: privateKey, cert: certificate };
 
-const certificate = fs.readFileSync('./cert/server.crt', 'utf8');
-const privateKey = fs.readFileSync('./cert/server.key', 'utf8');
-const credentials = { 
-    key: privateKey, 
-    cert: certificate 
-};
-
 // OpenSSL:- Load certificate and key
-// const credentials = {
-//     key: fs.readFileSync(path.join(__dirname, 'cert/server_key.pem')),  // Path to your private key
-//     cert: fs.readFileSync(path.join(__dirname, 'cert/server_csr.pem')),  // Path to your certificate
-// };
+const credentials = {
+    key: fs.readFileSync(path.join(__dirname, 'cert/server.key')),  // Path to your private key
+    cert: fs.readFileSync(path.join(__dirname, 'cert/server.crt')),  // Path to your certificate
+};
 console.log(`CRED 1: ${credentials.key} \nCRED 2: ${credentials.cert}`);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
