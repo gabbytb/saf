@@ -10,4 +10,4 @@
   force = false
 
 [functions]  
-  directory = "server"
+  directory = "netlify/functions"  # Express backend functions
