@@ -1,6 +1,6 @@
 const https = require('https');
 const fs = require('fs');
-// const serverless = require('serverless-http');
+const serverless = require('serverless-http');
 const path = require("path");
 const cors = require("cors");
 const express = require("express");
@@ -12,9 +12,14 @@ const ip = process.env.BASE_URL || "0.0.0.0",
       CSPort = 3000,
       port = process.env.PORT || CSPort;
 
+
+
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // =======================================================================================================//
-// 1. SERVER  ======================================================================================//
+// 1. HTTPS SERVER  ======================================================================================//
 // =======================================================================================================//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const app = express();
@@ -24,13 +29,10 @@ const certificate = fs.readFileSync('./cert/localhost.pem', 'utf8');
 const privateKey = fs.readFileSync('./cert/localhost-key.pem', 'utf8');
 
 const credentials = { key: privateKey, cert: certificate };
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// const credentials = {
-//     key: fs.readFileSync('/etc/letsencrypt/live/your-domain/privkey.pem'),
-//     cert: fs.readFileSync('/etc/letsencrypt/live/your-domain/cert.pem'),
-// };
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -58,21 +60,19 @@ const corsOptions = {
         };
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods    
-    credentials: true, // CORS configuration for accepting credentials (cookies, Authorization headers, etc.)
+    credentials: false, // CORS configuration for accepting credentials (cookies, Authorization headers, etc.)
     // allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers for requests
-    allowedHeaders: "Content-Type", // Specify which headers are allowed
+    allowedHeaders: ["Content-Type", "x-api-key"], // Specify which headers are allowed
     // Setting the withCredentials option to true
     // axios.get('https://your-api-url.com/endpoint', {
     //     withCredentials: true  // Tells Axios to send cookies along with the request
     // })  
 };
-
-// Apply CORS settings to the Express app
-// Now your Express server will allow requests from these three locations and respond without CORS issues.
+// Apply CORS settings to the Express app:- Now your Express server will allow requests from these three locations and respond without CORS issues.
 app.use(cors(corsOptions));
 
 // Handle preflight CORS request
-// app.options('*', cors(corsOptions));
+app.options('*', cors(corsOptions));
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // express.json():-  Will add a body property to the request or req object. 
 // - This includes the request body's parsed JSON data. 
@@ -81,6 +81,8 @@ app.use(cors(corsOptions));
 // NOTE:- req.body in your route handler function will allow you to access this data.
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Serve static files from the React app (build folder)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // USE IF:-  client directory is inside server directory.
@@ -88,18 +90,23 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 // - OR -
 // USE IF:-  client directory and server directory are seperate.
 const buildPath = path.join(__dirname, '..', 'client', 'build');
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
 app.use(express.static(buildPath));
-app.use((req, res, next) => {
-    console.log('Request received:', req.method, req.url);
-    console.log('Request headers:', req.headers);
-    next();
-});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Serve the index.html for all API routes
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The app.get('*') route ensures that any request will serve the index.html file, 
+// allowing React’s client-side router to take over.
+app.get('*', (req, res) => {
+    res.sendFile(buildPath, 'index.html');
+}); 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // =======================================================================================================//
 // END OF MIDDLEWARES ====================================================================================//
 // =======================================================================================================//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 
@@ -118,18 +125,9 @@ LaunchCloudDBConnection(https, credentials, app, ip, port);
 
 
 
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// 5. Serve the index.html for all API routes
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// The app.get('*') route ensures that any request 
-// (including non-existent paths like /about or /contact) 
-// will serve the index.html file, 
-// allowing React’s client-side router to take over.
-app.get('*', (req, res) => {
-   res.sendFile(buildPath, 'index.html');
-});
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// 4. BACKEND API ROUTES
+// 5. BACKEND API ROUTES
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 require("./routes/user.routes")(app);
 require("./routes/role.routes")(app);
@@ -138,23 +136,18 @@ require("./routes/donation.route")(app);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-// app.options("/", (req, res) => {
-//     res.setHeader("Access-Control-Allow-Origin", "https://679748336c295d17464a00e7--samuelakinolafoundation.netlify.app");
-//     res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
-//     res.setHeader("Access-Control-Allow-Headers", "Content-Type");
-//     res.sendStatus(204);
-// });
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // 6. Export Express app as a Netlify function
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// module.exports.handler = serverless(app); // Make the express app serverless
+module.exports.handler = serverless(app); // Make the express app serverless
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
 
 
 
@@ -176,27 +169,6 @@ require("./routes/donation.route")(app);
 //
 // app.get("/products/:id", cors(corsOptions), function (req, res, next) {
 //     res.json({ msg: 'This is CORS-enabled for a Single Route!' });
-// });
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// 8) Database Connection
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// const db = require("./models");
-//
-//
-// db.mongoose.connect(db.url)
-// .then(() => {
-//     console.log(`ACTIVE DB: ${DB_URI}`);
-// })
-// .catch((err) => {
-//     console.log("************ ERROR WITH DATABASE CONNECTION ************")
-//     console.log(`Cannot connect to the database: ${err}`);
-//     process.exit();
-// });
-//
-//
-// let server = app.listen(PORT, () => {
-//     const port = server.address().port;
-//     console.log(`Listening on: ${port}`);
 // });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
