@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const { mailServiceProvider, mailServiceUser, mailServicePwd, IP, port, } = process.env;
+const { mailServiceProvider, mailServiceUser, mailServicePwd, BASE_URL, } = process.env;
 console.log("************************************************",
             "\n*********        E-MAIL CONFIG        **********",
             "\n************************************************",
@@ -25,11 +25,12 @@ const mailSenderForGetSignUp = (token, user) => {
             pass: mailServicePwd,
         },
     });
-    const serverIP = `https://${IP}`;
+    const serverIP = `${BASE_URL}`;
     const siteURL = `<a href="www.samuelakinolafoundation.com" style="text-decoration:none;color:blue;">www.samuelakinolafoundation.com</a>`;
     const verifyActivationLink = `${serverIP}/user/verify?token=${token}`;
     const verificationLink = `<button style="background:limegreen;border:0;padding:15px 20px;border-radius:3px;"><a style="color:white;font-weight:500;text-decoration:none;" href="${verifyActivationLink}" alt="account verification">Verify your email address</a></button>`;
     const activationLink = `<span style="color:black;font-size:10px;">or copy and paste this link on your browser</span><br /><a href="${serverIP}/user/verify?token=${token}" alt="activation link" style="font-size:10px;">${serverIP}/user/verify?token=${token}</a>`;
+
 
     // Configure Mail Options (E.g sender, subject, message, etc.)
     let mailOptions = {
