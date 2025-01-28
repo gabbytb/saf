@@ -1,7 +1,7 @@
 const https = require('https');
 const fs = require('fs');
 const express = require("express");
-const serverless = require('serverless-http');
+// const serverless = require('serverless-http');
 const path = require("path");
 const cors = require("cors");
 // Load environment variables from .env file.
@@ -49,7 +49,7 @@ const credentials = { key: privateKey, cert: certificate };
 // };
 // Your list of allowed origins (domains)
 const allowedOrigins = [
-    "https://samuelakinolafoundation.netlify.app",  // Allow production frontend on Netlify
+    "https://6798e0c3b2f22c0078ebe263--samuelakinolafoundation.netlify.app",  // Allow production frontend on Netlify
     "https://localhost:3000",  // Allow local React app
     "https://192.168.234.113:3000",  // Allow local network access if needed
 ];
@@ -66,7 +66,7 @@ const corsOptions = {
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Allow headers for requests
-    credentials: false,  // Don't pass cookies by default
+    credentials: true,  // Don't pass cookies by default
 };
 
 // Apply CORS settings to the Express app
@@ -156,7 +156,7 @@ app.get('*', (req, res) => {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // 6. Export Express app as a Netlify function
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.handler = serverless(app); // Make the express app serverless
+// module.exports.handler = serverless(app); // Make the express app serverless
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
