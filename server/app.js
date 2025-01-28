@@ -45,9 +45,8 @@ const credentials = { key: privateKey, cert: certificate };
 const allowedOrigins = [
     "https://samuelakinolafoundation.netlify.app", // Allow production frontend on Netlify / Allow the frontend domain
     "https://localhost:3000",  // Allow local React app
-    "https://192.168.234.113:3000",  // Allow local network access if needed
+    "https://192.168.205.113:3000",  // Allow local network access if needed
 ];
-
 // Configure CORS options
 const corsOptions = {
     origin: (origin, callback) => {
@@ -61,8 +60,7 @@ const corsOptions = {
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods    
     credentials: true, // CORS configuration for accepting credentials (cookies, Authorization headers, etc.)
     // allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers for requests
-    allowedHeaders: ["Content-Type", "x-api-key"], // Specify which headers are allowed
-    
+    allowedHeaders: "Content-Type", // Specify which headers are allowed
     // Setting the withCredentials option to true
     // axios.get('https://your-api-url.com/endpoint', {
     //     withCredentials: true  // Tells Axios to send cookies along with the request
@@ -74,7 +72,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Handle preflight CORS request
-app.options('*', cors(corsOptions));
+// app.options('*', cors(corsOptions));
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // express.json():-  Will add a body property to the request or req object. 
 // - This includes the request body's parsed JSON data. 
@@ -121,18 +119,6 @@ LaunchCloudDBConnection(https, credentials, app, ip, port);
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// 4. BACKEND API ROUTES
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-require("./routes/user.routes")(app);
-require("./routes/role.routes")(app);
-require("./routes/blog.routes")(app);
-require("./routes/donation.route")(app);
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // 5. Serve the index.html for all API routes
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // The app.get('*') route ensures that any request 
@@ -142,6 +128,16 @@ require("./routes/donation.route")(app);
 app.get('*', (req, res) => {
    res.sendFile(buildPath, 'index.html');
 });
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// 4. BACKEND API ROUTES
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+require("./routes/user.routes")(app);
+require("./routes/role.routes")(app);
+require("./routes/blog.routes")(app);
+require("./routes/donation.route")(app);
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 // app.options("/", (req, res) => {
 //     res.setHeader("Access-Control-Allow-Origin", "https://679748336c295d17464a00e7--samuelakinolafoundation.netlify.app");
 //     res.setHeader("Access-Control-Allow-Methods", "POST, GET, PUT");
