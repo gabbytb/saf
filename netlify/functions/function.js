@@ -7,7 +7,7 @@ exports.handler = async (event, context) => {
         statusCode: 200,
         headers: {
             'Access-Control-Allow-Origin': '*', // Allow all origins
-            'Access-Control-Allow-Headers': 'Content-Type',
+            'Access-Control-Allow-Headers': 'Content-Type, Authorization',
         },
         // body: JSON.stringify({ message: `Hello from Netlify Function! \nYour API Key: ${apiKey}` }),
         body: JSON.stringify({ message: 'Hello from Netlify Function!' }),
