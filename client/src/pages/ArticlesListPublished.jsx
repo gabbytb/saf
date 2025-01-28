@@ -5,67 +5,7 @@ import { blogBg } from "../constants";
 import BlogSlider from "../components/Slider/BlogSlider";
 import { NavSlider, HomeFooter, AdminNavSlider, } from "../components";
 import { spinner } from "../assets/images";
-
-
-
-
-
-
-
-const logEvent = (message, mode = 'TRACKER') => {   
-    
-    // Create a new Date object for the current time
-    const date = new Date();
-    // Add 1 hour (60 minutes * 60 seconds * 1000 milliseconds)
-    date.setHours(date.getHours() + 1);
-    // Format the date to ISO 8601 string
-    const newDate = date.toISOString();
-
-
-    // Send the log to a backend server
-    api.post('/api/logs', {
-        message,
-        mode: mode.toLowerCase(),
-        timestamp: newDate,
-    });
-    
-
-    // api.post('/api/logs', {
-    //     message,
-    //     mode: mode.toLowerCase(),
-    //     timestamp: newDate,
-    // })
-    // .then((response) => {
-    //     const { servermessage } = response.data;                       
-    //     localStorage.setItem('sessionend', servermessage);
-    // }) 
-    // .catch((error) => {
-    //     console.log('Error encountered during logging of ADMIN DASHBOARD - Create Donation page', error.message);
-    // });
-
-};
-
-
-
-// ********************************** //
-// *** CONVERT DATE STRING PARAMS *** // 
-// ********************************** //
-const convertDate = (dateString) => {
-    const date = new Date(dateString);
-
-    const options = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        // hour: '2-digit',
-        // minute: '2-digit',
-        hour12: true
-    };
-
-    return date.toLocaleString('en-GB', options);
-};
-// ********************************* //
-// ********************************* //
+import setNigerianTime from "../middlewares/setNigerianTime";
 
 
 
@@ -73,6 +13,53 @@ const convertDate = (dateString) => {
 
 
 const ArticlesListPublished = ({ isLoggedIn, }) => {
+
+
+    const logEvent = (message, mode = 'TRACKER') => {   
+    
+        // Send the log to a backend server
+        api.post('/api/logs', {
+            message,
+            mode: mode.toLowerCase(),
+            timestamp: setNigerianTime(),
+        });
+        
+    
+        // api.post('/api/logs', {
+        //     message,
+        //     mode: mode.toLowerCase(),
+        //     timestamp: newDate,
+        // })
+        // .then((response) => {
+        //     const { servermessage } = response.data;                       
+        //     localStorage.setItem('sessionend', servermessage);
+        // }) 
+        // .catch((error) => {
+        //     console.log('Error encountered during logging of ADMIN DASHBOARD - Create Donation page', error.message);
+        // });
+    
+    };
+    
+
+    // ********************************** //
+    // *** CONVERT DATE STRING PARAMS *** // 
+    // ********************************** //
+    const convertDate = (dateString) => {
+        const date = new Date(dateString);
+
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            // hour: '2-digit',
+            // minute: '2-digit',
+            hour12: true
+        };
+
+        return date.toLocaleString('en-GB', options);
+    };
+    // ********************************* //
+    // ********************************* //
 
 
     const isPublished = useParams();

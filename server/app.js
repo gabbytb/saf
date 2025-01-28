@@ -61,7 +61,7 @@ const corsOptions = {
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods    
     credentials: true, // CORS configuration for accepting credentials (cookies, Authorization headers, etc.)
     // allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers for requests
-    allowedHeaders: 'Content-Type', // Specify which headers are allowed
+    allowedHeaders: ["Content-Type", "x-api-key"], // Specify which headers are allowed
     
     // Setting the withCredentials option to true
     // axios.get('https://your-api-url.com/endpoint', {

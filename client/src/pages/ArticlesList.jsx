@@ -12,60 +12,55 @@ import setNigerianTime from "../middlewares/setNigerianTime";
 
 
 
-const logEvent = (message, mode = 'TRACKER') => {
-    
-    // Send the log to a backend server
-    api.post('/api/logs', {
-        message,
-        mode: mode.toLowerCase(),
-        timestamp: setNigerianTime(),
-    });
-    
-
-    // api.post('/api/logs', {
-    //     message,
-    //     mode: mode.toLowerCase(),
-    //     timestamp: newDate,
-    // })
-    // .then((response) => {
-    //     const { servermessage } = response.data;                       
-    //     localStorage.setItem('sessionend', servermessage);
-    // }) 
-    // .catch((error) => {
-    //     console.log('Error encountered during logging of ADMIN DASHBOARD - Create Donation page', error.message);
-    // });
-
-};
-
-
-
-// ********************************** //
-// *** CONVERT DATE STRING PARAMS *** // 
-// ********************************** //
-const convertDate = (dateString) => {
-    const date = new Date(dateString);
-
-    const options = {
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        // hour: '2-digit',
-        // minute: '2-digit',
-        hour12: true
-    };
-
-    return date.toLocaleString('en-GB', options);
-};
-// ********************************* //
-// ********************************* //
-
-
-
-
-
-
 const ArticlesList = ({ isLoggedIn, }) => {
 
+
+    const logEvent = (message, mode = 'TRACKER') => {
+    
+        // Send the log to a backend server
+        api.post('/api/logs', {
+            message,
+            mode: mode.toLowerCase(),
+            timestamp: setNigerianTime(),
+        });
+        
+    
+        // api.post('/api/logs', {
+        //     message,
+        //     mode: mode.toLowerCase(),
+        //     timestamp: newDate,
+        // })
+        // .then((response) => {
+        //     const { servermessage } = response.data;                       
+        //     localStorage.setItem('sessionend', servermessage);
+        // }) 
+        // .catch((error) => {
+        //     console.log('Error encountered during logging of ADMIN DASHBOARD - Create Donation page', error.message);
+        // });
+    
+    };
+    
+    
+    // ********************************** //
+    // *** CONVERT DATE STRING PARAMS *** // 
+    // ********************************** //
+    const convertDate = (dateString) => {
+        const date = new Date(dateString);
+    
+        const options = {
+            year: 'numeric',
+            month: 'long',
+            day: 'numeric',
+            // hour: '2-digit',
+            // minute: '2-digit',
+            hour12: true
+        };
+    
+        return date.toLocaleString('en-GB', options);
+    };
+    // ********************************* //
+    // ********************************* //    
+    
 
     // ***************************************************************************
     // CURRENT ACTIVE USER:-
@@ -157,9 +152,7 @@ const ArticlesList = ({ isLoggedIn, }) => {
             const pageLimit = 10;   // Number of items per page  
             var status = 'published';   // Status is Published
                  
-            await api.get(`/api/v1/admin/posts/manage?page=${currentPage}&limit=${pageLimit}&status=${status}`, {
-                withCredentials: true
-            })
+            await api.get(`/api/v1/admin/posts/manage?page=${currentPage}&limit=${pageLimit}&status=${status}`)
             .then((response) => {
                 const { success, data, message } = response?.data;
                 // const { allBlogPosts, pagination } = data;
