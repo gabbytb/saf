@@ -34,7 +34,7 @@ const credentials = { key: privateKey, cert: certificate };
 // const sslCertPath = path.join(__dirname, './cert/server.crt');  // Path to your .crt file
 // const sslKeyPath = path.join(__dirname, './cert/server.key');   // Path to your .key file
 
-// // SSL options for the Express HTTPS server
+// SSL options for the Express HTTPS server
 // const credentials = {
 //     key: fs.readFileSync(sslKeyPath),   // Read the private key
 //     cert: fs.readFileSync(sslCertPath), // Read the certificate file
