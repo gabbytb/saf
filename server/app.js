@@ -11,6 +11,7 @@ dotenv.config();    // or require("dotenv").config();
 const ip = process.env.BASE_URL || "0.0.0.0",
       CSPort = 3000,
       port = process.env.PORT || CSPort;
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // =======================================================================================================//
 // 1. SERVER  ======================================================================================//
@@ -19,8 +20,8 @@ const ip = process.env.BASE_URL || "0.0.0.0",
 const app = express();
 
 // Load certificate and key
-const privateKey = fs.readFileSync('./cert/localhost-key.pem', 'utf8');
 const certificate = fs.readFileSync('./cert/localhost.pem', 'utf8');
+const privateKey = fs.readFileSync('./cert/localhost-key.pem', 'utf8');
 
 const credentials = { key: privateKey, cert: certificate };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
