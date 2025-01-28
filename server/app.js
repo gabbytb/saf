@@ -30,8 +30,8 @@ const app = express();
 // List of allowed origins
 const allowedOrigins = [
     "https://samuelakinolafoundation.netlify.app", // Production frontend URL
-    "http://localhost:3000", // React app running locally on port 3000
-    "http://192.168.234.113:3000" // Local network access, if neded
+    "https://localhost:3000", // React app running locally on port 3000
+    "https://192.168.234.113:3000" // Local network access, if neded
 ];
 const corsOptions = {
     origin: (origin, callback) => {

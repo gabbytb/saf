@@ -4,10 +4,11 @@
   command = "npm run build --prefix client"  # Build React app
  
 [[redirects]]
-  from = "http://*"
-  to = "https://:splat"
-  status = 301
-  force = true
+  from = "*"
+  to = "/index.html"
+  status = 200
+  force = false
+  
 
 [functions]  
   directory = "netlify/functions"  # Express backend functions
