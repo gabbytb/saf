@@ -44,7 +44,7 @@ const corsOptions = {
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allowed HTTP methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers
-    // credentials: true, // If you need to include credentials like cookies    
+    credentials: true, // If you need to include credentials like cookies    
 };
 // const corsOptions = {
 //     origin: 'http://192.168.138.113:3000',

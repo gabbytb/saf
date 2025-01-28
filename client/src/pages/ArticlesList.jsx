@@ -6,6 +6,7 @@ import BlogSlider from "../components/Slider/BlogSlider";
 import { NavSlider, HomeFooter, AdminNavSlider, } from "../components";
 import { spinner } from "../assets/images";
 import setNigerianTime from "../middlewares/setNigerianTime";
+import api2 from "../api2";
 
 
 
@@ -157,6 +158,7 @@ const ArticlesList = ({ isLoggedIn, }) => {
             const pageLimit = 10;   // Number of items per page  
             var status = 'published';   // Status is Published
               
+            api2.get("/api/v1/admin/posts/manage");
             api.get(`/api/v1/admin/posts/manage?page=${currentPage}&limit=${pageLimit}&status=${status}`)
             .then((response) => {
                 const { success, data, message } = response?.data;
