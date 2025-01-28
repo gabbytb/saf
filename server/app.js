@@ -44,7 +44,7 @@ const credentials = { key: privateKey, cert: certificate };
 // List of allowed origins
 const allowedOrigins = [
     "https://samuelakinolafoundation.netlify.app", // Production frontend URL
-    "https://70e6-102-88-109-204.ngrok-free.app",
+    "https://52db-102-88-109-204.ngrok-free.app",
     "https://localhost:3000", // React app running locally on port 3000
     "https://192.168.234.113:3000", // Local network access, if neded
 ];
