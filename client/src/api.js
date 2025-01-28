@@ -7,15 +7,19 @@
 import axios from "axios";
 import axiosRetry from "axios-retry";
 
+const apiKey = process.env.REACT_APP_API_KEY;  // Use the environment variable from build
+console.log("API KEY: ", apiKey);
+
+
 
 // Create an instance of Axios with default settings
 const api = axios.create({
-                // baseURL: "https://localhost:8000",   // This is your server’s base URL
                 baseURL: "https://192.168.234.113:8000",   // This is your server’s base URL            
+                // baseURL: "https://samuelakinolafoundation.netlify.app",   // This is your server’s base URL            
                 timeout: 20000, // Optional: Maximum time to wait for a response
                 headers: {
                     'Content-Type': 'application/json',  // This is commonly used for APIs that communicate with JSON
-                    'x-api-key': 'your-unique-api-key',   // Replace with your API key
+                    'x-api-key': apiKey,   // Replace with your API key
                 },
                 withCredentials: true,  // This will send cookies and authorization headers automatically                
             });
