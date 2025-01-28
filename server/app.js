@@ -42,7 +42,8 @@ const credentials = { key: privateKey, cert: certificate };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SET THE URL OF THE FRONTEND HERE (i.e Web Browser url = http://localhost:3000)
 // List of allowed origins
-const allowedOrigins = [   
+const allowedOrigins = [
+    "https://0404-102-88-109-204.ngrok-free.app",  
     "https://samuelakinolafoundation.netlify.app", // Production frontend URL
     "https://localhost:3000", // React app running locally on port 3000
     "https://192.168.234.113:3000" // Local network access, if neded
@@ -66,7 +67,7 @@ const corsOptions = {
 //     allowedHeaders: 'Content-Type, Authorization', // Specify which headers are allowed
 //     credentials: true,  // Allows cookies and access-control-allow-credentials to be sent with the request
 // };
-app.use(cors(corsOptions));
+app.use(cors());
 // Handle preflight CORS request
 // app.options('*', cors(corsOptions));
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////

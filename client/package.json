@@ -1,8 +1,7 @@
 {
   "name": "client-side",
   "description": "REACHING OUT TO GREAT MINDS",
-  "version": "2.0",
-  "proxy": "https://samuelakinolafoundation.netlify.app",
+  "version": "2.0",  
   "private": true,
   "dependencies": {
     "@fortawesome/fontawesome-free": "^6.6.0",
