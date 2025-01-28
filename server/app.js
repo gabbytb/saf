@@ -31,7 +31,7 @@ const app = express();
 const allowedOrigins = [
     'https://samuelakinolafoundation.netlify.app', // Production frontend URL
     'http://localhost:3000', // React app running locally on port 3000
-    'http://192.168.138.113:3000' // Local network access, if needed
+    'http://192.168.234.113:3000' // Local network access, if neded
 ];
 const corsOptions = {
     origin: (origin, callback) => {
@@ -51,7 +51,7 @@ const corsOptions = {
 //     methods: 'GET, POST, PUT, DELETE',  // Specify which methods are allowed
 //     allowedHeaders: 'Content-Type, Authorization', // Specify which headers are allowed
 //     credentials: true,  // Allows cookies and access-control-allow-credentials to be sent with the request
-13// };
+// };
 app.use(cors(corsOptions));
 // Handle preflight CORS request
 // app.options('*', cors(corsOptions));
