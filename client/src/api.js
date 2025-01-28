@@ -12,9 +12,9 @@ const api = axios.create({
     baseURL: "http://192.168.234.113:8000",   // This is your server’s base URL
     // baseURL: "https://samuelakinolafoundation.netlify.app",     // This is your server’s base URL
     timeout: 20000, // Optional: Maximum time to wait for a response
-    headers: {
-        'Content-Type': 'application/json',
-    },
+    // headers: {
+    //     'Content-Type': 'application/json',
+    // },
 });
 
 export default api;
