@@ -62,11 +62,11 @@ const corsOptions = {
             callback(null, true);  // Allow the request
         } else {
             callback(new Error('Not allowed by CORS'));  // Block the request if origin isn't allowed
-        }
+        };
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Allow headers for requests
-    credentials: false,  // Don't pass cookies by default
+    credentials: true,  // Don't pass cookies by default
     
     // Setting the withCredentials option to true
     // axios.get('https://your-api-url.com/endpoint', {
