@@ -1,6 +1,6 @@
 const https = require('https');
 const fs = require('fs');
-const serverless = require('serverless-http');
+// const serverless = require('serverless-http');
 const path = require("path");
 const cors = require("cors");
 const express = require("express");
@@ -45,6 +45,7 @@ const credentials = { key: privateKey, cert: certificate };
 // SET THE URL OF DOMAINS THAT ARE GOING TO MAKE REQUEST FROM FRONTEND HERE (i.e Web Browser url = https://samuelakinolafoundation.com)
 // Your list of allowed origins (domains)
 const allowedOrigins = [
+    "https://lemon-houses-judge.loca.lt",
     "https://samuelakinolafoundation.netlify.app", // Allow production frontend on Netlify / Allow the frontend domain
     "https://localhost:3000",  // Allow local React app
     "https://192.168.205.113:3000",  // Allow local network access if needed
@@ -62,7 +63,8 @@ const corsOptions = {
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods    
     credentials: false, // CORS configuration for accepting credentials (cookies, Authorization headers, etc.)
     // allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers for requests
-    allowedHeaders: ["Content-Type", "x-api-key"], // Specify which headers are allowed
+    // allowedHeaders: ["Content-Type", "x-api-key"], // Specify which headers are allowed
+    
     // Setting the withCredentials option to true
     // axios.get('https://your-api-url.com/endpoint', {
     //     withCredentials: true  // Tells Axios to send cookies along with the request
@@ -72,7 +74,7 @@ const corsOptions = {
 app.use(cors(corsOptions));
 
 // Handle preflight CORS request
-app.options('*', cors(corsOptions));
+// app.options('*', cors(corsOptions));
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // express.json():-  Will add a body property to the request or req object. 
 // - This includes the request body's parsed JSON data. 
@@ -142,7 +144,7 @@ require("./routes/donation.route")(app);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // 6. Export Express app as a Netlify function
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-module.exports.handler = serverless(app); // Make the express app serverless
+// module.exports.handler = serverless(app); // Make the express app serverless
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
