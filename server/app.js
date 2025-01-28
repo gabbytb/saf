@@ -66,7 +66,13 @@ const corsOptions = {
     },
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
     allowedHeaders: ['Content-Type', 'Authorization'], // Allow headers for requests
-    credentials: true,  // Don't pass cookies by default
+    credentials: false,  // Don't pass cookies by default
+    
+    // Setting the withCredentials option to true
+    // axios.get('https://your-api-url.com/endpoint', {
+    //     withCredentials: true  // Tells Axios to send cookies along with the request
+    // })
+  
 };
 
 // Apply CORS settings to the Express app
