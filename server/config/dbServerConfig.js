@@ -72,7 +72,7 @@ const DB_Server_Connection = async (https, credentials, app, ip, port) => {
 
         // Start HTTPS server
         const httpsServer = https.createServer(credentials, app);
-        const server = httpsServer.listen(port, () => {
+        const server = httpsServer.listen(port, '0.0.0.0', () => {
             let port = server.address().port;
             let family = server.address().family;           
             console.log("************************************************",
