@@ -9,5 +9,5 @@
   status = 200
   force = false
 
-[functions]
-  directory = "netlify/functions"  # Express backend functions
+[functions]  
+  directory = "server"
