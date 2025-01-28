@@ -151,14 +151,15 @@ const ArticlesList = ({ isLoggedIn, }) => {
         // *************************************************************************************************************
         // Function:- FETCH ALL BLOG ARTICLES BY STATUS: Published
         // *************************************************************************************************************                               
-        function fetchAllBlogPostsByPublished() {                                    
+        async function fetchAllBlogPostsByPublished() {                                    
          
             setIsLoading(true);
             
             const pageLimit = 10;   // Number of items per page  
             var status = 'published';   // Status is Published
-                          
-            api.get(`/api/v1/admin/posts/manage?page=${currentPage}&limit=${pageLimit}&status=${status}`)
+                 
+            await api2.get("/api/v1/admin/posts/manage");
+            await api.get(`/api/v1/admin/posts/manage?page=${currentPage}&limit=${pageLimit}&status=${status}`)
             .then((response) => {
                 const { success, data, message } = response?.data;
                 // const { allBlogPosts, pagination } = data;
@@ -178,29 +179,7 @@ const ArticlesList = ({ isLoggedIn, }) => {
             })
             .finally(() => {
                 setIsLoading(false);
-            });   
-              
-            api2.get(`/api/v1/admin/posts/manage?page=${currentPage}&limit=${pageLimit}&status=${status}`)
-            .then((response) => {
-                const { success, data, message } = response?.data;
-                // const { allBlogPosts, pagination } = data;
-        
-                if (!success && message === "No article found") {
-                    console.log("Success: ", success);
-                    console.log("Message: ", message);
-                };
-        
-                setAllPosts(data?.allBlogPosts);
-
-                setTotalBlogPosts(data?.pagination?.postsRecord);
-                setTotalPages(data?.pagination?.lastPage);                           
-            })
-            .catch((error) => {
-                console.log("Error fetching data: ", error);
-            })
-            .finally(() => {
-                setIsLoading(false);
-            });   
+            });           
 
         };      
         var timerID = setTimeout(fetchAllBlogPostsByPublished, 400);   // Delay execution by 400ms
