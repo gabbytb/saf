@@ -1,3 +1,5 @@
+const https = require('https');
+const fs = require('fs');
 const express = require("express");
 const serverless = require('serverless-http');
 const path = require("path");
@@ -15,6 +17,12 @@ const ip = process.env.BASE_URL || "0.0.0.0",
 // =======================================================================================================//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const app = express();
+
+// Load certificate and key
+const privateKey = fs.readFileSync('./cert/localhost-key.pem', 'utf8');
+const certificate = fs.readFileSync('./cert/localhost.pem', 'utf8');
+
+const credentials = { key: privateKey, cert: certificate };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -91,7 +99,7 @@ app.use((req, res, next) => {
 // =======================================================================================================//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const LaunchCloudDBConnection = require("./config/dbServerConfig");
-LaunchCloudDBConnection(app, ip, port);
+LaunchCloudDBConnection(https, credentials, app, ip, port);
 
 // const LaunchLocalDBConnection = require("./config/dbLocalConfig");
 // LaunchLocalDBConnection(app, ip, port);
