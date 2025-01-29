@@ -54,10 +54,10 @@ const credentials = { key: privateKey, cert: certificate };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // SET THE URL OF DOMAINS THAT ARE GOING TO MAKE REQUEST FROM FRONTEND HERE (i.e Web Browser url = https://samuelakinolafoundation.com)
 // DEVELOPMENT
-app.use(cors({
-    origin: '*', // Allow all origins
-    credentials: true,
-}));
+// app.use(cors({
+//     origin: '*', // Allow all origins
+//     credentials: true,
+// }));
 
 
 // PRODUCTION: Your list of allowed origins (domains)
