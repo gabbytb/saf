@@ -29,6 +29,7 @@ const certificate = fs.readFileSync('./cert/localhost.pem', 'utf8');
 const privateKey = fs.readFileSync('./cert/localhost-key.pem', 'utf8');
 const credentials = { key: privateKey, cert: certificate };
 
+
 // OpenSSL:- Load certificate and key
 // Set up paths to the certificate files
 // const sslCertPath = path.join(__dirname, './cert/server.crt');  // Path to your .crt file
