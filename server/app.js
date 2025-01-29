@@ -51,10 +51,10 @@ const credentials = { key: privateKey, cert: certificate };
 // 2. MIDDLEWARES  =======================================================================================//
 // =======================================================================================================//
 // Middleware to set headers globally
-app.use((req, res, next) => {
-    res.setHeader("Content-Type", "application/json");
-    next();
-});
+// app.use((req, res, next) => {
+//     res.setHeader("Content-Type", "application/json");
+//     next();
+// });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Enable: CORS (CROSS ORIGIN RESOURCE SHARING) for all routes
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -74,8 +74,8 @@ const corsOptions = {
             callback(new Error('Not allowed by CORS'));  // Block the request if origin isn't allowed
         };
     },
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods    
-    credentials: true, // CORS configuration for accepting credentials (cookies, Authorization headers, etc.)
+    // methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods    
+    // credentials: true, // CORS configuration for accepting credentials (cookies, Authorization headers, etc.)
     // allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers for requests
     // allowedHeaders: ["Content-Type", "x-api-key"], // Specify which headers are allowed
 
