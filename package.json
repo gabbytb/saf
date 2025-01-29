@@ -7,7 +7,6 @@
     "saf": "bin/AuthMiddlewareCookiesToken.js"
   },
   "scripts": {
-    "server": "node --prefix server",
     "start": "node server/app.js",
     "dev": "concurrently \"npm run start\" \"npm run client\"",
     "client": "npm start --prefix client",

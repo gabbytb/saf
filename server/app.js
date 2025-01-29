@@ -1,6 +1,6 @@
 const https = require('https');
 const fs = require('fs');
-// const serverless = require('serverless-http');
+const serverless = require('serverless-http');
 const path = require("path");
 const cors = require("cors");
 const express = require("express");
@@ -24,10 +24,21 @@ const ip = process.env.BASE_URI || "0.0.0.0",
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const app = express();
 
+// DEFAULT LOCAL:- Load certificate and key
+// const certificate = fs.readFileSync('./cert/localhost.pem', 'utf8');
+// const privateKey = fs.readFileSync('./cert/localhost-key.pem', 'utf8');
+// const credentials = { 
+//    key: privateKey, 
+//    cert: certificate 
+// };
+
 // LOCAL:- Load certificate and key
-const certificate = fs.readFileSync('./server/cert/localhost.pem', 'utf8');
-const privateKey = fs.readFileSync('./server/cert/localhost-key.pem', 'utf8');
-const credentials = { key: privateKey, cert: certificate };
+const certificate = fs.readFileSync("server/cert/localhost.pem", "utf8");
+const privateKey = fs.readFileSync("server/cert/localhost-key.pem", "utf8");
+const credentials = { 
+    key: privateKey,
+    cert: certificate
+};
 
 
 // OpenSSL:- Load certificate and key
@@ -168,7 +179,7 @@ require("./routes/donation.route")(app);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // 6. Export Express app as a Netlify function
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// module.exports.handler = serverless(app); // Make the express app serverless
+module.exports.handler = serverless(app); // Make the express app serverless
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

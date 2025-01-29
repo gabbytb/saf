@@ -11,9 +11,14 @@
   force = false
 
 
+[dev]
+  targetPort = 8000  # Set your Express backend port
+  port = 8888
+  command = "node server/app.js"  # How you start your Express backend
+  autoLaunch = false  # Prevent browser from auto-opening
+  publish = "client/build"  # Publish the React build folder
+
+
 [functions]  
   directory = "netlify/functions"  # Express backend functions
 
-
-[dev]
-  command = "node server/app.js"  # Run Express backend during dev
