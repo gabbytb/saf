@@ -24,7 +24,7 @@ const DB_Server_Connection = async (https, credentials, app, ip, port) => {
     const defaultauthdb = process.env.MONGO_DB_CLOUD_DATABASE || "serverAuthDatabase";
     
     //   SELECT CLOUD
-    const mongoURI = authSource + username + authbinder + pswd + host + defaultauthdb || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
+    const mongoURI = authSource + username + authbinder + pswd + host + defaultauthdb+"?retryWrites=true&w=majority" || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

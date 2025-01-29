@@ -3,7 +3,7 @@ const { mailServiceProvider, mailServiceUser, mailServicePwd, BASE_URL, } = proc
 console.log("************************************************",
             "\n*********        E-MAIL CONFIG        **********",
             "\n************************************************",
-            `\n\nSERVICE PROVIDER: ${mailServiceProvider.toUpperCase()}`,
+            `\n\nSERVICE PROVIDER: ${mailServiceProvider}`,
             `\nADMIN E-MAIL: ${mailServiceUser}\n`);
 
 
