@@ -1,6 +1,6 @@
 const https = require('https');
 const fs = require('fs');
-// const serverless = require('serverless-http');
+const serverless = require('serverless-http');
 const path = require("path");
 const cors = require("cors");
 const express = require("express");
@@ -52,15 +52,7 @@ const credentials = { key: privateKey, cert: certificate };
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Enable: CORS (CROSS ORIGIN RESOURCE SHARING) for all routes
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// SET THE URL OF DOMAINS THAT ARE GOING TO MAKE REQUEST FROM FRONTEND HERE (i.e Web Browser url = https://samuelakinolafoundation.com)
-// DEVELOPMENT
-app.use(cors({
-    origin: '*', // Allow all origins
-    credentials: true,
-}));
-
-
-// PRODUCTION: Your list of allowed origins (domains)
+// DEVELOPMENT: Your list of allowed origins (domains) (i.e https://samuelakinolafoundation.netlify.app).
 // const allowedOrigins = [
 //     "https://samuelakinolafoundation.netlify.app", // Allow production frontend on Netlify / Allow the frontend domain
 //     "https://localhost:3000",  // Allow local React app
@@ -76,13 +68,12 @@ app.use(cors({
 //             callback(new Error('Not allowed by CORS'));  // Block the request if origin isn't allowed
 //         };
 //     },
-//     credentials: true,
-    
 //     // methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods    
-//     // credentials: false, // CORS configuration for accepting credentials (cookies, Authorization headers, etc.)
+//     // credentials: true, // CORS configuration for accepting credentials (cookies, Authorization headers, etc.)
 //     // allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers for requests
 //     // allowedHeaders: ["Content-Type", "x-api-key"], // Specify which headers are allowed
-    
+//
+//    
 //     // Setting the withCredentials option to true
 //     // axios.get('https://your-api-url.com/endpoint', {
 //     //     withCredentials: true  // Tells Axios to send cookies along with the request
@@ -90,6 +81,13 @@ app.use(cors({
 // };
 // // Apply CORS settings to the Express app:- Now your Express server will allow requests from these three locations and respond without CORS issues.
 // app.use(cors(corsOptions));
+
+// PRODUCTION: Allow all origins
+app.use(cors({
+    origin: '*', // Allow all origins
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
+    credentials: true,
+}));
 
 // Handle preflight CORS request
 // app.options('*', cors(corsOptions));
@@ -162,12 +160,9 @@ require("./routes/donation.route")(app);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // 6. Export Express app as a Netlify function
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// module.exports.handler = serverless(app); // Make the express app serverless
+module.exports.handler = serverless(app); // Make the express app serverless
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
 
 
 

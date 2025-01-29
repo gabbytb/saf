@@ -74,14 +74,25 @@ const DB_Server_Connection = async (https, credentials, app, ip, port) => {
         const httpsServer = https.createServer(credentials, app);
         const server = httpsServer.listen(port, () => {
             let port = server.address().port;
-            let family = server.address().family;           
-            console.log("************************************************",
+            let family = server.address().family;      
+            
+            if (ip === "https://samuelakinolafoundation.netlify.app" || ip === "https://samuelakinolafoundation.com") {
+                console.log("************************************************",
+                    "\n*********      BACKEND CONNECTION      *********",
+                    `\n************************************************`,              
+                    `\n\nSERVER IS RUNNING ON: ${ip}`,
+                    `\nINTERNET PROTOCOL: ${family}\n`,
+                    "\n************************************************",
+                    "\n************************************************\n\n");
+            } else {
+                console.log("************************************************",
                         "\n*********      BACKEND CONNECTION      *********",
                         `\n************************************************`,              
                         `\n\nSERVER IS RUNNING ON: ${ip}:${port}`,
                         `\nINTERNET PROTOCOL: ${family}\n`,
                         "\n************************************************",
                         "\n************************************************\n\n"); 
+            };
         });           
     })
     .catch((error) =>  {
