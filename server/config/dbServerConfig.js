@@ -52,12 +52,10 @@ const DB_Server_Connection = async (https, credentials, app, ip, port) => {
         // ssl: true,
         // tls: true
     };
-    
-    let _DB;
+        
     await mongoose.set("strictQuery", false);
     await mongoose.connect(mongoURI, options)
-    .then((client) => { 
-        _DB = client; 
+    .then(() => {
         let placard = "*******/";
         // _DB = client; // you can also use this "client.db();"
         console.log("************************************************",

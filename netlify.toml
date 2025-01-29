@@ -16,6 +16,4 @@
 
 
 [dev]
-  command = "nodemon server/app.js"  # Run Express backend during dev
-  port = 8888  # Netlify serves frontend here
-  publish = "client/build"  # Serve React frontend
+  command = "node server/app.js"  # Run Express backend during dev
