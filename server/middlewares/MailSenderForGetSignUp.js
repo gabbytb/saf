@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const { mailServiceProvider, mailServiceUser, mailServicePwd, BASE_URL, } = process.env;
+const { mailServiceProvider, mailServiceUser, mailServicePwd, BASE_URL, } = process.env || null;
 console.log("************************************************",
             "\n*********        E-MAIL CONFIG        **********",
             "\n************************************************",

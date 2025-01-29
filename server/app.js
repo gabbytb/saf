@@ -8,7 +8,7 @@ const express = require("express");
 const dotenv = require("dotenv");
 dotenv.config();    // or require("dotenv").config();
 // Environment variables
-const ip = process.env.BASE_URL || "0.0.0.0",
+const ip = process.env.BASE_URI || "0.0.0.0",      
       CSPort = 3000,
       port = process.env.PORT || CSPort;
 
@@ -74,12 +74,12 @@ app.use((req, res, next) => {
 //             callback(new Error('Not allowed by CORS'));  // Block the request if origin isn't allowed
 //         };
 //     },
-//     // methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods    
-//     // credentials: true, // CORS configuration for accepting credentials (cookies, Authorization headers, etc.)
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods    
+//     credentials: true, // CORS configuration for accepting credentials (cookies, Authorization headers, etc.)
 //     // allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers for requests
 //     // allowedHeaders: ["Content-Type", "x-api-key"], // Specify which headers are allowed
-//
-//    
+
+   
 //     // Setting the withCredentials option to true
 //     // axios.get('https://your-api-url.com/endpoint', {
 //     //     withCredentials: true  // Tells Axios to send cookies along with the request
