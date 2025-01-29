@@ -25,8 +25,8 @@ const ip = process.env.BASE_URI || "0.0.0.0",
 const app = express();
 
 // LOCAL:- Load certificate and key
-const certificate = fs.readFileSync('./cert/localhost.pem', 'utf8');
-const privateKey = fs.readFileSync('./cert/localhost-key.pem', 'utf8');
+const certificate = fs.readFileSync('./server/cert/localhost.pem', 'utf8');
+const privateKey = fs.readFileSync('./server/cert/localhost-key.pem', 'utf8');
 const credentials = { key: privateKey, cert: certificate };
 
 
