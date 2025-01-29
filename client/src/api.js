@@ -19,9 +19,9 @@ const api = axios.create({
                 // baseURL: "https://famous-rabbits-wash.loca.lt",   // HTTPS Domains:- This is your server’s base URL
                 timeout: 20000, // Optional: Maximum time to wait for a response                
                 // withCredentials: true, // If cookies or sessions are needed
-                // headers: {
-                //   'Content-Type': 'application/json',
-                // },
+                headers: {
+                  'Content-Type': 'application/json',
+                },
             });
 
             // Enable retries with axios
