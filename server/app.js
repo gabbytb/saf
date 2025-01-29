@@ -63,7 +63,7 @@ const credentials = { key: privateKey, cert: certificate };
 // PRODUCTION: Your list of allowed origins (domains)
 const allowedOrigins = [
     "https://samuelakinolafoundation.netlify.app", // Allow production frontend on Netlify / Allow the frontend domain
-    "https://localhost:8888",  // Allow local React app
+    "http://localhost:8888",  // Allow local React app
     "https://192.168.205.113:8888",  // Allow local network access if needed
 ];
 // Configure CORS options
