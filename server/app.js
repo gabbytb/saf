@@ -60,7 +60,7 @@ app.use(cors({
 }));
 
 
-// // PRODUCTION: Your list of allowed origins (domains)
+// PRODUCTION: Your list of allowed origins (domains)
 // const allowedOrigins = [
 //     "https://samuelakinolafoundation.netlify.app", // Allow production frontend on Netlify / Allow the frontend domain
 //     "https://localhost:3000",  // Allow local React app
@@ -76,8 +76,10 @@ app.use(cors({
 //             callback(new Error('Not allowed by CORS'));  // Block the request if origin isn't allowed
 //         };
 //     },
-//     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods    
-//     credentials: false, // CORS configuration for accepting credentials (cookies, Authorization headers, etc.)
+//     credentials: true,
+    
+//     // methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods    
+//     // credentials: false, // CORS configuration for accepting credentials (cookies, Authorization headers, etc.)
 //     // allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers for requests
 //     // allowedHeaders: ["Content-Type", "x-api-key"], // Specify which headers are allowed
     
@@ -86,7 +88,7 @@ app.use(cors({
 //     //     withCredentials: true  // Tells Axios to send cookies along with the request
 //     // })  
 // };
-// Apply CORS settings to the Express app:- Now your Express server will allow requests from these three locations and respond without CORS issues.
+// // Apply CORS settings to the Express app:- Now your Express server will allow requests from these three locations and respond without CORS issues.
 // app.use(cors(corsOptions));
 
 // Handle preflight CORS request
