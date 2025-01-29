@@ -59,41 +59,41 @@ app.use((req, res, next) => {
 // Enable: CORS (CROSS ORIGIN RESOURCE SHARING) for all routes
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // DEVELOPMENT: Your list of allowed origins (domains) (i.e https://samuelakinolafoundation.netlify.app).
-// const allowedOrigins = [
-//     "https://samuelakinolafoundation.netlify.app", // Allow production frontend on Netlify / Allow the frontend domain
-//     "https://localhost:3000",  // Allow local React app
-//     "https://192.168.205.113:3000",  // Allow local network access if needed
-// ];
-// // Configure CORS options
-// const corsOptions = {
-//     origin: (origin, callback) => {
-//         // If the origin is in allowedOrigins or it's empty (e.g. Postman, or curl), allow the request
-//         if (allowedOrigins.includes(origin) || !origin) {  // origin can be null for Postman or CURL requests
-//             callback(null, true);  // Allow the request
-//         } else {
-//             callback(new Error('Not allowed by CORS'));  // Block the request if origin isn't allowed
-//         };
-//     },
-//     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods    
-//     credentials: true, // CORS configuration for accepting credentials (cookies, Authorization headers, etc.)
-//     // allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers for requests
-//     // allowedHeaders: ["Content-Type", "x-api-key"], // Specify which headers are allowed
+const allowedOrigins = [
+    "https://samuelakinolafoundation.netlify.app", // Allow production frontend on Netlify / Allow the frontend domain
+    "https://localhost:8888",  // Allow local React app
+    "https://192.168.205.113:8888",  // Allow local network access if needed
+];
+// Configure CORS options
+const corsOptions = {
+    origin: (origin, callback) => {
+        // If the origin is in allowedOrigins or it's empty (e.g. Postman, or curl), allow the request
+        if (allowedOrigins.includes(origin) || !origin) {  // origin can be null for Postman or CURL requests
+            callback(null, true);  // Allow the request
+        } else {
+            callback(new Error('Not allowed by CORS'));  // Block the request if origin isn't allowed
+        };
+    },
+    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods    
+    credentials: true, // CORS configuration for accepting credentials (cookies, Authorization headers, etc.)
+    // allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers for requests
+    // allowedHeaders: ["Content-Type", "x-api-key"], // Specify which headers are allowed
 
    
-//     // Setting the withCredentials option to true
-//     // axios.get('https://your-api-url.com/endpoint', {
-//     //     withCredentials: true  // Tells Axios to send cookies along with the request
-//     // })  
-// };
-// // Apply CORS settings to the Express app:- Now your Express server will allow requests from these three locations and respond without CORS issues.
-// app.use(cors(corsOptions));
+    // Setting the withCredentials option to true
+    // axios.get('https://your-api-url.com/endpoint', {
+    //     withCredentials: true  // Tells Axios to send cookies along with the request
+    // })  
+};
+// Apply CORS settings to the Express app:- Now your Express server will allow requests from these three locations and respond without CORS issues.
+app.use(cors(corsOptions));
 
 // PRODUCTION: Allow all origins
-app.use(cors({
-    origin: '*', // Allow all origins
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
-    credentials: false,
-}));
+// app.use(cors({
+//     origin: '*', // Allow all origins
+//     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
+//     credentials: false,
+// }));
 
 // Handle preflight CORS request
 // app.options('*', cors(corsOptions));
