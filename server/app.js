@@ -56,7 +56,7 @@ const credentials = { key: privateKey, cert: certificate };
 // DEVELOPMENT
 app.use(cors({
     origin: '*', // Allow all origins
-    credentials: true,
+    credentials: false,
 }));
 
 
