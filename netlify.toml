@@ -4,6 +4,13 @@
   publish = "client/build"  # Publish the React build output
 
 
+[dev]
+  command = "nodemon app.js"  # Start a custom server
+  targetPort = 8000
+  framework = "create-react-app"
+  autoLaunch = true
+
+
 [functions]
   directory = "netlify/functions"  # Path to Netlify serverless functions (if used)
 
