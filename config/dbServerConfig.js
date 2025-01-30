@@ -53,7 +53,7 @@ const DB_Server_Connection = async (https, credentials, app, ip, port) => {
         // ssl: true,
         // tls: true
     };
-        
+            
     await mongoose.set("strictQuery", false);
     await mongoose.connect(MONGO_URI, options)
     .then(() => {
