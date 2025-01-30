@@ -32,7 +32,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build-drop": "react-scripts build && cp _redirects build/_redirects",
-    "build": "react-scripts build && echo /* /index.html 200 > build/_redirects",
+    "build": "react-scripts build && echo /* /index.html 200 > public/_redirects",
     "style": "npx tailwindcss -i ./src/index.css -o ./public/css/style.css --watch",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
