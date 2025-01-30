@@ -1,6 +1,6 @@
 [build]
   base = "server"  # Set the build directory to the server folder
-  publish = "server/client/build"  # Publish the React build output
+  publish = "client/build"  # Publish the React build output
   command = "npm run client-build"  # Build the React frontend
 
 
