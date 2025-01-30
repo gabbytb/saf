@@ -105,7 +105,7 @@ app.use((req, res, next) => {
 app.use(cors({
     origin: '*', // Allow all origins
     methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods
-    credentials: false,
+    credentials: true,
 }));
 
 
