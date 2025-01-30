@@ -32,6 +32,7 @@ const app = express();
 //    cert: certificate 
 // };
 
+
 // LOCAL:- Load certificate and key
 const certificate = fs.readFileSync("server/cert/localhost.pem", "utf8");
 const privateKey = fs.readFileSync("server/cert/localhost-key.pem", "utf8");

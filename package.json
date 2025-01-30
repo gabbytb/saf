@@ -7,7 +7,7 @@
     "saf": "bin/AuthMiddlewareCookiesToken.js"
   },
   "scripts": {
-    "start": "node server/app.js",
+    "start": "nodemon server/app.js",
     "dev": "concurrently \"npm run start\" \"npm run client\"",
     "client": "npm start --prefix client",
     "client-build": "npm run build --prefix client",
@@ -25,5 +25,8 @@
   "dependencies": {
     "concurrently": "^9.1.2",
     "express": "^4.21.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.9"
   }
 }

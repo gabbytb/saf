@@ -9,19 +9,23 @@ const DB_Server_Connection = async (https, credentials, app, ip, port) => {
     // =======================================================================================================//
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     const db = require("../models");
-    const authSource = db.url;
-    const whichMongoose = db.mongoose;
-    console.log("WHICH MONGOOSE: ", whichMongoose);
-    //   CLOUD CONFIG:-  Environment variables
-    const username = process.env.MONGO_DB_USERNAME || "userName";
-    const authbinder = process.env.MONGO_DB_PLANNER || "serverAuthBinder";
-    const password = process.env.MONGO_DB_MAIN_PASSWORD || "authpwrd";
-    const pswd = process.env.MONGO_DB_PASSWORD || password;
-    const host = process.env.MONGO_DB_HOST || "serverHost";
-    const defaultauthdb = process.env.MONGO_DB_CLOUD_DATABASE || "serverAuthDatabase";    
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //  CLOUD CONFIG
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    const mongoURI = `${authSource}${username}${authbinder}${pswd}${host}${defaultauthdb}` || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
+    const authSource = db.url
+    const MONGO_URI = `${authSource}`;
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    //  [COCKY]  CLOUD CONFIG
+    ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    // const authSource = db.url;
+    // //  Environment variables
+    // const username = process.env.MONGO_DB_USERNAME || "userName";
+    // const authbinder = process.env.MONGO_DB_PLANNER || "serverAuthBinder";
+    // const password = process.env.MONGO_DB_MAIN_PASSWORD || "authpwrd";
+    // const pswd = process.env.MONGO_DB_PASSWORD || password;
+    // const host = process.env.MONGO_DB_HOST || "serverHost";
+    // const defaultauthdb = process.env.MONGO_DB_CLOUD_DATABASE || "serverAuthDatabase";       
+    // const MONGO_URI = `${authSource}${username}${authbinder}${pswd}${host}${defaultauthdb}` || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -51,7 +55,7 @@ const DB_Server_Connection = async (https, credentials, app, ip, port) => {
     };
         
     await mongoose.set("strictQuery", false);
-    await mongoose.connect(mongoURI, options)
+    await mongoose.connect(MONGO_URI, options)
     .then(() => {
         let placard = "*******/";
         // _DB = client; // you can also use this "client.db();"
