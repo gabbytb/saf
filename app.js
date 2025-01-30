@@ -69,13 +69,12 @@ app.use((req, res, next) => {
 // DEVELOPMENT: Your list of allowed origins (domains) (i.e https://samuelakinolafoundation.netlify.app).
 const allowedOrigins = [
     "https://samuelakinolafoundation.netlify.app", // Allow production frontend on Netlify / Allow the frontend domain
+    
     "https://localhost:3000",  // Allow local React app
     "https://192.168.238.113:3000",  // Allow local network access if needed
 
     "http://localhost:8888",  // Allow local React app
-    "http://192.168.238.113:8888",  // Allow local network access if needed
-    "https://localhost:8888",  // Allow local React app
-    "https://192.168.238.113:8888",  // Allow local network access if needed
+    "http://192.168.238.113:8888",  // Allow local network access if needed   
 ];
 // Configure CORS options
 const corsOptions = {
@@ -87,8 +86,8 @@ const corsOptions = {
             callback(new Error('Not allowed by CORS'));  // Block the request if origin isn't allowed
         };
     },
-    methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods    
-    credentials: true, // CORS configuration for accepting credentials (cookies, Authorization headers, etc.)
+    // methods: ['GET', 'POST', 'PUT', 'DELETE'], // Allow specific HTTP methods    
+    // credentials: true, // CORS configuration for accepting credentials (cookies, Authorization headers, etc.)
     // allowedHeaders: ['Content-Type', 'Authorization'], // Allowed headers for requests
     // allowedHeaders: ["Content-Type", "x-api-key"], // Specify which headers are allowed
 
@@ -101,6 +100,7 @@ const corsOptions = {
 // Apply CORS settings to the Express app:- Now your Express server will allow requests from these three locations and respond without CORS issues.
 app.use(cors(corsOptions));
 
+
 // PRODUCTION: Allow all origins
 // app.use(cors({
 //     origin: '*', // Allow all origins
@@ -108,12 +108,13 @@ app.use(cors(corsOptions));
 //     credentials: false,
 // }));
 
+
 // Handle preflight CORS request
 // app.options('*', cors(corsOptions));
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // express.json():-  Will add a body property to the request or req object. 
 // NOTE:- This includes the request body's parsed JSON data. 
- app.use(express.json({ limit: "50mb" , extended: true }));      // for parsing application/json
+app.use(express.json({ limit: "50mb" , extended: true }));      // for parsing application/json
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // NOTE:- req.body in your route handler function will allow you to access this data.
 app.use(express.urlencoded({ limit: "50mb", extended: true }));
@@ -127,11 +128,17 @@ const buildPath = path.join(__dirname, 'client/build')
 // const buildPath = path.join(__dirname, '..', 'client', 'build');
 app.use(express.static(buildPath));
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// Serve the index.html for all API routes
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// The app.get('*') route ensures that any request will serve the index.html file, allowing React’s client-side router to take over.
+app.get('*', (req, res) => {
+    res.sendFile(buildPath, 'index.html');
+});
+////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // =======================================================================================================//
 // END OF MIDDLEWARES ====================================================================================//
 // =======================================================================================================//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 
@@ -150,7 +157,6 @@ LaunchCloudDBConnection(https, credentials, app, ip, port);
 
 
 
-
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // 5. BACKEND API ROUTES
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -164,25 +170,11 @@ require("./routes/donation.route")(app);
 
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// Serve the index.html for all API routes
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// The app.get('*') route ensures that any request will serve the index.html file, 
-// allowing React’s client-side router to take over.
-app.get('*', (req, res) => {
-    res.sendFile(buildPath, 'index.html');
-});
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // 6. Export Express app as a Netlify function
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // module.exports.handler = serverless(app); // Make the express app serverless
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-
 
 
 
