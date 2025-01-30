@@ -10,20 +10,17 @@ const DB_Server_Connection = async (https, credentials, app, ip, port) => {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     const db = require("../models");
     const authSource = db.url;
-
-    // Environment variables
+    const whichMongoose = db.mongoose;
+    console.log("WHICH MONGOOSE: ", whichMongoose);
+    //   CLOUD CONFIG:-  Environment variables
     const username = process.env.MONGO_DB_USERNAME || "userName";
     const authbinder = process.env.MONGO_DB_PLANNER || "serverAuthBinder";
     const password = process.env.MONGO_DB_MAIN_PASSWORD || "authpwrd";
     const pswd = process.env.MONGO_DB_PASSWORD || password;
     const host = process.env.MONGO_DB_HOST || "serverHost";
-    
+    const defaultauthdb = process.env.MONGO_DB_CLOUD_DATABASE || "serverAuthDatabase";    
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    //   CLOUD CONFIG.   
-    const defaultauthdb = process.env.MONGO_DB_CLOUD_DATABASE || "serverAuthDatabase";
-    
-    //   SELECT CLOUD
     const mongoURI = `${authSource}${username}${authbinder}${pswd}${host}${defaultauthdb}` || `mongodb+srv://${username}:${password}@safdb.93th1.mongodb.net/?retryWrites=true&w=majority`;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////

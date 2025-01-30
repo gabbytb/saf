@@ -4,10 +4,7 @@ mongoose.Promise = global.Promise;
 
 const dataBase = require("../config/db.js");
 
-const db = {
-};
-
-
+const db = { };
 db.mongoose = mongoose;
 db.url = dataBase.url;
 
