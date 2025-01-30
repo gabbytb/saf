@@ -12,8 +12,8 @@ const DB_Server_Connection = async (https, credentials, app, ip, port) => {
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //  CLOUD CONFIG
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-    var authSource = db.url;
-    const MONGO_URI = `${authSource}`;
+    // var authSource = db.url;
+    // const MONGO_URI = `${authSource}`;
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
     //  [COCKY]  CLOUD CONFIG
     ////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -53,17 +53,20 @@ const DB_Server_Connection = async (https, credentials, app, ip, port) => {
         // ssl: true,
         // tls: true
     };
-            
+ 
+    let _DB;
     await mongoose.set("strictQuery", false);
-    await mongoose.connect(MONGO_URI, options)
-    .then(() => {
+    await mongoose.connect(db.url, options)
+    .then((client) => {
+
+        _DB = client;
         let placard = "*******/";
         // _DB = client; // you can also use this "client.db();"
         console.log("************************************************",
             "\n*********     DATABASE CONNECTION     **********",
             `\n************************************************`,    
             // `\n\nCONNECTED TO DATABASE: ${authSource}${placard}${defaultauthdb}\n`);
-            `\n\nCONNECTED TO DATABASE: ${MONGO_URI}\n`);
+            `\n\nCONNECTED TO DATABASE: ${db.url}\n`);
             
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////
         // 6. SERVER:-  Port
