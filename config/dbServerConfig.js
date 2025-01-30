@@ -79,7 +79,7 @@ const DB_Server_Connection = async (https, credentials, app, ip, port) => {
         // Start the server only after a successful DATABASE Connection
 
         // Start HTTPS server
-        const server = https.createServer(credentials, app).listen(port, "https://localhost", () => {
+        const server = https.createServer(credentials, app).listen(port, () => {
             let port = server.address().port;
             let family = server.address().family;      
             
@@ -100,7 +100,7 @@ const DB_Server_Connection = async (https, credentials, app, ip, port) => {
                         "\n************************************************",
                         "\n************************************************\n\n"); 
             };
-        });
+        });           
     })
     .catch((error) =>  {
         console.log("DATABASE ERROR: ", error.message,
