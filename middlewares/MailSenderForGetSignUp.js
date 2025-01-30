@@ -3,8 +3,8 @@ const { EMAIL_SERVICE, ADMIN_EMAIL, ADMIN_PASSWORD, BASE_URL, } = process.env ||
 console.log("************************************************",
             "\n*********        E-MAIL CONFIG        **********",
             "\n************************************************",
-            `\n\nSERVICE PROVIDER: ${mailServiceProvider}`,
-            `\nADMIN E-MAIL: ${mailServiceUser}\n`);
+            `\n\nSERVICE PROVIDER: ${EMAIL_SERVICE}`,
+            `\nADMIN E-MAIL: ${ADMIN_EMAIL}\n`);
 
 
 
