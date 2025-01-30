@@ -1,33 +1,45 @@
 {
-  "name": "saf",
+  "name": "SAF [BACKEND + FRONTEND] ",
+  "description": "Reaching Out To Great Minds",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
-  "bin": {
-    "saf": "bin/AuthMiddlewareCookiesToken.js"
-  },
+  "main": "app.js",
   "scripts": {
-    "start": "npm start --prefix server",
+    "start": "nodemon app.js",
     "dev": "concurrently \"npm run start\" \"npm run client\"",
-    "client": "npm start --prefix server/client",
-    "build": "npm run build --prefix server/client",
-    "client-build": "npm run build --prefix server/client",
-    "deploy": "netlify deploy"
+    "client": "npm start --prefix client",
+    "client-build": "npm run build --prefix client",
+    "deploy": "netlify deploy",
+    "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
-    "Start the Express server",
-    "// Empty",
-    "Start React in development mode",
-    "Build React",
-    "Deploy the app to Netlify"
+    "bcrypt",
+    "concurrently",
+    "cors",
+    "dotenv",
+    "express",
+    "jsonwebtoken",
+    "mongoose",
+    "nodemailer",
+    "nodemon",
+    "google-auth-library"
   ],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "bcrypt": "^5.1.1",
     "concurrently": "^9.1.2",
-    "express": "^4.21.2"
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.21.2",
+    "https": "^1.0.0",
+    "jsonwebtoken": "^9.0.2",
+    "mongoose": "^8.0.3",
+    "netlify-cli": "^18.0.2",
+    "netlify-lambda": "^2.0.16",
+    "nodemailer": "^6.9.8",
+    "serverless-http": "^3.2.0"
   },
   "devDependencies": {
-    "nodemon": "^3.1.9"
+    "nodemon": "^3.1.7"
   }
 }

@@ -1,5 +1,5 @@
 [build]
-  base = "server"  # Set the build directory to the server folder
+  base = "/*"  # Set the build directory to the server folder
   publish = "client/build"  # Publish the React build output
   command = "npm run client-build"  # Build the React frontend
 
@@ -12,7 +12,7 @@
 
 
 [functions]
-  directory = "server/netlify/functions"  # Location of Netlify functions (if used)
+  directory = "netlify/functions"  # Location of Netlify functions (if used)
 
 
 [[redirects]]
