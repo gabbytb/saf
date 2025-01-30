@@ -1,7 +1,7 @@
 [build]
   base = "."  # Build from the root directory
-  publish = "client/build"  # Publish the React build folder
-  command = "npm run build --prefix server/client"  # Build React app
+  publish = "server/client/build"  # Publish the React build folder
+  command = "npm run build"  # Build React app
 
 
 [dev]
