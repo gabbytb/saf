@@ -1,6 +1,6 @@
 [build]
-  base = "./server"  # Build from the root directory
-  publish = "./server/client/build"  # Publish the React build folder
+  base = "server"  # Build from the root directory
+  publish = "server/client/build"  # Publish the React build folder
   command = "npm run client-build --prefix server"  # Build React app
 
 
