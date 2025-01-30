@@ -7,8 +7,7 @@
 [dev]
   framework = "#custom"  # Prevents Netlify from auto-detecting
   command = "npm run dev"  # Start backend & frontend together
-  targetPort = 8000  # Express backend runs on 8000
-  port = 8888
+  targetPort = 8888  # Express backend runs on 8000
   autoLaunch = false  # Prevents browser auto-launch
 
 
