@@ -25,12 +25,12 @@ const ip = process.env.BASE_URI || "0.0.0.0",
 const app = express();
 
 // DEFAULT LOCAL:-  Load SSL certificates
-// const certificate = fs.readFileSync("cert/localhost.pem", "utf8");
-// const privateKey = fs.readFileSync("cert/localhost-key.pem", "utf8");
+const certificate = fs.readFileSync("cert/localhost.pem", "utf8");
+const privateKey = fs.readFileSync("cert/localhost-key.pem", "utf8");
 
 // MKCERT:-  Load SSL certificates
-const certificate = fs.readFileSync("ssl/localhost+2.pem");
-const privateKey = fs.readFileSync("ssl/localhost+2-key.pem");
+// const certificate = fs.readFileSync("ssl/localhost+2.pem");
+// const privateKey = fs.readFileSync("ssl/localhost+2-key.pem");
 
 const credentials = { 
     key: privateKey,
