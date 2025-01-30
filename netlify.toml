@@ -4,13 +4,6 @@
   publish = "client/build"  # Publish the React build output
 
 
-[dev]
-  command = "npm run dev"  # Command to start your backend
-  targetPort = 8000  # The port your backend runs on
-  framework = "create-react-app"  # If using React
-  autoLaunch = true  # Open browser on start
-
-
 [functions]
   directory = "netlify/functions"  # Path to Netlify serverless functions (if used)
 
