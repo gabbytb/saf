@@ -12,7 +12,7 @@
 
 
 [functions]
-  directory = "netlify/functions"  # Location of Netlify functions (if used)
+  directory = "server/netlify/functions"  # Location of Netlify functions (if used)
 
 
 [[redirects]]
