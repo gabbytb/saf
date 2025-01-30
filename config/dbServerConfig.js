@@ -62,7 +62,8 @@ const DB_Server_Connection = async (https, credentials, app, ip, port) => {
         console.log("************************************************",
             "\n*********     DATABASE CONNECTION     **********",
             `\n************************************************`,    
-            `\n\nCONNECTED TO DATABASE: ${authSource}${placard}${defaultauthdb}\n`);
+            // `\n\nCONNECTED TO DATABASE: ${authSource}${placard}${defaultauthdb}\n`);
+            `\n\nCONNECTED TO DATABASE: ${MONGO_URI}\n`);
             
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////
         // 6. SERVER:-  Port

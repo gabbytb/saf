@@ -1,5 +1,5 @@
 const nodemailer = require("nodemailer");
-const { mailServiceProvider, mailServiceUser, mailServicePwd, BASE_URL, } = process.env || null;
+const { EMAIL_SERVICE, ADMIN_EMAIL, ADMIN_PASSWORD, BASE_URL, } = process.env || null;
 console.log("************************************************",
             "\n*********        E-MAIL CONFIG        **********",
             "\n************************************************",
@@ -19,10 +19,10 @@ const mailSenderForGetSignUp = (token, user) => {
     // ***************************************************************//
     var transporter = nodemailer.createTransport({
         host: "smtp.gmail.com", // hostname
-        service: mailServiceProvider,
+        service: EMAIL_SERVICE,
         auth: {
-            user: mailServiceUser,
-            pass: mailServicePwd,
+            user: ADMIN_EMAIL,
+            pass: ADMIN_PASSWORD,
         },
     });
     const serverIP = `${BASE_URL}`;
