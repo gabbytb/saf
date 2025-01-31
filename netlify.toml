@@ -5,10 +5,10 @@
 
 
 [dev]
-  framework = "#custom"
-  command = "npm run server"  # Start my server  
+  framework = "create-react-app"
+  command = "node app.js"  # Start my server  
   targetPort = 8000
-  autoLaunch = true
+  autoLaunch = false
 
 
 [functions]
