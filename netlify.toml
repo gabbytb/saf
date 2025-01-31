@@ -5,7 +5,7 @@
 
 
 [dev]
-  command = "nodemon app.js"  # Start a custom server
+  command = "npm run server"  # Start my server
   targetPort = 8000
   port = 8888
   framework = "create-react-app"
