@@ -7,9 +7,9 @@
 [dev]
   framework = "create-react-app"
   command = "npm run dev"  # Start both Express backend & React frontend
-  targetPort = 8888  # Set to the Express server port
+  targetPort = 8000  # Set to the Express server port
   autoLaunch = false
-  port = 8888  # Netlify local dev server port
+  port = 8000  # Netlify local dev server port
 
 [functions]
   directory = "netlify/functions"  # Path to Netlify serverless functions (if used)
