@@ -34,8 +34,8 @@ const app = express();
 
 // MKCERT:-  Load SSL certificates 
 // SSL options for the Express HTTPS server (i.e sslOptions)
-const sslKey = fs.readFileSync("ssl/localhost+2-key.pem");
-const sslCert = fs.readFileSync("ssl/localhost+2.pem");
+const sslKey = fs.readFileSync("localhost+2-key.pem", "utf-8");
+const sslCert = fs.readFileSync("localhost+2.pem", "utf-8");
 const credentials = {
     key: sslKey,
     cert: sslCert,
