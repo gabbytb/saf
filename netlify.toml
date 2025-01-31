@@ -8,9 +8,9 @@
 [dev]
   framework = "create-react-app"
   command = "npm run dev"  # Start Express backend
-  targetPort = 3000  # React frontend runs on this port
+  targetPort = 8000  # React frontend runs on this port
   autoLaunch = false  # Prevents automatic browser opening
-  port = 8000  # Netlify local dev server port
+  port = 8888  # Netlify local dev server port
 
 
 [functions]
@@ -22,4 +22,3 @@
   to = "/index.html"
   status = 200
   force = true
-
