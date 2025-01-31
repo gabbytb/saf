@@ -9,6 +9,7 @@
   command = "node app.js"  # Start my server  
   targetPort = 8000
   autoLaunch = false
+  port = 8888
 
 
 [functions]
@@ -16,6 +17,8 @@
 
 
 [[redirects]]
-  from = "*"
+  from = "/*"
   to = "/index.html"
   status = 200
+  force = true
+
