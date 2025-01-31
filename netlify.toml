@@ -5,9 +5,8 @@
 
 
 [dev]
-  command = "npm run server"  # Start my server
-  targetPort = 8000
-  framework = "create-react-app"
+  framework = "#custom"
+  command = "npm run server"  # Start my server  
   autoLaunch = true
 
 
