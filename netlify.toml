@@ -9,7 +9,7 @@
   command = "npm run dev"  # Start both Express backend & React frontend
   targetPort = 3000  # Set to the Express server port
   autoLaunch = true
-  port = 8888  # Netlify local dev server port
+  port = 8000  # Netlify local dev server port
 
 [functions]
   directory = "netlify/functions"  # Path to Netlify serverless functions (if used)
