@@ -1,4 +1,4 @@
-const DB_Server_Connection = async (https, credentials, app, ip, port) => {
+const DB_Server_Connection = async (https, sslOptions, app, ip, port) => {
             
     const mongoose = require("mongoose");
        
@@ -79,7 +79,7 @@ const DB_Server_Connection = async (https, credentials, app, ip, port) => {
         // Start the server only after a successful DATABASE Connection
 
         // Start HTTPS server
-        const server = https.createServer(credentials, app).listen(port, () => {
+        const server = https.createServer(sslOptions, app).listen(port, () => {
             let port = server.address().port;
             let family = server.address().family;      
             
@@ -95,7 +95,7 @@ const DB_Server_Connection = async (https, credentials, app, ip, port) => {
                 console.log("************************************************",
                         "\n*********      BACKEND CONNECTION      *********",
                         `\n************************************************`,              
-                        `\n\nSERVER IS RUNNING ON: ${ip}:${port}`,
+                        `\n\nSERVER IS RUNNING ON: ${ip}:${port}`,    
                         `\nINTERNET PROTOCOL: ${family}\n`,
                         "\n************************************************",
                         "\n************************************************\n\n"); 

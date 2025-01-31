@@ -26,7 +26,7 @@ const app = express();
 
 // DEFAULT LOCAL:-  Load SSL certificates
 // SSL options for the Express HTTPS server
-// const credentials = { 
+// const sslOptions = { 
 //     key: fs.readFileSync("cert/localhost-key.pem", "utf8"),
 //     cert: fs.readFileSync("cert/localhost.pem", "utf8"),
 // };
@@ -36,7 +36,7 @@ const app = express();
 // SSL options for the Express HTTPS server (i.e sslOptions)
 const sslKey = fs.readFileSync("localhost+2-key.pem", "utf-8");
 const sslCert = fs.readFileSync("localhost+2.pem", "utf-8");
-const credentials = {
+const sslOptions = {
     key: sslKey,
     cert: sslCert,
 };
@@ -136,7 +136,7 @@ app.get('*', (req, res) => {
 // =======================================================================================================//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 const LaunchCloudDBConnection = require("./config/dbServerConfig");
-LaunchCloudDBConnection(https, credentials, app, ip, port);
+LaunchCloudDBConnection(https, sslOptions, app, ip, port);
 
 // const LaunchLocalDBConnection = require("./config/dbLocalConfig");
 // LaunchLocalDBConnection(app, ip, port);
