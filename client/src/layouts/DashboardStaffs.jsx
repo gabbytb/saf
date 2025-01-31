@@ -141,6 +141,7 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
     // ****************************************************************************
     const [query, setQuery] = useState('');
     const search_parameters = Object.keys(Object.assign({}, ...data));
+    
     useEffect(() => {
 
         // Assuming the token is passed as a query parameter
@@ -181,6 +182,20 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
             allStaffsLink?.classList.remove("activeStaffView");     
         };
     }, [activeDisplay]);
+
+
+    useEffect(() => {                                 
+        if (activeDisplay === "allStaffs") {
+
+            setIsLoading(true);           
+
+            var timer = setTimeout(fetchAllStaffs, 300);   // Delay execution of findAllStaffs by 1800ms
+            return () => {
+                clearTimeout(timer);                  // Clean up timer if component unmounts or token changes
+            };
+        };
+    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
+
 
     const fetchAllStaffs = async () =>  {
         // const limit = 10;
@@ -253,17 +268,6 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
         });
     };
     
-    useEffect(() => {                                 
-        if (activeDisplay === "allStaffs") {
-
-            setIsLoading(true);           
-
-            var timer = setTimeout(fetchAllStaffs, 300);   // Delay execution of findAllStaffs by 1800ms
-            return () => {
-                clearTimeout(timer);                  // Clean up timer if component unmounts or token changes
-            };
-        };
-    }, [activeDisplay, currentPage]); // Fetch data when currentPage changes
 
     const handlePageChange = (page) => {
         setCurrentPage(page);
@@ -276,6 +280,13 @@ const DashboardStaffs = ({ color, isLoggedIn }) => {
 
 
 
+
+
+
+
+
+
+    
     if (isLoading) {
         return (
             <>
