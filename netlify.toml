@@ -8,7 +8,7 @@
   command = "node app.js"  # Start my server
   targetPort = 8000  
   framework = "create-react-app"
-  autoLaunch = false
+  autoLaunch = true
 
 
 [functions]
