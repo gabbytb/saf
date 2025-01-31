@@ -4,12 +4,13 @@
   publish = "client/build"  # Publish the React build output
 
 
+# Netlify Development Server Settings
 [dev]
   framework = "create-react-app"
-  command = "node app.js"  # Start my server  
-  targetPort = 8000
-  autoLaunch = false
-  port = 8888
+  command = "npm run server"  # Start Express backend
+  targetPort = 3000  # React frontend runs on this port
+  autoLaunch = false  # Prevents automatic browser opening
+  port = 8888  # Netlify local dev server port
 
 
 [functions]
