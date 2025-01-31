@@ -25,18 +25,14 @@ const ip = process.env.BASE_URI || "0.0.0.0",
 const app = express();
 
 
-// DEFAULT LOCAL:-  Load SSL certificates
 // SSL options for the Express HTTPS server
-// const sslOptions = { 
-//     key: fs.readFileSync("cert/localhost-key.pem", "utf8"),
-//     cert: fs.readFileSync("cert/localhost.pem", "utf8"),
-// };
-
+// DEFAULT LOCAL:-  Load SSL certificates
+const sslKey = fs.readFileSync("cert/localhost-key.pem", "utf-8");
+const sslCert = fs.readFileSync("cert/localhost.pem", "utf-8");
 
 // MKCERT:-  Load SSL certificates 
-// SSL options for the Express HTTPS server (i.e sslOptions)
-const sslKey = fs.readFileSync("localhost+2-key.pem", "utf-8");
-const sslCert = fs.readFileSync("localhost+2.pem", "utf-8");
+// const sslKey = fs.readFileSync("localhost+2-key.pem", "utf-8");
+// const sslCert = fs.readFileSync("localhost+2.pem", "utf-8");
 const sslOptions = {
     key: sslKey,
     cert: sslCert,
