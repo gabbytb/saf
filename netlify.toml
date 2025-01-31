@@ -11,7 +11,8 @@
   targetPort = 3000  # React frontend runs on this port
   autoLaunch = false  # Prevents automatic browser opening
   port = 8000  # Netlify local dev server port
-
+  https = true
+  
 
 [functions]
   directory = "netlify/functions"  # Path to Netlify serverless functions (if used)
