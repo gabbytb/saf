@@ -1,24 +1,21 @@
 [build]
-  base = "/"  # Set the build directory to the server folder
+  base = "client/"  # Set the build directory to the client folder
   command = "npm run client-build"  # Build the React frontend
   publish = "client/build"  # Publish the React build output
-
 
 # Netlify Development Server Settings
 [dev]
   framework = "create-react-app"
-  command = "npm run dev"  # Start Express backend
-  targetPort = 8000  # React frontend runs on this port
-  autoLaunch = false  # Prevents automatic browser opening
+  command = "npm run dev"  # Start both Express backend & React frontend
+  targetPort = 8888  # Set to the Express server port
+  autoLaunch = false
   port = 8888  # Netlify local dev server port
-
 
 [functions]
   directory = "netlify/functions"  # Path to Netlify serverless functions (if used)
 
-
 [[redirects]]
-  from = "*"
+  from = "/*"
   to = "/index.html"
   status = 200
   force = true
