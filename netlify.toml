@@ -15,7 +15,7 @@
   directory = "netlify/functions"  # Path to Netlify serverless functions (if used)
 
 [[redirects]]
-  from = "/*"
+  from = "*"
   to = "/index.html"
   status = 200
   force = true
