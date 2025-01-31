@@ -1,42 +1,19 @@
 {
-  "name": "saf",
-  "description": "Reaching Out To Great Minds",
+  "name": "App",
   "version": "1.0.0",
-  "main": "app.js",
+  "description": "Run Frontend & Backend Concurrently",
+  "main": "index.js",
   "scripts": {
-    "server": "nodemon app.js",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "start": "concurrently \"npm run server\" \"npm run client\"",
+    "server": "npm start --prefix server",  
     "client": "npm start --prefix client",
     "client-build": "npm run build --prefix client",
-    "deploy": "netlify deploy",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "keywords": [
-    "bcrypt",
-    "concurrently",
-    "cors",
-    "dotenv",
-    "express",
-    "jsonwebtoken",
-    "mongoose",
-    "nodemailer",
-    "nodemon",
-    "google-auth-library"
-  ],
+  "keywords": [],
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "bcrypt": "^5.1.1",
-    "cors": "^2.8.5",
-    "dotenv": "^16.3.1",
-    "express": "^4.21.2",
-    "https": "^1.0.0",
-    "jsonwebtoken": "^9.0.2",
-    "mongoose": "^8.0.3",
-    "nodemailer": "^6.9.8"
-  },
   "devDependencies": {
-    "concurrently": "^9.1.2",
-    "nodemon": "^3.1.7"
+    "concurrently": "^9.1.2"
   }
 }
