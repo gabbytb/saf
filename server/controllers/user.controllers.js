@@ -41,6 +41,7 @@ const ip = process.env.IP || "0.0.0.0";
 // *****************************************************************
 // Middlewares
 // *****************************************************************
+
 const encryptPassword = require("../middlewares/EncryptPassword");
 const assignOneDayToken = require("../middlewares/AssignOneDayToken");   // For Sign In
 const assignTwoDaysToken = require("../middlewares/AssignTwoDaysToken");    // For Sign Up
@@ -95,11 +96,6 @@ const monitorUsersActivities = async (req, res) => {
         res.status(500).json(responseData);
     };
 };
-
-
-
-
-
 
 
 
@@ -1302,6 +1298,7 @@ const findAllUsers = async (req, res) => {
         return res.status(500).send(`Internal Server Error: ${error.message}`);
     };
 };
+
 // Get Length of All Approved Users
 const totalApprovedUsers = async (req, res) => {
 
@@ -1335,6 +1332,7 @@ const totalApprovedUsers = async (req, res) => {
         // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
     };
 };
+
 // Get Length of All Pending Users
 const totalPendingUsers = async (req, res) => {
 
@@ -1367,6 +1365,7 @@ const totalPendingUsers = async (req, res) => {
         // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
     };
 };
+
 // Get Length of All Rejected Users
 const totalRejectedUsers = async (req, res) => {
 
@@ -1468,6 +1467,7 @@ const findAllAdmins = async (req, res) => {
         return res.status(500).send(`Internal Server Error: ${error.message}`);
     };
 };
+
 // Get Length of All Approved Admins
 const totalApprovedAdmins = async (req, res) => {
 
@@ -1500,6 +1500,7 @@ const totalApprovedAdmins = async (req, res) => {
         // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
     };
 };
+
 // Get Length of All Pending Admins
 const totalPendingAdmins = async (req, res) => {
 
@@ -1532,6 +1533,7 @@ const totalPendingAdmins = async (req, res) => {
         // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
     };
 };
+
 // Get Length of All Rejected Admins
 const totalRejectedAdmins = async (req, res) => {
 
@@ -1917,6 +1919,10 @@ const deleteAllUsers = (req, res) => {
     }
 };
 
+
+
+
+
 module.exports = {    
     
     monitorUsersActivities,
@@ -1942,7 +1948,7 @@ module.exports = {
     findSingleUserById,
     updateSingleUserById,
     activateOrDeactivateSingleUserById,
-    
+
     deleteUserById,
     deleteAllUsers,
 
