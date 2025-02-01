@@ -105,11 +105,11 @@ app.get('*', (req, res) => {
 // 3. DATABASE CONNECTION  ===============================================================================//
 // =======================================================================================================//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-const LaunchCloudDBConnection = require("./config/dbServerConfig");
-LaunchCloudDBConnection(https, sslOptions, app, ip, port);
+// const LaunchCloudDBConnection = require("./config/dbServerConfig");
+// LaunchCloudDBConnection(https, sslOptions, app, ip, port);
 
-// const LaunchLocalDBConnection = require("./config/dbLocalConfig");
-// LaunchLocalDBConnection(app, ip, port);
+const LaunchLocalDBConnection = require("./config/dbLocalConfig");
+LaunchLocalDBConnection(https, sslOptions, app, ip, port);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

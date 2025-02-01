@@ -1,4 +1,4 @@
-const LaunchLocalDBConnection = async (app, ip, port) => {    
+const LaunchLocalDBConnection = async (https, sslOptions, app, ip, port) => {    
     
     const mongoose = require("mongoose");    
     
@@ -63,18 +63,30 @@ const LaunchLocalDBConnection = async (app, ip, port) => {
         // 6. SERVER:-  Port
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Start the server only after a successful DATABASE Connection
-        let server = app.listen(port, ip, () => {
-            let ip = "***********************";
+
+        // Start HTTPS server
+        const server = https.createServer(sslOptions, app).listen(port, () => {
             let port = server.address().port;
-            let family = server.address().family;           
-            console.log("************************************************",
+            let family = server.address().family;      
+            
+            if (ip === "https://samuelakinolafoundation.netlify.app" || ip === "https://samuelakinolafoundation.com") {
+                console.log("************************************************",
+                    "\n*********      BACKEND CONNECTION      *********",
+                    `\n************************************************`,              
+                    `\n\nSERVER IS RUNNING ON: ${ip}`,
+                    `\nINTERNET PROTOCOL: ${family}\n`,
+                    "\n************************************************",
+                    "\n************************************************\n\n");
+            } else {
+                console.log("************************************************",
                         "\n*********      BACKEND CONNECTION      *********",
                         `\n************************************************`,              
-                        `\n\nIP ADDRESS: https://${ip}:${port}`,
+                        `\n\nSERVER IS RUNNING ON: ${ip}:${port}`,    
                         `\nINTERNET PROTOCOL: ${family}\n`,
                         "\n************************************************",
-                        "\n************************************************\n\n");   
-        });  
+                        "\n************************************************\n\n"); 
+            };
+        });
     })
     .catch((error) =>  {
         console.log('DATABASE ERROR: ', error.message,
