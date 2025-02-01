@@ -603,7 +603,7 @@ export default function CardAccountDetails({ firstName, displayImg }) {
                                             Email address
                                         
                                             <input
-                                                type="email"
+                                                type="text"
                                                 className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150 hover:cursor-not-allowed"                                              
                                                 placeholder={user?.userName} 
                                                 name="userName"
