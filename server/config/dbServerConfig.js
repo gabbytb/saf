@@ -1,4 +1,4 @@
-const DB_Server_Connection = async (https, sslOptions, app, ip, port) => {
+const DB_Server_Connection = async (http, https, sslOptions, app, ip, HTTP_PORT, HTTPS_PORT) => {
             
     const mongoose = require("mongoose");
        
@@ -64,43 +64,47 @@ const DB_Server_Connection = async (https, sslOptions, app, ip, port) => {
     await mongoose.set("strictQuery", false);
     await mongoose.connect(MONGO_URI, options)
     .then(() => {
-       
-        let placard = "*******/";
+        let _DB = "***********/";
         // _DB = client; // you can also use this "client.db();"
         console.log("************************************************",
             "\n*********     DATABASE CONNECTION     **********",
             `\n************************************************`,    
-            `\n\nCONNECTED TO DATABASE: ${connProtocol}${placard}${defaultauthdb}\n`);
-            // `\n\nCONNECTED TO DATABASE: ${MONGO_URI}\n`);
-            
+            `\n\nCONNECTED TO DATABASE: ${connProtocol}${_DB}${defaultauthdb}\n`);
+        
         ///////////////////////////////////////////////////////////////////////////////////////////////////////////
         // 6. SERVER:-  Port
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Start the server only after a successful DATABASE Connection
 
+        // Redirect HTTP to HTTPS
+        http.createServer((req, res) => {
+            res.writeHead(301, { "Location": "https://" + req.headers.host + req.url });
+            res.end();
+        }).listen(HTTP_PORT, () => {
+            console.log("************************************************",
+                        "\n*********      BACKEND CONNECTION      *********",
+                        `\n************************************************`,
+                        `\n\nRedirecting all HTTP requests to HTTPS`);
+        });
+
         // Start HTTPS server
-        const server = https.createServer(sslOptions, app).listen(port, () => {
+        const server = https.createServer(sslOptions, app).listen(HTTPS_PORT, () => {
             let port = server.address().port;
             let family = server.address().family;      
             
             if (ip === "https://samuelakinolafoundation.netlify.app" || ip === "https://samuelakinolafoundation.com") {
-                console.log("************************************************",
-                    "\n*********      BACKEND CONNECTION      *********",
-                    `\n************************************************`,              
-                    `\n\nSERVER IS RUNNING ON: ${ip}`,
+                console.log(`SERVER IS RUNNING ON: ${ip}`,    
                     `\nINTERNET PROTOCOL: ${family}\n`,
                     "\n************************************************",
                     "\n************************************************\n\n");
             } else {
-                console.log("************************************************",
-                        "\n*********      BACKEND CONNECTION      *********",
-                        `\n************************************************`,              
-                        `\n\nSERVER IS RUNNING ON: ${ip}:${port}`,    
-                        `\nINTERNET PROTOCOL: ${family}\n`,
-                        "\n************************************************",
-                        "\n************************************************\n\n"); 
+                console.log(`SERVER IS RUNNING ON: ${ip}:${port}`,    
+                            `\nINTERNET PROTOCOL: ${family}\n`,
+                            "\n************************************************",
+                            "\n************************************************\n\n"); 
             };
-        });           
+        });
+        
     })
     .catch((error) =>  {
         console.log("DATABASE ERROR: ", error.message,

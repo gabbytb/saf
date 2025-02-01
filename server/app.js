@@ -124,11 +124,11 @@ configureDonationRoutes(app);
 // 4. DATABASE CONNECTION  ===============================================================================//
 // =======================================================================================================//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
-// const LaunchCloudDBConnection = require("./config/dbServerConfig");
-// LaunchCloudDBConnection(http, https, sslOptions, app, ip, HTTP_PORT, HTTPS_PORT);
+const LaunchCloudDBConnection = require("./config/dbServerConfig");
+LaunchCloudDBConnection(http, https, sslOptions, app, ip, HTTP_PORT, HTTPS_PORT);
 
-const LaunchLocalDBConnection = require("./config/dbLocalConfig");
-LaunchLocalDBConnection(http, https, sslOptions, app, ip, HTTP_PORT, HTTPS_PORT);
+// const LaunchLocalDBConnection = require("./config/dbLocalConfig");
+// LaunchLocalDBConnection(http, https, sslOptions, app, ip, HTTP_PORT, HTTPS_PORT);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
