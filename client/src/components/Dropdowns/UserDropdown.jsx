@@ -119,7 +119,7 @@ const UserDropdown = ({ userId, userName, displayImg, userRoles, logOut }) => {
                                     :
                                     <img className="w-full rounded-full align-middle border-none shadow-lg"                                        
                                         src={`${adminDashboardIcon}`}   
-                                        srcset={`${adminDashboardIcon} 1200w, 
+                                        srcSet={`${adminDashboardIcon} 1200w, 
                                                  ${adminDashboardIcon} 800w, 
                                                  ${adminDashboardIcon} 400w `}
                                         alt="display pic"

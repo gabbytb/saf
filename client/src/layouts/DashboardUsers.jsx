@@ -97,7 +97,7 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
     const userId = isLoggedIn?.id ? isLoggedIn?.id : logOut();
     // console.log("Logged-In User ID: ", userId);
     const userName = isLoggedIn?.user_name ? isLoggedIn?.user_name : logOut(); 
-    // console.log("Logged-In User Name: ", userName);
+    // console.log("Logged-In Username: ", userName);
     const firstName = isLoggedIn?.first_name ? isLoggedIn?.first_name : logOut();
     // console.log("Logged-In User First Name: ", firstName);
     const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();            
@@ -106,10 +106,10 @@ const DashboardUsers = ({ color, isLoggedIn }) => {
     // console.log("Logged-In User E-mail: ", userRoles);    
     const displayImg = isLoggedIn?.display_img ? isLoggedIn?.display_img : '';   // console.log("Logged-In User DP: ", displayImg);    
     // console.log("Logged-In User DP: ", displayImg);    
-    const expiresAt = isLoggedIn?.expires_at ? isLoggedIn?.expires_at : logOut();
-    console.log("Logged-In User Session Exp: ", expiresAt);
     // const userBio = isLoggedIn?.aboutMe ? isLoggedIn?.aboutMe : '';
     // console.log("Logged-In User BIO: ", userBio);    
+    const expiresAt = isLoggedIn?.expires_at ? isLoggedIn?.expires_at : logOut();
+    // console.log("Logged-In User Session Exp: ", expiresAt);
     // ***************************************************************************
     // ***************************************************************************
 

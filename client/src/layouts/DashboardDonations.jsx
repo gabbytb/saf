@@ -103,10 +103,10 @@ const DashboardDonations = ({ color, isLoggedIn }) => {
     // console.log("Logged-In User E-mail: ", userRoles);    
     const displayImg = isLoggedIn?.display_img ? isLoggedIn?.display_img : '';
     // console.log("Logged-In User DP: ", displayImg);    
-    const expiresAt = isLoggedIn?.expires_at ? isLoggedIn?.expires_at : logOut();
-    console.log("Logged-In User Session Exp: ", expiresAt);
     // const userBio = isLoggedIn?.aboutMe ? isLoggedIn?.aboutMe : '';
     // console.log("Logged-In User BIO: ", userBio);    
+    const expiresAt = isLoggedIn?.expires_at ? isLoggedIn?.expires_at : logOut();
+    // console.log("Logged-In User Session Exp: ", expiresAt);   
     // ***************************************************************************
     // ***************************************************************************
 
