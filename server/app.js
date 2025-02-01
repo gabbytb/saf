@@ -18,7 +18,8 @@ const configureDonationRoutes = require("./routes/donation.route");
 // Load Environment variables
 const ip = process.env.BASE_URI || "0.0.0.0",      
       CSPort = 9419,
-      port = process.env.PORT || CSPort;
+      HTTP_PORT = process.env.PORT_HTTP || CSPort,
+      HTTPS_PORT = process.env.PORT_HTTPS || CSPort;
     
 
 
@@ -124,10 +125,10 @@ configureDonationRoutes(app);
 // =======================================================================================================//
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // const LaunchCloudDBConnection = require("./config/dbServerConfig");
-// LaunchCloudDBConnection(https, sslOptions, app, ip, port);
+// LaunchCloudDBConnection(http, https, sslOptions, app, ip, HTTP_PORT, HTTPS_PORT);
 
 const LaunchLocalDBConnection = require("./config/dbLocalConfig");
-LaunchLocalDBConnection(http, https, sslOptions, app, ip, port);
+LaunchLocalDBConnection(http, https, sslOptions, app, ip, HTTP_PORT, HTTPS_PORT);
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 

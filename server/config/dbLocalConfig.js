@@ -1,4 +1,4 @@
-const LaunchLocalDBConnection = async (http, https, sslOptions, app, ip, port) => {    
+const LaunchLocalDBConnection = async (http, https, sslOptions, app, ip, HTTP_PORT, HTTPS_PORT) => {    
     
     const mongoose = require("mongoose");    
     
@@ -63,14 +63,16 @@ const LaunchLocalDBConnection = async (http, https, sslOptions, app, ip, port) =
         // 6. SERVER:-  Port
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Start the server only after a successful DATABASE Connection
-        const HTTPS_PORT = 443;
 
         // Redirect HTTP to HTTPS
         http.createServer((req, res) => {
             res.writeHead(301, { "Location": "https://" + req.headers.host + req.url });
             res.end();
-        }).listen(port, () => {
-            console.log(`Redirecting all HTTP requests to HTTPS`);
+        }).listen(HTTP_PORT, () => {
+            console.log("************************************************",
+                        "\n*********      BACKEND CONNECTION      *********",
+                        `\n************************************************`,
+                        `\n\nRedirecting all HTTP requests to HTTPS`);
         });
 
         // Start HTTPS server
@@ -79,21 +81,15 @@ const LaunchLocalDBConnection = async (http, https, sslOptions, app, ip, port) =
             let family = server.address().family;      
             
             if (ip === "https://samuelakinolafoundation.netlify.app" || ip === "https://samuelakinolafoundation.com") {
-                console.log("************************************************",
-                    "\n*********      BACKEND CONNECTION      *********",
-                    `\n************************************************`,              
-                    `\n\nSERVER IS RUNNING ON: ${ip}`,
+                console.log(`SERVER IS RUNNING ON: ${ip}`,    
                     `\nINTERNET PROTOCOL: ${family}\n`,
                     "\n************************************************",
                     "\n************************************************\n\n");
             } else {
-                console.log("************************************************",
-                        "\n*********      BACKEND CONNECTION      *********",
-                        `\n************************************************`,              
-                        `\n\nSERVER IS RUNNING ON: ${ip}:${port}`,    
-                        `\nINTERNET PROTOCOL: ${family}\n`,
-                        "\n************************************************",
-                        "\n************************************************\n\n"); 
+                console.log(`SERVER IS RUNNING ON: ${ip}:${port}`,    
+                            `\nINTERNET PROTOCOL: ${family}\n`,
+                            "\n************************************************",
+                            "\n************************************************\n\n"); 
             };
         });
         
