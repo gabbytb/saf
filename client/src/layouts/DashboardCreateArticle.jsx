@@ -73,20 +73,33 @@ const DashboardCreateArticle = ({ isLoggedIn }) => {
     // *************************************************************************** 
     const userId = isLoggedIn?.id ? isLoggedIn?.id : logOut();
     // console.log("Logged-In User ID: ", userId);
+    const userName = isLoggedIn?.user_name ? isLoggedIn?.user_name : logOut(); 
+    // console.log("Logged-In Username: ", userName);
     const firstName = isLoggedIn?.first_name ? isLoggedIn?.first_name : logOut();
     // console.log("Logged-In User First Name: ", firstName);
     const lastName = isLoggedIn?.last_name ? isLoggedIn?.last_name : logOut();            
     // console.log("Logged-In User Last Name: ", lastName);
-    const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut(); 
-    // console.log("Logged-In User E-mail: ", userEmail);
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
     // console.log("Logged-In User E-mail: ", userRoles);    
     const displayImg = isLoggedIn?.display_img ? isLoggedIn?.display_img : '';
     // console.log("Logged-In User DP: ", displayImg);    
     const userBio = isLoggedIn?.about_me ? isLoggedIn?.about_me : '';
     // console.log("Logged-In User BIO: ", userBio);    
+    const expiresAt = isLoggedIn?.expires_at ? isLoggedIn?.expires_at : logOut();
+    console.log("Logged-In User Session Exp: ", expiresAt);
     // ***************************************************************************
     // ***************************************************************************
+ 
+
+   
+    
+    useEffect(() => {
+        if (expiresAt <= 0) {
+            localStorage?.removeItem("user");
+            const redirToLogin = "/user/login";
+            navigate(redirToLogin);
+        };
+    }, [expiresAt]);
 
 
 
@@ -99,7 +112,7 @@ const DashboardCreateArticle = ({ isLoggedIn }) => {
         const pageTitle = "Create Article", 
               siteTitle = "Samuel Akinola Foundation";
         document.title = `${pageTitle} | ${siteTitle}`;
-        logEvent(`${firstName} ${lastName} [${userEmail}] visited ${pageTitle} page`);
+        logEvent(`${firstName} ${lastName} [${userName}] visited ${pageTitle} page`);
     }, []);
     // *************************** //
     // *** SET PAGE TITLE(SEO) *** //
@@ -212,7 +225,7 @@ const DashboardCreateArticle = ({ isLoggedIn }) => {
 
                             {/* User */}
                             <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
-                                <UserDropdown userId={userId} userEmail={userEmail} displayImg={displayImg} userRoles={userRoles} logOut={logOut} />
+                                <UserDropdown userId={userId} userName={userName} displayImg={displayImg} userRoles={userRoles} logOut={logOut} />
                             </ul>
                         </div>
                     </nav>
@@ -238,7 +251,7 @@ const DashboardCreateArticle = ({ isLoggedIn }) => {
                     <div className="px-4 md:px-10 mx-auto w-full -m-24">                    
                         <div className="flex flex-wrap">
                             <div className="w-full px-4">            
-                                <NewArticle firstName={firstName} lastName={lastName} userEmail={userEmail}
+                                <NewArticle firstName={firstName} lastName={lastName} userName={userName}
                                     displayImg={displayImg} userBio={userBio} userRoles={userRoles} logOut={logOut} />
                             </div>                            
                         </div>

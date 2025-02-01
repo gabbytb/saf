@@ -43,14 +43,16 @@ const Sidebar = ({ isLoggedIn }) => {
     // ***************************************************************************
     const userId = isLoggedIn?.id ? isLoggedIn?.id : logOut();
     // console.log("Logged-In User ID: ", userId);
-    const userEmail = isLoggedIn?.email ? isLoggedIn?.email : logOut(); 
-    // console.log("Logged-In User E-mail: ", userEmail);
+    const userName = isLoggedIn?.user_name ? isLoggedIn?.user_name : logOut(); 
+    // console.log("Logged-In Username: ", userName);
     const userRoles = isLoggedIn?.roles ? isLoggedIn?.roles : logOut();
-    // console.log("Logged-In User E-mail: ", userRoles);    
+    // console.log("Logged-In User Roles: ", userRoles);    
     const displayImg = isLoggedIn?.display_img ? isLoggedIn?.display_img : '';
     // console.log("Logged-In User DP: ", displayImg); 
     // const userBio = isLoggedIn?.aboutMe ? isLoggedIn?.aboutMe : '';
     // console.log("Logged-In User BIO: ", userBio);    
+    // const userSession = isLoggedIn?.aboutMe ? isLoggedIn?.aboutMe : '';
+    // console.log("Logged-In User Session: ", userSession);    
     // ***************************************************************************
     // ***************************************************************************
 
@@ -82,7 +84,7 @@ const Sidebar = ({ isLoggedIn }) => {
                             <NotificationDropdown />
                         </li>
                         <li className="inline-block relative m-0">
-                            <UserDropdown displayImg={displayImg} userId={userId} userEmail={userEmail} userRoles={userRoles} logOut={logOut} />
+                            <UserDropdown displayImg={displayImg} userId={userId} userName={userName} userRoles={userRoles} logOut={logOut} />
                         </li>
                     </ul>
                     {/* Logged-in User */}

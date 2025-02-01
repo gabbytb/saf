@@ -1075,16 +1075,16 @@ exports.logIn = async (req, res) => {
 
         let loggedInUser = {
             id: userInfoUpdatedAfterLogin._id,
+            user_name: userInfoUpdatedAfterLogin.email,             
             first_name: userInfoUpdatedAfterLogin.firstName,
-            last_name: userInfoUpdatedAfterLogin.lastName,                  
-            email: userInfoUpdatedAfterLogin.email,             
-            access_token: userInfoUpdatedAfterLogin.accessToken,            
-            expires_at: userInfoUpdatedAfterLogin.tokenExpires, 
+            last_name: userInfoUpdatedAfterLogin.lastName,                                                
             status: userInfoUpdatedAfterLogin.status,
             roles: [userInfoUpdatedAfterLogin.roles],
             approves_T_and_C: userInfoUpdatedAfterLogin.approvesTandC,     
             is_verified: userInfoUpdatedAfterLogin.isVerified,
             about_me: userInfoUpdatedAfterLogin.aboutMe,
+            access_token: userInfoUpdatedAfterLogin.accessToken,      
+            expires_at: verifiedToken.exp,
             // time_created: userInfoUpdatedAfterLogin.createdAt, 
             // time_updated: userInfoUpdatedAfterLogin.updatedAt, 
         };

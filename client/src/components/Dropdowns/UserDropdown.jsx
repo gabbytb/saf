@@ -17,7 +17,7 @@ import {
 // };
 
 
-const UserDropdown = ({ userId, userEmail, displayImg, userRoles, logOut }) => {
+const UserDropdown = ({ userId, userName, displayImg, userRoles, logOut }) => {
 
 
     // dropdown props
@@ -53,7 +53,7 @@ const UserDropdown = ({ userId, userEmail, displayImg, userRoles, logOut }) => {
                 <div className="flex flex-row space-x-6">
                     <div className="hidden md:flex md:flex-col">
                         <span className="font-bold text-2xl tracking-supertight text-white">
-                            {userEmail}
+                            {userName}
                         </span>
                         {
                              userRoles?.length !== 0
@@ -109,14 +109,15 @@ const UserDropdown = ({ userId, userEmail, displayImg, userRoles, logOut }) => {
                             { 
                                 displayImg ?
                                     <img className="w-full rounded-full align-middle border-none shadow-lg"
-                                        src={`${displayImg}`}
-                                        alt="gmail pic"
                                         loading="lazy"
-                                        srcSet={`${displayImg} 800w, 
-                                                 ${displayImg} 1200w`}
+                                        src={`${displayImg}`}                                        
+                                        srcSet={`${displayImg} 1200w, 
+                                                ${displayImg} 800w, 
+                                                ${displayImg} 400w `}
+                                        alt="gmail pic"
                                         sizes="(max-width: 600px) 100vw, (max-width: 1024px) 50vw, 800px" />
                                     :
-                                    <img className="w-full rounded-full align-middle border-none shadow-lg"
+                                    <img className="w-full rounded-full align-middle border-none shadow-lg"                                        
                                         src={`${adminDashboardIcon}`}   
                                         srcset={`${adminDashboardIcon} 1200w, 
                                                  ${adminDashboardIcon} 800w, 
