@@ -5,13 +5,14 @@ import { BrowserRouter as Router } from 'react-router-dom';
 import './index.css';
 // import "./assets/styles/tailwind.css";
 import "@fortawesome/fontawesome-free/css/all.min.css"; 
-
 import { googleClient } from './constants';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 
 
 
+if (process.env.NODE_ENV === "production") disableReactDevTools();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(

@@ -57,7 +57,7 @@ const setThisTimeToNigerianTime = require("../middlewares/SetThisTimeToNigerianT
 
 
 
-exports.monitorUsersActivities = async (req, res) => {
+const monitorUsersActivities = async (req, res) => {
     
     // Gets a unique number based on the current time
     var uniqueId = Date.now(),
@@ -105,7 +105,7 @@ exports.monitorUsersActivities = async (req, res) => {
 
 
 // Our CREATE ACCOUNT Logic starts here
-exports.signUp = async (req, res) => {
+const signUp = async (req, res) => {
 
     // Gets a unique number based on the current time
     const uniqueId = Date.now();
@@ -319,10 +319,8 @@ exports.signUp = async (req, res) => {
 
 
 
-
-
 // Our CREATE ACCOUNT Logic starts here
-exports.adminCreateUser = async (req, res) => {
+const adminCreateUser = async (req, res) => {
 
     // Gets a unique number based on the current time
     const uniqueId = Date.now();
@@ -516,9 +514,8 @@ exports.adminCreateUser = async (req, res) => {
     };
 };  // THOROUGHLY Tested === Working
 
-
 // Our ACCOUNT Re-ACTIVATION Logic starts here
-exports.reValidateSignUp = async (req, res) => {
+const reValidateSignUp = async (req, res) => {
 
     const { email } = req.body;
 
@@ -894,7 +891,7 @@ exports.reValidateSignUp = async (req, res) => {
 
 // Our ACCOUNT VERIFICATION Logic USING GET request starts here
 
-exports.verifySignUpWithGetReq = async (req, res) => {
+const verifySignUpWithGetReq = async (req, res) => {
             
     const verified_success = req.user.success;
     const verified_message = req.user.message;
@@ -917,7 +914,7 @@ exports.verifySignUpWithGetReq = async (req, res) => {
 };  // THOROUGHLY Tested === Working
 
 // Our USER LOGIN Logic starts here
-exports.logIn = async (req, res) => {
+const logIn = async (req, res) => {
 
     try {
 
@@ -1118,7 +1115,7 @@ exports.logIn = async (req, res) => {
 };  // THOROUGHLY Tested === Working
 
 // Our USER LOGIN via G-MAIL Logic starts here
-exports.googleSignOn = async (req, res) => {
+const googleSignOn = async (req, res) => {
 
     try {
         
@@ -1240,10 +1237,8 @@ exports.googleSignOn = async (req, res) => {
 
 
 
-
-
 // Our FIND All USERS Logic starts here
-exports.findAllUsers = async (req, res) => { 
+const findAllUsers = async (req, res) => { 
 
     // Get Pagination Parameters from the request query     
     const status = req.query.status || "";               
@@ -1308,7 +1303,7 @@ exports.findAllUsers = async (req, res) => {
     };
 };
 // Get Length of All Approved Users
-exports.totalApprovedUsers = async (req, res) => {
+const totalApprovedUsers = async (req, res) => {
 
     try {
 
@@ -1341,7 +1336,7 @@ exports.totalApprovedUsers = async (req, res) => {
     };
 };
 // Get Length of All Pending Users
-exports.totalPendingUsers = async (req, res) => {
+const totalPendingUsers = async (req, res) => {
 
     try {
 
@@ -1373,7 +1368,7 @@ exports.totalPendingUsers = async (req, res) => {
     };
 };
 // Get Length of All Rejected Users
-exports.totalRejectedUsers = async (req, res) => {
+const totalRejectedUsers = async (req, res) => {
 
     try {
 
@@ -1408,10 +1403,8 @@ exports.totalRejectedUsers = async (req, res) => {
 
 
 
-
-
 // Our FIND All ADMINS Logic starts here
-exports.findAllAdmins = async (req, res) => {
+const findAllAdmins = async (req, res) => {
             
     // Get Pagination Parameters from the request query     
     const status = req.query.status || "";               
@@ -1476,7 +1469,7 @@ exports.findAllAdmins = async (req, res) => {
     };
 };
 // Get Length of All Approved Admins
-exports.totalApprovedAdmins = async (req, res) => {
+const totalApprovedAdmins = async (req, res) => {
 
     try {
 
@@ -1508,7 +1501,7 @@ exports.totalApprovedAdmins = async (req, res) => {
     };
 };
 // Get Length of All Pending Admins
-exports.totalPendingAdmins = async (req, res) => {
+const totalPendingAdmins = async (req, res) => {
 
     try {
 
@@ -1540,7 +1533,7 @@ exports.totalPendingAdmins = async (req, res) => {
     };
 };
 // Get Length of All Rejected Admins
-exports.totalRejectedAdmins = async (req, res) => {
+const totalRejectedAdmins = async (req, res) => {
 
     try {
 
@@ -1575,10 +1568,8 @@ exports.totalRejectedAdmins = async (req, res) => {
 
 
 
-
-
 // Our FIND SINGLE USER by ID Logic starts here
-exports.findSingleUserById = async (req, res) => {
+const findSingleUserById = async (req, res) => {
     
     try {
         
@@ -1692,9 +1683,8 @@ exports.findSingleUserById = async (req, res) => {
     };
 };  // THOROUGHLY Tested === Working
 
-
 // Update User Information
-exports.updateSingleUserById = async (req, res) => {
+const updateSingleUserById = async (req, res) => {
 
     try {
 
@@ -1823,11 +1813,10 @@ exports.updateSingleUserById = async (req, res) => {
         return res.status(500).send(`Internal Server Error ${error}`);
         // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
     };
-};
-
+};  // THOROUGHLY TESTED === Working
 
 // Update User Information
-exports.activateOrDeactivateSingleUserById = async (req, res) => {
+const activateOrDeactivateSingleUserById = async (req, res) => {
     
     try {
         const _id = req.params.id;
@@ -1878,11 +1867,10 @@ exports.activateOrDeactivateSingleUserById = async (req, res) => {
         return res.status(500).send(`Internal Server Error ${error}`);
         // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
     };
-};   
-
+};  // THOROUGHLY TESTED === Working
 
 // Deleta a User with the Specified id in the request
-exports.deleteUserById = async (req, res) => {
+const deleteUserById = async (req, res) => {
     
     try {
 
@@ -1913,9 +1901,8 @@ exports.deleteUserById = async (req, res) => {
 
 };
 
-
 // Deleta all Users from the Database
-exports.deleteAllUsers = (req, res) => {
+const deleteAllUsers = (req, res) => {
     //  res.setHeader('Content-Type', 'application/json');
     try {
         const users = User.deleteMany({});
@@ -1930,7 +1917,36 @@ exports.deleteAllUsers = (req, res) => {
     }
 };
 
+module.exports = {    
+    
+    monitorUsersActivities,
 
+    signUp,
+    adminCreateUser,
+    reValidateSignUp,
+
+    verifySignUpWithGetReq,
+    logIn,
+    googleSignOn, 
+    
+    findAllUsers,
+    totalApprovedUsers,
+    totalPendingUsers,
+    totalRejectedUsers,
+
+    findAllAdmins,
+    totalApprovedAdmins,
+    totalPendingAdmins,
+    totalRejectedAdmins,
+    
+    findSingleUserById,
+    updateSingleUserById,
+    activateOrDeactivateSingleUserById,
+    
+    deleteUserById,
+    deleteAllUsers,
+
+};
 
 
 
