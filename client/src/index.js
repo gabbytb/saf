@@ -14,34 +14,26 @@ import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 
 if (process.env.NODE_ENV === "production") disableReactDevTools();
 
-
-
-
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
-    <GoogleOAuthProvider clientId={`${googleClient.map(item => item.key)}`}>
+    // Google OAuth client
+    <GoogleOAuthProvider clientId={`${googleClient.map(item => item.key)}`}>           
+        {/**    
+            React.StrictMode is a wrapper component provided by React, 
+            that helps you identify potential problems in your application.
+            It doesn’t affect the actual rendering of your app, 
+            but it does provide additional checks and warnings in development mode 
+            to help you catch issues early. 
+            For example, it can help find components with unsafe lifecycle methods.                                 
+        */}      
         <React.StrictMode>
             <Router>
                 <App />
-            </Router>    
-            {/**
-                // Google OAuth client
-                <GoogleOAuthProvider clientId={`${googleClient.map(item => item.key)}`}>
-
-                    React.StrictMode is a wrapper component provided by React, 
-                    that helps you identify potential problems in your application.
-                    It doesn’t affect the actual rendering of your app, 
-                    but it does provide additional checks and warnings in development mode 
-                    to help you catch issues early. 
-                    For example, it can help find components with unsafe lifecycle methods. 
-                
-                </GoogleOAuthProvider>
-                // Google OAuth client
-            */}      
+            </Router>
         </React.StrictMode>
     </GoogleOAuthProvider>
+    // Google OAuth client
 );
-
 
 // If you want to start measuring performance in your app, pass a function
 // to log results (for example: reportWebVitals(console.log))

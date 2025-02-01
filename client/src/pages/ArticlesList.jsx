@@ -11,35 +11,35 @@ import setNigerianTime from "../middlewares/setNigerianTime";
 
 
 
+const logEvent = (message, mode = 'TRACKER') => {
+    
+    // Send the log to a backend server
+    api.post('/api/logs', {
+        message,
+        mode: mode.toLowerCase(),
+        timestamp: setNigerianTime(),
+    });
+    
+
+    // api.post('/api/logs', {
+    //     message,
+    //     mode: mode.toLowerCase(),
+    //     timestamp: newDate,
+    // })
+    // .then((response) => {
+    //     const { servermessage } = response.data;                       
+    //     localStorage.setItem('sessionend', servermessage);
+    // }) 
+    // .catch((error) => {
+    //     console.log('Error encountered during logging of ADMIN DASHBOARD - Create Donation page', error.message);
+    // });
+
+};
+
 
 const ArticlesList = ({ isLoggedIn, }) => {
 
 
-    const logEvent = (message, mode = 'TRACKER') => {
-    
-        // Send the log to a backend server
-        api.post('/api/logs', {
-            message,
-            mode: mode.toLowerCase(),
-            timestamp: setNigerianTime(),
-        });
-        
-    
-        // api.post('/api/logs', {
-        //     message,
-        //     mode: mode.toLowerCase(),
-        //     timestamp: newDate,
-        // })
-        // .then((response) => {
-        //     const { servermessage } = response.data;                       
-        //     localStorage.setItem('sessionend', servermessage);
-        // }) 
-        // .catch((error) => {
-        //     console.log('Error encountered during logging of ADMIN DASHBOARD - Create Donation page', error.message);
-        // });
-    
-    };
-    
     
     // ********************************** //
     // *** CONVERT DATE STRING PARAMS *** // 
@@ -301,22 +301,22 @@ const ArticlesList = ({ isLoggedIn, }) => {
                                                                 <div className="rounded shadow-md h-full">
                                                                     {/* <Link to={`/blog/${formatUrl(post.url)}`}> */}
                                                                     <Link to={`/blog/${post?.uri}`}>
-                                                                        {
-                                                                            post?.images?.map((item) => {
+                                                                        {   
+                                                                            // eslint-disable-next-line
+                                                                            post?.images?.map((item, index) => {
                                                                                 if (item?.featured) {
                                                                                     return (
-                                                                                        <img className="w-full m-0 rounded-t lazy sm:h-72 lg:h-96 sm:max-h-full" 
-                                                                                            // src="data:image/svg+xml,%3Csvg%20xmlns%3D&#39;http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg&#39;%20viewBox%3D&#39;0%200%201%201&#39;%20height%3D&#39;500&#39;%20width%3D&#39;960&#39;%20style%3D&#39;background-color%3Argb(203%2C213%2C224)&#39;%2F%3E"
-                                                                                            //  data-src="/assets/img/small-business.jpg" 
-                                                                                            src={item?.url}
-                                                                                            width="960" 
-                                                                                            height="500" 
-                                                                                            alt="post thumbnail" 
-                                                                                        />
+                                                                                        <div key={index}>
+                                                                                            <img className="w-full m-0 rounded-t lazy sm:h-72 lg:h-96 sm:max-h-full"
+                                                                                                src={item?.url}
+                                                                                                placeholder={"https://res.cloudinary.com/delivery-247-saf/image/upload/v1650674899/woocommerce-placeholder.png"}
+                                                                                                alt="img thumbnail" 
+                                                                                            />
+                                                                                        </div>
                                                                                     );
                                                                                 };
                                                                             })
-                                                                        }                                                                
+                                                                        }                              
                                                                     </Link>
                                                                     <div className="px-6 pt-7 pb-12">
                                                                         <div className="font-black text-lg mb-1.5">

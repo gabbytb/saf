@@ -1,4 +1,4 @@
-const LaunchLocalDBConnection = async (https, sslOptions, app, ip, port) => {    
+const LaunchLocalDBConnection = async (http, https, sslOptions, app, ip, port) => {    
     
     const mongoose = require("mongoose");    
     
@@ -63,9 +63,18 @@ const LaunchLocalDBConnection = async (https, sslOptions, app, ip, port) => {
         // 6. SERVER:-  Port
         ////////////////////////////////////////////////////////////////////////////////////////////////////////////
         // Start the server only after a successful DATABASE Connection
+        const HTTPS_PORT = 443;
+
+        // Redirect HTTP to HTTPS
+        http.createServer((req, res) => {
+            res.writeHead(301, { "Location": "https://" + req.headers.host + req.url });
+            res.end();
+        }).listen(port, () => {
+            console.log(`Redirecting all HTTP requests to HTTPS`);
+        });
 
         // Start HTTPS server
-        const server = https.createServer(sslOptions, app).listen(port, () => {
+        const server = https.createServer(sslOptions, app).listen(HTTPS_PORT, () => {
             let port = server.address().port;
             let family = server.address().family;      
             
@@ -87,6 +96,7 @@ const LaunchLocalDBConnection = async (https, sslOptions, app, ip, port) => {
                         "\n************************************************\n\n"); 
             };
         });
+        
     })
     .catch((error) =>  {
         console.log('DATABASE ERROR: ', error.message,

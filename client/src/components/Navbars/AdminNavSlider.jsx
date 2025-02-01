@@ -35,7 +35,7 @@ const AdminNavSlider = () => {
 
 
             {/* Top Header  */}
-            <header id="header" className="default-header">
+            <header id="header" className="default-header shadow-sm">
                 <div className="container">
                     <div className="flex justify-between items-center h-full px-0 relative ">                
                         <Link to={"/"} className="mt-1.5 w-5/8 justify-start brand dark:block">
