@@ -5,6 +5,7 @@ import { NavSlider, HomeFooter, AdminNavSlider, } from "../components";
 // import { donationBg } from "../constants";
 // import BlogSlider from "../components/Slider/BlogSlider";
 import { spinner } from "../assets/images";
+import setNigerianTime from "../middlewares/setNigerianTime";
 
 
 
@@ -14,19 +15,19 @@ import { spinner } from "../assets/images";
 
 const logEvent = (message, mode = 'TRACKER') => {   
     
-    // Create a new Date object for the current time
-    const date = new Date();
-    // Add 1 hour (60 minutes * 60 seconds * 1000 milliseconds)
-    date.setHours(date.getHours() + 1);
-    // Format the date to ISO 8601 string
-    const newDate = date.toISOString();
+    // // Create a new Date object for the current time
+    // const date = new Date();
+    // // Add 1 hour (60 minutes * 60 seconds * 1000 milliseconds)
+    // date.setHours(date.getHours() + 1);
+    // // Format the date to ISO 8601 string
+    // const newDate = date.toISOString();
 
 
     // Send the log to a backend server
     api.post('/api/logs', {
         message,
         mode: mode.toLowerCase(),
-        timestamp: newDate,
+        timestamp: setNigerianTime(),
     });
     
 
