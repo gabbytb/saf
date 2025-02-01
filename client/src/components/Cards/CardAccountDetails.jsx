@@ -39,9 +39,9 @@ export default function CardAccountDetails({ firstName, displayImg }) {
     // ************************************
     const { id } = useParams(); // console.log("STAFF ID: ", id);
     const [ user, setUser ] = useState({
+        userName: '',
         first_name: '',
         last_name: '',
-        email: '', 
         phone: '', 
         address: '', 
         address2: '', 
@@ -336,19 +336,19 @@ export default function CardAccountDetails({ firstName, displayImg }) {
 
                                 <div className="w-full lg:w-6/12 px-4">
                                     <div className="relative w-full mb-3">
-                                    <label
-                                        className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
-                                        htmlFor="email"
-                                    >
-                                        Email address
-                                    </label>
-                                    <input
-                                        type="email"
-                                        className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
-                                        // defaultValue="jesse@example.com"
-                                        value={user?.email}
-                                        disabled
-                                    />
+                                        <label
+                                            className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
+                                            htmlFor="userName"
+                                        >
+                                            Email address
+                                        </label>
+                                        <input
+                                            type="email"
+                                            className="border-0 px-3 py-3 mt-0 mb-6 placeholder-blueGray-300 text-blueGray-600 bg-white rounded text-xl font-bold shadow focus:outline-none focus:ring w-full ease-linear transition-all duration-150"
+                                            // defaultValue="jesse@example.com"
+                                            value={user?.userName}
+                                            disabled
+                                        />
                                     </div>
                                 </div>
 
@@ -599,14 +599,14 @@ export default function CardAccountDetails({ firstName, displayImg }) {
                                     <div className="relative w-full mb-3">
                                         <label
                                             className="block uppercase text-blueGray-600 text-lg tracking-tightener font-bold mb-2"
-                                            htmlFor="email">
+                                            htmlFor="userName">
                                             Email address
                                         
                                             <input
-                                                type="text"
+                                                type="email"
                                                 className="border-0 px-3 py-3 mt-1.5 mb-6 placeholder-gray-500 text-blueGray-600 rounded text-xl shadow focus:outline-none focus:ring-1 w-full ease-linear transition-all duration-150 hover:cursor-not-allowed"                                              
-                                                placeholder={user?.email} 
-                                                name="email"
+                                                placeholder={user?.userName} 
+                                                name="userName"
                                                 onChange={handleChangeUserInfo} 
                                                 readOnly                                                                                           
                                             />

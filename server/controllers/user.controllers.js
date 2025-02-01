@@ -1653,9 +1653,9 @@ exports.findSingleUserById = async (req, res) => {
 
         const parseUserById =  {
             id: user._id,
+            userName: user.email,
             first_name: user.firstName,
             last_name: user.lastName,                  
-            email: user.email,
             status: user.status,
             socials: [parsedSocials],
             phone: user.phone, 
@@ -1701,7 +1701,7 @@ exports.updateSingleUserById = async (req, res) => {
         const _id = req.params.id;        
         const socialsID = await Social.findById(_id);
         
-        const { first_name, last_name, email, socials, phone, address, address2, city, state, country, postalCode, aboutMe, } = req.body;        
+        const { userName, first_name, last_name, socials, phone, address, address2, city, state, country, postalCode, aboutMe, } = req.body;        
 
         // To Add New Roles to Existing User's Account
         // const roleAdmin = await Role.findOne({ role: "ROLE_ADMIN" });
@@ -1732,7 +1732,7 @@ exports.updateSingleUserById = async (req, res) => {
         const dataToUpdate = {
             firstName: first_name,
             lastName: last_name,
-            email,
+            email: userName,
             phone,
             address,
             address2,
