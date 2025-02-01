@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect, } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { googleLogout } from "@react-oauth/google";
 import NotificationDropdown from "../Dropdowns/NotificationDropdown";
@@ -51,10 +51,21 @@ const Sidebar = ({ isLoggedIn }) => {
     // console.log("Logged-In User DP: ", displayImg); 
     // const userBio = isLoggedIn?.aboutMe ? isLoggedIn?.aboutMe : '';
     // console.log("Logged-In User BIO: ", userBio);    
-    // const userSession = isLoggedIn?.aboutMe ? isLoggedIn?.aboutMe : '';
-    // console.log("Logged-In User Session: ", userSession);    
+    const expiresAt = isLoggedIn?.expires_at ? isLoggedIn?.expires_at : logOut();
+    // console.log("Logged-In User Session Exp: ", expiresAt);
     // ***************************************************************************
     // ***************************************************************************
+
+
+
+
+    useEffect(() => {
+        if (expiresAt <= 0) {
+            localStorage?.removeItem("user");
+            const redirToLogin = "/user/login";
+            navigate(redirToLogin);
+        };
+    }, [expiresAt]);
 
 
 
@@ -149,8 +160,8 @@ const Sidebar = ({ isLoggedIn }) => {
                                     <label className="w-full">
                                         <input className="peer/showLabel absolute scale-0" type="checkbox" />
                                         <span className="block max-h-14 max-w-xl overflow-hidden rounded-lg p-0 text-cyan-800 transition-all duration-300 peer-checked/showLabel:max-h-52">
-                                            <p className={"uppercase flex flex-row items-center pt-1 pb-3 text-xl font-bold " + (window.location.href.indexOf("/admin/blog/") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")}>                                
-                                                <div className={"mr-2 " + (window.location.href.indexOf("/admin/blog/") !== -1 ? "border-2 border-orange-500 h-8" : "hidden")}></div>
+                                            <div className={"uppercase flex flex-row items-center pt-1 pb-3 text-xl font-bold " + (window.location.href.indexOf("/admin/blog/") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")}>                                
+                                                <p className={"mr-2 " + (window.location.href.indexOf("/admin/blog/") !== -1 ? "border-2 border-orange-500 h-8" : "hidden")}></p>
                                                 <i className={"fas fa-bible ml-2 mr-5 h-14 text-2xl flex items-center " + (window.location.href.indexOf("/admin/blog/") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Blog
                                                 <svg
                                                     className="ml-auto mr-1 h-5 w-5"
@@ -167,7 +178,7 @@ const Sidebar = ({ isLoggedIn }) => {
                                                         d="M19 9l-7 7-7-7"
                                                     />
                                                 </svg>                           
-                                            </p>
+                                            </div>
 
 
                                             <ul className="mb-2">
@@ -192,8 +203,8 @@ const Sidebar = ({ isLoggedIn }) => {
                                     <label className="w-full">
                                         <input className="peer/showLabel absolute scale-0" type="checkbox" />
                                         <span className="block max-h-14 max-w-xl overflow-hidden rounded-lg p-0 text-cyan-800 transition-all duration-300 peer-checked/showLabel:max-h-52">
-                                            <p className={"uppercase flex flex-row items-center pt-1 pb-3 text-xl font-bold " + (window.location.href.indexOf("/admin/donations/") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")}>                                
-                                                <div className={"mr-2 " + (window.location.href.indexOf("/admin/donations/") !== -1 ? "border-2 border-orange-500 h-8" : "hidden")}></div>
+                                            <div className={"uppercase flex flex-row items-center pt-1 pb-3 text-xl font-bold " + (window.location.href.indexOf("/admin/donations/") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")}>                                
+                                                <p className={"mr-2 " + (window.location.href.indexOf("/admin/donations/") !== -1 ? "border-2 border-orange-500 h-8" : "hidden")}></p>
                                                 <i className={"fas fa-solid fa-hand-holding-heart ml-1 mr-4 h-14 text-2xl flex items-center " + (window.location.href.indexOf("/admin/donations/") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Donations
                                                 <svg
                                                     className="ml-auto mr-1 h-5 w-5"
@@ -210,7 +221,7 @@ const Sidebar = ({ isLoggedIn }) => {
                                                         d="M19 9l-7 7-7-7"
                                                     />
                                                 </svg>                           
-                                            </p>
+                                            </div>
 
 
                                             <ul className="mb-2">
@@ -235,8 +246,8 @@ const Sidebar = ({ isLoggedIn }) => {
                                     <label className="w-full">
                                         <input className="peer/showLabel absolute scale-0" type="checkbox" />
                                         <span className="block max-h-14 max-w-xl overflow-hidden rounded-lg p-0 text-cyan-800 transition-all duration-300 peer-checked/showLabel:max-h-64">
-                                            <p className={"uppercase flex flex-row items-center pt-1 pb-3 text-xl font-bold " + (window.location.href.indexOf("/admin/products/") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")}>                                
-                                                <div className={"mr-2 " + (window.location.href.indexOf("/admin/products/") !== -1 ? "border-2 border-orange-500 h-8" : "hidden")}></div>
+                                            <div className={"uppercase flex flex-row items-center pt-1 pb-3 text-xl font-bold " + (window.location.href.indexOf("/admin/products/") !== -1 ? "text-lightBlue-500 hover:text-lightBlue-600" : "text-blueGray-700 hover:text-blueGray-500")}>                                
+                                                <p className={"mr-2 " + (window.location.href.indexOf("/admin/products/") !== -1 ? "border-2 border-orange-500 h-8" : "hidden")}></p>
                                                 <i className={"fas fa-solid fa-store fa-hand-holding-heart ml-1 mr-4 h-14 text-2xl flex items-center " + (window.location.href.indexOf("/admin/products/") !== -1 ? "opacity-75" : "text-blueGray-300")}></i>{" "}Shop
                                                 <svg
                                                     className="ml-auto mr-1 h-5 w-5"
@@ -253,8 +264,8 @@ const Sidebar = ({ isLoggedIn }) => {
                                                         d="M19 9l-7 7-7-7"
                                                     />
                                                 </svg>                           
-                                            </p>
-
+                                            </div>
+                                            
 
                                             <ul className="mb-2">
                                                 <li className="items-center">

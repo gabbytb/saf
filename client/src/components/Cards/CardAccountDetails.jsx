@@ -278,12 +278,12 @@ export default function CardAccountDetails({ firstName, displayImg }) {
                                 </button>
                             </Link>
                             {                 
-                                user?.roles?.map((item) => {                                
+                                user?.roles?.map((item, index) => {                                
                                     return (
                                         item?.role === 'ROLE_USERS' ?
-                                            <h6 className="text-white text-42xl tracking-tightener font-black capitalize">user Information</h6>  // text-blueGray-700
+                                            <h6 key={index} className="text-white text-42xl tracking-tightener font-black capitalize">user Information</h6>  // text-blueGray-700
                                             :
-                                            <h6 className="text-white text-42xl tracking-tightener font-black capitalize">staff Information</h6>                                            
+                                            <h6 key={index} className="text-white text-42xl tracking-tightener font-black capitalize">staff Information</h6>                                            
                                     );
                                 })
                             }
