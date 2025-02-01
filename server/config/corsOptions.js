@@ -21,6 +21,8 @@ const allowedOrigins = require("./allowedOrigins");
 // };
 
 
+
+// Configure CORS options
 const corsOptions = {
 
     origin: (origin, callback) => {
@@ -32,6 +34,7 @@ const corsOptions = {
     },
     credentials: true,
     optionsSuccessStatus: 200
+
 };
 
 module.exports = corsOptions;
