@@ -61,17 +61,17 @@ const sslOptions = {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // DEVELOPMENT: 
 // CORS Configuration
-// app.use(cors({
-//     origin: '*', // Allow all origins - Change in production
-//     credentials: true,
-//     allowedHeaders: ['Authorization', 'Content-Type', 'X-Requested-With'],
-//     methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],    // Allow specific HTTP methods
-//     exposedHeaders: ['Authorization', 'Content-Length'],
-// }));
+app.use(cors({
+    origin: '*', // Allow all origins - Change in production
+    credentials: true,
+    // allowedHeaders: ['Authorization', 'Content-Type', 'X-Requested-With'],
+    // methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],    // Allow specific HTTP methods
+    // exposedHeaders: ['Authorization', 'Content-Length'],
+}));
 
 // PRODUCTION: Your list of allowed origins (domains) (i.e https://samuelakinolafoundation.netlify.app).
 // Apply CORS settings to the Express app:- Now your Express server will allow requests from these three locations and respond without CORS issues.
-app.use(cors(corsOptions));
+// app.use(cors(corsOptions));
 
 // Security Headers Middleware
 // app.use((req, res, next) => {
