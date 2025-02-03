@@ -11,7 +11,7 @@ import reportWebVitals from './reportWebVitals';
 import { disableReactDevTools } from "@fvilers/disable-react-devtools";
 
 
-
+console.log("SERVER MODE: ", process.env.NODE_ENV);
 if (process.env.NODE_ENV === "production") disableReactDevTools();
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
