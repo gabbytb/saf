@@ -4,8 +4,7 @@
   "version": "2.0",
   "main": "app.js",
   "scripts": {
-    "start": "nodemon app.js",   
-    "build": "npm run build --prefix client",
+    "start": "nodemon app.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [
