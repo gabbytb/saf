@@ -1,0 +1,350 @@
+//    "homepage": "http://192.168.0.145:3000",
+//    "homepage": "http://192.168.68.113:5000",
+
+
+[dev]
+  framework = "#custom"  # Prevents Netlify from auto-detecting
+  command = "npm run dev"  # Start backend & frontend together
+  targetPort = 8000  # Express backend runs on 8000
+  autoLaunch = false  # Prevents browser auto-launch
+
+
+[[functions]]
+  directory = "server"  # Your Express API functions will be inside the server folder
+
+ "bin": {
+    "server": "bin/AuthMiddlewareCookiesToken.js"
+  },
+
+
+    try {
+        
+        const email = req.body.email || "";
+
+        // 1) Find Existing User
+        const existingUser = await User.findOne({ email: email }); 
+
+        if (existingUser) {
+            // 2) If User Exists or Not    
+            console.log("***********************************************",
+                    "\n******       🔐   ACTIVE USER  🔑        ******",
+                    "\n***********************************************",
+                    "\nUser ID: ", existingUser._id,
+                    "\nUser Name: ", existingUser.firstName + " " + existingUser.lastName,
+                    "\nUser E-mail: ", existingUser.email,
+                    "\n**********************************************",
+                    "\n****      ADDITIONAL USER INFORMATION      ****",
+                    "\n***********************************************",
+                    "\nPrev. AccessToken: ", existingUser.accessToken,
+                    "\nPrev. AccessToken [TIME TO EXPIRE]: ", existingUser.tokenExpires,
+                    "\n***********************************************",
+                "\n\n");
+
+            // 3) Create Token for User logging-in.  (NOTE:-  Token will have a Life-span once created.)
+            const token = await assignOneDayToken(existingUser._id);    // console.log("Generated Token Data: ", token);
+            
+            // 4) Verify token to get Lifespan of Token
+            const verifiedToken = await verifyToken(token);   // console.log("Verified or Decoded Token Data: ", verifiedToken);
+            
+            // 5. Update user.tokenExpires with value of tokenExpiryDate
+            // NOTE: USE new Date() function to make expire date begin with current date and time.
+            existingUser.tokenExpires = new Date(verifiedToken.exp * 1000);
+                    
+            // existingUser.tokenExpires = tokenExpiryDate;
+            // 6. Update user.accessToken with value of token
+            existingUser.accessToken = token;
+
+            // 7. Save to Update USER DETAILS with values parsed
+            const loggedInUser = await existingUser.save();
+        
+            for (var n = 0; n < loggedInUser.roles.length; n++) {
+                if (n < loggedInUser.roles.length) {
+                    // ***********************************************************************************//
+                    // *************                CURRENT LOGGED-IN USER                  **************//
+                    // ***********************************************************************************//
+                    console.log("***********************************************",
+                        "\n******      🔐  LOGIN SUCCESSFUL 🔑      ******",
+                        "\n***********************************************",
+                        // "\nUser ID: ", loggedInUser._id,
+                        "\nUser Name: ", loggedInUser.firstName + " " + loggedInUser.lastName,
+                        "\nUser E-mail: ", loggedInUser.email,
+                        "\n***********************************************",
+                        "\n****      ADDITIONAL USER INFORMATION      ****",
+                        "\n***********************************************",
+                        "\nUser ROLE(S): ", loggedInUser.roles[n].role,
+                        // "\nUser isVerified: ", loggedInUser.isVerified,
+                        "\nUser Status: ", loggedInUser.status.toUpperCase(),
+                        "\nUser AccessToken: ", loggedInUser.accessToken,
+                        "\nSESSION WILL EXPIRE: ", loggedInUser.tokenExpires,
+                        "\n***********************************************",
+                        "\n=====>       CURRENT LOGGED-IN USER      <=====",
+                        "\n***********************************************",
+                        "\n\n");
+                };
+            };
+            
+            // ***********************************************************************************//
+            // NOTE:- By assigning Token to Logged-in User,
+            //        Now you can use User's "accessToken" 
+            //        for Headers Authentication & Authorization
+            // ***********************************************************************************//  
+            const responseData = {
+                success: true,
+                data: loggedInUser,
+                // data: {
+                //     userId: existingUser._id,
+                //     accessToken: existingUser.accessToken,
+                // },
+                message: "Successful",
+            };
+            return res.status(200).json(responseData);
+        } else {
+            const responseData = { 
+                success: false,
+                message: "User not found",
+            };
+            res.json(responseData);
+        };
+    } catch (error) {
+        console.error('Error saving code:', error);
+        res.status(500).json({ message: 'Failed to save code' });
+    };
+
+
+
+
+
+
+
+
+
+
+
+        await api.get(`/api/v1/admin/posts/manage/publishedPosts`)
+        .then((response) => {
+                    const { success, data, message } = response.data;              
+                    if (!success && message === "No staff found") {
+                        console.log("Success: ", success);
+                        console.log("Message: ", message);
+                    };
+    
+                    setTotalPublishedPosts(data);
+        })
+        .catch((error) => {
+                    console.log("Error fetching data: ", error);
+        });
+
+
+        await api.get(`/api/v1/admin/posts/manage/draftPosts`)
+        .then((response) => {
+                    const { success, data, message } = response.data;              
+                    if (!success && message === "No staff found") {
+                        console.log("Success: ", success);
+                        console.log("Message: ", message);
+                    };
+    
+                    setTotalDraftPosts(data);
+        })
+        .catch((error) => {
+                    console.log("Error fetching data: ", error);
+        });
+
+
+
+
+       <nav className="absolute top-0 left-0 w-full z-1 bg-transparent md:flex-row md:flex-nowrap md:justify-start flex items-center p-4">
+                    <div className="w-full mx-autp items-center flex justify-between md:flex-nowrap flex-wrap md:px-10 px-4">                            
+                        
+                        {/* Brand */}
+                        <Link className="text-white text-sm uppercase hidden lg:inline-block font-semibold"
+                            to={"/admin/dashboard"} onClick={(e) => e.preventDefault()}>Dashboard 
+                        </Link>
+                        {/* Brand */}
+
+
+                        {/* Form*/}
+                        <form className="md:flex hidden flex-row flex-wrap items-center lg:ml-auto mr-12 lg:mr-28  w-98 h-178">
+                            <div className="relative flex w-full flex-wrap items-stretch">                      
+                                <span className="z-10 h-full leading-snug font-normal text-center text-blueGray-300 absolute bg-transparent rounded text-2xl flex items-center justify-center w-12 pl-3 py-3">
+                                    <i className="fas fa-search"></i>
+                                </span>
+                                    
+                                <input
+                                    type="search"
+                                        name="q"
+                                        id="search-form"
+                                        className="search-input border-0 px-3 py-3 indent-8 placeholder-blueGray-300 text-blueGray-600 relative bg-white bg-white rounded text-sm shadow outline-none focus:outline-none focus:ring w-full pl-10"       
+                                        onChange={(e) => setQuery(e.target.value)}
+                                        placeholder="Search user"
+                                />
+
+                                <button type="submit" onSubmit={fetchAllStaffs}></button>
+                            </div>                                             
+                        </form>
+            
+                        {/* User */}
+                        <ul className="flex-col md:flex-row list-none items-center hidden md:flex">
+                            <UserDropdown />
+                        </ul>
+
+                    </div>
+                </nav>
+
+
+                
+
+// exports.verifySignUp = async (req, res) => {
+//     const AuthHeader = req.headers.authorization;
+//     if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
+//         const responseData = { 
+//             success: false, 
+//             message: "Unauthorized: Bearer token required",
+//         };
+//         console.log("Token required to verify account: ", responseData);
+//         return res.status(403).json(responseData);
+//     }
+    
+//     const token = AuthHeader.split(" ")[1];
+//     try {          
+//         const existingUser = await jwt.verify(token, secretKey);
+//         const _id = existingUser.id;
+//         const user = await User.findById(_id);
+//         if (!user) {
+//             const dataToUpdate = {
+//                 status: 'rejected',
+//                 isVerified: false,
+//                 accessToken: token,
+//             };
+//             const email = user.email;
+//             await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
+
+//             const responseData = { 
+//                 success: false,
+//                 message: "User not found",
+//             };
+//             console.log("Account verification failed: ", responseData);
+//             return res.status(404).json(responseData);
+//         } else {
+//             const dataToUpdate = {
+//                 status: 'approved',
+//                 isVerified: true,
+//                 accessToken: token,
+//             };
+//             const email = user.email;
+//             const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });
+
+//             const responseData = {
+//                 success: true,
+//                 data: updatedUser,
+//                 message: "Account verification successful",
+//             };
+//             console.log("Account verification status: ", responseData);
+//             return res.status(200).json(responseData);
+//         };
+//     } catch (error) {
+//         const responseData = { 
+//             success: false, 
+//             message: "Internal Server Error",
+//         };
+//         console.error("Unexpected error during account verification: ", error);
+//         return res.status(500).json(responseData);
+//     }
+// };
+// exports.verifySignUp = async (req, res) => {
+//     try {
+//         // Step 1: Get the authorization header from the request
+//         const AuthHeader = req.headers.authorization;
+        
+//         // Step 2: Check if the authorization header is present and starts with 'Bearer '
+//         if (!AuthHeader || !AuthHeader.startsWith('Bearer ')) {
+//             const responseData = { 
+//                 success: false, 
+//                 message: "Unauthorized",  // No token provided
+//             };
+//             console.log("Missing Token for Account Verification: ", responseData);
+//             return res.status(401).json(responseData); // Send a 401 Unauthorized response
+//         }
+        
+//         // Step 3: Extract the token from the authorization header
+//         const token = AuthHeader.split(" ")[1];
+        
+//         // Step 4: Verify the token using a secret key
+//         const existingUser = await jwt.verify(token, secretKey);
+        
+//         // Step 5: If the token is valid, find the user by ID
+//         const _id = existingUser.id;
+//         const user = await User.findById(_id);
+        
+//         if (user) {
+//             // Step 6: If user exists, update their status to "approved" and set them as verified
+//             const email = user.email;   
+//             const dataToUpdate = {
+//                 status: "approved",
+//                 accessToken: token,
+//                 isVerified: true,
+//             };
+//             const updatedUser = await User.findOneAndUpdate({ email }, dataToUpdate, { new: true });               
+        
+//             const responseData = {
+//                 success: true,
+//                 data: updatedUser,
+//                 message: "Successful"
+//             };
+//             console.log("*********************************************************",
+//                 "\n*****           NEW ACCOUNT VERIFICATION             ****",
+//                 "\n*********************************************************",
+//                 "\nVerification Status: ", responseData,
+//                 "\n*********************************************************\n\n");
+//             return res.status(200).json(responseData); // Send a success response
+//         } else {
+//             // Step 7: If the user does not exist
+//             const responseData = {
+//                 success: false,
+//                 message: "user not found",
+//             };
+//             console.log("*********************************************************",
+//                 "\n*****           NEW ACCOUNT VERIFICATION             ****",
+//                 "\n*********************************************************",
+//                 "\nVerification Status: ", responseData,
+//                 "\n*********************************************************\n\n");
+//             return res.status(404).json(responseData); // Send a 404 Not Found response
+//         };
+
+//     } catch (error) {
+//         // Step 8: Error handling for different cases
+//         if (error.name === 'TokenExpiredError') {
+//             // If the token has expired
+//             const responseData = {
+//                 errorStatus: false,
+//                 errorMessage: "Token has expired",
+//             };
+//             console.error('Token verification error: ', error); // Log the original error for debugging
+//             return res.status(401).json(responseData.data); // Send a 401 Unauthorized response
+
+//         } else if (error.name === "JsonWebTokenError") {
+//             // If the token is invalid
+//             const responseData = {
+//                 errorStatus: false,
+//                 errorMessage: "Token does not exist",
+//             };
+//             console.error('Token verification error: ', error); // Log the original error for debugging
+//             return res.status(401).json(responseData.data); // Send a 401 Unauthorized response
+
+//         } else {
+//             // Catch any other unexpected errors
+//             const responseData = {
+//                 errorStatus: false,
+//                 errorMessage: "An unexpected error occurred",
+//             };
+//             console.error('Unexpected error: ', error); // Log the original error for debugging
+//             return res.status(500).json(responseData.data); // Send a 500 Internal Server Error response
+//         };
+//     };
+// };
+
+
+
+
+
+
+// 1. SIGN IN WITH GOOGLE WORKING PERFECTLY... 2. ADMIN DASHBOARD: USER, BLOG SINGLE POST PG  ''-n-'' STAFF PAGE WORKING PERFECTLY - Pushed to Repository (vybezonvibes@protonmail.com)placeholder-gray-500
