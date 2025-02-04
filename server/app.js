@@ -6,7 +6,7 @@ const path = require("path");
 const cors = require("cors");
 const express = require("express");
 
-const corsOptions = require("./config/corsOptions");
+// const corsOptions = require("./config/corsOptions");
 
 const configureUserRoutes = require("./routes/user.routes");
 const configureRoleRoutes = require("./routes/role.routes");

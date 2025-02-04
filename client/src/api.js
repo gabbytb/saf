@@ -16,7 +16,7 @@ import axiosRetry from "axios-retry";
 const api = axios.create({
                 // baseURL: "https://localhost:8000",   // LOCAL Domains:- This is your server’s base URL
                 // baseURL: "https://192.168.204.113:8000",   // LOCAL Domains:- This is your server’s base URL            
-                baseURL: "https://saf-api.onrender.com",   // HTTPS Domains:- This is your server’s base URL
+                baseURL: "https://saf-api.onrender.com/*",   // HTTPS Domains:- This is your server’s base URL
                 timeout: 20000, // Optional: Maximum time to wait for a response                
                 // withCredentials: true, // If cookies or sessions are needed
                 // headers: {
