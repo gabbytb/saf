@@ -15,7 +15,7 @@ module.exports = app => {
     router.post("/api/v1/admin/blogs/manage/create", blogs.createBlogPost);
 
 
-    router.get("/api/v1/admin/posts/manage", blogs.findAllBlogPosts);
+    router.get(["/api/v1/admin/posts/manage", "/donations"], blogs.findAllBlogPosts);
     router.get("/api/v1/admin/posts/manage/publishedPosts", blogs.totalPublishedPosts);
     router.get("/api/v1/admin/posts/manage/draftPosts", blogs.totalDraftPosts);
 
