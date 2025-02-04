@@ -57,7 +57,7 @@ const setThisTimeToNigerianTime = require("../middlewares/SetThisTimeToNigerianT
 
 
 
-const monitorUsersActivities = async (req, res) => {
+exports.monitorUsersActivities = async (req, res) => {
     
     // Gets a unique number based on the current time
     var uniqueId = Date.now(),
@@ -100,7 +100,7 @@ const monitorUsersActivities = async (req, res) => {
 
 
 // Our CREATE ACCOUNT Logic starts here
-const signUp = async (req, res) => {
+exports.signUp = async (req, res) => {
 
     // Gets a unique number based on the current time
     const uniqueId = Date.now();
@@ -315,7 +315,7 @@ const signUp = async (req, res) => {
 
 
 // Our CREATE ACCOUNT Logic starts here
-const adminCreateUser = async (req, res) => {
+exports.adminCreateUser = async (req, res) => {
 
     // Gets a unique number based on the current time
     const uniqueId = Date.now();
@@ -510,7 +510,7 @@ const adminCreateUser = async (req, res) => {
 };  // THOROUGHLY Tested === Working
 
 // Our ACCOUNT Re-ACTIVATION Logic starts here
-const reValidateSignUp = async (req, res) => {
+exports.reValidateSignUp = async (req, res) => {
 
     const { email } = req.body;
 
@@ -885,7 +885,7 @@ const reValidateSignUp = async (req, res) => {
 
 // Our ACCOUNT VERIFICATION Logic USING GET request starts here
 
-const verifySignUpWithGetReq = async (req, res) => {
+exports.verifySignUpWithGetReq = async (req, res) => {
             
     const verified_success = req.user.success;
     const verified_message = req.user.message;
@@ -908,7 +908,7 @@ const verifySignUpWithGetReq = async (req, res) => {
 };  // THOROUGHLY Tested === Working
 
 // Our USER LOGIN Logic starts here
-const logIn = async (req, res) => {
+exports.logIn = async (req, res) => {
 
     try {
 
@@ -1109,7 +1109,7 @@ const logIn = async (req, res) => {
 };  // THOROUGHLY Tested === Working
 
 // Our USER LOGIN via G-MAIL Logic starts here
-const googleSignOn = async (req, res) => {
+exports.googleSignOn = async (req, res) => {
 
     try {
         
@@ -1232,7 +1232,7 @@ const googleSignOn = async (req, res) => {
 
 
 // Our FIND All USERS Logic starts here
-const findAllUsers = async (req, res) => { 
+exports.findAllUsers = async (req, res) => { 
 
     // Get Pagination Parameters from the request query     
     const status = req.query.status || "";               
@@ -1298,7 +1298,7 @@ const findAllUsers = async (req, res) => {
 };
 
 // Get Length of All Approved Users
-const totalApprovedUsers = async (req, res) => {
+exports.totalApprovedUsers = async (req, res) => {
 
     try {
 
@@ -1332,7 +1332,7 @@ const totalApprovedUsers = async (req, res) => {
 };
 
 // Get Length of All Pending Users
-const totalPendingUsers = async (req, res) => {
+exports.totalPendingUsers = async (req, res) => {
 
     try {
 
@@ -1365,7 +1365,7 @@ const totalPendingUsers = async (req, res) => {
 };
 
 // Get Length of All Rejected Users
-const totalRejectedUsers = async (req, res) => {
+exports.totalRejectedUsers = async (req, res) => {
 
     try {
 
@@ -1401,7 +1401,7 @@ const totalRejectedUsers = async (req, res) => {
 
 
 // Our FIND All ADMINS Logic starts here
-const findAllAdmins = async (req, res) => {
+exports.findAllAdmins = async (req, res) => {
             
     // Get Pagination Parameters from the request query     
     const status = req.query.status || "";               
@@ -1467,7 +1467,7 @@ const findAllAdmins = async (req, res) => {
 };
 
 // Get Length of All Approved Admins
-const totalApprovedAdmins = async (req, res) => {
+exports.totalApprovedAdmins = async (req, res) => {
 
     try {
 
@@ -1500,7 +1500,7 @@ const totalApprovedAdmins = async (req, res) => {
 };
 
 // Get Length of All Pending Admins
-const totalPendingAdmins = async (req, res) => {
+exports.totalPendingAdmins = async (req, res) => {
 
     try {
 
@@ -1533,7 +1533,7 @@ const totalPendingAdmins = async (req, res) => {
 };
 
 // Get Length of All Rejected Admins
-const totalRejectedAdmins = async (req, res) => {
+exports.totalRejectedAdmins = async (req, res) => {
 
     try {
 
@@ -1569,7 +1569,7 @@ const totalRejectedAdmins = async (req, res) => {
 
 
 // Our FIND SINGLE USER by ID Logic starts here
-const findSingleUserById = async (req, res) => {
+exports.findSingleUserById = async (req, res) => {
     
     try {
         
@@ -1684,7 +1684,7 @@ const findSingleUserById = async (req, res) => {
 };  // THOROUGHLY Tested === Working
 
 // Update User Information
-const updateSingleUserById = async (req, res) => {
+exports.updateSingleUserById = async (req, res) => {
 
     try {
 
@@ -1816,7 +1816,7 @@ const updateSingleUserById = async (req, res) => {
 };  // THOROUGHLY TESTED === Working
 
 // Update User Information
-const activateOrDeactivateSingleUserById = async (req, res) => {
+exports.activateOrDeactivateSingleUserById = async (req, res) => {
     
     try {
         const _id = req.params.id;
@@ -1870,7 +1870,7 @@ const activateOrDeactivateSingleUserById = async (req, res) => {
 };  // THOROUGHLY TESTED === Working
 
 // Deleta a User with the Specified id in the request
-const deleteUserById = async (req, res) => {
+exports.deleteUserById = async (req, res) => {
     
     try {
 
@@ -1902,7 +1902,7 @@ const deleteUserById = async (req, res) => {
 };
 
 // Deleta all Users from the Database
-const deleteAllUsers = (req, res) => {
+exports.deleteAllUsers = (req, res) => {
     //  res.setHeader('Content-Type', 'application/json');
     try {
         const users = User.deleteMany({});
@@ -1915,42 +1915,6 @@ const deleteAllUsers = (req, res) => {
         return res.status(500).send(`Internal Server Error ${error}`);
         // return res.status(500).json({ message: 'Internal Server Error', error: error.message });
     }
-};
-
-
-
-
-
-
-module.exports = {    
-    
-    monitorUsersActivities,
-
-    signUp,
-    adminCreateUser,
-    reValidateSignUp,
-
-    verifySignUpWithGetReq,
-    logIn,
-    googleSignOn, 
-    
-    findAllUsers,
-    totalApprovedUsers,
-    totalPendingUsers,
-    totalRejectedUsers,
-
-    findAllAdmins,
-    totalApprovedAdmins,
-    totalPendingAdmins,
-    totalRejectedAdmins,
-    
-    findSingleUserById,
-    updateSingleUserById,
-    activateOrDeactivateSingleUserById,
-
-    deleteUserById,
-    deleteAllUsers,
-
 };
 
 
