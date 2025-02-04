@@ -5,6 +5,8 @@ const fs = require('fs');
 // const path = require("path");
 const cors = require("cors");
 const express = require("express");
+// .env Config
+require("dotenv").config();
 
 // const corsOptions = require("./config/corsOptions");
 
@@ -13,8 +15,6 @@ const configureRoleRoutes = require("./routes/role.routes");
 const configureBlogRoutes = require("./routes/blog.routes");
 const configureDonationRoutes = require("./routes/donation.route");
 
-// .env Config
-require("dotenv").config();
 
 // Load Environment variables
 const ip = process.env.BASE_URI || "0.0.0.0",      
