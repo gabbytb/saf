@@ -2,7 +2,7 @@
 const http = require('http');
 const https = require('https');
 const fs = require('fs');
-const path = require("path");
+// const path = require("path");
 const cors = require("cors");
 const express = require("express");
 
@@ -59,15 +59,18 @@ const sslOptions = {
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // Enable: CORS (CROSS ORIGIN RESOURCE SHARING) for all routes
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
+// INITIAL CORS STATE
+app.use(cors());
+
 // DEVELOPMENT: 
 // CORS Configuration
-app.use(cors({
-    origin: '*', // Allow all origins - Change in production
-    credentials: true,
-    // allowedHeaders: ['Authorization', 'Content-Type', 'X-Requested-With'],
-    // methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],    // Allow specific HTTP methods
-    // exposedHeaders: ['Authorization', 'Content-Length'],
-}));
+// app.use(cors({
+//     origin: '*', // Allow all origins - Change in production
+//     credentials: true,
+//     // allowedHeaders: ['Authorization', 'Content-Type', 'X-Requested-With'],
+//     // methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],    // Allow specific HTTP methods
+//     // exposedHeaders: ['Authorization', 'Content-Length'],
+// }));
 
 // PRODUCTION: Your list of allowed origins (domains) (i.e https://samuelakinolafoundation.netlify.app).
 // Apply CORS settings to the Express app:- Now your Express server will allow requests from these three locations and respond without CORS issues.
@@ -100,8 +103,8 @@ app.use(express.urlencoded({ limit: "50mb", extended: true }));
 // const buildPath = path.join(__dirname, 'client/build');
 // - OR -
 // USE IF:-  client directory and server directory are both inside the root/project directory.
-const buildPath = path.join(__dirname, '..', 'client', 'build');
-app.use(express.static(buildPath));
+// const buildPath = path.join(__dirname, '..', 'client', 'build');
+// app.use(express.static(buildPath));
 
 
 
@@ -139,8 +142,12 @@ LaunchCloudDBConnection(http, https, sslOptions, app, gip, ip, HTTP_PORT, HTTPS_
 // Serve the index.html for all API routes
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // The app.get('*') route ensures that any request will serve the index.html file, allowing React’s client-side router to take over.
-app.get('*', (req, res) => {
-    res.sendFile(buildPath, 'index.html');
+// app.get('*', (req, res) => {
+//     res.sendFile(buildPath, 'index.html');
+// });
+
+app.get("/", (req, res) => {
+    res.json({ message: "Hello World" });
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // =======================================================================================================//
