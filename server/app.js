@@ -139,11 +139,7 @@ LaunchCloudDBConnection(http, https, sslOptions, app, gip, ip, HTTP_PORT, HTTPS_
 // Serve the index.html for all API routes
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
 // The app.get('*') route ensures that any request will serve the index.html file, allowing React’s client-side router to take over.
-app.get('/', (req, res) => {
-    res.status(200).json({ message: "Hello World" });
-});
-
-app.get('/*', (req, res) => {
+app.get('*', (req, res) => {
     res.sendFile(buildPath, 'index.html');
 });
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////
